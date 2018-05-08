@@ -1,0 +1,11 @@
+{
+	"browserSync": {
+		"proxy": "https://sitename.local.com",
+		"open": false,
+		"notify": true,
+		"https": {
+			"key": "/path/to/your/server.key",
+			"cert": "/path/to/your/server.cert"
+		}
+	}
+}
