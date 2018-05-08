@@ -116,16 +116,16 @@
         },
         {
             "name": "gravitate/grav-util",
-            "version": "1.2.9",
+            "version": "1.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GravitateDesignStudio/grav-util.git",
-                "reference": "c3507c6f163270666236a7f958cc8acd2e960b9d"
+                "reference": "a9ed4a02eb1282c1a9c28eeccfd0b176b9e7cd30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GravitateDesignStudio/grav-util/zipball/c3507c6f163270666236a7f958cc8acd2e960b9d",
-                "reference": "c3507c6f163270666236a7f958cc8acd2e960b9d",
+                "url": "https://api.github.com/repos/GravitateDesignStudio/grav-util/zipball/a9ed4a02eb1282c1a9c28eeccfd0b176b9e7cd30",
+                "reference": "a9ed4a02eb1282c1a9c28eeccfd0b176b9e7cd30",
                 "shasum": ""
             },
             "require": {
@@ -145,7 +145,7 @@
                 "MIT"
             ],
             "description": "Gravitate theme utilities and helper classes",
-            "time": "2018-03-14T19:25:59+00:00"
+            "time": "2018-05-04T16:24:04+00:00"
         },
         {
             "name": "maxmind-db/reader",
