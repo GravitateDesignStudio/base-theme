@@ -30,7 +30,7 @@ add_filter('grav_get_css', function($css, $block_name) {
 }, 10, 2);
 
 add_action('rest_api_init', function() {
-	register_rest_field(['post', 'page'], 'grav_blocks', [
+	register_rest_field(array('post', 'page'), 'grav_blocks', [
 		'get_callback' => function($post) {
 			return get_field('grav_blocks');
 		}
