@@ -1,7 +1,7 @@
 {
-	"name": "gravtheme",
+	"name": "blueprint-theme",
 	"version": "3.0.0",
-	"description": "Gravitate WordPress Theme",
+	"description": "Blueprint Theme",
 	"scripts": {
 		"eslint": "npx eslint js/**/*.js",
 		"build-css": "npx gulp build-scss; npx gulp build-scss-editor-styles",
@@ -11,14 +11,14 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/GravitateDesignStudio/gravtheme.git"
+		"url": "git+https://github.com/GravitateDesignStudio/blueprint-theme.git"
 	},
 	"author": "Gravitate Design Studio",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/GravitateDesignStudio/gravtheme/issues"
+		"url": "https://github.com/GravitateDesignStudio/blueprint-theme/issues"
 	},
-	"homepage": "https://github.com/GravitateDesignStudio/gravtheme#readme",
+	"homepage": "https://github.com/GravitateDesignStudio/blueprint-theme#readme",
 	"dependencies": {
 		"babel-core": "^6.26.3",
 		"babel-loader": "^7.1.4",
