@@ -4,8 +4,8 @@
 	"description": "Gravitate WordPress Theme",
 	"scripts": {
 		"eslint": "npx eslint js/**/*.js",
-		"build-css": "npx gulp scss",
-		"build-js": "npx gulp js",
+		"build-css": "npx gulp build-scss; npx gulp build-scss-editor-styles",
+		"build-js": "npx gulp build-js",
 		"build": "npm run build-css; npm run build-js",
 		"watch": "npx gulp"
 	},
