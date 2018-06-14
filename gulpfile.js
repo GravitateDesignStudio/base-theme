@@ -15,8 +15,26 @@ const webpack		= require('webpack');
 const webpackStream	= require('webpack-stream');
 const webpackConfig	= require('./webpack.config.js');
 
-gulp.task('scss', function () {
-	return gulp.src('css/master.scss')
+const watchPaths = {
+	scss: 'css/**/*.scss',
+	js: 'js/**/*.js',
+	php: '**/*.php'
+};
+
+const srcFiles = {
+	scss: 'css/master.scss',
+	scssEditorStyles: 'css/editor-styles.scss',
+	js: 'js/master.js'
+};
+
+const distFiles = {
+	scss: 'dist/css/master.min.css',
+	scssEditorStyles: 'dist/css/editor-styles.min.css',
+	js: 'dist/js/master.min.js'
+};
+
+gulp.task('build-scss', function () {
+	return gulp.src(srcFiles.scss)
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.sass())
 		.on('error', plugins.sass.logError)
@@ -36,8 +54,8 @@ gulp.task('scss', function () {
 		}));
 });
 
-gulp.task('scss-editor-styles', function () {
-	return gulp.src('css/editor-styles.scss')
+gulp.task('build-scss-editor-styles', function () {
+	return gulp.src(srcFiles.scssEditorStyles)
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.sass())
 		.on('error', plugins.sass.logError)
@@ -56,8 +74,8 @@ gulp.task('scss-editor-styles', function () {
 		}));
 });
 
-gulp.task('js', function () {
-	return gulp.src('js/master.js')
+gulp.task('build-js', function () {
+	return gulp.src(srcFiles.js)
 		.pipe(plugins.plumber({
 			errorHandler: function (err) {
 				plugins.notify.onError({
@@ -74,10 +92,7 @@ gulp.task('js', function () {
 		.pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('js-watch', ['js'], function (done) {
-	browsersync.reload();
-	done();
-});
+gulp.task('build', gulp.parallel('build-scss', 'build-scss-editor-styles', 'build-js'));
 
 gulp.task('browser-sync', function () {
 	const localConfig = loadLocalConfig();
@@ -88,17 +103,32 @@ gulp.task('browser-sync', function () {
 	}
 
 	browsersync.init(localConfig.browserSync);
-
-	gulp.watch('css/**/*.scss', ['scss']);
-	gulp.watch('js/**/*.js', ['js-watch']);
-	gulp.watch('**/*.php').on('change', browsersync.reload);
 });
 
-gulp.task('default', ['scss', 'js', 'browser-sync'], function () {
-	const localConfig = loadLocalConfig();
-
-	if (!localConfig) {
-		console.error('Unable to load "local_config.json" -- please use "local_config_example.json" as a template');
-		process.exit();
-	}
+gulp.task('browser-sync-reload', function (done) {
+	browsersync.reload();
+	done();
 });
+
+gulp.task('watch-dist-files', function () {
+	gulp.watch(watchPaths.php, gulp.series('browser-sync-reload'));
+	gulp.watch(distFiles.js, gulp.series('browser-sync-reload'));
+});
+
+gulp.task('watch-source-scss', function () {
+	gulp.watch(watchPaths.scss, gulp.parallel('build-scss', 'build-scss-editor-styles'));
+});
+
+gulp.task('watch-source-js', function () {
+	gulp.watch(watchPaths.js, gulp.parallel('build-js'));
+});
+
+gulp.task('watch', gulp.series(
+	gulp.parallel('build'),
+	gulp.parallel('watch-source-scss', 'watch-source-js', 'watch-dist-files')
+));
+
+gulp.task('default', gulp.series(
+	gulp.parallel('build'),
+	gulp.parallel('browser-sync', 'watch')
+));
