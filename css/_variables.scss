@@ -5,16 +5,26 @@ Foundation Variables
 **************************************/
 $global-width: 1300px;
 
-$row-max-width-num: 1440;
-$row-max-width: #{$row-max-width-num}px;
-$outer-gutter-width-small: 1rem;
-$outer-gutter-width: 2.85rem;
-$gutter-width-small: 1.25rem;
-$gutter-width: 1.25rem;
+// create our own breakpoint variables
 $medium: 641px;
 $large: 1025px;
 $xlarge: 1441px;
 $xxlarge: 1921px;
+
+// override default foundation breakpoints
+$breakpoints: (
+    small: 0,
+    medium: $medium,
+    large: $large,
+    xlarge: $xlarge,
+    xxlarge: $xxlarge,
+);
+
+// override default foundation gutter widths
+$grid-column-gutter: (
+    small: 40px,
+    medium: 60px
+);
 
 /*************************************
 z-index

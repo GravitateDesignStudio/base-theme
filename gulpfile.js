@@ -35,6 +35,14 @@ const distFiles = {
 
 gulp.task('build-scss', function () {
 	return gulp.src(srcFiles.scss)
+		.pipe(plugins.plumber({
+			errorHandler: function (err) {
+				plugins.notify.onError({
+					title: 'SCSS Build Error',
+					message: err.message
+				})(err);
+			}
+		}))
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.sass())
 		.on('error', plugins.sass.logError)
@@ -56,6 +64,14 @@ gulp.task('build-scss', function () {
 
 gulp.task('build-scss-editor-styles', function () {
 	return gulp.src(srcFiles.scssEditorStyles)
+		.pipe(plugins.plumber({
+			errorHandler: function (err) {
+				plugins.notify.onError({
+					title: 'SCSS Build Error',
+					message: err.message
+				})(err);
+			}
+		}))
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.sass())
 		.on('error', plugins.sass.logError)
