@@ -13,7 +13,7 @@ select {
 	border-radius: $input-border-radius;
 	border: $input-border;
 	padding: $input-padding-small;
-	background: $input-background-color;
+	background-color: $input-background-color;
 	min-height: $input-min-height-small;
 	font: $input-font;
 	color: $input-text-color;
@@ -40,7 +40,7 @@ select {
 		border-radius: $input-focus-border-radius;
 		border: $input-focus-border;
 		padding: $input-focus-padding;
-		background: $input-focus-background-color;
+		background-color: $input-focus-background-color;
 		color: $input-focus-text-color;
 	}
 
@@ -49,7 +49,7 @@ select {
 		.block-bg-#{$color-name} & {
 			border-radius: $input-dark-bg-border-radius;
 			border: $input-dark-bg-border;
-			background: $input-dark-bg-background-color;
+			background-color: $input-dark-bg-background-color;
 			color: $input-dark-bg-text-color;
 
 			&::placeholder {
@@ -59,7 +59,7 @@ select {
 			&:focus {
 				border-radius: $input-dark-bg-focus-border-radius;
 				border: $input-dark-bg-focus-border;
-				background: $input-dark-bg-focus-background-color;
+				background-color: $input-dark-bg-focus-background-color;
 				color: $input-dark-bg-focus-text-color;
 			}
 		}
