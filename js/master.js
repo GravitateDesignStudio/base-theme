@@ -39,7 +39,28 @@ jQuery(function ($) {
 			instances.components.siteHeader = new SiteHeader($siteHeaderEls.first());
 		}
 
-		objectFitImages();
+		// polyfill for browsers that don't support object-fit and object-position
+		// ObjectFitImages: create the necessary 'font-family' CSS attribute
+		$('img').each(function () {
+			var objectFit = $(this).css('object-fit') || 'cover';
+			var objectPos = $(this).css('object-position') || '50% 50%';
+			var fontFamilyParams = [];
+
+			if (objectFit) {
+				fontFamilyParams.push('object-fit: ' + objectFit);
+			}
+
+			if (objectPos) {
+				fontFamilyParams.push('object-position: ' + objectPos);
+			}
+
+			if (fontFamilyParams.length) {
+				$(this).css('font-family', '"' + fontFamilyParams.join('; ') + ';"');
+			}
+		});
+
+		// ObjectFitImages: only act upon images that have a valid src attribute
+		objectFitImages('img:not([src^="data:"])');
 	});
 
 	/**
