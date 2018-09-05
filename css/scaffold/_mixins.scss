@@ -1,3 +1,14 @@
+@mixin object-fit-polyfill($object-fit, $object-position: '') {
+	@if $object-position != '' {
+		object-fit: #{$object-fit};
+		object-position: #{$object-position};
+		font-family: 'object-fit: #{$object-fit}; object-position: #{$object-position};';
+	} @else {
+		object-fit: #{$object-fit};
+		font-family: 'object-fit: #{$object-fit}';
+	}
+}
+
 @mixin size($size) {
 	width: $size;
 	height: $size;
