@@ -1,10 +1,10 @@
-import Swiper from 'swiper';
 require('jquery-colorbox');
 
 const ThemeWelcome = (function ($) {
 	return class {
-		constructor($el) {
+		constructor($el, Swiper) {
 			this.$el = $el;
+			this.Swiper = Swiper;
 			this.swiperInstances = [];
 
 			this.initializeSwiper();
@@ -17,7 +17,7 @@ const ThemeWelcome = (function ($) {
 
 		initializeSwiper() {
 			this.$el.find('.swiper-container').each((index, el) => {
-				this.swiperInstances.push(new Swiper(el));
+				this.swiperInstances.push(new this.Swiper(el));
 			});
 		}
 	};

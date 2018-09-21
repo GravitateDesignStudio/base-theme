@@ -1,115 +1,122 @@
-// Base
-.button,
-input[type=submit] {
-	transition: all $transition-speed ease-out;
-	border-radius: map-get($button-default, 'button-border-radius');
-	appearance: none;
-	border: map-get($button-default, 'button-border');
-	box-shadow: map-get($button-default, 'button-box-shadow');
-	color: map-get($button-default, 'button-text-color');
-	background-color: map-get($button-default, 'button-bg-color');
-	cursor: pointer;
-	display: inline-block;
-	font-size: map-get($button-default, 'button-font-size');
-	font-weight: map-get($button-default, 'button-font-weight');
-	line-height: 1.875;
-	margin: 0 0 1.11111rem;
-	position: relative;
-	padding: map-get($button-default, 'button-padding');
-	text-transform: map-get($button-default, 'button-text-transform');
-	min-width: map-get($button-default, 'button-min-width');
-	min-height: map-get($button-default, 'button-min-height');
-	outline: none;
-	text-align: center;
-	text-decoration: none;
-	
-	&:hover,
-	&:focus {
-		color: map-get($button-default, 'button-hover-text-color');
-		background-color: map-get($button-default, 'button-hover-bg-color');
-		border-color: map-get($button-default, 'button-hover-border-color');
-		text-decoration: none;
+@mixin button-state-styles($state-styles) {
+	@each $prop-key, $prop-value in $state-styles {
+		@if (type-of($prop-value) != 'map') {
+			#{$prop-key}: #{map-get($state-styles, $prop-key)};
+		}
 	}
-	
-	&:active {
-		color: map-get($button-default, 'button-active-text-color');
-		background-color: map-get($button-default, 'button-active-bg-color');
-		border-color: map-get($button-default, 'button-active-border-color');
-		text-decoration: none;
+}
+
+@mixin button-styles($styles, $include-defaults) {
+	// state styles, dark bg, bg overrides
+	$hover-styles: map-get($styles, 'hover');
+	$active-styles: map-get($styles, 'active');
+	$disabled-styles: map-get($styles, 'disabled');
+	$dark-bg: map-get($styles, 'dark-bg');
+	$override-bg: map-get($styles, 'override-bg');
+
+	// default styles
+	$default-properties: (
+		'transition': all $default-transition-speed ease-out,
+		'appearance': none,
+		'cursor': pointer,
+		'display': inline-flex,
+		'justify-content': center,
+		'align-items': center,
+		'position': relative,
+		'outline': none,
+		// 'text-align': center,
+		'text-decoration': none,
+		'line-height': 1.875rem,
+		'margin': 0 0 1rem,
+		'border-radius': 0,
+		'border': 0,
+		'box-shadow': none,
+		'color': '',
+		'background-color': '',
+		'letter-spacing': '',
+		'padding': 0.5rem 1rem,
+		'text-transform': uppercase,
+		'min-width': 175px,
+		'min-height': '',
+		'font': sans-serif
+	);
+
+	// default properties
+	@each $prop-key, $prop-value in $default-properties {
+		@if (map-get($styles, $prop-key)) {
+			#{$prop-key}: #{map-get($styles, $prop-key)};
+		} @else if ($include-defaults) {
+			#{$prop-key}: #{map-get($default-properties, $prop-key)};
+		}
 	}
 
-	@each $color-name in $bg-colors-with-light-text {
-		.bg-#{$color-name} &,
-		.block-bg-#{$color-name} & {
-			color: map-get($button-default, 'button-text-color-on-dark-bg');
-	        background-color: map-get($button-default, 'button-bg-color-on-dark-bg');
-			border-color: map-get($button-default, 'button-border-color-on-dark-bg');
-			
-			&:hover,
-			&:focus {
-				color: map-get($button-default, 'button-hover-text-color-on-dark-bg');
-				background-color: map-get($button-default, 'button-hover-bg-color-on-dark-bg');
-				border-color: map-get($button-default, 'button-hover-border-color-on-dark-bg');
-			}
-			
-			&:active {
-				color: map-get($button-default, 'button-active-text-color-on-dark-bg');
-				background-color: map-get($button-default, 'button-active-bg-color-on-dark-bg');
-				border-color: map-get($button-default, 'button-active-border-color-on-dark-bg');
+	// custom properties not included in the defaults
+	// ignore map values (ex: 'hover', 'active', etc...)
+	@each $prop-key, $prop-value in $styles {
+		@if (map-has-key($default-properties, $prop-key) == false and type-of($prop-value) != 'map') {
+			#{$prop-key}: #{map-get($styles, $prop-key)};
+		}
+	}
+
+	@if $hover-styles {
+		&:hover,
+		&:focus {
+			@include button-state-styles($hover-styles);
+			text-decoration: none;
+		}
+	}
+
+	@if $active-styles {
+		&.active,
+		&:active {
+			@include button-state-styles($active-styles);
+			text-decoration: none;
+		}
+	}
+
+	@if $disabled-styles {
+		&:disabled,
+		&.disabled {
+			@include button-state-styles($disabled-styles);
+			pointer-events: none;
+			cursor: not-allowed;
+		}
+	}
+
+	@if $dark-bg {
+		@each $color-name in $bg-colors-with-light-text {
+			@if (map-has-key($override-bg, $color-name) == false) {
+				.bg-#{$color-name} &,
+				.block-bg-#{$color-name} & {
+					@include button-styles($dark-bg, false);
+				}
 			}
 		}
 	}
 
-	// Additional Buttons
-	@each $button-name, $button-fields in $buttons {
-		&.button-#{$button-name} {
-			border-radius: map-get($button-fields, 'button-border-radius');
-			border: map-get($button-fields, 'button-border');
-			box-shadow: map-get($button-fields, 'button-box-shadow');
-			color: map-get($button-fields, 'button-text-color');
-			background-color: map-get($button-fields, 'button-bg-color');
-			font-size: map-get($button-fields, 'button-font-size');
-			font-weight: map-get($button-fields, 'button-font-weight');
-			padding: map-get($button-fields, 'button-padding');
-			
-			&:hover,
-			&:focus {
-				color: map-get($button-fields, 'button-hover-text-color');
-				background-color: map-get($button-fields, 'button-hover-bg-color');
-				border-color: map-get($button-fields, 'button-hover-border-color');
-			}
-			
-			&:active {
-				color: map-get($button-fields, 'button-active-text-color');
-				background-color: map-get($button-fields, 'button-active-bg-color');
-				border-color: map-get($button-fields, 'button-active-border-color');
-			}
-
-			@each $color-name in $bg-colors-with-light-text {
-				.bg-#{$color-name} &,
-				.block-bg-#{$color-name} & {
-					color: map-get($button-fields, 'button-text-color-on-dark-bg');
-			        background-color: map-get($button-fields, 'button-bg-color-on-dark-bg');
-					border-color: map-get($button-fields, 'button-border-color-on-dark-bg');
-					
-					&:hover,
-					&:focus {
-						color: map-get($button-fields, 'button-hover-text-color-on-dark-bg');
-						background-color: map-get($button-fields, 'button-hover-bg-color-on-dark-bg');
-						border-color: map-get($button-fields, 'button-hover-border-color-on-dark-bg');
-					}
-					
-					&:active {
-						color: map-get($button-fields, 'button-active-text-color-on-dark-bg');
-						background-color: map-get($button-fields, 'button-active-bg-color-on-dark-bg');
-						border-color: map-get($button-fields, 'button-active-border-color-on-dark-bg');
-					}
-				}
+	@if $override-bg {
+		@each $color-name, $color-styles in $override-bg {
+			.bg-#{$color-name} &,
+			.block-bg-#{$color-name} & {
+				@include button-styles($color-styles, false);
 			}
 		}
 	}
 }
 
-button {
-	cursor: pointer;
+.button,
+button,
+input[type=submit],
+.mce-button-primary {
+	@include button-styles($button-default, true);
+
+	@each $variation-name, $variation-styles in $button-variations {
+		&.button--#{$variation-name} {
+			@include button-styles($variation-styles, false);
+		}
+	}
+
+	html.browser-ie & {
+		padding-top: 1rem;
+	}
 }

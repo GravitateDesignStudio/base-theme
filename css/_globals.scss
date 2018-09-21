@@ -1,14 +1,6 @@
 /* Global Styles Here */
-html {
-	font-size: $font-size-small;
-	
-	@include media-min($medium) {
-	    font-size: $font-size-medium;
-	}
-
-	@include media-min($large) {
-	    font-size: 100%;
-	}
+:root {
+	font-size: 10px;
 }
 
 a {

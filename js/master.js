@@ -29,7 +29,11 @@ jQuery(function ($) {
 		const $themeWelcomeEls = $('.theme-welcome');
 
 		if ($themeWelcomeEls.length) {
-			instances.themeWelcome = new ThemeWelcome($themeWelcomeEls.first());
+			import(/* webpackChunkName: "swiper" */ 'swiper').then((Swiper) => {
+				instances.themeWelcome = new ThemeWelcome($themeWelcomeEls.first(), Swiper.default);
+			}).catch((err) => {
+				console.error('Swiper dynamic import failed', err);
+			})
 		}
 
 		// site header

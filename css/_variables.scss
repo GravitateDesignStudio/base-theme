@@ -35,6 +35,13 @@ $z-header: $z-root + 10;
 
 
 /*************************************
+default variables
+**************************************/
+$default-border-radius: 6px;
+$default-transition-speed: 0.2s;
+
+
+/*************************************
 Colors
 **************************************/
 $black:         #000000;
@@ -75,12 +82,13 @@ Typography
 $font-arial: Arial, sans-serif;
 $font-primary: $font-arial;
 
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
 $body-font: normal normal 100 rem(16) / 1 $font-primary;
 $body-font-color: $text-dark;
-
-// Global Size Change
-$font-size-small: 80%;
-$font-size-medium: 90%;
 
 // Blockquote
 $blockquote-margin: 2em 1em;
@@ -214,114 +222,236 @@ $input-dark-bg-focus-text-color: $white;
 /*************************************
 Buttons
 *************************************/
-$buttons: (
-    'primary': (
-        button-text-color: $white, //$white,
-        button-bg-color: $black,
-        button-border: 0,
-        button-border-radius: 0,
-        button-font-size: rem(14),
-        button-font-weight: normal,
-        button-padding: 0.65rem 1.5rem 0.5rem 1.5rem,
-        button-box-shadow: none,
-        button-text-transform: uppercase,
-        button-min-width: 174px,
-        button-min-height: $input-min-height,
+$button-default: (
+    color: $white,
+    background-color: $black,
+    border: 2px solid $gray,
+    border-radius: $input-border-radius,
+    font: normal normal $font-weight-bold 1.4rem / 1 $font-primary,
+    letter-spacing: 0.88px,
+    padding: 0.5rem 2.5rem,
+    box-shadow: none,
+    text-transform: uppercase,
+    min-width: 175px,
+    min-height: $input-min-height,
 
-        // Hover
-        button-hover-text-color: $white,
-        button-hover-bg-color: $black,
-        button-hover-border-color: $black,
-
-        // Active
-        button-active-text-color: $white,
-        button-active-bg-color: $black,
-        button-active-border-color: $white,
-
-        // Dark Backgrounds
-        button-text-color-on-dark-bg: $white,
-        button-bg-color-on-dark-bg: $black,
-        button-border-color-on-dark-bg: $text-light,
-
-        // Hover on Dark Backgrounds
-        button-hover-text-color-on-dark-bg: $white,
-        button-hover-bg-color-on-dark-bg: $black,
-        button-hover-border-color-on-dark-bg: $white,
-
-        // Active on Dark Backgrounds
-        button-active-text-color-on-dark-bg: $white,
-        button-active-bg-color-on-dark-bg: $black,
-        button-active-border-color-on-dark-bg: $black,
+    'hover': (
+        color: $white,
+        background-color: $green-lightest,
+        border-color: $green-lightest,
     ),
-    'secondary': (
-        button-text-color: $black, //$white,
-        button-bg-color: $white,
-        button-border: 1px solid $black,
 
-        // Hover
-        button-hover-text-color: $blue,
-        // button-hover-bg-color: $gray-med,
-        button-hover-border-color: $blue,
-
-        // // Active
-        // button-active-text-color: $white,
-        // button-active-bg-color: $gray-med,
-        // button-active-border-color: $white,
-
-        // Dark Backgrounds
-        button-text-color-on-dark-bg: $text-light,
-        button-bg-color-on-dark-bg: $transparent,
-        button-border-color-on-dark-bg: $text-light,
-
-        // Hover on Dark Backgrounds
-        button-hover-text-color-on-dark-bg: $black,
-        button-hover-bg-color-on-dark-bg: $transparent,
-        button-hover-border-color-on-dark-bg: $black,
-        //
-        // // Active on Dark Backgrounds
-        // button-active-text-color-on-dark-bg: $white,
-        // button-active-bg-color-on-dark-bg: $gray-med,
-        // button-active-border-color-on-dark-bg: $black,
+    'active': (
+        color: $white,
+        background-color: $green-lightest,
+        border-color: $green-lightest,
     ),
-    'primary-big': (
-        // button-text-color: $white, //$white,
-        // button-bg-color: $gray-med,
-        // button-border: 1px solid $white,
-        // button-border-radius: 0,
-        button-font-size: 1.5rem,
-        // button-font-weight: normal,
-        button-padding: 0.6rem 1.5rem 0.6rem 1.5rem,
-        // button-box-shadow: none,
 
-        // // Hover
-        // button-hover-text-color: $white,
-        // button-hover-bg-color: $gray-med,
-        // button-hover-border-color: $white,
-        //
-        // // Active
-        // button-active-text-color: $white,
-        // button-active-bg-color: $gray-med,
-        // button-active-border-color: $white,
-        //
-        // // Dark Backgrounds
-        // button-text-color-on-dark-bg: $white,
-        // button-bg-color-on-dark-bg: $transparent,
-        // button-border-color-on-dark-bg: $text-light,
-        //
-        // // Hover on Dark Backgrounds
-        // button-hover-text-color-on-dark-bg: $white,
-        // button-hover-bg-color-on-dark-bg: $gray-med,
-        // button-hover-border-color-on-dark-bg: $white,
-        //
-        // // Active on Dark Backgrounds
-        // button-active-text-color-on-dark-bg: $white,
-        // button-active-bg-color-on-dark-bg: $gray-med,
-        // button-active-border-color-on-dark-bg: $black,
+    'disabled': (
+        color: rgba($white, 0.7),
+        background-color: rgba($green, 0.4),
+        border-color: transparent,
+    ),
+
+    'dark-bg': (
+        color: $white,
+        background-color: $green,
+        border-color: $green,
+
+        'hover': (
+            color: $white,
+            background-color: $green-lightest,
+            border-color: $green-lightest,
+        ),
+
+        'active': (
+            color: $white,
+            background-color: $green-lightest,
+            border-color: $green-lightest,
+        ),
+
+        'disabled': (
+            color: rgba($white, 0.5),
+            background-color: rgba($green, 0.4),
+            border-color: transparent,
+        )
+    ),
+
+    'override-bg': (
+        'green': (
+            color: $green,
+            background-color: $white,
+            border-color: $white,
+
+            'hover': (
+                color: $white,
+                background-color: $green-lightest,
+                border-color: $green-lightest,
+            ),
+
+            'active': (
+                color: $white,
+                background-color: $green-lightest,
+                border-color: $green-lightest,
+            ),
+
+            'disabled': (
+                color: rgba($green, 0.6),
+                background-color: rgba($white, 0.4),
+                border-color: transparent,
+            )
+        )
     )
 );
 
-// Set the first Button as the default
-$button-default: map-get($buttons, nth(map-keys($buttons), 1));
+$button-variations: (
+    'secondary': (
+        color: $green-light,
+        background-color: transparent,
+        border: 2px solid $green-light,
+
+        'hover': (
+            color: $white,
+            background-color: $green-lightest,
+            border-color: $green-lightest,
+        ),
+
+        'active': (
+            color: $white,
+            background-color: $green-lightest,
+            border-color: $green-lightest,
+        ),
+
+        'disabled': (
+            color: rgba($green-light, 0.4),
+            background-color: transparent,
+            border-color: rgba($green-light, 0.4),
+        ),
+
+        'dark-bg': (
+            color: $white,
+            background-color: transparent,
+            border-color: $green-light,
+
+            'hover': (
+                color: $white,
+                background-color: $green-lightest,
+                border-color: $green-lightest,
+            ),
+
+            'active': (
+                color: $white,
+                background-color: $green-lightest,
+                border-color: $green-lightest,
+            ),
+
+            'disabled': (
+                color: rgba($white, 0.4),
+                background-color: transparent,
+                border-color: rgba($green-light, 0.4),
+            )
+        ),
+
+        'override-bg': (
+            'green': (
+                color: $white,
+                background-color: transparent,
+                border-color: $white,
+
+                'hover': (
+                    color: $white,
+                    background-color: $green-lightest,
+                    border-color: $green-lightest,
+                ),
+
+                'active': (
+                    color: $white,
+                    background-color: $green-lightest,
+                    border-color: $green-lightest,
+                ),
+
+                'disabled': (
+                    color: rgba($white, 0.4),
+                    background-color: transparent,
+                    border-color: rgba($white, 0.4),
+                )
+            )
+        )
+    ),
+    'tertiary': (
+        color: $green-light,
+        background-color: transparent,
+        border: 0,
+
+        'hover': (
+            color: $green-light,
+            background-color: transparent,
+            border-color: 0,
+        ),
+
+        'active': (
+            color: $green-light,
+            background-color: transparent,
+            border-color: 0,
+        ),
+
+        'disabled': (
+            color: $green-light,
+            background-color: transparent,
+            border-color: 0,
+        ),
+
+        'dark-bg': (
+            color: $white,
+            background-color: transparent,
+            border-color: 0,
+
+            'hover': (
+                color: $white,
+                background-color: transparent,
+                border-color: 0,
+            ),
+
+            'active': (
+                color: $white,
+                background-color: transparent,
+                border-color: 0,
+            ),
+
+            'disabled': (
+                color: $white,
+                background-color: transparent,
+                border-color: 0,
+            )
+        ),
+
+        'override-bg': (
+            'green': (
+                color: $white,
+                background-color: transparent,
+                border-color: 0,
+
+                'hover': (
+                    color: $white,
+                    background-color: transparent,
+                    border-color: 0,
+                ),
+
+                'active': (
+                    color: $white,
+                    background-color: transparent,
+                    border-color: 0,
+                ),
+
+                'disabled': (
+                    color: $white,
+                    background-color: transparent,
+                    border-color: 0,
+                )
+            )
+        )
+    )
+);
 
 
 /*************************************

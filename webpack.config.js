@@ -1,5 +1,5 @@
 const path = require('path');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
@@ -13,7 +13,7 @@ module.exports = {
 		chunkFilename: '[name].bundle.js'
 	},
 	plugins: [
-		new HardSourceWebpackPlugin()
+		// new HardSourceWebpackPlugin()
 	],
 	resolve: {
 		modules: ['node_modules']
