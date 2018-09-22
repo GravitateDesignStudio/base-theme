@@ -18,7 +18,7 @@ const webpackConfig	= require('./webpack.config.js');
 const watchPaths = {
 	scss: 'css/**/*.scss',
 	js: 'js/**/*.js',
-	php: '**/*.php'
+	php: ['**/*.php', '!vendor/**', '!media/**', '!js/**', '!dist/**', '!css/**']
 };
 
 const srcFiles = {

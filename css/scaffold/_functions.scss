@@ -1,3 +1,14 @@
-@function rem($px,$rembase:16) {
-	@return ($px / $rembase) + rem;
+@function generate-selector-string($list, $prepend: '', $append: '') {
+	$result: null;
+	
+	@for $i from 1 through length($list) {
+		$e: nth($list, $i);
+		$result: if(
+			$i != length($list),
+			$result#{$prepend}#{$e}#{$append}#{','},
+			$result#{$prepend}#{$e}#{$append}
+		);
+	}
+
+	@return $result;
 }

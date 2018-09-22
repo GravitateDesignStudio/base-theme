@@ -1,0 +1,20 @@
+.block-bg-image {
+	background-color: $white;
+}
+
+@each $color_name, $color_value in $bg-colors {
+	.bg-#{$color_name} {
+		background-color: $color_value;
+	}
+}
+
+/*
+ *  Dark Background Colors and Light Text
+ */
+@include dark-bg('', '') {
+	color: $text-light;
+
+	* {
+		color: $text-light;
+	}
+}

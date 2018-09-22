@@ -1,28 +1,3 @@
-/* Global Styles Here */
-:root {
-	font-size: 10px;
-}
-
-a {
-	color: $anchor-color;
-	text-decoration: $anchor-text-decoration;
-	
-	&:hover {
-		color: $anchor-hover-color;
-		text-decoration: $anchor-hover-text-decoration;
-	}
-
-	@each $color_name in $bg-colors-with-light-text {
-		.bg-#{$color_name} & {
-			color: $anchor-color-on-dark-bg;
-			
-			&:hover {
-				color: $anchor-hover-color-on-dark-bg;
-			}
-		}
-	}
-}
-
 ul {
 	padding: 0;
 	
@@ -54,49 +29,8 @@ table {
 	}
 }
 
-/*
- *  Typography
- */
-@each $type-name, $type-fields in $typography {
-	#{$type-name},
-	%#{$type-name} {
-		font: map-get($type-fields, 'type-font-small');
-		color: map-get($type-fields, 'type-color');
-		text-transform: map-get($type-fields, 'type-text-transform');
-		letter-spacing: map-get($type-fields, 'type-letter-spacing-small');
-		
-		@include media-min($medium) {
-		    font: map-get($type-fields, 'type-font');
-			letter-spacing: map-get($type-fields, 'type-letter-spacing');
-		}
-	}
-}
-
-/*
- *  Dark Background Colors and Light Text
- */
-@each $color_name, $color_value in $bg-colors {
-	.bg-#{$color_name},
-	.block-bg-#{$color_name} {
-		background-color: $color_value;
-	}
-}
-
-@each $color_name in $bg-colors-with-light-text {
-	.bg-#{$color_name},
-	.bg-#{$color_name} .block-inner,
-	.block-bg-#{$color_name},
-	.block-bg-#{$color_name} .block-inner {
-		color: $text-light;
-		
-		*:not(svg):not(use) {
-			color: $text-light;
-		}
-	}
-}
-
 blockquote {
-	margin: $blockquote-margin;
+	margin: 2em 1em;
 	
 	&::before {
 	   content: '\201C';
@@ -113,11 +47,34 @@ blockquote {
 	}
 }
 
-video {
+code {
+	background: $black;
+	color: $white;
+	padding: 0.1rem 0.25rem;
+}
+
+strong {
+	font-weight: $font-weight-semibold;
+}
+
+video,
+iframe {
 	max-width: 100%;
 }
 
 .wysiwyg {
+	a:not(.button) {
+		color: $text-dark;
+		text-decoration: none;
+		font-weight: $font-weight-semibold;
+		transition: color $default-transition-speed ease-in-out;
+
+		&:hover,
+		&:active {
+			text-decoration: underline;
+		}
+	}
+
 	ul,
 	ol {
 		padding-left: 0;
@@ -129,6 +86,15 @@ video {
 			li {
 				margin-left: 1.5rem;
 			}
+		}
+	}
+}
+
+@include dark-bg('', '') {
+	&.wysiwyg,
+	.wysiwyg {
+		a:not(.button) {
+			color: $text-light;
 		}
 	}
 }
@@ -146,12 +112,19 @@ video {
 	text-align: right;
 }
 
-code {
-	background: $black;
-	color: $white;
-	padding: 0.1rem 0.25rem;
-}
+.equal-ratio {
+	position: relative;
+	width: 50%;
 
-strong {
-	font-weight: 600;
+	&::before {
+		content: '';
+		padding-top: 100%;
+		float: left;
+	}
+
+	&::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
 }

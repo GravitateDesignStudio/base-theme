@@ -1,0 +1,131 @@
+/**
+ *	Set base font size to 10px
+ *	This makes calculating rem values very easy
+ *	Just divide your pixel value by 10
+ *	Need an rem value that matches 13px? 1.3rem
+ *	Need an rem value that matches 27px? 2.7rem
+ */
+:root {
+	font-size: 10px;
+}
+
+/**
+ *	Reset element margins
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+}
+
+@each $el, $margin-top in $following-el-margin-top {
+	#{$el} + * {
+		margin-top: $margin-top;
+	}
+}
+
+/*
+ *	Global element styling
+ */
+body {
+	font: $body-font;
+	color: $body-font-color;
+}
+
+p {
+	font: $body-font;
+	color: $body-font-color;
+
+	@include dark-bg {
+		color: $text-light;
+	}
+}
+
+blockquote {
+	font: $body-font;
+    color: $body-font-color;
+}
+
+h1,
+%h1 {
+	font: normal normal $font-weight-bold 3.6rem / 1.21 $font-primary;
+	color: $black;
+	text-transform: uppercase;
+
+	@include media-min($large) {
+		font-size: 4.8rem;
+	}
+
+	@include dark-bg {
+		color: $white;
+	}
+}
+
+h2,
+%h2 {
+	font: normal normal $font-weight-bold 3.6rem / 1.22 $font-primary;
+	color: $black;
+    text-transform: uppercase;
+
+	@include dark-bg {
+		color: $white;
+	}
+}
+
+h3,
+%h3 {
+	font: normal normal $font-weight-medium 2.6rem / 1.25 $font-primary;
+    color: $black;
+
+	@include dark-bg {
+		color: $white;
+	}
+}
+
+h4,
+%h4 {
+	font: normal normal $font-weight-medium 1.8rem / 1.44 $font-primary;
+	color: $black;
+
+	@include dark-bg {
+		color: $white;
+	}
+}
+
+h5,
+%h5 {
+	font: normal normal $font-weight-medium 1.6rem / 1.5 $font-primary;
+    color: $black;
+        
+	@include dark-bg {
+		color: $white;
+	}
+}
+
+h6,
+%h6 {
+	font: normal normal $font-weight-medium 1.2rem / 1.66 $font-primary;
+	color: $black;
+
+	@include dark-bg {
+		color: $white;
+	}
+}
+
+/**
+ *	Text size modifiers - usually used with paragaph elements
+ */
+.large,
+%large-text {
+	font-size: #{$body-font-size + 0.2rem};
+}
+
+small,
+.small,
+%small-text {
+	font-size: #{$body-font-size - 0.2rem};
+}

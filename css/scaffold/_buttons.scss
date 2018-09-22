@@ -1,122 +1,86 @@
-@mixin button-state-styles($state-styles) {
-	@each $prop-key, $prop-value in $state-styles {
-		@if (type-of($prop-value) != 'map') {
-			#{$prop-key}: #{map-get($state-styles, $prop-key)};
-		}
-	}
-}
-
-@mixin button-styles($styles, $include-defaults) {
-	// state styles, dark bg, bg overrides
-	$hover-styles: map-get($styles, 'hover');
-	$active-styles: map-get($styles, 'active');
-	$disabled-styles: map-get($styles, 'disabled');
-	$dark-bg: map-get($styles, 'dark-bg');
-	$override-bg: map-get($styles, 'override-bg');
-
-	// default styles
-	$default-properties: (
-		'transition': all $default-transition-speed ease-out,
-		'appearance': none,
-		'cursor': pointer,
-		'display': inline-flex,
-		'justify-content': center,
-		'align-items': center,
-		'position': relative,
-		'outline': none,
-		// 'text-align': center,
-		'text-decoration': none,
-		'line-height': 1.875rem,
-		'margin': 0 0 1rem,
-		'border-radius': 0,
-		'border': 0,
-		'box-shadow': none,
-		'color': '',
-		'background-color': '',
-		'letter-spacing': '',
-		'padding': 0.5rem 1rem,
-		'text-transform': uppercase,
-		'min-width': 175px,
-		'min-height': '',
-		'font': sans-serif
-	);
-
-	// default properties
-	@each $prop-key, $prop-value in $default-properties {
-		@if (map-get($styles, $prop-key)) {
-			#{$prop-key}: #{map-get($styles, $prop-key)};
-		} @else if ($include-defaults) {
-			#{$prop-key}: #{map-get($default-properties, $prop-key)};
-		}
-	}
-
-	// custom properties not included in the defaults
-	// ignore map values (ex: 'hover', 'active', etc...)
-	@each $prop-key, $prop-value in $styles {
-		@if (map-has-key($default-properties, $prop-key) == false and type-of($prop-value) != 'map') {
-			#{$prop-key}: #{map-get($styles, $prop-key)};
-		}
-	}
-
-	@if $hover-styles {
-		&:hover,
-		&:focus {
-			@include button-state-styles($hover-styles);
-			text-decoration: none;
-		}
-	}
-
-	@if $active-styles {
-		&.active,
-		&:active {
-			@include button-state-styles($active-styles);
-			text-decoration: none;
-		}
-	}
-
-	@if $disabled-styles {
-		&:disabled,
-		&.disabled {
-			@include button-state-styles($disabled-styles);
-			pointer-events: none;
-			cursor: not-allowed;
-		}
-	}
-
-	@if $dark-bg {
-		@each $color-name in $bg-colors-with-light-text {
-			@if (map-has-key($override-bg, $color-name) == false) {
-				.bg-#{$color-name} &,
-				.block-bg-#{$color-name} & {
-					@include button-styles($dark-bg, false);
-				}
-			}
-		}
-	}
-
-	@if $override-bg {
-		@each $color-name, $color-styles in $override-bg {
-			.bg-#{$color-name} &,
-			.block-bg-#{$color-name} & {
-				@include button-styles($color-styles, false);
-			}
-		}
-	}
-}
-
 .button,
-button,
+button:not(.site-header__mobile-menu-button):not(.hellobar__close),
 input[type=submit],
 .mce-button-primary {
-	@include button-styles($button-default, true);
+	transition: all $default-transition-speed ease-in-out;
+	appearance: none;
+	cursor: pointer;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	outline: none;
+	text-align: center;
+	text-decoration: none;
+	margin: 0;
+	color: $white;
+    background-color: $black;
+    border: 2px solid $black;
+    border-radius: $default-input-border-radius;
+	box-shadow: $default-box-shadow;
+    font: normal normal $font-weight-bold #{$body-font-size} / 1 $font-primary;
+    padding: 1rem 1.2rem;
+    text-transform: uppercase;
+    min-width: 160px;
+	min-height: $default-input-min-height;
 
-	@each $variation-name, $variation-styles in $button-variations {
-		&.button--#{$variation-name} {
-			@include button-styles($variation-styles, false);
+	.bg-black & {
+		background-color: $white;
+		border-color: $white;
+		color: $black;
+	}
+	
+	&:hover,
+	&:active,
+	&.active {
+		color: $white;
+        background-color: $red;
+		border-color: $red;
+		text-decoration: none;
+	}
+
+	&:disabled,
+	&.disabled {
+		pointer-events: none;
+		cursor: not-allowed;
+		color: rgba($white, 0.7);
+        background-color: rgba($black, 0.4);
+		border-color: transparent;
+		
+		.bg-black & {
+			background-color: rgba($white, 0.4);
+			color: rgba($black, 0.7);
 		}
 	}
 
-	html.browser-ie & {
-		padding-top: 1rem;
+	&.button--secondary {
+		color: $black;
+        background-color: transparent;
+		border: 2px solid $black;
+
+		@include dark-bg() {
+			color: $white;
+			border-color: $white;
+		}
+		
+		&:hover,
+		&:active,
+		&.active {
+			color: $white;
+            background-color: $red;
+            border-color: $red;
+		}
+
+		&:disabled,
+		&.disabled {
+			color: rgba($black, 0.4);
+            background-color: transparent;
+			border-color: rgba($black, 0.4);
+
+			@include dark-bg() {
+				color: rgba($white, 0.4);
+				border-color: rgba($white, 0.4);
+			}
+		}
 	}
 }

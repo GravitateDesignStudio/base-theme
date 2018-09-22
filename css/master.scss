@@ -4,6 +4,7 @@ Include Functions and Mixins
 @import 'scaffold/functions';
 @import 'scaffold/mixins';
 
+
 /*************************************
 Include Variables
 **************************************/
@@ -11,6 +12,7 @@ Include Variables
 
 // included in foundation
 // @import '../node_modules/normalize.css/normalize';
+
 
 /*************************************
 Foundation Grid
@@ -22,13 +24,16 @@ Foundation Grid
 @include foundation-visibility-classes;
 @include foundation-flex-classes;
 
+
 /*************************************
 Scaffolding
 **************************************/
-@import 'scaffold/spacing';
+@import 'scaffold/typography';
+@import 'scaffold/backgrounds';
 @import 'scaffold/buttons';
 @import 'scaffold/forms';
 @import 'scaffold/blocks';
+
 
 /*************************************
 Vendor Styles
@@ -40,10 +45,10 @@ Vendor Styles
 
 @import '../node_modules/swiper/dist/css/swiper';
 
+
 /*************************************
 Main Project Custom Files
 **************************************/
-
 @import 'globals';
 
 @import 'components/style-testing';

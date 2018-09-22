@@ -1,20 +1,25 @@
 .style-testing {
+	& > .row {
+		margin-top: 4rem;
+	}
+
 	&__icon-container {
-		column-count: 2;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		grid-gap: 2rem;
 
 		@include media-min($medium) {
-			column-count: 3;
+			grid-template-columns: repeat(3, 1fr);
 		}
 
 		@include media-min($large) {
-			column-count: 4;
+			grid-template-columns: repeat(4, 1fr);
 		}
 	}
 
 	&__icon-row {
 		display: flex;
 		align-items: center;
-		margin-bottom: 1.5rem;
 	}
 
 	&__icon {

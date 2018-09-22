@@ -1,72 +1,75 @@
-$form-disabled-opacity: 0.4 !default;
+$form-disabled-opacity: 0.4;
 
-input[type="text"],
-input[type="number"],
-input[type="tel"],
-input[type="url"],
-input[type="email"],
-input[type="password"],
-textarea,
-select {
-	transition: all $transition-speed ease-out;
+$input-border: 2px solid $gray;
+$input-text-color: $body-font-color;
+
+$input-checkbox-radio-size: 16px;
+$input-checked-fill-color: $black;
+
+
+label {
+	font: $body-font;
+	color: $black;
+}
+
+$input-style-selectors: (
+	'input[type="text"]',
+	'input[type="number"]',
+	'input[type="tel"]',
+	'input[type="url"]',
+	'input[type="email"]',
+	'input[type="password"]',
+	'textarea',
+	'select'
+);
+
+@include classes-from-list($input-style-selectors) {
+	transition: all $default-transition-speed ease-out;
 	appearance: none;
-	border-radius: $input-border-radius;
+	border-radius: $default-input-border-radius;
 	border: $input-border;
-	padding: $input-padding-small;
-	background-color: $input-background-color;
-	min-height: $input-min-height-small;
-	font: $input-font;
+	padding: 8px 20px 8px 18px;
+	background-color: $white;
+	min-height: 36px;
+	font: $body-font;
 	color: $input-text-color;
 	display: block;
 	width: 100%;
 
 	&::placeholder {
-		color: $input-placeholder-color;
+		color: $gray;
 	}
 
 	@include media-min($medium) {
 	    display: inline-block;
 		width: auto;
-		padding: $input-padding-medium;
-		min-height: $input-min-height-medium;
+		padding: 10px 20px 12px 18px;
+		min-height: $default-input-min-height;
 	}
 
 	@include media-min($large) {
-		padding: $input-padding;
-		min-height: $input-min-height;
+		padding: 0.8rem 2rem;
+		min-height: $default-input-min-height;
 	}
 
 	&:focus {
-		border-radius: $input-focus-border-radius;
-		border: $input-focus-border;
-		padding: $input-focus-padding;
-		background-color: $input-focus-background-color;
-		color: $input-focus-text-color;
-	}
-
-	@each $color-name in $bg-colors-with-light-text {
-		.bg-#{$color-name} &,
-		.block-bg-#{$color-name} & {
-			border-radius: $input-dark-bg-border-radius;
-			border: $input-dark-bg-border;
-			background-color: $input-dark-bg-background-color;
-			color: $input-dark-bg-text-color;
-
-			&::placeholder {
-				color: $input-dark-bg-placeholder-color;	
-			}
-
-			&:focus {
-				border-radius: $input-dark-bg-focus-border-radius;
-				border: $input-dark-bg-focus-border;
-				background-color: $input-dark-bg-focus-background-color;
-				color: $input-dark-bg-focus-text-color;
-			}
-		}
+		border-radius: $default-input-border-radius;
+		border: 2px solid $black;
+		color: $body-font-color;
 	}
 
 	&:disabled {
 		opacity: $form-disabled-opacity;
+	}
+}
+
+input[type="text"],
+input[type="email"] {
+	&.arrow-right {
+		background-image: url('../../media/images/arrow-right.png');
+		background-repeat: no-repeat;
+		background-position: calc(100% - 15px) 50%;
+		padding-right: 35px;
 	}
 }
 
@@ -112,12 +115,12 @@ input[type=radio] {
 			height: $input-checkbox-radio-size;
 			// border: 1px solid $gray;
 			border: $input-border;
-			background: $white;
+			background: transparent;
 		}
 
 		&::after {
 			opacity: 0;
-			transition: opacity $transition-speed ease-in;
+			transition: opacity $default-transition-speed ease-in;
 		}
 
 		& + input[type=checkbox],
@@ -145,15 +148,19 @@ input[type=checkbox] {
 			transform: translateY(-50%);
 			top: 50%;
 			left: 0;
+			border-radius: 3px;
 		}
 
 		&::after {
 			transform: translateY(-50%);
 			top: 50%;
-			left: 4px;
-			width: #{$input-checkbox-radio-size - 8px};
-			height: #{$input-checkbox-radio-size - 8px};
-			background: $input-checked-fill-color;
+			left: 3px;
+			// width: #{$input-checkbox-radio-size - 8px};
+			width: 10px;
+			// height: #{$input-checkbox-radio-size - 8px};
+			height: 8px;
+			// background: $input-checked-fill-color;
+			background-image: url('../../media/images/check-blue.png');
 		}
 	}
 }
@@ -171,122 +178,50 @@ input[type=radio] {
 		&::after {
 			transform: translateY(-50%);
 			top: 50%;
-			left: 4px;
-			width: #{$input-checkbox-radio-size - 8px};
-			height: #{$input-checkbox-radio-size - 8px};
+			left: 5px;
+			width: #{$input-checkbox-radio-size - 10px};
+			height: #{$input-checkbox-radio-size - 10px};
 			border-radius: 100%;
 			background: $input-checked-fill-color;
 		}
 	}
 }
 
-
-.input-wrapper {
-	display: inline-block;
-	position: relative;
-	input,
-	select {
-		appearance: none;
+@include dark-bg('', '') {
+	@include classes-from-list($input-style-selectors) {
+		border-color: $white;
+		background-color: $white;
+		color: $input-text-color;
 	}
 
-	&.input-wrapper-checkbox,
-	&.input-wrapper-radio {
-		@include size($input-checkbox-radio-size);
-
-		margin: $input-checkbox-radio-margin;
-		vertical-align: $input-checkbox-radio-vertical-align;
-		border: $input-border;
-
-		@each $color-name in $bg-colors-with-light-text {
-			.bg-#{$color-name} &,
-			.block-bg-#{$color-name} & {
-				border: $input-dark-bg-border;
-			}
-		}
-
-		input {
-			@include absolute();
-		}
-
-		&.checked {
-			&::before {
-				@include absolute();
-				@include size($input-checked-fill-size);
-
-				content: '';
-				display: block;
-				background: $input-checked-fill-color;
-
-				@each $color-name in $bg-colors-with-light-text {
-					.bg-#{$color-name} &,
-					.block-bg-#{$color-name} & {
-						background: $input-dark-bg-checked-fill-color;
-					}
-				}
+	input[type=checkbox] {
+		& + label {
+			&::after {
+				background-image: url('../../media/images/check-white.png');
 			}
 		}
 	}
 
-	&.input-wrapper-radio {
-		border-radius: 50%;
-
-		&.checked {
-			&::before {
-				border-radius: 50%;
+	input[type=radio] {
+		& + label {
+			&::after {
+				background: $white;
 			}
 		}
 	}
 }
 
-.input-wrapper-select {
-	position: relative;
-	display: block;
-	width: 100%;
-
-	@include media-min($medium) {
-	    display: inline-block;
-		width: auto;
+.bg-gray,
+.bg-gray-light {
+	#{$input-style-selectors} {
+		border-color: $black;
 	}
 
-	select::-ms-expand {
-		display: none;
-	}
-
-	&::before,
-	&::after {
-		transform: rotate(-45deg);
-		position: absolute;
-	    top: 30%;
-		right: 10px;
-		content: '';
-		display: block;
-		width: 6px;
-		height: 6px;
-		border-top: 1px solid $black;
-		border-right: 1px solid $black;
-
-		@each $color-name in $bg-colors-with-light-text {
-			.bg-#{$color-name} &,
-			.block-bg-#{$color-name} & {
-				border-top-color: $gray;
-				border-right-color: $gray;
-			}
-		}
-	}
-
-	&::after {
-		transform: rotate(135deg);
-	    top: auto;
-		bottom: 30%;
-	}
-
-	select option {
-		color: $input-text-color;
-
-		@each $color-name in $bg-colors-with-light-text {
-			.bg-#{$color-name} &,
-			.block-bg-#{$color-name} & {
-				color: $input-dark-bg-text-color;
+	input[type=checkbox],
+	input[type=radio] {
+		& + label {
+			&::before {
+				border-color: $black;
 			}
 		}
 	}

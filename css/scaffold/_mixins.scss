@@ -9,6 +9,18 @@
 	}
 }
 
+@mixin classes-from-list($list, $prepend: '', $append: '') {
+	#{generate-selector-string($list, $prepend, $append)} {
+		@content;
+	}
+}
+
+@mixin dark-bg($prepend: '', $append: ' &') {
+	@include classes-from-list($bg-colors-with-light-text-classes, $prepend, $append) {
+		@content;
+	}
+}
+
 @mixin size($size) {
 	width: $size;
 	height: $size;
