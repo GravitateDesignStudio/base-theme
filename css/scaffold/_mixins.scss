@@ -21,6 +21,32 @@
 	}
 }
 
+@mixin stacked-column-spacing($spacing-small: 6rem, $spacing-medium: 6rem, $spacing-large: 6rem) {
+	.columns.small-12 + .columns {
+		margin-top: $spacing-small;
+	}
+
+	@include media-min($medium) {
+		.columns.small-12 + .columns {
+			margin-top: 0;
+		}
+
+		.columns.medium-12 + .columns {
+			margin-top: $spacing-medium;
+		}
+	}
+
+	@include media-min($large) {
+		.columns.medium-12 + .columns {
+			margin-top: 0;
+		}
+
+		.columns.large-12 + .columns {
+			margin-top: $spacing-large;
+		}
+	}
+}
+
 @mixin size($size) {
 	width: $size;
 	height: $size;
