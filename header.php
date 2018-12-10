@@ -5,12 +5,14 @@
 	<?php if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS')) { the_field('global_head_top_content', 'option', false); } ?>
 	
 	<title><?php bloginfo("name"); ?> <?php wp_title('&bull;'); ?></title>
-	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
+	<meta charset="<?php bloginfo('charset'); ?>">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="application-name" content="<?php bloginfo('name'); ?>" />
-	
-	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/library/images/favicon.ico">
+	<meta name="application-name" content="<?php bloginfo('name'); ?>">
+
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
+
+	<?php /* TODO: generate a favicon at https://realfavicongenerator.net */ ?>
 	
 	<?php wp_head(); ?>
 	<?php if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS')) { the_field('global_head_bottom_content', 'option', false); } ?>
