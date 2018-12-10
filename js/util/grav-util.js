@@ -98,6 +98,34 @@ const GravUtil = (function ($) {
 				this.lastScrollPos = this.scrollPos;
 			}
 		}
+
+		socialShareOpen(shareMethod, opts = {}) {
+			opts.title = opts.title || '';
+			opts.twitterUsername = opts.twitterUsername || '';
+
+			switch (shareMethod) {
+				case 'facebook':
+					window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(window.location.href), 'facebookShare', 'width=626,height=436');
+					break;
+				
+				case 'twitter':
+					let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(opts.title)}&url=${encodeURIComponent(window.location.href)}`;
+
+					if (opts.twitterUsername) {
+						twitterUrl = twitterUrl + `&via=${encodeURIComponent(opts.twitterUsername)}`;
+					}
+
+					window.open(twitterUrl, 'twitterShare', 'width=626,height=436');
+					break;
+				
+				case 'linkedin':
+					window.open(`https://www.linkedin.com/shareArticle?url=${encodeURIComponent(window.location.href)}&title=${encodeURIComponent(opts.title)}`, 'linkedinShare', 'width=626,height=436');
+					break;
+				
+				default:
+					break;
+			}
+		}
 	};
 })(jQuery);
 
