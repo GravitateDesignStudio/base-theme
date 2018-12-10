@@ -14,7 +14,7 @@
 @include dark-bg('', '') {
 	color: $text-light;
 
-	* {
+	*:not(svg):not(use):not(select):not(option):not(input):not(textarea) {
 		color: $text-light;
 	}
 }
