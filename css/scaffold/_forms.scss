@@ -66,7 +66,7 @@ $input-style-selectors: (
 input[type="text"],
 input[type="email"] {
 	&.arrow-right {
-		background-image: url('../../media/images/arrow-right.png');
+		background-image: url('#{$theme-url-base}/media/images/arrow-right.png');
 		background-repeat: no-repeat;
 		background-position: calc(100% - 15px) 50%;
 		padding-right: 35px;
@@ -75,10 +75,11 @@ input[type="email"] {
 
 select,
 select:focus {
-	background-image: url('../../media/images/arrow-down.png');
+	background-image: url('#{$theme-url-base}/media/images/arrow-down.png');
 	background-repeat: no-repeat;
 	background-position: calc(100% - 10px) 50%;
 	padding-right: 35px;
+	color: $text-dark;
 
 	&:disabled {
 		opacity: $form-disabled-opacity;
@@ -91,6 +92,10 @@ select:focus {
 
 select::-ms-expand {
 	display: none;
+}
+
+select option {
+	color: $text-dark;
 }
 
 input[type=checkbox],
@@ -160,7 +165,7 @@ input[type=checkbox] {
 			// height: #{$input-checkbox-radio-size - 8px};
 			height: 8px;
 			// background: $input-checked-fill-color;
-			background-image: url('../../media/images/check-blue.png');
+			background-image: url('#{$theme-url-base}/media/images/check-blue.png');
 		}
 	}
 }
@@ -197,7 +202,7 @@ input[type=radio] {
 	input[type=checkbox] {
 		& + label {
 			&::after {
-				background-image: url('../../media/images/check-white.png');
+				background-image: url('#{$theme-url-base}/media/images/check-white.png');
 			}
 		}
 	}
@@ -206,22 +211,6 @@ input[type=radio] {
 		& + label {
 			&::after {
 				background: $white;
-			}
-		}
-	}
-}
-
-.bg-gray,
-.bg-gray-light {
-	#{$input-style-selectors} {
-		border-color: $black;
-	}
-
-	input[type=checkbox],
-	input[type=radio] {
-		& + label {
-			&::before {
-				border-color: $black;
 			}
 		}
 	}
