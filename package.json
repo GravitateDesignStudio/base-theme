@@ -1,6 +1,6 @@
 {
 	"name": "blueprint-theme",
-	"version": "3.0.0",
+	"version": "3.1.0",
 	"description": "Blueprint Theme",
 	"scripts": {
 		"eslint": "npx eslint js/**/*.js",
@@ -20,19 +20,28 @@
 	},
 	"homepage": "https://github.com/GravitateDesignStudio/blueprint-theme#readme",
 	"dependencies": {
-		"@babel/core": "^7.1.0",
-		"@babel/polyfill": "^7.0.0",
-		"@babel/preset-env": "^7.1.0",
-		"babel-loader": "^8.0.0",
-		"browser-sync": "^2.24.7",
-		"caniuse-lite": "^1.0.30000886",
-		"eslint": "^5.6.0",
-		"eslint-config-airbnb-base": "^13.1.0",
-		"eslint-plugin-import": "^2.14.0",
 		"foundation-sites": "^6.5.0",
+		"imagebuddy": "^1.0.0",
+		"jquery-colorbox": "^1.6.4",
+		"js-cookie": "^2.2.0",
+		"normalize.css": "^8.0.0",
+		"object-fit-images": "^3.2.4",
+		"swiper": "^4.4.1"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.2.2",
+		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
+		"@babel/polyfill": "^7.2.5",
+		"@babel/preset-env": "^7.3.1",
+		"babel-loader": "^8.0.5",
+		"browser-sync": "^2.26.3",
+		"caniuse-lite": "^1.0.30000932",
+		"eslint": "^5.12.1",
+		"eslint-config-airbnb-base": "^13.1.0",
+		"eslint-plugin-import": "^2.15.0",
 		"gulp": "^4.0.0",
 		"gulp-autoprefixer": "^6.0.0",
-		"gulp-clean-css": "^3.10.0",
+		"gulp-clean-css": "^4.0.0",
 		"gulp-exec": "^3.0.2",
 		"gulp-load-plugins": "^1.5.0",
 		"gulp-notify": "^3.2.0",
@@ -40,13 +49,8 @@
 		"gulp-rename": "^1.4.0",
 		"gulp-sass": "^4.0.1",
 		"gulp-sourcemaps": "^2.6.4",
-		"imagebuddy": "^1.0.0",
-		"jquery-colorbox": "^1.6.4",
-		"js-cookie": "^2.2.0",
+		"hard-source-webpack-plugin": "^0.13.0",
 		"node-sass": "^4.9.3",
-		"normalize.css": "^8.0.0",
-		"object-fit-images": "^3.2.4",
-		"swiper": "^4.4.1",
 		"webpack": "^4.19.1",
 		"webpack-cli": "^3.1.0",
 		"webpack-stream": "^5.1.1"
@@ -54,8 +58,10 @@
 	"bundlerOptions": {
 		"babel": true
 	},
-	"devDependencies": {
-		"@babel/plugin-syntax-dynamic-import": "^7.0.0",
-		"hard-source-webpack-plugin": "^0.12.0"
-	}
+	"browserslist": [
+		"last 2 versions",
+		"IE >= 11",
+		"not IE <= 10",
+		"not ie_mob <= 10"
+	]
 }
