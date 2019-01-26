@@ -4,9 +4,9 @@
 	"description": "Blueprint Theme",
 	"scripts": {
 		"eslint": "npx eslint js/**/*.js",
-		"build-css": "npx gulp build-scss; npx gulp build-scss-editor-styles",
-		"build-js": "npx gulp build-js",
-		"build": "npm run build-css; npm run build-js",
+		"build-css": "npx gulp build_scss",
+		"build-js": "npx gulp build_js",
+		"build": "npx gulp build",
 		"watch": "npx gulp"
 	},
 	"repository": {
@@ -30,6 +30,8 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.2.2",
+		"@babel/plugin-proposal-class-properties": "^7.3.0",
+		"@babel/plugin-proposal-object-rest-spread": "^7.3.1",
 		"@babel/plugin-syntax-dynamic-import": "^7.2.0",
 		"@babel/polyfill": "^7.2.5",
 		"@babel/preset-env": "^7.3.1",

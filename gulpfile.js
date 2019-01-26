@@ -1,14 +1,6 @@
-function loadLocalConfig() {
-	const fs = require('fs');
-
-	try {
-		return JSON.parse(fs.readFileSync('local_config.json'));
-	} catch (e) {
-		return false;
-	}
-}
-
-const gulp			= require('gulp');
+const fs = require('fs');
+const path = require('path');
+const { series, parallel, src, dest, watch } = require('gulp');
 const plugins		= require('gulp-load-plugins')();
 const browsersync	= require('browser-sync').create();
 const webpack		= require('webpack');
@@ -18,7 +10,7 @@ const webpackConfig	= require('./webpack.config.js');
 const watchPaths = {
 	scss: 'css/**/*.scss',
 	js: 'js/**/*.js',
-	php: ['**/*.php', '!vendor/**', '!media/**', '!js/**', '!dist/**', '!css/**']
+	php: ['**/*.php', '!vendor/', '!node_modules/', '!media/', '!js/', '!css/', '!dist/']
 };
 
 const srcFiles = {
@@ -33,8 +25,21 @@ const distFiles = {
 	js: 'dist/js/master.min.js'
 };
 
-gulp.task('build-scss', function () {
-	return gulp.src(srcFiles.scss)
+function loadLocalConfig() {
+	try {
+		return JSON.parse(fs.readFileSync('local_config.json'));
+	} catch (e) {
+		return false;
+	}
+}
+
+/**
+ * Build Tasks
+ */
+function buildSCSSwithInput(srcFile, destPath = 'dist') {
+	const basename = path.basename(srcFile, '.scss');
+
+	return src(srcFile)
 		.pipe(plugins.plumber({
 			errorHandler: function (err) {
 				plugins.notify.onError({
@@ -46,52 +51,29 @@ gulp.task('build-scss', function () {
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.sass())
 		.on('error', plugins.sass.logError)
-		.pipe(plugins.autoprefixer({
-			browsers: ['last 2 versions', 'ie >= 11']
-		}))
+		.pipe(plugins.autoprefixer())
 		.pipe(plugins.cleanCss({
 			keepSpecialComments: 0
 		}))
-		.pipe(plugins.rename('master.min.css'))
+		.pipe(plugins.rename(`${basename}.min.css`))
 		.pipe(plugins.sourcemaps.write('.'))
-		.pipe(gulp.dest('dist/css'))
-		.pipe(browsersync.stream())
+		.pipe(dest(destPath))
 		.on('error', plugins.notify.onError({
 			message: '<%= error.message %>',
 			title: 'SCSS Error'
 		}));
-});
+}
 
-gulp.task('build-scss-editor-styles', function () {
-	return gulp.src(srcFiles.scssEditorStyles)
-		.pipe(plugins.plumber({
-			errorHandler: function (err) {
-				plugins.notify.onError({
-					title: 'SCSS Build Error',
-					message: err.message
-				})(err);
-			}
-		}))
-		.pipe(plugins.sourcemaps.init())
-		.pipe(plugins.sass())
-		.on('error', plugins.sass.logError)
-		.pipe(plugins.autoprefixer({
-			browsers: ['last 2 versions', 'ie >= 11']
-		}))
-		.pipe(plugins.cleanCss({
-			keepSpecialComments: 0
-		}))
-		.pipe(plugins.rename('editor-styles.min.css'))
-		.pipe(plugins.sourcemaps.write('.'))
-		.pipe(gulp.dest('dist/css'))
-		.on('error', plugins.notify.onError({
-			message: '<%= error.message %>',
-			title: 'SCSS (editor styles) Error'
-		}));
-});
+function buildSCSStheme() {
+	return buildSCSSwithInput(srcFiles.scss);
+}
 
-gulp.task('build-js', function () {
-	return gulp.src(srcFiles.js)
+function buildSCSSeditor() {
+	return buildSCSSwithInput(srcFiles.scssEditorStyles);
+}
+
+function buildJS() {
+	return src(srcFiles.js)
 		.pipe(plugins.plumber({
 			errorHandler: function (err) {
 				plugins.notify.onError({
@@ -105,46 +87,55 @@ gulp.task('build-js', function () {
 			title: 'JS Build'
 		}))
 		.pipe(webpackStream(webpackConfig, webpack))
-		.pipe(gulp.dest('dist/js'));
-});
+		.pipe(dest('dist/js'));
+}
 
-gulp.task('build', gulp.parallel('build-scss', 'build-scss-editor-styles', 'build-js'));
+/**
+ * Watch Tasks
+ */
+function watchSourceSCSS(cb) {
+	watch(watchPaths.scss, parallel(buildSCSStheme, buildSCSSeditor));
+	cb();
+}
 
-gulp.task('browser-sync', function () {
+function watchSourceJS(cb) {
+	watch(watchPaths.js, buildJS);
+	cb();
+}
+
+/**
+ * BrowserSync
+ */
+function startBrowserSync(cb) {
 	const localConfig = loadLocalConfig();
 
 	if (!localConfig) {
-		console.error('Unable to load "local_config.json" -- please use "local_config_example.json" as a template');
-		process.exit();
+		cb(new Error('Unable to load "local_config.json" -- please use "local_config_example.json" as a template'));
+		return;
 	}
 
 	browsersync.init(localConfig.browserSync);
-});
 
-gulp.task('browser-sync-reload', function (done) {
-	browsersync.reload();
-	done();
-});
+	watch([distFiles.js].concat(watchPaths.php), () => {
+		browsersync.reload();
+	});
 
-gulp.task('watch-dist-files', function () {
-	gulp.watch(watchPaths.php, gulp.series('browser-sync-reload'));
-	gulp.watch(distFiles.js, gulp.series('browser-sync-reload'));
-});
+	cb();
+}
 
-gulp.task('watch-source-scss', function () {
-	gulp.watch(watchPaths.scss, gulp.parallel('build-scss', 'build-scss-editor-styles'));
-});
+/**
+ * Exports
+ */
+exports.build_scss = parallel(buildSCSStheme, buildSCSSeditor);
+exports.build_scss_theme = buildSCSStheme;
+exports.build_scss_editor = buildSCSSeditor;
+exports.build_js = buildJS;
+exports.build = parallel(buildSCSStheme, buildSCSSeditor, buildJS);
 
-gulp.task('watch-source-js', function () {
-	gulp.watch(watchPaths.js, gulp.parallel('build-js'));
-});
+exports.watch_scss = series(parallel(buildSCSStheme, buildSCSSeditor), watchSourceSCSS);
+exports.watch_js = series(buildJS, watchSourceJS);
+exports.watch = series(parallel(buildSCSStheme, buildSCSSeditor, buildJS), watchSourceSCSS, watchSourceJS);
 
-gulp.task('watch', gulp.series(
-	gulp.parallel('build'),
-	gulp.parallel('watch-source-scss', 'watch-source-js', 'watch-dist-files')
-));
+exports.browsersync = startBrowserSync;
 
-gulp.task('default', gulp.series(
-	gulp.parallel('build'),
-	gulp.parallel('browser-sync', 'watch')
-));
+exports.default = series(parallel(buildSCSStheme, buildSCSSeditor, buildJS), watchSourceSCSS, watchSourceJS, startBrowserSync);

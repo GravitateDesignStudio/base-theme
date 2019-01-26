@@ -20,6 +20,7 @@
         "wrap-iife": ["error", "inside"],
         "object-shorthand": "off",
         "vars-on-top": "off",
-        "max-len": "off"
+        "max-len": "off",
+        "object-curly-newline": "off"
     }
 }
