@@ -1,5 +1,5 @@
 .style-testing {
-	& > .row {
+	&__row {
 		margin-top: 4rem;
 	}
 
@@ -29,5 +29,33 @@
 
 	&__icon-name {
 		margin-left: 1rem;
+	}
+
+	&__color-selector {
+		@include grid-column-gutter;
+
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		padding-top: 0.5rem;
+		padding-bottom: 0.5rem;
+		display: flex;
+		align-items: center;
+		background: $white;
+		box-shadow: 0 0 5px rgba($black, 0.4);
+
+		body.admin-bar & {
+			bottom: 46px;
+
+			@include media-min(783px) {
+				bottom: 32px;
+			}
+		}
+	}
+
+	&__select--color {
+		margin: 0 0 0 1rem;
+		width: auto;
 	}
 }

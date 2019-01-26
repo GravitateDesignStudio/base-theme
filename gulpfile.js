@@ -36,7 +36,7 @@ function loadLocalConfig() {
 /**
  * Build Tasks
  */
-function buildSCSSwithInput(srcFile, destPath = 'dist') {
+function buildSCSSwithInput(srcFile, destPath = 'dist/css') {
 	const basename = path.basename(srcFile, '.scss');
 
 	return src(srcFile)
