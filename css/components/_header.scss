@@ -8,16 +8,42 @@ html.mobile-menu-active {
 
 .site-header {
 	z-index: $z-header;
-	position: relative;
+	position: fixed;
+	top: 0;
+	left: 0;
 	width: 100%;
-	max-width: $global-width;
-	margin: 0 auto;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	background: $white;
+	box-shadow: 0 0 5px rgba($black, 0.4);
+	transition: transform ($default-transition-speed * 2) ease-in-out;
+
+	height: $header-height-sm;
+
+	@include media-min($medium) {
+		height: $header-height-md;
+	}
 
 	@include media-min($large) {
-		align-items: flex-end;
+		height: $header-height-lg;
+	}
+
+	html.scroll-down & {
+		transform: translateY(-105%);
+	}
+	
+	&__inner {
+		@include grid-column-gutter;
+
+		position: relative;
+		width: 100%;
+		max-width: $global-width;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		@include media-min($large) {
+			align-items: flex-end;
+		}
 	}
 
 	&__logo {
@@ -103,8 +129,11 @@ html.mobile-menu-active {
 		position: fixed;
 		top: 0;
 		right: 0;
-		padding: 13px 10px;
-		display: inline-block;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 60px;
+		height: 60px;
 		cursor: pointer;
 
 		// Normalize (<button>)
@@ -114,7 +143,9 @@ html.mobile-menu-active {
 		background: $black;
 		border: 0;
 		margin: 0;
+		padding: 0;
 		overflow: visible;
+		min-width: 0;
 	}
 
 	&__mobile-menu-button-box {

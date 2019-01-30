@@ -4,6 +4,18 @@
 	box-sizing: border-box;
 }
 
+body {
+	margin-top: $header-height-sm;
+
+	@include media-min($medium) {
+		margin-top: $header-height-md;
+	}
+
+	@include media-min($large) {
+		margin-top: $header-height-lg;
+	}
+}
+
 ul {
 	padding: 0;
 	

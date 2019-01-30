@@ -3,7 +3,7 @@ Foundation Variables
 -- Foundation variables reference: https://github.com/zurb/foundation-sites/blob/develop/scss/settings/_settings.scss
 -- local reference can be found at: node_modules/foundation-sites/scss/settings/_settings.scss
 **************************************/
-$global-width: 1300px;
+$global-width: 1160px;
 
 // create our own breakpoint variables
 $medium: 641px;
@@ -25,6 +25,11 @@ $grid-column-gutter: (
     small: 40px,
     medium: 60px
 );
+
+// header height by viewport
+$header-height-sm: 60px;
+$header-height-md: 70px;
+$header-height-lg: 80px;
 
 
 /*************************************
