@@ -10,7 +10,7 @@ const SiteHeader = (function ($) {
 
 		setupEventHandlers() {
 			// mobile menu button handler
-			this.$el.find('.site-header__mobile-menu-button').on('click tap', function () {
+			$('.site-header__mobile-menu-button').on('click tap', function () {
 				$('html').toggleClass('mobile-menu-active');
 			});
 
