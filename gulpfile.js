@@ -58,6 +58,7 @@ function buildSCSSwithInput(srcFile, destPath = 'dist/css') {
 		.pipe(plugins.rename(`${basename}.min.css`))
 		.pipe(plugins.sourcemaps.write('.'))
 		.pipe(dest(destPath))
+		.pipe(browsersync.stream())
 		.on('error', plugins.notify.onError({
 			message: '<%= error.message %>',
 			title: 'SCSS Error'
