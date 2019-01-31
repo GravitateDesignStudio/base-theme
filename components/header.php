@@ -17,7 +17,7 @@
 		</div>
 	</div>
 </header>
-<button class="site-header__mobile-menu-button hide-for-large" type="button" aria-label="Menu">
+<button class="site-header__mobile-menu-button ignore-default-styling hide-for-large" type="button" aria-label="Menu">
 	<span class="site-header__mobile-menu-button-box">
 		<span class="site-header__mobile-menu-button-inner"></span>
 	</span>

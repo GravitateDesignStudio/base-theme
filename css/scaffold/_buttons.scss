@@ -1,7 +1,9 @@
 .button,
-button:not(.site-header__mobile-menu-button):not(.hellobar__close),
+button:not(.ignore-default-styling):not(.hellobar__close),
+.wysiwyg button,
 input[type=submit],
-.mce-button-primary {
+.mce-button-primary,
+%button {
 	transition: all $default-transition-speed ease-in-out;
 	appearance: none;
 	cursor: pointer;
@@ -24,7 +26,7 @@ input[type=submit],
     min-width: 160px;
 	min-height: $default-input-min-height;
 
-	.bg-black & {
+	@include dark-bg() {
 		background-color: $white;
 		border-color: $white;
 		color: $black;

@@ -47,28 +47,6 @@
 	}
 }
 
-@mixin size($size) {
-	width: $size;
-	height: $size;
-}
-
-@mixin absolute($top: 0, $right: 0, $bottom: 0, $left: 0) {
-	position: absolute;
-	top: $top;
-	right: $right;
-	left: $left;
-	bottom: $bottom;
-	margin: auto;
-}
-
-@mixin fixed($top: 0, $right: 0, $bottom: 0, $left: 0) {
-	position: fixed;
-	top: $top;
-	right: $right;
-	left: $left;
-	bottom: $bottom;
-}
-
 @mixin media($args...) {
 	$media-type: 'only screen';
 	$media-type-key: 'media-type';

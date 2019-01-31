@@ -1,7 +1,11 @@
+:root {
+	box-sizing: border-box;
+}
+
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
+	box-sizing: inherit;
 }
 
 body {
@@ -48,7 +52,7 @@ table {
 }
 
 blockquote {
-	margin: 2em 1em;
+	margin: 2rem 1rem;
 	
 	&::before {
 	   content: '\201C';
@@ -128,21 +132,4 @@ iframe {
 
 .text-right {
 	text-align: right;
-}
-
-.equal-ratio {
-	position: relative;
-	width: 50%;
-
-	&::before {
-		content: '';
-		padding-top: 100%;
-		float: left;
-	}
-
-	&::after {
-		content: '';
-		display: block;
-		clear: both;
-	}
 }
