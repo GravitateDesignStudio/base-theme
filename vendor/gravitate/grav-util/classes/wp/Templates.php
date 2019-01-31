@@ -12,7 +12,9 @@ class Templates {
 			$post_type = str_replace('_', '-', get_post_type());
 			$taxonomy = get_query_var('taxonomy');
 	
-			if (is_front_page() && file_exists($template_dir.'/home.php')) {
+			if (is_front_page() && file_exists($template_dir.'/front-page.php')) {
+				return $template_dir.'/front-page.php';
+			} else if (is_home() && file_exists($template_dir.'/home.php')) {
 				return $template_dir.'/home.php';
 			} else if ((is_tax() || is_tag() || is_category()) && $taxonomy && file_exists($template_dir.'/taxonomy-'.$taxonomy.'.php')) {
 				return $template_dir.'/archive-'.$taxonomy.'.php';

@@ -1,23 +1,24 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+    "hash": "ba848a8b76edbb14f61ff867a6ea7e3f",
     "content-hash": "b6a884231661ccf365fd9c231ba14d0f",
     "packages": [
         {
             "name": "composer/ca-bundle",
-            "version": "1.1.1",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "d2c0a83b7533d6912e8d516756ebd34f893e9169"
+                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/d2c0a83b7533d6912e8d516756ebd34f893e9169",
-                "reference": "d2c0a83b7533d6912e8d516756ebd34f893e9169",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
+                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
                 "shasum": ""
             },
             "require": {
@@ -60,7 +61,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2018-03-29T19:57:20+00:00"
+            "time": "2019-01-28 09:30:10"
         },
         {
             "name": "geoip2/geoip2",
@@ -112,20 +113,20 @@
                 "geolocation",
                 "maxmind"
             ],
-            "time": "2018-04-10T15:32:59+00:00"
+            "time": "2018-04-10 15:32:59"
         },
         {
             "name": "gravitate/grav-util",
-            "version": "1.2.10",
+            "version": "1.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/GravitateDesignStudio/grav-util.git",
-                "reference": "a9ed4a02eb1282c1a9c28eeccfd0b176b9e7cd30"
+                "reference": "2d520988dcbc5afc686e0da76ef87c3a4066f02a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GravitateDesignStudio/grav-util/zipball/a9ed4a02eb1282c1a9c28eeccfd0b176b9e7cd30",
-                "reference": "a9ed4a02eb1282c1a9c28eeccfd0b176b9e7cd30",
+                "url": "https://api.github.com/repos/GravitateDesignStudio/grav-util/zipball/2d520988dcbc5afc686e0da76ef87c3a4066f02a",
+                "reference": "2d520988dcbc5afc686e0da76ef87c3a4066f02a",
                 "shasum": ""
             },
             "require": {
@@ -145,20 +146,20 @@
                 "MIT"
             ],
             "description": "Gravitate theme utilities and helper classes",
-            "time": "2018-05-04T16:24:04+00:00"
+            "time": "2018-06-26 17:27:55"
         },
         {
             "name": "maxmind-db/reader",
-            "version": "v1.3.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maxmind/MaxMind-DB-Reader-php.git",
-                "reference": "e042b4f8a2dff41e19019faf16427178b07fbd58"
+                "reference": "eb83d0ee1c1f9b8a340206302136bc81ee02ae74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/e042b4f8a2dff41e19019faf16427178b07fbd58",
-                "reference": "e042b4f8a2dff41e19019faf16427178b07fbd58",
+                "url": "https://api.github.com/repos/maxmind/MaxMind-DB-Reader-php/zipball/eb83d0ee1c1f9b8a340206302136bc81ee02ae74",
+                "reference": "eb83d0ee1c1f9b8a340206302136bc81ee02ae74",
                 "shasum": ""
             },
             "require": {
@@ -201,7 +202,7 @@
                 "geolocation",
                 "maxmind"
             ],
-            "time": "2018-02-21T21:23:33+00:00"
+            "time": "2019-01-04 19:55:56"
         },
         {
             "name": "maxmind/web-service-common",
@@ -247,7 +248,7 @@
             ],
             "description": "Internal MaxMind Web Service API",
             "homepage": "https://github.com/maxmind/web-service-common-php",
-            "time": "2018-02-12T22:31:54+00:00"
+            "time": "2018-02-12 22:31:54"
         }
     ],
     "packages-dev": [],
