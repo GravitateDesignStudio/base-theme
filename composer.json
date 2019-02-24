@@ -7,6 +7,7 @@
     },
 	"autoload": {
 		"psr-4": {
+            "Blueprint\\": "inc/Blueprint/",
             "ClientNamespace\\": "inc/ClientNamespace/"
 		}
 	}

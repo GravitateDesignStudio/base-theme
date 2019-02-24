@@ -15,4 +15,5 @@ return array(
     'GeoIp2\\' => array($vendorDir . '/geoip2/geoip2/src'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'ClientNamespace\\' => array($baseDir . '/inc/ClientNamespace'),
+    'Blueprint\\' => array($baseDir . '/inc/Blueprint'),
 );

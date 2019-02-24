@@ -1,6 +1,4 @@
 <?php
-$social_sprites = Grav\WP\SVGSpriteManager::get_sprite('social');
-
 $social_links = array();
 
 if ($social_icon_fields = get_field('theme_options_social_site_links', 'option')) {
@@ -29,7 +27,7 @@ if ($social_icon_fields = get_field('theme_options_social_site_links', 'option')
 						target="_blank"
 						title="<?php echo esc_attr($social_link['title']); ?>">
 						<span class="site-footer__social-icon">
-							<?php $social_sprites->the_svg_symbol($social_link['icon']); ?>
+							<?php Blueprint\SVG::the_svg($social_link['icon']); ?>
 						</span>
 					</a>
 					<?php

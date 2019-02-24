@@ -25,6 +25,10 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
             'Composer\\CaBundle\\' => 18,
             'ClientNamespace\\' => 16,
         ),
+        'B' => 
+        array (
+            'Blueprint\\' => 10,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -63,6 +67,10 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         'ClientNamespace\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc/ClientNamespace',
+        ),
+        'Blueprint\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/inc/Blueprint',
         ),
     );
 

@@ -1,7 +1,12 @@
 <?php
 $acf_group = 'theme_options_social';
-$social_sprites = Grav\WP\SVGSpriteManager::get_sprite('social');
-$sprite_symbols = $social_sprites->get_symbols_array();
+
+$social_icons_list = Blueprint\SVG::get_svg_list('social', ['label_includes_dir' => false]);
+$social_icon_choices = [];
+
+foreach ($social_icons_list as $icon) {
+    $social_icon_choices[$icon['name']] = $icon['label'];
+}
 
 acf_add_local_field_group(array (
     'key' => 'group_'.$acf_group,
@@ -83,8 +88,8 @@ acf_add_local_field_group(array (
                         'class' => '',
                         'id' => '',
                     ),
-                    'choices' => $sprite_symbols,
-                    'default_value' => (is_array($sprite_symbols) && isset($sprite_symbols[0])) ? $sprite_symbols[0] : '',
+                    'choices' => $social_icon_choices,
+                    'default_value' => '',
                     'allow_null' => 0,
                     'multiple' => 0,         // allows for multi-select
                     'ui' => 0,               // creates a more stylized UI

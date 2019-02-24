@@ -9,9 +9,6 @@ Grav\WP\Media::add_upload_mime_types(array(
 	'svg' => 'image/svg+xml'
 ));
 
-// load SVG sprites
-Grav\WP\SVGSpriteManager::add_sprite('social', get_template_directory().'/media/svg/social-icons.svg');
-
 // enable post thumbnail support
 Grav\WP\ThemeSupport::post_thumbnails(300, 300, true);
 

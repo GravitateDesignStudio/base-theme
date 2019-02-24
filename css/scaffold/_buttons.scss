@@ -1,30 +1,32 @@
 .button,
-button:not(.ignore-default-styling):not(.hellobar__close):not(.gm-control-active),
 .wysiwyg button,
 input[type=submit],
 .mce-button-primary,
 %button {
-	transition: all $default-transition-speed ease-in-out;
-	appearance: none;
-	cursor: pointer;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
 	position: relative;
-	outline: none;
-	text-align: center;
-	text-decoration: none;
+	display: inline-block;
+
 	margin: 0;
-	color: $white;
-    background-color: $black;
-    border: 2px solid $black;
-    border-radius: $default-input-border-radius;
-	box-shadow: $default-box-shadow;
-    font: normal normal $font-weight-bold #{$body-font-size} / 1 $font-primary;
-    padding: 1rem 1.2rem;
-    text-transform: uppercase;
+	padding: 1.7rem 2rem 1.8rem;
     min-width: 160px;
 	min-height: $default-input-min-height;
+
+    border: 2px solid $black;
+	border-radius: $default-input-border-radius;
+
+	font: normal normal $font-weight-bold #{$body-font-size} / 1.45 $font-primary;
+	text-align: center;
+	text-decoration: none;
+    text-transform: uppercase;
+
+	color: $white;
+    background-color: $black;
+	box-shadow: $default-box-shadow;
+
+	appearance: none;
+	outline: none;
+	cursor: pointer;
+	transition: all $default-transition-speed ease-in-out;
 
 	@include dark-bg() {
 		background-color: $white;
@@ -84,5 +86,42 @@ input[type=submit],
 				border-color: rgba($white, 0.4);
 			}
 		}
+	}
+}
+
+.button {
+	&--has-icon {
+		min-width: 0;
+		padding-left: 7rem;
+	}
+
+	&__icon-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: 50px;
+		height: 50px;
+		
+		border-top-left-radius: $default-input-border-radius;
+		border-bottom-left-radius: $default-input-border-radius;
+
+		background: $black;
+		color: $white;
+	}
+
+	&__icon {
+		width: 11px;
+		color: $white;
+	}
+
+	&--slim {
+		min-width: 125px;
+		min-height: 40px;
+		padding: 1.2rem 2rem 1.3rem;
 	}
 }
