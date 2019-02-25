@@ -20,6 +20,10 @@ function setLoadedDependency(depName, loadedObject) {
 
 export function loadSwiper() {
 	return new Promise((resolve, reject) => {
+		if (typeof window.Swiper !== 'undefined') {
+			resolve(window.Swiper);
+		}
+
 		const existingInstance = getLoadedDependency('swiper');
 
 		if (existingInstance) {
@@ -29,6 +33,27 @@ export function loadSwiper() {
 		import(/* webpackChunkName: "swiper" */ 'swiper').then((Swiper) => {
 			setLoadedDependency('swiper', Swiper.default);
 			resolve(Swiper.default);
+		}).catch((err) => {
+			reject(err);
+		});
+	});
+}
+
+export function loadIntersectionObserver() {
+	return new Promise((resolve, reject) => {
+		if (typeof window.IntersectionObserver !== 'undefined') {
+			resolve();
+		}
+
+		const existingInstance = getLoadedDependency('intersectionObserver');
+
+		if (existingInstance) {
+			resolve(existingInstance);
+		}
+
+		import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer').then((IntersectionObserver) => {
+			setLoadedDependency('intersectionObserver', IntersectionObserver);
+			resolve();
 		}).catch((err) => {
 			reject(err);
 		});
