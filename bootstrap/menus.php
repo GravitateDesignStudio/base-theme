@@ -16,5 +16,4 @@ $default_menus = array(
 	'sitemap-menu' => 'Sitemap Menu' 			// Sitemap Links
 );
 
-Grav\WP\ThemeSupport::register_menus($default_menus);
-Grav\WP\Menus::create_default_menus($default_menus);
+WPUtil\ThemeSupport::register_menus($default_menus);

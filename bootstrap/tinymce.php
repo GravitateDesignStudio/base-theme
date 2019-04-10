@@ -1,7 +1,7 @@
 <?php
 add_editor_style('/dist/css/editor-styles.min.css');
 
-Grav\WP\TinyMCE::add_formats(array(
+WPUtil\TinyMCE::add_formats(array(
 	array(
 		'title' => 'Button (Primary)',
 		'selector' => 'a',
@@ -14,6 +14,6 @@ Grav\WP\TinyMCE::add_formats(array(
 	)
 ));
 
-Grav\WP\TinyMCE::set_options(array(
+WPUtil\TinyMCE::set_options(array(
 	'paste_as_text' => true
 ));

@@ -6,19 +6,20 @@ abstract class SVG
 	protected static $use_svgs = [];
 	protected static $use_hook_added = false;
 
-	protected static function clean_markup($markup, $opts = [])
+	protected static function clean_markup($markup)
 	{
-		$debug = $opts['debug'] ?? false;
-		$remove_ids = $opts['remove_ids'] ?? false;
-
-		$cleaned_markup = preg_replace([
+		$debug = apply_filters('blueprint/svg_clean_debug', false);
+		$remove_ids = apply_filters('blueprint/svg_clean_remove_ids', false);
+		$remove_matches = apply_filters('blueprint/svg_clean_remove_matches', [
 			'/(<\?xml\ .*\?>)/i', // remove XML tag - causes issues with W3C validation
 			'/(<!--.*-->)/i', // remove comments
 			'/(\<title>[^\<]+\<\/title\>)/', // remove 'title' tag
 			'/(\<desc>[^\<]+\<\/desc\>)/', // remove 'desc' tag
 			'/\s\s+/', // remove 2+ sequential spaces
 			'/(\n|\r)/' // remove line breaks
-        ], '', $markup);
+		]);
+
+		$cleaned_markup = preg_replace($remove_matches, '', $markup);
 
 		// remove 'id' attributes
 		if ($remove_ids) {

@@ -1,6 +1,18 @@
-<div class="archive__navigation">
-	<ul>
-		<li class="archive__navigation-prev-link"><?php next_posts_link(__('&laquo; Older Entries')) ?></li>
-		<li class="archive__navigation-next-link"><?php previous_posts_link(__('Newer Entries &raquo;')) ?></li>
-	</ul>
+<?php
+add_filter('next_posts_link_attributes', function($atts) {
+	return 'class="archive__navigation-link archive__navigation-link--prev button button--slim"';
+});
+
+add_filter('previous_posts_link_attributes', function($atts) {
+	return 'class="archive__navigation-link archive__navigation-link--next button button--slim"';
+});
+
+?>
+<div class="row archive__navigation">
+	<div class="columns small-6">
+		<?php next_posts_link(__('&laquo; Older Entries')) ?>
+	</div>
+	<div class="columns small-6 text-right">
+		<?php previous_posts_link(__('Newer Entries &raquo;')) ?>
+	</div>
 </div>

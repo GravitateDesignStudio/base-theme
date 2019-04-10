@@ -42,18 +42,11 @@ export function loadSwiper() {
 export function loadIntersectionObserver() {
 	return new Promise((resolve, reject) => {
 		if (typeof window.IntersectionObserver !== 'undefined') {
-			resolve();
-		}
-
-		const existingInstance = getLoadedDependency('intersectionObserver');
-
-		if (existingInstance) {
-			resolve(existingInstance);
+			resolve(true);
 		}
 
 		import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer').then((IntersectionObserver) => {
-			setLoadedDependency('intersectionObserver', IntersectionObserver);
-			resolve();
+			resolve(true);
 		}).catch((err) => {
 			reject(err);
 		});

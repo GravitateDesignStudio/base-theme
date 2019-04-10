@@ -1,30 +1,39 @@
 <?php
 get_header();
 
-Grav\WP\Content::get_template_part('components/banners/banner-default');
+WPUtil\Component::render('components/banners/banner-default');
 
-if (have_posts()) {
-	while (have_posts()) {
-		the_post();
+?>
+<main class="main-content main-content__<?php echo esc_attr(get_post_type()); ?>">
+	<?php
+	if (have_posts())
+	{
+		while (have_posts())
+		{
+			the_post();
 
-		if (get_the_content()) {
-			?>
-			<section class="section-container">
-				<div class="section-inner">
-					<div class="row">
-						<div class="columns small-12 wysiwyg">
-							<?php the_content(); ?>
+			if (get_the_content())
+			{
+				?>
+				<section class="block-container">
+					<div class="block-inner">
+						<div class="row align-center">
+							<div class="columns small-12 large-10 wysiwyg">
+								<?php the_content(); ?>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<?php
-		}
+				</section>
+				<?php
+			}
 
-		if (class_exists('GRAV_BLOCKS')) {
-			GRAV_BLOCKS::display();
+			if (class_exists('GRAV_BLOCKS')) {
+				GRAV_BLOCKS::display();
+			}
 		}
 	}
-}
+	?>
+</main>
+<?php
 
 get_footer();

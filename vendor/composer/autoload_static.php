@@ -7,22 +7,12 @@ namespace Composer\Autoload;
 class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
 {
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'W' => 
         array (
-            'MaxMind\\WebService\\' => 19,
-            'MaxMind\\Exception\\' => 18,
-            'MaxMind\\Db\\' => 11,
-        ),
-        'G' => 
-        array (
-            'Grav\\WP\\' => 8,
-            'Grav\\Vendor\\' => 12,
-            'Grav\\Dev\\' => 9,
-            'GeoIp2\\' => 7,
+            'WPUtil\\' => 7,
         ),
         'C' => 
         array (
-            'Composer\\CaBundle\\' => 18,
             'ClientNamespace\\' => 16,
         ),
         'B' => 
@@ -32,37 +22,9 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
     );
 
     public static $prefixDirsPsr4 = array (
-        'MaxMind\\WebService\\' => 
+        'WPUtil\\' => 
         array (
-            0 => __DIR__ . '/..' . '/maxmind/web-service-common/src/WebService',
-        ),
-        'MaxMind\\Exception\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/maxmind/web-service-common/src/Exception',
-        ),
-        'MaxMind\\Db\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/maxmind-db/reader/src/MaxMind/Db',
-        ),
-        'Grav\\WP\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/gravitate/grav-util/classes/wp',
-        ),
-        'Grav\\Vendor\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/gravitate/grav-util/classes/vendor',
-        ),
-        'Grav\\Dev\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/gravitate/grav-util/classes/dev',
-        ),
-        'GeoIp2\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/geoip2/geoip2/src',
-        ),
-        'Composer\\CaBundle\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/composer/ca-bundle/src',
+            0 => __DIR__ . '/..' . '/dfrei/wp-util/src',
         ),
         'ClientNamespace\\' => 
         array (

@@ -18,12 +18,21 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+ul,
+ol,
+li {
 	margin: 0;
 }
 
-@each $el, $margin-top in $following-el-margin-top {
+@each $el, $margin-top in $next-el-margin-top {
 	#{$el} + * {
+		margin-top: $margin-top;
+	}
+}
+
+@each $el, $margin-top in $following-el-margin-top {
+	* + #{$el} {
 		margin-top: $margin-top;
 	}
 }

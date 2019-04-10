@@ -70,7 +70,7 @@ abstract class MenuDropdowns
 				return [];
 			}
 			
-			$template_fields = include($template_fields_file);
+			$template_fields = include $template_fields_file;
 
 			return [
 				'key' => 'field_'.$acf_master_group.'_template_group_'.$template_group['name'],
@@ -182,7 +182,7 @@ abstract class MenuDropdowns
 
 			echo apply_filters('menu_dropdown/container_html_open', $html_open, $template_name, $dropdown_id, $opts['section']);
 
-			include($render_file);
+			include $render_file;
 
 			echo apply_filters('menu_dropdown/container_html_close', $html_close, $template_name, $dropdown_id, $opts['section']);
 		}

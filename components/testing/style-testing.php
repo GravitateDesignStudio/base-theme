@@ -114,20 +114,20 @@
         <hr>
 
         <?php
-        Grav\WP\Content::get_template_part('components/ui/button', [
+        WPUtil\Component::render('components/ui/button', [
             'link' => '#',
             'text' => 'Button',
             'icon' => 'general/play'
         ]);
 
-        Grav\WP\Content::get_template_part('components/ui/button', [
+        WPUtil\Component::render('components/ui/button', [
             'link' => '#',
             'text' => 'Button (active)',
             'icon' => 'general/play',
             'additional_classes' => ['active']
         ]);
 
-        Grav\WP\Content::get_template_part('components/ui/button', [
+        WPUtil\Component::render('components/ui/button', [
             'link' => '#',
             'text' => 'Button (disabled)',
             'icon' => 'general/play',
@@ -140,14 +140,14 @@
         <hr>
 
         <?php
-        // Grav\WP\Content::get_template_part('components/ui/button', [
+        // WPUtil\Component::render('components/ui/button', [
         //     'link' => '#',
         //     'text' => 'Button',
         //     'icon' => 'play',
         //     'style' => 'secondary'
         // ]);
 
-        // Grav\WP\Content::get_template_part('components/ui/button', [
+        // WPUtil\Component::render('components/ui/button', [
         //     'link' => '#',
         //     'text' => 'Button (active)',
         //     'icon' => 'play',
@@ -155,7 +155,7 @@
         //     'additional_classes' => ['active']
         // ]);
 
-        // Grav\WP\Content::get_template_part('components/ui/button', [
+        // WPUtil\Component::render('components/ui/button', [
         //     'link' => '#',
         //     'text' => 'Button (disabled)',
         //     'icon' => 'play',

@@ -24,7 +24,7 @@ $tag_links = $tags ? array_map(function($tag_term) {
     </p>
     <div class="post__content">
         <?php
-        echo Grav\WP\Content::get_excerpt(array(
+        echo Blueprint\Content::get_excerpt(array(
             'post_id' => $post_id, 
             'more' => '<a class="post__read-more" href="'.esc_url($permalink).'">Read More</a>'
         ));

@@ -3,7 +3,7 @@
 // W3TC
 // ********************
 if (!defined('ENVIRONMENT') || constant('ENVIRONMENT') !== 'local') {
-	Grav\Vendor\W3TC::lock_settings_page();
+	WPUtil\Vendor\W3TC::lock_settings_page();
 }
 
 // ********************

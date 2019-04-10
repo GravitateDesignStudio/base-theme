@@ -32,7 +32,7 @@ abstract class Helpers
 			];
 		}, $quick_nav_links);
 
-		\Grav\WP\Content::get_template_part('components/ui/quick-links', [
+		\WPUtil\Component::render('components/ui/quick-links', [
 			'links' => $quick_nav_links
 		]);
 	}

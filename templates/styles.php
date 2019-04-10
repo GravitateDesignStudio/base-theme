@@ -4,7 +4,7 @@
 */
 get_header();
 
-Grav\WP\Content::get_template_part('components/banners/banner-default');
+WPUtil\Component::render('components/banners/banner-default');
 
 $backgrounds = apply_filters('grav_block_background_colors', [], '');
 $backgrounds = $backgrounds ? array_filter($backgrounds, function($key) {
@@ -34,7 +34,7 @@ if (have_posts())
 			<section class="section-container wysiwyg">
 				<div class="row section-inner">
 					<div class="columns small-12">
-						<?php Grav\WP\Content::get_template_part('components/testing/style-testing'); ?>
+						<?php WPUtil\Component::render('components/testing/style-testing'); ?>
 					</div>
 				</div>
 			</section>

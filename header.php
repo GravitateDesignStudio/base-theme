@@ -42,7 +42,5 @@
 	{
 		the_field('global_body_top_content', 'option', false);
 	}
-	?>
-	<div class="global-wrapper">
-		<?php Grav\WP\Content::get_template_part('components/header'); ?>
-		<main class="global-content">
+
+	WPUtil\Component::render('components/header');

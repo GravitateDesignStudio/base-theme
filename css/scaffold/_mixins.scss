@@ -80,3 +80,29 @@
 		@content;
 	}
 }
+
+@mixin faux-foundation-row() {
+	@include grid-column-gutter;
+
+	width: 100%;
+	max-width: $global-width;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+@mixin image-cover-entire-container($object-fit: 'cover', $object-position: '') {
+	@include object-fit-polyfill($object-fit, $object-position);
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: #{$object-fit};
+
+	@if $object-position != '' {
+		object-position: #{$object-position};
+	}
+}

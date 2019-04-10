@@ -9,10 +9,10 @@
 		</div>
 		<div class="site-header__menu-container">
 			<nav class="site-header__menu site-header__menu--primary">
-				<?php Grav\WP\Menus::display_for_location('main-menu', array('depth' => 1)); ?>
+				<?php WPUtil\Menus::display_for_location('main-menu', array('depth' => 1)); ?>
 			</nav>
 			<nav class="site-header__menu site-header__menu--secondary">
-				<?php Grav\WP\Menus::display_for_location('main-links', array('depth' => 1)); ?>
+				<?php WPUtil\Menus::display_for_location('main-links', array('depth' => 1)); ?>
 			</nav>
 		</div>
 	</div>
@@ -24,9 +24,9 @@
 </button>
 <div class="site-header__mobile-container">
 	<nav class="site-header__mobile-menu site-header__mobile-menu--primary">
-		<?php Grav\WP\Menus::display_for_location('main-menu', array('depth' => 1)); ?>
+		<?php WPUtil\Menus::display_for_location('main-menu', array('depth' => 1)); ?>
 	</nav>
 	<nav class="site-header__mobile-menu site-header__mobile-menu--secondary">
-		<?php Grav\WP\Menus::display_for_location('main-links', array('depth' => 1)); ?>
+		<?php WPUtil\Menus::display_for_location('main-links', array('depth' => 1)); ?>
 	</nav>
 </div>

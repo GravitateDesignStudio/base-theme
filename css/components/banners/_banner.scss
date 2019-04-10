@@ -1,0 +1,66 @@
+.banner {
+	z-index: $z-root;
+	position: relative;
+
+	&__cover-video-container {
+		position: relative;
+		overflow: hidden;
+	}
+
+	&__cover-video {
+		z-index: -1;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: auto;
+		height: auto;
+		transform: translate(-50%, -50%);
+
+		@supports (object-fit: cover) {
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transform: none;
+		}
+
+		// Edge will claim support for object-fit but does not support it on video elements
+		html.browser-edge & {
+			top: 50%;
+			left: 50%;
+			width: auto;
+			height: auto;
+			transform: translate(-50%, -50%);
+		}
+	}
+
+	&__cover-image-container,
+	&__cover-video-container {
+		z-index: -1;
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		overflow: hidden;
+
+		// apply a fade over the background image or video
+		&::before {
+			content: '';
+			z-index: 1;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-image: linear-gradient(0deg, rgba($black, 0.1) 0%, rgba($black, 0.25) 100%);
+		}
+	}
+
+	&__cover-image {
+		@include image-cover-entire-container();
+	}
+}

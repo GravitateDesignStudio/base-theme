@@ -1,4 +1,4 @@
 <?php
-Grav\WP\Performance::remove_emojicon_support();
-Grav\WP\Performance::remove_jquery_migrate();
-// Grav\WP\Performance::move_jquery_to_footer();
+WPUtil\Performance::remove_emojicon_support();
+WPUtil\Performance::remove_jquery_migrate();
+// WPUtil\Performance::move_jquery_to_footer();

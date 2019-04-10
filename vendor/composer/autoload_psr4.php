@@ -6,14 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'MaxMind\\WebService\\' => array($vendorDir . '/maxmind/web-service-common/src/WebService'),
-    'MaxMind\\Exception\\' => array($vendorDir . '/maxmind/web-service-common/src/Exception'),
-    'MaxMind\\Db\\' => array($vendorDir . '/maxmind-db/reader/src/MaxMind/Db'),
-    'Grav\\WP\\' => array($vendorDir . '/gravitate/grav-util/classes/wp'),
-    'Grav\\Vendor\\' => array($vendorDir . '/gravitate/grav-util/classes/vendor'),
-    'Grav\\Dev\\' => array($vendorDir . '/gravitate/grav-util/classes/dev'),
-    'GeoIp2\\' => array($vendorDir . '/geoip2/geoip2/src'),
-    'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
+    'WPUtil\\' => array($vendorDir . '/dfrei/wp-util/src'),
     'ClientNamespace\\' => array($baseDir . '/inc/ClientNamespace'),
     'Blueprint\\' => array($baseDir . '/inc/Blueprint'),
 );

@@ -1,0 +1,17 @@
+.archive__load-more-container {
+	@include faux-foundation-row;
+
+	display: flex;
+	justify-content: center;
+	margin-top: 2rem;
+
+	@include media-max($medium) {
+		.button {
+			width: 100%;
+		}
+	}
+
+	@include media-min($medium) {
+		margin-top: 6rem;
+	}
+}

@@ -1,0 +1,26 @@
+.banner-default {
+	@include media-min($large) {
+		min-height: 355px;
+	}
+
+	&__content {
+		@include faux-foundation-row();
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		padding-top: 9.5rem;
+		padding-bottom: 9.5rem;
+
+		@include media-min($large) {
+			padding-top: 12rem;
+			padding-bottom: 12rem;
+		}
+	}
+	
+	&__title {
+		text-align: center;		
+	}
+}

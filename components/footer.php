@@ -12,7 +12,7 @@ if ($social_icon_fields = get_field('theme_options_social_site_links', 'option')
     <div class="row">
 		<div class="columns small-6 medium-8">
             <nav class="site-footer__menu site-footer__menu--primary">
-				<?php Grav\WP\Menus::display_for_location('footer-menu', array('depth' => 1)); ?>
+				<?php WPUtil\Menus::display_for_location('footer-menu', array('depth' => 1)); ?>
             </nav>
         </div>
 		<div class="columns small-6 medium-4">
@@ -40,7 +40,7 @@ if ($social_icon_fields = get_field('theme_options_social_site_links', 'option')
 		 <div class="columns small-12 site-footer__legal">
               <p class="site-footer__copyright">&copy; <?php echo date('Y'); ?> <?php the_field('copyright_text', 'option'); ?></p>
               <nav class="site-footer__menu site-footer__menu--secondary">
-                  <?php Grav\WP\Menus::display_for_location('footer-links', array('depth' => 1)); ?>
+                  <?php WPUtil\Menus::display_for_location('footer-links', array('depth' => 1)); ?>
               </nav>
          </div>
 	</div>

@@ -34,8 +34,8 @@
 					<p>3rd party PHP packages for this theme are managed using Composer. If you do not have Composer installed you can do so by using <a href="https://brew.sh/" target="_blank" rel="nofollow noopener">Homebrew</a> <code>brew install composer</code> or by going to <a href="https://getcomposer.org/" target="_blank" rel="nofollow noopener">https://getcomposer.org/</a>.</p>
 				</li>
 				<li>
-					<h6>Gravitate Utilities Package</h6>
-					<p>The Gravitate Utilities package (repo: <a href="https://github.com/GravitateDesignStudio/grav-util">https://github.com/GravitateDesignStudio/grav-util</a> | packagist: <a href="https://packagist.org/packages/gravitate/grav-util">https://packagist.org/packages/gravitate/grav-util</a>) for Composer contains many theme-independent utility methods for WordPress and common 3rd party integrations.</p>
+					<h6>WP-Util Package</h6>
+					<p>The WP-Util package (repo: <a href="https://github.com/dougfrei/wp-util">https://github.com/dougfrei/wp-util</a> | packagist: <a href="https://packagist.org/packages/dfrei/wp-util">https://packagist.org/packages/dfrei/wp-util</a>) for Composer contains many theme-independent utility methods for WordPress and common 3rd party integrations.</p>
 				</li>
 			</ul>
 
@@ -106,11 +106,9 @@
 		<div class="row">
 			<div class="columns small-12">
 				<?php
-				Grav\WP\Content::get_template_part(
+				WPUtil\Component::render(
 					'components/entry',
-					array(
-						'post_id' => 2
-					)
+					[ 'post_id' => 2 ]
 				);
 				?>
 			</div>

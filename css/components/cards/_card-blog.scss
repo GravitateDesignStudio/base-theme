@@ -1,0 +1,22 @@
+.card-blog {
+	display: block;
+	background: $gray;
+
+	&__image-container {
+		position: relative;
+		height: 0;
+		padding-top: 62.5%; // 16x10 ratio
+	}
+
+	&__image {
+		@include image-cover-entire-container;
+	}
+
+	&__title {
+		padding: 0 1rem;
+	}
+
+	&__content {
+		padding: 1rem;
+	}
+}
