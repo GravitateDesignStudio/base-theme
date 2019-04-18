@@ -16,7 +16,7 @@ import SearchResults from './templates/search-results';
 import { processExternalLinks } from './util/general-util';
 import ScrollWatcher from './util/scroll-watcher';
 import SiteEvents from './util/site-events';
-import blockAnimationWatcher from './util/block-animation-watcher';
+import BlockAnimationWatcher from './util/block-animation-watcher';
 
 const App = (function ($) {
 	return class {
