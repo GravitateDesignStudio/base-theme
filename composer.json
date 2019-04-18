@@ -2,19 +2,13 @@
     "name": "gravitate/gravtheme",
     "description": "Gravitate WordPress Starter Theme",
     "type": "project",
-    "require": {
-        "dfrei/wp-util": "@dev"
-    },
-	"autoload": {
+    "autoload": {
 		"psr-4": {
             "Blueprint\\": "inc/Blueprint/",
             "ClientNamespace\\": "inc/ClientNamespace/"
 		}
 	},
-    "repositories": {
-        "local": {
-            "type": "path",
-            "url": "/Users/dougfrei/Development/WordPress/WPUtil"
-        }
+    "require": {
+        "dfrei/wp-util": "^2.0"
     }
 }

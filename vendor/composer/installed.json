@@ -1,17 +1,23 @@
 [
     {
         "name": "dfrei/wp-util",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "version": "2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dougfrei/wp-util.git",
+            "reference": "35b655c6b1ac5d3275855b728110e96bf0c14bdd"
+        },
         "dist": {
-            "type": "path",
-            "url": "/Users/dougfrei/Development/WordPress/WPUtil",
-            "reference": null,
-            "shasum": null
+            "type": "zip",
+            "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/35b655c6b1ac5d3275855b728110e96bf0c14bdd",
+            "reference": "35b655c6b1ac5d3275855b728110e96bf0c14bdd",
+            "shasum": ""
         },
         "require": {
             "php": "^7.0"
         },
+        "time": "2019-04-18 17:55:11",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -19,6 +25,7 @@
                 "WPUtil\\": "src"
             }
         },
+        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
