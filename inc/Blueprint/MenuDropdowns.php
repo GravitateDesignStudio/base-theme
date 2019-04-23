@@ -155,7 +155,8 @@ abstract class MenuDropdowns
 	{
 		$opts = array_merge([
 			'render_file_name' => 'render',
-			'section' => ''
+			'section' => '',
+			'custom_values' => []
 		], $custom_opts);
 
 		$post = get_post($dropdown_id);
@@ -166,7 +167,10 @@ abstract class MenuDropdowns
 		$render_file = trailingslashit(self::$opts['template_path']).$template_name.DIRECTORY_SEPARATOR.$opts['render_file_name'].'.php';
 
 		if (file_exists($render_file)) {
-			extract(['values' => get_field('template_group_'.$template_name, $dropdown_id)]);
+			extract([
+				'values' => get_field('template_group_'.$template_name, $dropdown_id),
+				'custom_values' => $opts['custom_values']
+			]);
 
 			$container_classes = [
 				'menu-dropdown',
@@ -231,7 +235,8 @@ abstract class MenuDropdowns
 			array_merge(
 				[
 					'post_type' => self::$cpt_slug,
-					'posts_per_page' => -1
+					'posts_per_page' => -1,
+					'post_status' => 'publish'
 				],
 				$query_opts
 			)
