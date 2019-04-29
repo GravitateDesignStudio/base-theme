@@ -117,9 +117,9 @@ function startBrowserSync(cb) {
 
 	browsersync.init(localConfig.browserSync);
 
-	watch([distFiles.js].concat(watchPaths.php), () => {
+	watch([distFiles.js].concat(watchPaths.php), series(() => {
 		browsersync.reload();
-	});
+	}));
 
 	cb();
 }
