@@ -57,11 +57,3 @@ add_filter('grav_block_use_default_js', function($use_default_js, $block_name) {
 
 	return $use_default_js;
 }, 10, 2);
-
-add_filter('grav_blocks_title_guidelines_title', function($title) {
-	return 'changed the title';
-});
-
-add_filter('grav_blocks_title_guidelines_text', function($text) {
-	return 'testing the guidelines text for title blocks';
-});
