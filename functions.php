@@ -33,27 +33,3 @@ require_once 'bootstrap/plugins.php';
 require_once 'bootstrap/blocks.php';
 require_once 'bootstrap/theme-settings-pages.php';
 require_once 'bootstrap/api.php';
-
-add_filter('grav_blocks_output_default_styles', function($output_default_styles) {
-	return false;
-});
-
-// add_filter('grav_blocks_output_default_js', function($output_default_js) {
-// 	return false;	
-// });
-
-add_filter('grav_block_use_default_css', function($use_default_css, $block_name) {
-	if ($block_name === 'columns') {
-		return false;
-	}
-
-	return $use_default_css;
-}, 10, 2);
-
-add_filter('grav_block_use_default_js', function($use_default_js, $block_name) {
-	if ($block_name === 'columns') {
-		return false;
-	}
-
-	return $use_default_js;
-}, 10, 2);
