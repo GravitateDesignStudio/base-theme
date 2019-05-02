@@ -21,7 +21,7 @@ export function getPostsHTML(opts = {}) {
 					resolve(postsHTML);
 				}
 			})
-			.error((err) => {
+			.fail((err) => {
 				reject(err);
 			});
 	});
@@ -45,7 +45,7 @@ export function getSearchResultCardsHTML(opts = {}) {
 					resolve(postsHTML);
 				}
 			})
-			.error((err) => {
+			.fail((err) => {
 				reject(err);
 			});
 	});
