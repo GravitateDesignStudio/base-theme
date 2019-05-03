@@ -79,4 +79,19 @@ abstract class Blocks
 
 		return $fields['grav_link_fields'];
 	}
+
+	/**
+	 * Ensure the GRAV_BLOCKS::display method can be called
+	 *
+	 * @param array $params
+	 * @return void
+	 */
+	public static function safe_display(array $params = []): void
+	{
+		if (!class_exists('GRAV_BLOCKS')) {
+			return;
+		}
+
+		\GRAV_BLOCKS::display($params);
+	}
 }
