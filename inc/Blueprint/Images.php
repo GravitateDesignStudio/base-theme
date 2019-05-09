@@ -65,7 +65,7 @@ abstract class Images
 		if (is_numeric($acf_image)) {
 			$acf_image = acf_get_attachment($acf_image);
 		}
-		
+
 		if (!is_array($acf_image)) {
 			return [];
 		}
@@ -100,5 +100,82 @@ abstract class Images
 		);
 
 		return $acf_image_sizes;
+	}
+
+	public static function build_ib_sources_string($images)
+	{
+		$used_urls = [];
+		$ib_sources = [];
+
+		foreach ($images as $image) {
+			if (in_array($image['url'], $used_urls)) {
+				continue;
+			}
+
+			$used_urls[] = $image['url'];
+			$ib_sources[] = implode(' ', array($image['url'], $image['width'], $image['height']));
+		}
+
+		return implode(', ', $ib_sources);
+	}
+
+	public static function replace_content_with_ib_images($content)
+	{
+		$matches = [];
+		preg_match_all('(<img\ .+\/\>)', $content, $matches);
+
+		if (!$matches || !$matches[0]) {
+			return $content;
+		}
+
+		$tag_matches = $matches[0];
+
+		$dom = new \DOMDocument();
+		$dom->loadHTML($content, LIBXML_NOERROR | LIBXML_NOWARNING);
+
+		$image_nodes = $dom->getElementsByTagName('img');
+
+		if (count($tag_matches) !== count($image_nodes)) {
+			return $content;
+		}
+
+		for ($i = 0; $i < count($image_nodes); $i++) {
+			$attr_class = $image_nodes[$i]->getAttribute('class');
+			$attr_width = $image_nodes[$i]->getAttribute('width');
+			$attr_height = $image_nodes[$i]->getAttribute('height');
+			$attr_alt = $image_nodes[$i]->getAttribute('alt');
+			$attr_src = $image_nodes[$i]->getAttribute('src');
+
+			$wp_image_id = attachment_url_to_postid($attr_src);
+
+			if (!$wp_image_id) {
+				continue;
+			}
+
+			$image_sizes = self::get_image_sizes_from_acf_object($wp_image_id);
+			$ib_sources_str = self::build_ib_sources_string($image_sizes);
+
+			$attributes['src'] = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC"'; // 100x1
+			$attributes['data-ib-sources'] = '"'.$ib_sources_str.'"';
+			$attributes['data-ib-match-dpr'] = '"0"';
+			$attributes['class'] = '"'.$attr_class.'"';
+			$attributes['alt'] = '"'.$attr_alt.'"';
+
+			if ($attr_width) {
+				$attributes['width'] = '"'.$attr_width.'"';
+			}
+
+			if ($attr_height) {
+				$attributes['height'] = '"'.$attr_height.'"';
+			}
+
+			$attributes_str = trim(urldecode(http_build_query($attributes, '', ' ')));
+
+			$ib_image_tag = "<img {$attributes_str} />";
+
+			$content = str_replace($tag_matches[$i], $ib_image_tag, $content);
+		}
+
+		return $content;
 	}
 }

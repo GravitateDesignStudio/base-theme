@@ -80,13 +80,21 @@ add_filter('grav_blocks_image_tag', function($default_markup, $tag, $attributes,
 		$used_urls[] = $size['url'];
 		$ib_sources[] = implode(' ', array($size['url'], $size['width'], $size['height']));
 	}
-	
+
 	// $attributes['src'] = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='; // 1x1
 	$attributes['src'] = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC"'; // 100x1
 	$attributes['data-ib-sources'] = '"'.implode(', ', $ib_sources).'"';
 	$attributes['data-ib-match-dpr'] = '"0"';
-	
+
 	$attributes_str = trim(urldecode(http_build_query($attributes, '', ' ')));
 
 	return "<img {$attributes_str} />";
 }, 10, 4);
+
+add_filter('acf/load_value/type=wysiwyg', function($value, $post_id, $field) {
+	return \Blueprint\Images::replace_content_with_ib_images($value);
+}, 10, 3);
+
+add_filter('the_content', function($content) {
+	return \Blueprint\Images::replace_content_with_ib_images($content);
+});
