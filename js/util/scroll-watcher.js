@@ -8,7 +8,16 @@ class ScrollWatcher {
 		this.scrollFunc = typeof scrollFunc === 'function' ? scrollFunc : null;
 		this.isTicking = false;
 
-		document.addEventListener('scroll', this.scrollHandler.bind(this));
+		if (this.scrollFunc) {
+			document.addEventListener('scroll', this.scrollHandler.bind(this));
+
+			this.scrollFunc({
+				curScrollPos: this.curScrollPos,
+				prevScrollPos: this.prevScrollPos,
+				documentHeight: this.documentHeight,
+				windowHeight: this.windowHeight
+			});
+		}
 	}
 
 	scrollHandler() {
