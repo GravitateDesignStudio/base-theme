@@ -1,6 +1,12 @@
+function getScrollTop() {
+	const scrollEl = document.scrollingElement || document.documentElement;
+
+	return scrollEl.scrollTop;
+}
+
 class ScrollWatcher {
 	constructor(scrollFunc) {
-		this.curScrollPos = document.documentElement.scrollTop;
+		this.curScrollPos = getScrollTop();
 		this.prevScrollPos = 0;
 		this.documentHeight = document.body.clientHeight;
 		this.windowHeight = window.outerHeight;
@@ -30,7 +36,7 @@ class ScrollWatcher {
 
 		requestAnimationFrame(() => {
 			this.prevScrollPos = this.curScrollPos;
-			this.curScrollPos = document.documentElement.scrollTop;
+			this.curScrollPos = getScrollTop();
 
 			if (this.scrollFunc) {
 				this.scrollFunc({
