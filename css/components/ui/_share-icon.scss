@@ -1,0 +1,26 @@
+.share-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $white;
+	cursor: pointer;
+
+	&--twitter {
+		background: $color-twitter;
+	}
+
+	&--facebook {
+		background: $color-facebook;
+	}
+
+	&--linkedin {
+		background: $color-linkedin;
+	}
+
+	&__icon {
+		width: 20px;
+	}
+}

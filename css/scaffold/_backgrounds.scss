@@ -5,6 +5,7 @@
 @each $color_name, $color_value in $bg-colors {
 	.bg-#{$color_name} {
 		background-color: $color_value;
+		background: $color_value;
 	}
 }
 
@@ -14,7 +15,8 @@
 @include dark-bg('', '') {
 	color: $text-light;
 
-	*:not(svg):not(use):not(select):not(option):not(input):not(textarea) {
-		color: $text-light;
+	label,
+	p {
+		color: inherit;
 	}
 }

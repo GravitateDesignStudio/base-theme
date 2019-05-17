@@ -13,30 +13,30 @@ WPUtil\Component::render('components/banners/banner-default', [
 ]);
 
 ?>
-<main class="main-content main-content__404">
-	<?php
-	
-	if ($content)
-	{
-		?>
-		<section class="block-container">
-			<div class="block-inner">
-				<div class="row">
-					<div class="columns small-12 large-10 wysiwyg">
-						<?php echo $content; ?>
+<main class="main-content">
+	<div class="tmpl-404">
+		<?php
+		if ($content)
+		{
+			?>
+			<section class="block-container">
+				<div class="block-inner">
+					<div class="row">
+						<div class="columns small-12 large-10 wysiwyg">
+							<?php echo $content; ?>
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		<?php
-	}
+			</section>
+			<?php
+		}
 
-	GRAV_BLOCKS::display(array(
-		'section' => '404_blocks_grav_blocks',
-		'object' => 'option'
-	));
-
-	?>
+		GRAV_BLOCKS::display(array(
+			'section' => '404_blocks_grav_blocks',
+			'object' => 'option'
+		));
+		?>
+	</div>
 </main>
 <?php
 

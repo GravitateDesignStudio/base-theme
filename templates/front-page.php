@@ -6,20 +6,22 @@ WPUtil\Component::render('components/banners/banner-default', [
 ]);
 
 ?>
-<main class="main-content main-content__front-page">
-	<?php
-	WPUtil\Component::render('components/testing/theme-welcome');
+<main class="main-content">
+	<div class="tmpl-front-page">
+		<?php
+		WPUtil\Component::render('components/testing/theme-welcome');
 
-	if (have_posts()) {
-		while (have_posts()) {
-			the_post();
+		if (have_posts()) {
+			while (have_posts()) {
+				the_post();
 
-			if (class_exists('GRAV_BLOCKS')) {
-				GRAV_BLOCKS::display();
+				if (class_exists('GRAV_BLOCKS')) {
+					GRAV_BLOCKS::display();
+				}
 			}
 		}
-	}
-	?>
+		?>
+	</div>
 </main>
 <?php
 

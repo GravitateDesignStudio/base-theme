@@ -41,6 +41,7 @@ const App = (function ($) {
 			this.initComponents();
 			this.initTemplates();
 			this.initBlocks();
+			this.initSocialShare();
 		}
 
 		init() {
@@ -81,7 +82,7 @@ const App = (function ($) {
 			if ($themeWelcomeEls.length) {
 				try {
 					const Swiper = await import(/* webpackChunkName: "swiper" */ 'swiper');
-					
+
 					this.instances.themeWelcome = new ThemeWelcome($themeWelcomeEls.first(), Swiper.default);
 				} catch (err) {
 					console.error('Swiper dynamic import failed', err);
@@ -128,6 +129,22 @@ const App = (function ($) {
 			if (animateBlocks && animateBlocks.length) {
 				this.instances.blockAnimationWatcher = new BlockAnimationWatcher(animateBlocks);
 			}
+		}
+
+		initSocialShare() {
+			$('[data-social-share]').on('click', (e) => {
+				const $el = $(e.currentTarget);
+				const site = $el.attr('data-social-share');
+				const shareUrl = $el.attr('href');
+
+				e.preventDefault();
+
+				if (!shareUrl) {
+					return;
+				}
+
+				window.open(shareUrl, `${site}Share`, 'width=626,height=436');
+			});
 		}
 	};
 })(jQuery);
