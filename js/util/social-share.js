@@ -21,11 +21,15 @@ export function openTwitterShare(opts = {}) {
 	opts.title = opts.title || '';
 	opts.twitterUsername = opts.twitterUsername || '';
 
-	let twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(opts.title)}&url=${encodeURIComponent(window.location.href)}`;
+	const twitterParts = [opts.title];
 
 	if (opts.twitterUsername) {
-		twitterUrl = twitterUrl + `&via=${encodeURIComponent(opts.twitterUsername)}`;
+		twitterParts.push(`@${opts.twitterUsername}`);
 	}
+
+	twitterParts.push(window.location.href);
+
+	const twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(twitterParts.join(' '));
 
 	window.open(twitterUrl, 'twitterShare', 'width=626,height=436');
 }
