@@ -33,7 +33,7 @@ input[type=submit],
 		border-color: $white;
 		color: $black;
 	}
-	
+
 	&:hover,
 	&:active,
 	&.active {
@@ -50,7 +50,7 @@ input[type=submit],
 		color: rgba($white, 0.7);
         background-color: rgba($black, 0.4);
 		border-color: transparent;
-		
+
 		.bg-black & {
 			background-color: rgba($white, 0.4);
 			color: rgba($black, 0.7);
@@ -66,7 +66,7 @@ input[type=submit],
 			color: $white;
 			border-color: $white;
 		}
-		
+
 		&:hover,
 		&:active,
 		&.active {
@@ -104,9 +104,9 @@ input[type=submit],
 		top: 0;
 		bottom: 0;
 		left: 0;
-		width: 50px;
-		height: 50px;
-		
+		width: $default-input-min-height;
+		height: $default-input-min-height;
+
 		border-top-left-radius: $default-input-border-radius;
 		border-bottom-left-radius: $default-input-border-radius;
 
@@ -115,7 +115,8 @@ input[type=submit],
 	}
 
 	&__icon {
-		width: 11px;
+		width: #{$default-input-min-height / 3};
+		height: #{$default-input-min-height / 3};
 		color: $white;
 	}
 
