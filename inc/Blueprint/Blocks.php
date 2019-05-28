@@ -36,7 +36,7 @@ abstract class Blocks
 			if (isset($opts['exclude']) && is_array($opts['exclude']) && in_array($class, $opts['exclude'])) {
 				return false;
 			}
-			
+
 			return true;
 		}, ARRAY_FILTER_USE_BOTH);
 
@@ -53,7 +53,7 @@ abstract class Blocks
 			uasort($layouts, function($a, $b) {
 				return strcasecmp($a['label'], $b['label']);
 			});
-		
+
 			return $layouts;
 		}, 1000);
 	}
@@ -93,5 +93,36 @@ abstract class Blocks
 		}
 
 		\GRAV_BLOCKS::display($params);
+	}
+
+	/**
+	 * Get the values for a button field created with the 'GRAV_BLOCKS::get_link_fields' method.
+	 * Returns an object with 'text' and 'link' properties or null if the field values are not found.
+	 *
+	 * @param string $acf_field
+	 * @param integer $post_id
+	 * @return object|null
+	 */
+	public static function get_button_field_values(string $acf_field, $post_id = 0)
+	{
+		$button_values = (object)[
+			'text' => '',
+			'link' => ''
+		];
+
+		if (!$post_id) {
+			$post_id = get_the_ID();
+		}
+
+		$button_type = get_field($acf_field.'_type', $post_id);
+
+		if (!$button_type || $button_type === 'none') {
+			return null;
+		}
+
+		$button_values->text = get_field($acf_field.'_text', $post_id) ?? '';
+		$button_values->link = get_field($acf_field.'_'.$button_type, $post_id) ?? '';
+
+		return $button_values;
 	}
 }
