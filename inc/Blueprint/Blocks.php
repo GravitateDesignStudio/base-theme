@@ -97,7 +97,7 @@ abstract class Blocks
 
 	/**
 	 * Get the values for a button field created with the 'GRAV_BLOCKS::get_link_fields' method.
-	 * Returns an object with 'text' and 'link' properties or null if the field values are not found.
+	 * Returns an object with 'text', 'link', and 'style' properties or null if the field values are not found.
 	 *
 	 * @param string $acf_field
 	 * @param integer $post_id
@@ -107,7 +107,8 @@ abstract class Blocks
 	{
 		$button_values = (object)[
 			'text' => '',
-			'link' => ''
+			'link' => '',
+			'style' => ''
 		];
 
 		if (!$post_id) {
@@ -122,6 +123,7 @@ abstract class Blocks
 
 		$button_values->text = get_field($acf_field.'_text', $post_id) ?? '';
 		$button_values->link = get_field($acf_field.'_'.$button_type, $post_id) ?? '';
+		$button_values->style = get_field($acf_field.'_style', $post_id) ?? '';
 
 		return $button_values;
 	}
