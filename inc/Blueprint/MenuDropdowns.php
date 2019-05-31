@@ -65,11 +65,11 @@ abstract class MenuDropdowns
 
 		$acf_template_groups = array_map(function($template_group) use ($acf_master_group) {
 			$template_fields_file = trailingslashit($template_group['path']).'fields.php';
-			
+
 			if (!file_exists($template_fields_file)) {
 				return [];
 			}
-			
+
 			$template_fields = include $template_fields_file;
 
 			return [
@@ -177,7 +177,7 @@ abstract class MenuDropdowns
 				'menu-dropdown-'.esc_attr($template_name)
 			];
 
-			if (self::$opts['container_classes']) {
+			if (isset(self::$opts['container_classes']) && is_array(self::$opts['container_classes'])) {
 				$container_classes = array_merge($container_classes, self::$opts['container_classes']);
 			}
 
@@ -203,7 +203,7 @@ abstract class MenuDropdowns
 		}
 
 		self::$registered_menu_dropdown_ids[] = $menu_id;
-		
+
 		if (!self::$render_hook_registered) {
 			add_action(self::$opts['render_action'], [__CLASS__, '_render_dropdown_menus']);
 
