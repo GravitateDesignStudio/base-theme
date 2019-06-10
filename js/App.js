@@ -106,14 +106,14 @@ const App = (function ($) {
 
 		initTemplates() {
 			// blog archive
-			const $archiveBlogEl = $('.main-content__archive-blog').first();
+			const $archiveBlogEl = $('.tmpl-archive-blog').first();
 
 			if ($archiveBlogEl) {
 				this.instances.templates.archiveBlog = new ArchiveBlog($archiveBlogEl);
 			}
 
 			// search results
-			const $searchResultsEl = $('.main-content__search').first();
+			const $searchResultsEl = $('.tmpl-search').first();
 
 			if ($searchResultsEl) {
 				this.instances.templates.searchResults = new SearchResults($searchResultsEl);
