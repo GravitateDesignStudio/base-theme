@@ -21,6 +21,8 @@
         "object-shorthand": "off",
         "vars-on-top": "off",
         "max-len": "off",
-        "object-curly-newline": "off"
+        "object-curly-newline": "off",
+        "no-plusplus": "off",
+        "import/prefer-default-export": ["off"]
     }
 }
