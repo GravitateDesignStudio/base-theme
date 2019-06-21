@@ -146,8 +146,23 @@ abstract class Images
 			$attr_alt = $image_nodes[$i]->getAttribute('alt');
 			$attr_src = $image_nodes[$i]->getAttribute('src');
 
-			$wp_image_id = attachment_url_to_postid($attr_src);
+			$class_names = explode(' ', $attr_class);
+			$wp_image_id = 0;
 
+			// check if a 'wp-image-*' class exists and pull the ID from that
+			foreach ($class_names as $class_name) {
+				if (stripos($class_name, 'wp-image-') === 0) {
+					$parts = explode('-', $class_name);
+					$wp_image_id = isset($parts[2]) ? (int)$parts[2] : 0;
+				}
+			}
+
+			// if we couldn't find an id, let's look it up by the image URL
+			if (!$wp_image_id) {
+				$wp_image_id = attachment_url_to_postid($attr_src);
+			}
+
+			// leave this loop if there is no id
 			if (!$wp_image_id) {
 				continue;
 			}
