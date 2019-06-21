@@ -116,7 +116,9 @@ $next-el-margin-top: (
 	h4: 2rem,
 	h5: 1.5rem,
 	h6: 1.5rem,
-    p: 1.5rem
+    p: 1.5rem,
+    ol: 1.5rem,
+    ul: 1.5rem
 );
 
 // creates the selector "* + <element>"
