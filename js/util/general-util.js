@@ -55,22 +55,6 @@ export function scrollTo(selector, offset) {
 	}, 500);
 }
 
-export function getVideoEmbedURL(videoUrl) {
-	let embedUrl = videoUrl;
-
-	if (videoUrl.indexOf('youtube.com') !== -1) {
-		const videoId = new RegExp('[\\?&]v=([^&#]*)').exec(videoUrl);
-
-		if (videoId && videoId[1]) {
-			embedUrl = 'https://www.youtube.com/embed/' + videoId[1] + '?rel=0&wmode=transparent&autoplay=1&showinfo=0';
-		}
-	} else if (videoUrl.indexOf('vimeo.com') !== -1) {
-		console.log('would process video.com url');
-	}
-
-	return embedUrl;
-}
-
 export function copyTextToClipboard(copyText) {
 	const textArea = document.createElement('textarea');
 	let copied = '';
@@ -107,46 +91,4 @@ export function copyTextToClipboard(copyText) {
 	document.body.removeChild(textArea);
 
 	return copied;
-}
-
-export function getUrlQueryArg(name) {
-	let retVal = null;
-	const urlParser = document.createElement('a');
-
-	urlParser.href = window.location.href;
-
-	urlParser.search.substring(1).split('&').forEach((val) => {
-		const [partName, partVal] = val.split('=');
-
-		if (partName === name && partVal.length) {
-			retVal = partVal;
-		}
-	});
-
-	return retVal;
-}
-
-export function addUrlQueryArg(name, value) {
-	let newUrl = window.location.href;
-
-	newUrl += window.location.search ? '&' : '?';
-	newUrl += `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
-
-	return newUrl;
-}
-
-export function removeUrlQueryArg(name) {
-	const queryArgs = window.location.search.substring(1).split('&').filter((val) => {
-		const [partName, partVal] = val.split('=');
-
-		return partName !== name;
-	});
-
-	let newUrl = window.location.origin + window.location.pathname;
-
-	if (queryArgs.length) {
-		newUrl += `?${queryArgs.join('&')}`;
-	}
-
-	return newUrl;
 }
