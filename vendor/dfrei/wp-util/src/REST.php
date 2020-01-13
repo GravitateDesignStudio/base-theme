@@ -29,7 +29,9 @@ abstract class REST
 	 */
 	public static function fix_oauth_url_match_issue(): void
 	{
-		add_filter('rest_oauth.check_callback', create_function('$valid,$url,$consumer', 'return true;'), 10, 3);
+		add_filter('rest_oauth.check_callback', function($valid, $url, $consumer) {
+			return true;
+		}, 10, 3);
 	}
 
 	/**

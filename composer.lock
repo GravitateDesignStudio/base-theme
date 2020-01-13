@@ -1,24 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "6408545ed30209c956b6c29f3fac13d1",
     "content-hash": "7abec0a76f5afc9a61be4f38413cd729",
     "packages": [
         {
             "name": "dfrei/wp-util",
-            "version": "2.0.0",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dougfrei/wp-util.git",
-                "reference": "35b655c6b1ac5d3275855b728110e96bf0c14bdd"
+                "reference": "59e285e169e9ff1e2e269d6a11b6aa19ac0f8b8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/35b655c6b1ac5d3275855b728110e96bf0c14bdd",
-                "reference": "35b655c6b1ac5d3275855b728110e96bf0c14bdd",
+                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/59e285e169e9ff1e2e269d6a11b6aa19ac0f8b8d",
+                "reference": "59e285e169e9ff1e2e269d6a11b6aa19ac0f8b8d",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +44,7 @@
                 "utilities",
                 "wordpress"
             ],
-            "time": "2019-04-18 17:55:11"
+            "time": "2019-11-25T17:43:16+00:00"
         }
     ],
     "packages-dev": [],

@@ -1,8 +1,4 @@
 /* global jQuery */
-
-// This '@babel/polyfill' module is necessary for async/await functionality
-import '@babel/polyfill';
-
 import objectFitImages from 'object-fit-images';
 import ImageBuddy from 'imagebuddy';
 

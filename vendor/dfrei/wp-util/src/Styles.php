@@ -40,8 +40,8 @@ abstract class Styles
 				if (isset($style['version'])) {
 					$url .= '?ver='.$style['version'];
 				}
-				
-				add_action($style['preload_hook'], function() use (&$url) {
+
+				add_action($style['preload_hook'], function() use ($url) {
 					echo '<link rel="preload" href="'.$url.'" as="style">'."\n";
 				});
 			}
