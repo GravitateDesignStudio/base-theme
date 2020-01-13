@@ -1,0 +1,79 @@
+.svg-icon-selector__modal {
+	z-index: 100000;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.svg-icon-selector__modal-inner {
+	position: relative;
+	width: 90vw;
+	height: 90vh;
+	background: white;
+	color: black;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-gap: 10px;
+	padding: 10px;
+}
+
+@media (min-width: 783px) {
+	.svg-icon-selector__modal-inner {
+		grid-template-columns: repeat(6, 1fr);
+	}
+}
+
+.svg-icon-selector__modal-close {
+	position: absolute;
+	top: -18px;
+	right: -18px;
+	width: 36px;
+	height: 36px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: white;
+	color: black;
+	font-size: 30px;
+	border-radius: 100%;
+	box-shadow: -2px 2px 1px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+}
+
+.svg-icon-selector__selectable-icons {
+	display: none;
+}
+
+.svg-icon-selector__selectable-icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.svg-icon-selector__selectable-icon svg {
+	width: 100%;
+	height: 100%;
+	max-width: 75%;
+	max-height: 75%;
+}
+
+.svg-icon-selector__selectable-icon:hover,
+.svg-icon-selector__selectable-icon.active {
+	background: lightskyblue;
+	color: white;
+}
+
+.svg-icon-selector__preview svg {
+	width: 100%;
+	height: 100%;
+	max-width: 100%;
+	max-height: 100%;
+}

@@ -8,3 +8,8 @@ if (function_exists('acf_add_local_field_group')) {
 		return substr(basename($file), 0, 1) !== '_';
 	});
 }
+
+// add custom ACF fields
+if (class_exists('acf_field')) {
+	Blueprint\ACF_Fields\ACF_SVGIconSelector::init();
+}
