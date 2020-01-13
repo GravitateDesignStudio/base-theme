@@ -28,7 +28,7 @@ body {
 		@include media-min($medium) {
 			min-height: calc(100vh - #{$header-height-md});
 		}
-	
+
 		@include media-min($large) {
 			min-height: calc(100vh - #{$header-height-lg});
 		}
@@ -43,9 +43,17 @@ body {
 	}
 }
 
+// Apple believes it has the authority to adjust font sizes it deems as "too small"
+// on iOS. This removes that hostile behavior.
+@media screen and (max-device-width: $medium) {
+	body {
+		-webkit-text-size-adjust: 100%;
+	}
+}
+
 ul {
 	padding: 0;
-	
+
 	nav & {
 		list-style: none;
 		list-style-position: inside;
@@ -76,15 +84,15 @@ table {
 
 blockquote {
 	margin: 2rem 1rem;
-	
+
 	&::before {
 	   content: '\201C';
     }
-	
+
 	&::after {
 	   content: '\201D';
     }
-	
+
 	p {
 	    font: inherit;
 	    display: inline;
