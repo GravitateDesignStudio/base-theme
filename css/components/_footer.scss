@@ -1,4 +1,6 @@
 .site-footer {
+	padding: 4rem 0;
+
 	&__menu {
 		ul {
 			display: flex;
@@ -13,9 +15,15 @@
 		}
 
 		&--primary {
+			ul {
+				flex-direction: column;
+			}
 		}
 
 		&--secondary {
+			ul {
+				flex-wrap: wrap;
+			}
 		}
 	}
 

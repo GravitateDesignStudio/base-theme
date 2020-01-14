@@ -40,7 +40,6 @@ Vendor Styles
 **************************************/
 @import 'vendor/wordpress';
 @import 'vendor/gravity-forms';
-@import 'vendor/colorbox';
 @import 'vendor/hellobar';
 
 // The styles in Swiper 5.0 are designed to be modular. If you need additional
@@ -62,6 +61,7 @@ Main Project Custom Files
 
 @import 'components/header';
 @import 'components/footer';
+@import 'components/modal';
 
 @import 'components/banners/banner';
 @import 'components/banners/banner-default';
@@ -73,3 +73,4 @@ Main Project Custom Files
 @import 'components/archive/navigation';
 
 @import 'components/ui/share-icon';
+@import 'components/ui/spin-loader';
