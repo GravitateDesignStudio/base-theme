@@ -5,7 +5,10 @@ Blueprint\Blocks::enforce_background_colors(array(
 	'block-bg-none' => 'None',
 	'block-bg-image' => 'Image',
 	'bg-white' => 'White',
-	'bg-black' => 'Black'
+	'bg-black' => 'Black',
+	'bg-blue' => 'Blue',
+	'bg-red' => 'Red',
+	'bg-gray' => 'Gray'
 ));
 
 // make sure blocks appear in alphabetical order by label in the flexible content field

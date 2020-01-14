@@ -23,7 +23,7 @@ $input-style-selectors: (
 	'select'
 );
 
-@include classes-from-list($input-style-selectors) {
+%default-input-styles {
 	transition: all $default-transition-speed ease-out;
 	appearance: none;
 	border-radius: $default-input-border-radius;
@@ -61,6 +61,10 @@ $input-style-selectors: (
 	&:disabled {
 		opacity: $form-disabled-opacity;
 	}
+}
+
+@include classes-from-list($input-style-selectors) {
+	@extend %default-input-styles;
 }
 
 input[type="text"],

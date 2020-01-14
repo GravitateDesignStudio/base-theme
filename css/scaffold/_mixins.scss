@@ -9,6 +9,18 @@
 	}
 }
 
+@mixin image-constrain($object-fit, $object-position: '') {
+	@include object-fit-polyfill($object-fit, $object-position);
+
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 @mixin classes-from-list($list, $prepend: '', $append: '') {
 	#{generate-selector-string($list, $prepend, $append)} {
 		@content;

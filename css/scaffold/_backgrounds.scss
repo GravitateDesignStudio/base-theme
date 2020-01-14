@@ -1,22 +1,67 @@
-.block-bg-image {
-	background-color: $white;
-}
+@each $bg_color_name, $color_values in $bg-colors {
+	.bg-#{$bg_color_name} {
+		background-color: map-get($color_values, 'background');
+		background: map-get($color_values, 'background');
+		color: map-get($color_values, 'text');
 
-@each $color_name, $color_value in $bg-colors {
-	.bg-#{$color_name} {
-		background-color: $color_value;
-		background: $color_value;
+		label,
+		p,
+		blockquote,
+		h1,
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			color: inherit;
+		}
+
+		@if (map-has-key($color_values, 'elements')) {
+			@each $element, $element_color in map-get($color_values, 'elements') {
+				#{$element} {
+					color: $element_color;
+				}
+			}
+		}
 	}
 }
 
-/*
- *  Dark Background Colors and Light Text
- */
-@include dark-bg('', '') {
-	color: $text-light;
+.block-bg-image {
+	background-color: $white;
+	background-size: cover;
+	color: $white;
+
+	&--dark-text {
+		color: $text-dark;
+	}
 
 	label,
-	p {
+	p,
+	blockquote,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
 		color: inherit;
+	}
+
+	&.block-bg-overlay {
+		&::before {
+			z-index: 0;
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			background-image: linear-gradient(180deg, rgba(0,0,0,0.70) 0%, rgba(246,249,252,0.00) 100%);
+		}
+
+		.block-inner {
+			z-index: 1;
+			position: relative;
+		}
 	}
 }

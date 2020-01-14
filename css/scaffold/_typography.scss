@@ -48,10 +48,6 @@ body {
 p {
 	font: $body-font;
 	color: $body-font-color;
-
-	@include dark-bg {
-		color: $text-light;
-	}
 }
 
 blockquote {
@@ -68,10 +64,6 @@ h1,
 	@include media-min($large) {
 		font-size: 4.8rem;
 	}
-
-	@include dark-bg {
-		color: $white;
-	}
 }
 
 h2,
@@ -79,50 +71,30 @@ h2,
 	font: normal normal $font-weight-bold 3.6rem / 1.22 $font-primary;
 	color: $black;
     text-transform: uppercase;
-
-	@include dark-bg {
-		color: $white;
-	}
 }
 
 h3,
 %h3 {
 	font: normal normal $font-weight-medium 2.6rem / 1.25 $font-primary;
     color: $black;
-
-	@include dark-bg {
-		color: $white;
-	}
 }
 
 h4,
 %h4 {
 	font: normal normal $font-weight-medium 1.8rem / 1.44 $font-primary;
 	color: $black;
-
-	@include dark-bg {
-		color: $white;
-	}
 }
 
 h5,
 %h5 {
 	font: normal normal $font-weight-medium 1.6rem / 1.5 $font-primary;
     color: $black;
-        
-	@include dark-bg {
-		color: $white;
-	}
 }
 
 h6,
 %h6 {
 	font: normal normal $font-weight-medium 1.2rem / 1.66 $font-primary;
 	color: $black;
-
-	@include dark-bg {
-		color: $white;
-	}
 }
 
 /**

@@ -74,6 +74,33 @@ $bg-colors: (
     gray: $gray
 );
 
+$bg-colors: (
+    white: (
+        background: $white,
+        text: $text-dark,
+        // elements: (
+        //     h2: $specific-h2-color,
+        //     h4: $specific-h4-color
+        // )
+    ),
+    black: (
+        background: $black,
+        text: $text-light
+    ),
+    blue: (
+        background: $blue,
+        text: $text-light
+    ),
+    red: (
+        background: $red,
+        text: $text-light
+    ),
+    gray: (
+        background: $gray,
+        text: $text-dark
+    )
+);
+
 $bg-colors-with-light-text-classes: (
     '.block-bg-image',
     '.block-bg-video',
@@ -85,6 +112,7 @@ $bg-colors-with-light-text-classes: (
 $color-twitter: #79CCF0;
 $color-facebook: #547BBD;
 $color-linkedin: #1385C8;
+
 
 /*************************************
 Typography
