@@ -10,6 +10,7 @@ register_taxonomy(
 	array(
 		'hierarchical' => true,
 		'show_ui' => true,
+		'show_in_rest' => true,
 		'query_var' => true,
 		'labels' => array(
 			'name' => $plural_label,

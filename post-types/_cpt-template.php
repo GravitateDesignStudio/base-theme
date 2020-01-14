@@ -13,6 +13,7 @@ register_post_type(
 		'publicly_queryable'  => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
+		'show_in_rest' => true,
 		'capability_type' => 'page',
 		'map_meta_cap' => true,
 		'hierarchical' => false,
