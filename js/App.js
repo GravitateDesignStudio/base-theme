@@ -5,6 +5,7 @@ import ImageBuddy from 'imagebuddy';
 import ThemeWelcome from './components/testing/theme-welcome';
 import SiteHeader from './components/site-header';
 import BannerVideo from './components/banner-video';
+import Modal from './components/modal';
 
 import ArchiveBlog from './templates/archive-blog';
 import SearchResults from './templates/search-results';
@@ -46,6 +47,16 @@ const App = (function ($) {
 				rel: 'noopener'
 			});
 
+			Modal.setDefaults({
+				closeDuration: 400,
+				closeButtonContent: `
+					<svg xmlns="http://www.w3.org/2000/svg" class="modal__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="18" y1="6" x2="6" y2="18"></line>
+						<line x1="6" y1="6" x2="18" y2="18"></line>
+					</svg>
+				`.trim()
+			});
+
 			this.scrollWatcher = new ScrollWatcher((params) => {
 				ScrollWatcher.defaultCallback(params, 100);
 			});
@@ -72,17 +83,12 @@ const App = (function ($) {
 		}
 
 		async initComponents() {
-			// theme welcome -- this can be removed during development
+			// theme welcome
+			// TODO: remove during development
 			const $themeWelcomeEls = $('.theme-welcome');
 
 			if ($themeWelcomeEls.length) {
-				try {
-					const Swiper = await import(/* webpackChunkName: "swiper" */ 'swiper');
-
-					this.instances.themeWelcome = new ThemeWelcome($themeWelcomeEls.first(), Swiper.default);
-				} catch (err) {
-					console.error('Swiper dynamic import failed', err);
-				}
+				this.instances.themeWelcome = new ThemeWelcome($themeWelcomeEls.first());
 			}
 
 			// site header

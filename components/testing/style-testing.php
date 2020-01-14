@@ -2,7 +2,7 @@
     <div class="columns small-12">
     <h4>Typography</h4>
         <hr>
-        
+
         <h1>H1: Main Header Cras Justo Odio, Dapibus</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dapibus vulputate diam eu pretium. Mauris elit orci, ultricies id fermentum vel, porta et eros. Vestibulum condimentum lectus in convallis feugiat. Sed vulputate fringilla felis. Aliquam ut arcu et dui feugiat scelerisque eu quis diam. Mauris placerat congue dui sit amet blandit. Phasellus condimentum libero vel velit auctor, sit amet tincidunt velit varius.</p>
 
@@ -140,28 +140,28 @@
         <hr>
 
         <?php
-        // WPUtil\Component::render('components/ui/button', [
-        //     'link' => '#',
-        //     'text' => 'Button',
-        //     'icon' => 'play',
-        //     'style' => 'secondary'
-        // ]);
+        WPUtil\Component::render('components/ui/button', [
+            'link' => '#',
+            'text' => 'Button',
+            'icon' => 'general/play',
+            'style' => 'secondary'
+        ]);
 
-        // WPUtil\Component::render('components/ui/button', [
-        //     'link' => '#',
-        //     'text' => 'Button (active)',
-        //     'icon' => 'play',
-        //     'style' => 'secondary',
-        //     'additional_classes' => ['active']
-        // ]);
+        WPUtil\Component::render('components/ui/button', [
+            'link' => '#',
+            'text' => 'Button (active)',
+            'icon' => 'general/play',
+            'style' => 'secondary',
+            'additional_classes' => ['active']
+        ]);
 
-        // WPUtil\Component::render('components/ui/button', [
-        //     'link' => '#',
-        //     'text' => 'Button (disabled)',
-        //     'icon' => 'play',
-        //     'style' => 'secondary',
-        //     'additional_classes' => ['disabled']
-        // ]);
+        WPUtil\Component::render('components/ui/button', [
+            'link' => '#',
+            'text' => 'Button (disabled)',
+            'icon' => 'general/play',
+            'style' => 'secondary',
+            'additional_classes' => ['disabled']
+        ]);
         ?>
     </div>
 </div>
@@ -243,7 +243,7 @@
             <option value="">Option 2</option>
             <option value="">Option 3</option>
         </select>
-        
+
         <select disabled>
             <option value="">Option 1 (disabled)</option>
             <option value="">Option 2 (disabled)</option>

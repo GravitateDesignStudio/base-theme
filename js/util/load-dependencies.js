@@ -45,7 +45,7 @@ export function loadIntersectionObserver() {
 			resolve(true);
 		}
 
-		import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer').then((IntersectionObserver) => {
+		import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer').then(() => {
 			resolve(true);
 		}).catch((err) => {
 			reject(err);
