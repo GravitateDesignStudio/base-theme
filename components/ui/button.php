@@ -43,7 +43,7 @@ if (isset($link) && isset($text)) {
 	}
 
 	?>
-	<a class="<?php echo implode(' ', $classes); ?>" href="<?php echo esc_url($link); ?>" <?php echo implode(' ', $additional_attrs); ?>>
+	<a class="<?php echo esc_attr(implode(' ', $classes)); ?>" href="<?php echo esc_url($link); ?>" <?php echo esc_attr(implode(' ', $additional_attrs)); ?>>
 		<?php
 		if ($icon) {
 			?>

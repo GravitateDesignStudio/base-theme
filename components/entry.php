@@ -18,7 +18,7 @@ $tag_links = $tags ? array_map(function ($tag_term) {
 		</a>
 	</h2>
 	<p class="post__meta">
-		<span class="post__meta-date">Posted On: <time datetime="<?php echo esc_attr(date('Y-m-d', $time)); ?>"><?php echo esc_html(date('F jS, Y', $time)); ?></time></span>
+		<span class="post__meta-date">Posted On: <time datetime="<?php echo esc_attr(gmdate('Y-m-d', $time)); ?>"><?php echo esc_html(gmdate('F jS, Y', $time)); ?></time></span>
 		<span class="post__meta-category">Filed Under: <?php the_category(', ', '', $post_id); ?></span>
 		<?php
 		if (comments_open($post_id)) {
@@ -30,14 +30,18 @@ $tag_links = $tags ? array_map(function ($tag_term) {
 	</p>
 	<div class="post__content">
 		<?php
-		echo Blueprint\Content::get_excerpt(array(
+		// phpcs:ignore
+		echo Blueprint\Content::get_excerpt([
 			'post_id' => $post_id,
 			'more' => '<a class="post__read-more" href="' . esc_url($permalink) . '">Read More</a>'
-		));
+		]);
 		?>
 	</div>
 	<p class="post__tags">
 		<span class="post__tags-title">Tags:</span>
-		<?php echo implode(', ', $tag_links); ?>
+		<?php
+		// phpcs:ignore
+		echo implode(', ', $tag_links);
+		?>
 	</p>
 </div>

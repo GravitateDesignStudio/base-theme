@@ -36,7 +36,7 @@ abstract class SVG
 	protected static function get_svg_path()
 	{
 		$svg_path = apply_filters('blueprint/svg_path', get_template_directory() . '/media/svg/');
-		
+
 		return trailingslashit($svg_path);
 	}
 
@@ -49,6 +49,7 @@ abstract class SVG
 
 	public static function the_svg($svg_name, $opts = [])
 	{
+		// phpcs:ignore
 		echo self::get_svg($svg_name, $opts);
 	}
 
@@ -74,7 +75,7 @@ abstract class SVG
 		$dom = self::get_svg_domdocument($filename);
 
 		$svg_node = $dom->documentElement;
-		
+
 		$add_class = $opts['class'] ?? '';
 
 		if ($add_class) {
@@ -118,7 +119,7 @@ abstract class SVG
 			$attrs['xml:space'] = $attrs['xml:space'] ?? 'preserve';
 			$attrs['x'] = $attrs['x'] ?? '0px';
 			$attrs['y'] = $attrs['y'] ?? '0px';
-			
+
 			// create markup from child nodes
 			$markup = '';
 
@@ -153,9 +154,12 @@ abstract class SVG
 			$safe_id = self::get_safe_id_value($svg_name);
 
 			?>
-			<svg style="display:none" <?php echo $attrs_str; ?>>
-				<symbol id="<?php echo $safe_id; ?>">
-					<?php echo $svg_data['markup']; ?>
+			<svg style="display:none" <?php echo esc_attr($attrs_str); ?>>
+				<symbol id="<?php echo esc_attr($safe_id); ?>">
+					<?php
+					// phpcs:ignore
+					echo $svg_data['markup'];
+					?>
 				</symbol>
 			</svg>
 			<?php
@@ -164,6 +168,7 @@ abstract class SVG
 
 	protected static function get_svg_domdocument($filename)
 	{
+		// phpcs:ignore
 		$clean_markup = self::clean_markup(file_get_contents($filename));
 
 		libxml_use_internal_errors(true);

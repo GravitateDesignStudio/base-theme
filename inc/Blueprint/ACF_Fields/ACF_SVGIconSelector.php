@@ -57,7 +57,7 @@ class ACF_SVGIconSelector extends \acf_field
 		?>
 		<input class="svg-icon-selector__value" type="hidden" name="<?php echo esc_attr($field['name']); ?>" value="<?php echo esc_attr($field['value']); ?>" />
 
-		<div class="svg-icon-selector__preview" style="width: <?php echo $preview_width; ?>px; height: <?php echo $preview_height; ?>px;">
+		<div class="svg-icon-selector__preview" style="width: <?php echo esc_attr($preview_width); ?>px; height: <?php echo esc_attr($preview_height); ?>px;">
 			<?php
 			if ($field['value']) {
 				\WPUtil\SVG::the_svg($field['value']);

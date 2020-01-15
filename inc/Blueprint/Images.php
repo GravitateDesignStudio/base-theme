@@ -9,6 +9,7 @@ abstract class Images
 			return '';
 		}
 
+		// phpcs:ignore
 		echo \GRAV_BLOCKS::image($image, $attrs);
 	}
 
@@ -25,7 +26,7 @@ abstract class Images
 		$sizes = [];
 
 		foreach (get_intermediate_image_sizes() as $size) {
-			if (in_array($size, ['thumbnail', 'medium', 'medium_large', 'large'])) {
+			if (in_array($size, ['thumbnail', 'medium', 'medium_large', 'large'], true)) {
 				$sizes[$size]['width'] = get_option("{$size}_size_w");
 				$sizes[$size]['height'] = get_option("{$size}_size_h");
 				$sizes[$size]['crop'] = (bool)get_option("{$size}_crop");
@@ -108,7 +109,7 @@ abstract class Images
 		$ib_sources = [];
 
 		foreach ($images as $image) {
-			if (in_array($image['url'], $used_urls)) {
+			if (in_array($image['url'], $used_urls, true)) {
 				continue;
 			}
 
@@ -134,12 +135,13 @@ abstract class Images
 		$dom->loadHTML($content, LIBXML_NOERROR | LIBXML_NOWARNING);
 
 		$image_nodes = $dom->getElementsByTagName('img');
+		$image_nodes_count = count($image_nodes);
 
-		if (count($tag_matches) !== count($image_nodes)) {
+		if (count($tag_matches) !== $image_nodes_count) {
 			return $content;
 		}
 
-		for ($i = 0; $i < count($image_nodes); $i++) {
+		for ($i = 0; $i < $image_nodes_count; $i++) {
 			$attr_class = $image_nodes[$i]->getAttribute('class');
 			$attr_width = $image_nodes[$i]->getAttribute('width');
 			$attr_height = $image_nodes[$i]->getAttribute('height');

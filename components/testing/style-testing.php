@@ -258,30 +258,30 @@
 		<hr>
 
 		<?php $check_id = uniqid(); ?>
-		<input type="checkbox" name="<?php echo $check_id; ?>" id="<?php echo $check_id; ?>">
-		<label for="<?php echo $check_id; ?>">Checkbox (unchecked)</label>
+		<input type="checkbox" name="<?php echo esc_attr($check_id); ?>" id="<?php echo esc_attr($check_id); ?>">
+		<label for="<?php echo esc_attr($check_id); ?>">Checkbox (unchecked)</label>
 
 		<?php $check_id = uniqid(); ?>
-		<input type="checkbox" name="<?php echo $check_id; ?>" id="<?php echo $check_id; ?>" checked>
-		<label for="<?php echo $check_id; ?>">Checkbox (checked)</label>
+		<input type="checkbox" name="<?php echo esc_attr($check_id); ?>" id="<?php echo esc_attr($check_id); ?>" checked>
+		<label for="<?php echo esc_attr($check_id); ?>">Checkbox (checked)</label>
 
 		<?php $check_id = uniqid(); ?>
-		<input type="checkbox" name="<?php echo $check_id; ?>" id="<?php echo $check_id; ?>" disabled>
-		<label for="<?php echo $check_id; ?>">Checkbox (disabled)</label>
+		<input type="checkbox" name="<?php echo esc_attr($check_id); ?>" id="<?php echo esc_attr($check_id); ?>" disabled>
+		<label for="<?php echo esc_attr($check_id); ?>">Checkbox (disabled)</label>
 	</div>
 	<div class="columns small-12 large-6">
 		<h4>Radio Button</h4>
 		<hr>
 
 		<?php $radio_id = uniqid(); ?>
-		<input type="Radio" name="<?php echo $radio_id; ?>" id="<?php echo $radio_id; ?>_1">
-		<label for="<?php echo $radio_id; ?>_1">Radio (unchecked)</label>
+		<input type="Radio" name="<?php echo esc_attr($radio_id); ?>" id="<?php echo esc_attr($radio_id); ?>_1">
+		<label for="<?php echo esc_attr($radio_id); ?>_1">Radio (unchecked)</label>
 
-		<input type="Radio" name="<?php echo $radio_id; ?>" id="<?php echo $radio_id; ?>_2" checked>
-		<label for="<?php echo $radio_id; ?>_2">Radio (checked)</label>
+		<input type="Radio" name="<?php echo esc_attr($radio_id); ?>" id="<?php echo esc_attr($radio_id); ?>_2" checked>
+		<label for="<?php echo esc_attr($radio_id); ?>_2">Radio (checked)</label>
 
-		<input type="Radio" name="<?php echo $radio_id; ?>" id="<?php echo $radio_id; ?>_3" disabled>
-		<label for="<?php echo $radio_id; ?>_3">Radio (disabled)</label>
+		<input type="Radio" name="<?php echo esc_attr($radio_id); ?>" id="<?php echo esc_attr($radio_id); ?>_3" disabled>
+		<label for="<?php echo esc_attr($radio_id); ?>_3">Radio (disabled)</label>
 	</div>
 </div>
 
@@ -378,9 +378,9 @@
 							<div class="ginput_container ginput_container_radio">
 								<ul class="gfield_radio" id="input_1_7">
 									<?php $radio_id = uniqid(); ?>
-									<li class="gchoice_1_7_0"><input name="<?php echo $radio_id; ?>" value="First Choice" checked="checked" id="<?php echo $radio_id; ?>_1" tabindex="7" type="radio"><label for="<?php echo $radio_id; ?>_1" id="">First Choice</label></li>
-									<li class="gchoice_1_7_1"><input name="<?php echo $radio_id; ?>" value="Second Choice" id="<?php echo $radio_id; ?>_2" tabindex="8" type="radio"><label for="<?php echo $radio_id; ?>_2" id="">Second Choice</label></li>
-									<li class="gchoice_1_7_2"><input name="<?php echo $radio_id; ?>" value="Third Choice" id="<?php echo $radio_id; ?>_3" tabindex="9" type="radio"><label for="<?php echo $radio_id; ?>_3" id="">Third Choice</label></li>
+									<li class="gchoice_1_7_0"><input name="<?php echo esc_attr($radio_id); ?>" value="First Choice" checked="checked" id="<?php echo esc_attr($radio_id); ?>_1" tabindex="7" type="radio"><label for="<?php echo esc_attr($radio_id); ?>_1" id="">First Choice</label></li>
+									<li class="gchoice_1_7_1"><input name="<?php echo esc_attr($radio_id); ?>" value="Second Choice" id="<?php echo esc_attr($radio_id); ?>_2" tabindex="8" type="radio"><label for="<?php echo esc_attr($radio_id); ?>_2" id="">Second Choice</label></li>
+									<li class="gchoice_1_7_2"><input name="<?php echo esc_attr($radio_id); ?>" value="Third Choice" id="<?php echo esc_attr($radio_id); ?>_3" tabindex="9" type="radio"><label for="<?php echo esc_attr($radio_id); ?>_3" id="">Third Choice</label></li>
 								</ul>
 							</div>
 						</li>
@@ -390,18 +390,18 @@
 								<ul class="gfield_checkbox" id="input_1_8">
 									<?php $check_id = uniqid(); ?>
 									<li class="gchoice_1_8_1">
-										<input name="input_8.1" value="First Choice" checked="checked" id="<?php echo $check_id; ?>" tabindex="10" type="checkbox">
-										<label for="<?php echo $check_id; ?>" id="">First Choice</label>
+										<input name="input_8.1" value="First Choice" checked="checked" id="<?php echo esc_attr($check_id); ?>" tabindex="10" type="checkbox">
+										<label for="<?php echo esc_attr($check_id); ?>" id="">First Choice</label>
 									</li>
 									<?php $check_id = uniqid(); ?>
 									<li class="gchoice_1_8_2">
-										<input name="input_8.2" value="Second Choice" id="<?php echo $check_id; ?>" tabindex="11" type="checkbox">
-										<label for="<?php echo $check_id; ?>" id="">Second Choice</label>
+										<input name="input_8.2" value="Second Choice" id="<?php echo esc_attr($check_id); ?>" tabindex="11" type="checkbox">
+										<label for="<?php echo esc_attr($check_id); ?>" id="">Second Choice</label>
 									</li>
 									<?php $check_id = uniqid(); ?>
 									<li class="gchoice_1_8_3">
-										<input name="input_8.3" value="Third Choice" id="<?php echo $check_id; ?>" tabindex="12" type="checkbox">
-										<label for="<?php echo $check_id; ?>" id="">Third Choice</label>
+										<input name="input_8.3" value="Third Choice" id="<?php echo esc_attr($check_id); ?>" tabindex="12" type="checkbox">
+										<label for="<?php echo esc_attr($check_id); ?>" id="">Third Choice</label>
 									</li>
 								</ul>
 							</div>
@@ -428,7 +428,9 @@
 </div>
 
 <?php
-if ($icons = Blueprint\SVG::get_svg_list()) {
+$icons = Blueprint\SVG::get_svg_list();
+
+if ($icons) {
 	?>
 	<div class="row style-testing__row">
 		<div class="columns small-12">

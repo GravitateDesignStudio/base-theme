@@ -5,26 +5,26 @@ add_filter('jpeg_quality', function () {
 });
 
 // enable media library support for SVGs
-WPUtil\Media::add_upload_mime_types(array(
+WPUtil\Media::add_upload_mime_types([
 	'svg' => 'image/svg+xml'
-));
+]);
 
 // enable post thumbnail support
 WPUtil\ThemeSupport::post_thumbnails(300, 300, true);
 
 // set image sizes
-WPUtil\ThemeSupport::image_sizes(array(
-	'small' => array(
+WPUtil\ThemeSupport::image_sizes([
+	'small' => [
 		'width' => 300,
 		'height' => 300,
 		'crop' => false
-	),
-	'xlarge' => array(
+	],
+	'xlarge' => [
 		'width' => 1440,
 		'height' => 1900,
 		'crop' => false
-	)
-));
+	]
+]);
 
 // add ImageBuddy 'ib-sources' values to background images
 add_filter('grav_blocks_background_image_attributes', function ($bg_image_attrs, $block_attrs, $acf_image_object) {
@@ -36,11 +36,11 @@ add_filter('grav_blocks_background_image_attributes', function ($bg_image_attrs,
 		return $bg_image_attrs;
 	}
 
-	$used_urls = array();
-	$ib_sources = array();
+	$used_urls = [];
+	$ib_sources = [];
 
 	foreach ($sizes as $size) {
-		if (in_array($size['url'], $used_urls)) {
+		if (in_array($size['url'], $used_urls, true)) {
 			continue;
 		}
 
@@ -73,7 +73,7 @@ add_filter('grav_blocks_image_tag', function ($default_markup, $tag, $attributes
 	$ib_sources = array();
 
 	foreach ($sizes as $size) {
-		if (in_array($size['url'], $used_urls)) {
+		if (in_array($size['url'], $used_urls, true)) {
 			continue;
 		}
 

@@ -19,9 +19,9 @@ WPUtil\Component::render('components/banners/banner-default', [
 			?>
 			<div class="archive__cards-container"
 				data-load-more-target
-				data-current-page="<?php echo $paged + 1; ?>"
-				data-total-pages="<?php echo $total_pages; ?>"
-				data-posts-per-page="<?php echo $posts_per_page; ?>"
+				data-current-page="<?php echo esc_attr($paged + 1); ?>"
+				data-total-pages="<?php echo esc_attr($total_pages); ?>"
+				data-posts-per-page="<?php echo esc_attr($posts_per_page); ?>"
 				data-search="<?php echo get_search_query(); ?>"
 				>
 				<?php

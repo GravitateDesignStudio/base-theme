@@ -1,7 +1,6 @@
 <?php
-
 // enforce background color choices
-Blueprint\Blocks::enforce_background_colors(array(
+Blueprint\Blocks::enforce_background_colors([
 	'block-bg-none' => 'None',
 	'block-bg-image' => 'Image',
 	'bg-white' => 'White',
@@ -9,7 +8,7 @@ Blueprint\Blocks::enforce_background_colors(array(
 	'bg-blue' => 'Blue',
 	'bg-red' => 'Red',
 	'bg-gray' => 'Gray'
-));
+]);
 
 // make sure blocks appear in alphabetical order by label in the flexible content field
 Blueprint\Blocks::sort_block_names_alphabetically();
@@ -25,7 +24,7 @@ add_filter('grav_is_viewable', function ($is_viewable) {
 
 // Add 'wysiwyg' class to content (v2) block columns
 add_filter('grav_get_css', function ($css, $block_name) {
-	if (($block_name == 'content' || $block_name == 'contentv2') && in_array('columns', $css)) {
+	if (in_array($block_name, ['content', 'contentv2'], true) && in_array('columns', $css, true)) {
 		$css[] = 'wysiwyg';
 	}
 
@@ -33,11 +32,11 @@ add_filter('grav_get_css', function ($css, $block_name) {
 }, 10, 2);
 
 add_action('rest_api_init', function () {
-	register_rest_field(array('post', 'page'), 'grav_blocks', array(
+	register_rest_field(['post', 'page'], 'grav_blocks', [
 		'get_callback' => function ($post) {
 			return get_field('grav_blocks');
 		}
-	));
+	]);
 });
 
 
@@ -50,8 +49,8 @@ add_filter('hello_bar_fields_settings', function ($fields) {
 });
 
 add_filter('hello_bar_colors', function ($colors) {
-	return array(
+	return [
 		'hellobar--blue' => 'Blue',
 		'hellobar--red' => 'Red'
-	);
+	];
 });

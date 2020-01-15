@@ -20,11 +20,14 @@
 
 	<?php
 	// polyfills for IE users
-	if (stripos($_SERVER['HTTP_USER_AGENT'], 'trident/') !== false) {
+	// phpcs:disable WordPress.WP.EnqueuedResources.NonEnqueuedScript
+	// phpcs:ignore
+	if (isset($_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'], 'trident/') !== false) {
 		?>
 		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 		<?php
 	}
+	// phpcs:enable WordPress.WP.EnqueuedResources.NonEnqueuedScript
 
 	wp_head();
 

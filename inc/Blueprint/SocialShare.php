@@ -33,16 +33,16 @@ abstract class SocialShare
 		}
 
 		// replace "[post_link]" placeholder
-		$url_template = str_replace('[post_link]', urlencode(get_the_permalink($post_id)), $url_template);
+		$url_template = str_replace('[post_link]', rawurlencode(get_the_permalink($post_id)), $url_template);
 
 		// replace "[post_title]" placeholder
-		$url_template = str_replace('[post_title]', urlencode(get_the_title($post_id)), $url_template);
+		$url_template = str_replace('[post_title]', rawurlencode(get_the_title($post_id)), $url_template);
 
 		// if twitter, replace "[twitter_username]" placeholder
 		if ($platform === 'twitter') {
 			$twitter_username = get_field('theme_options_social_twitter_username', 'option');
 
-			$url_template = str_replace('[twitter_username]', $twitter_username ? urlencode('@' . $twitter_username) : '', $url_template);
+			$url_template = str_replace('[twitter_username]', $twitter_username ? rawurlencode('@' . $twitter_username) : '', $url_template);
 		}
 
 		return $url_template;

@@ -151,7 +151,7 @@ abstract class MenuDropdowns
 		));
 	}
 
-	public static function _render_now($dropdown_id, $custom_opts = [])
+	protected static function render_now($dropdown_id, $custom_opts = [])
 	{
 		$opts = array_merge([
 			'render_file_name' => 'render',
@@ -184,10 +184,12 @@ abstract class MenuDropdowns
 			$html_open = sprintf('<div class="%s" data-menu-dropdown-id="%d">', implode(' ', $container_classes), $dropdown_id);
 			$html_close = '</div>';
 
+			// phpcs:ignore
 			echo apply_filters('menu_dropdown/container_html_open', $html_open, $template_name, $dropdown_id, $opts['section']);
 
 			include $render_file;
 
+			// phpcs:ignore
 			echo apply_filters('menu_dropdown/container_html_close', $html_close, $template_name, $dropdown_id, $opts['section']);
 		}
 
@@ -196,22 +198,22 @@ abstract class MenuDropdowns
 
 	public static function render_dropdown_menu($menu_id)
 	{
-		$menu_id = (int)$menu_id;
+		$menu_id = absint($menu_id);
 
-		if (in_array($menu_id, self::$registered_menu_dropdown_ids)) {
+		if (in_array($menu_id, self::$registered_menu_dropdown_ids, true)) {
 			return;
 		}
 
 		self::$registered_menu_dropdown_ids[] = $menu_id;
 
 		if (!self::$render_hook_registered) {
-			add_action(self::$opts['render_action'], [__CLASS__, '_render_dropdown_menus']);
+			add_action(self::$opts['render_action'], [__CLASS__, 'render_dropdown_menus']);
 
 			self::$render_hook_registered = true;
 		}
 	}
 
-	public static function _render_dropdown_menus()
+	public static function render_dropdown_menus()
 	{
 		if (!self::$registered_menu_dropdown_ids) {
 			return;
@@ -220,7 +222,7 @@ abstract class MenuDropdowns
 		global $post;
 
 		foreach (self::$registered_menu_dropdown_ids as $dropdown_id) {
-			self::_render_now($dropdown_id);
+			self::render_now($dropdown_id);
 		}
 	}
 

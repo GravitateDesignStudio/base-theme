@@ -10,9 +10,9 @@ add_filter('previous_posts_link_attributes', function ($atts) {
 ?>
 <div class="row archive__navigation">
 	<div class="columns small-6">
-		<?php next_posts_link(__('&laquo; Older Entries')); ?>
+		&laquo; <?php next_posts_link(__('Older Entries', 'blueprint')); ?>
 	</div>
 	<div class="columns small-6 text-right">
-		<?php previous_posts_link(__('Newer Entries &raquo;')); ?>
+		<?php previous_posts_link(__('Newer Entries', 'blueprint')); ?> &raquo;
 	</div>
 </div>

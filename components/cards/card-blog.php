@@ -22,6 +22,9 @@ if (!$image) {
 	?>
 	<h3 class="card-blog__title"><?php echo esc_html($title); ?></h3>
 	<div class="card-blog__content">
-		<?php echo $content; ?>
+		<?php
+		// phpcs:ignore
+		echo $content;
+		?>
 	</div>
 </a>

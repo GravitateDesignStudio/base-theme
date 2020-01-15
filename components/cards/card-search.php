@@ -13,7 +13,10 @@ $permalink = $permalink ?? get_the_permalink($post_id);
 	if ($content) {
 		?>
 		<div class="card-search__content">
-			<?php echo $content; ?>
+			<?php
+			// phpcs:ignore
+			echo $content;
+			?>
 		</div>
 		<?php
 	}

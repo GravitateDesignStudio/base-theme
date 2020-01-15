@@ -22,7 +22,10 @@ WPUtil\Component::render('components/banners/banner-default', [
 				<div class="block-inner">
 					<div class="row">
 						<div class="columns small-12 large-10 wysiwyg">
-							<?php echo $content; ?>
+							<?php
+							// phpcs:ignore
+							echo $content;
+							?>
 						</div>
 					</div>
 				</div>

@@ -1,9 +1,12 @@
 <?php
 // Add menu shortcode that allows to add sitemap menu to wysiwyg
 add_shortcode('menu', function ($atts, $content = null) {
-	extract(shortcode_atts(array('name' => null), $atts));
+	extract(shortcode_atts(['name' => null], $atts));
 
-	return wp_nav_menu(array('menu' => $name, 'echo' => false));
+	return wp_nav_menu([
+		'menu' => $name,
+		'echo' => false
+	]);
 });
 
 $default_menus = array(

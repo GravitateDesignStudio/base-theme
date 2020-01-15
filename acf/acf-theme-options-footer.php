@@ -21,7 +21,7 @@ acf_add_local_field_group(array (
 			'default_value' => get_bloginfo('name') . '. All Rights Reserved.',
 			'placeholder' => '',
 			'formatting' => 'none',       // none | html
-			'prepend' => '© ' . date('Y') . ' ',
+			'prepend' => '© ' . gmdate('Y') . ' ',
 			'append' => '',
 			'maxlength' => '',
 			'readonly' => 0,

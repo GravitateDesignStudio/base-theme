@@ -25,6 +25,7 @@ add_filter('gform_init_scripts_footer', '__return_true');
 // deferred. Without this hook, jQuery must be loadeded in the
 // <head> and cannot be deferred.
 add_filter('gform_cdata_open', function ($js) {
+	// phpcs:ignore
 	if ((defined('DOING_AJAX') && DOING_AJAX) || isset($_POST['gform_ajax'])) {
 		return $js;
 	}
@@ -33,6 +34,7 @@ add_filter('gform_cdata_open', function ($js) {
 });
 
 add_filter('gform_cdata_close', function ($js) {
+	// phpcs:ignore
 	if ((defined('DOING_AJAX') && DOING_AJAX) || isset($_POST['gform_ajax'])) {
 		return $js;
 	}

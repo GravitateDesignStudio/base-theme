@@ -31,7 +31,7 @@ if (isset($site)) {
 	$attrs_str = Blueprint\Util::attributes_array_to_string($attrs);
 
 	?>
-	<a class="<?php echo implode(' ', $button_classes); ?>" href="<?php echo Blueprint\SocialShare::get_social_share_link($site, $post_id); ?>" <?php echo $attrs_str; ?>>
+	<a class="<?php echo esc_attr(implode(' ', $button_classes)); ?>" href="<?php echo esc_url(Blueprint\SocialShare::get_social_share_link($site, $post_id)); ?>" <?php echo esc_attr($attrs_str); ?>>
 		<?php WPUtil\SVG::the_svg('social/' . $site, ['class' => 'share-icon__icon']); ?>
 	</a>
 	<?php

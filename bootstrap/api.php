@@ -1,7 +1,5 @@
 <?php
-/**
- * Register custom endpoints
- */
+// TODO: register custom endpoints for this theme using the WPUtil\REST::register_routes method
 // \WPUtil\REST::register_routes('client-name/v1', array(
 // '/endpoint' => 'ClientName\API\v1\Endpoint'
 // ));
@@ -40,35 +38,39 @@ add_action('rest_api_init', function () {
 	}, 10, 3);
 
 	/**
+	 * EXAMPLE:
 	 * add support for adding 'service_id' and 'industry_id'
 	 * parameters on project endpoints
 	 */
-	// add_filter('rest_<CPT slug>_query', function($args, $request) {
-	// $service_id = $request->get_param('service_id');
-	// $industry_id = $request->get_param('industry_id');
 
-	// if (($service_id || $industry_id) && !isset($args['meta_query'])) {
-	// $args['meta_query'] = [
-	// 'relation' => 'AND'
-	// ];
-	// }
+	/*
+	add_filter('rest_<CPT slug>_query', function($args, $request) {
+		$service_id = $request->get_param('service_id');
+		$industry_id = $request->get_param('industry_id');
 
-	// if ($service_id) {
-	// $args['meta_query'][] = [
-	// 'key' => 'services',
-	// 'value' => \JHKelly\DB::id_value_in_serialized_data_selector($service_id),
-	// 'compare' => 'LIKE'
-	// ];
-	// }
+		if (($service_id || $industry_id) && !isset($args['meta_query'])) {
+			$args['meta_query'] = [
+				'relation' => 'AND'
+			];
+		}
 
-	// if ($industry_id) {
-	// $args['meta_query'][] = [
-	// 'key' => 'industries',
-	// 'value' => \JHKelly\DB::id_value_in_serialized_data_selector($industry_id),
-	// 'compare' => 'LIKE'
-	// ];
-	// }
+		if ($service_id) {
+			$args['meta_query'][] = [
+				'key' => 'services',
+				'value' => \Blueprint\DB::id_value_in_serialized_data_selector($service_id),
+				'compare' => 'LIKE'
+			];
+		}
 
-	// return $args;
-	// }, 10, 2);
+		if ($industry_id) {
+			$args['meta_query'][] = [
+				'key' => 'industries',
+				'value' => \Blueprint\DB::id_value_in_serialized_data_selector($industry_id),
+				'compare' => 'LIKE'
+			];
+		}
+
+		return $args;
+	}, 10, 2);
+	*/
 });

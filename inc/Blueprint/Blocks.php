@@ -8,7 +8,7 @@ abstract class Blocks
 	/**
 	 * Enforce background color choices
 	 *
-	 * @param array $new_colors Key (class name) / Value (color name) pair
+	 * @param array $new_colors Key (class name) / Value (color name) pair.
 	 * @return void
 	 */
 	public static function enforce_background_colors(array $new_colors): void
@@ -30,10 +30,8 @@ abstract class Blocks
 			return [];
 		}
 
-		$colors = [];
-
-		return array_filter(self::$bg_colors, function ($name, $class) use (&$opts) {
-			if (isset($opts['exclude']) && is_array($opts['exclude']) && in_array($class, $opts['exclude'])) {
+		$colors = array_filter(self::$bg_colors, function ($name, $class) use (&$opts) {
+			if (isset($opts['exclude']) && is_array($opts['exclude']) && in_array($class, $opts['exclude'], true)) {
 				return false;
 			}
 

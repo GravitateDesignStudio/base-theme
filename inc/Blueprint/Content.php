@@ -35,13 +35,13 @@ abstract class Content
 		$strip_shortcodes = isset($opts['strip_shortcodes']) ? $opts['strip_shortcodes'] : true;
 		$prefer_excerpt = isset($opts['prefer_excerpt']) ? $opts['prefer_excerpt'] : false;
 		$excerpt_length = isset($opts['length']) ? $opts['length'] : apply_filters('excerpt_length', 55);
-		$excerpt_more = isset($opts['more']) ? $opts['more'] : apply_filters('excerpt_more', ' ' . '[&hellip;]');
+		$excerpt_more = isset($opts['more']) ? $opts['more'] : apply_filters('excerpt_more', ' [&hellip;]');
 		$filter_nbsp = isset($opts['filter_nbsp']) ? $opts['filter_nbsp'] : true;
 		$meta_key_match = (isset($opts['meta_key_match']) && is_array($opts['meta_key_match'])) ? $opts['meta_key_match'] : array('grav\_blocks\__\_content', 'grav\_blocks\__\_content\_column\__\_column', 'grav\_blocks\__\_column\__');
 		$post_id = isset($opts['post_id']) ? (int)$opts['post_id'] : get_the_ID();
 		$post = get_post($post_id);
 
-		
+
 		if ($prefer_excerpt && trim($post->post_excerpt)) {
 			if ($autop) {
 				return wpautop($post->post_excerpt);
@@ -60,16 +60,19 @@ abstract class Content
 				global $wpdb;
 
 				// prepare our sql query
-				$meta_key_match = array_map(function ($match_str) {
-					return "meta_key LIKE '{$match_str}'";
+				$meta_key_match = array_map(function ($match_str) use (&$wpdb) {
+					return $wpdb->prepare('meta_key LIKE %s', $match_str);
 				}, $meta_key_match);
 
 				$meta_key_match_str = implode(' OR ', $meta_key_match);
 
 				$sql = "SELECT meta_value FROM {$wpdb->postmeta} WHERE ({$meta_key_match_str}) AND post_id = {$post_id} LIMIT 10";
-				
+
 				// fetch our results
-				if ($results = $wpdb->get_results($sql, ARRAY_N)) {
+				// phpcs:ignore
+				$results = $wpdb->get_results($sql, ARRAY_N);
+
+				if ($results) {
 					// flatten our multidimensional array and
 					// concatenate it to usable content
 					$content_parts = array();
@@ -88,7 +91,7 @@ abstract class Content
 
 		// option to strip tags
 		if ($strip_tags) {
-			$content = strip_tags($content);
+			$content = wp_strip_all_tags($content);
 		}
 
 		// option to strip shortcodes

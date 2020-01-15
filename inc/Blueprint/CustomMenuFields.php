@@ -84,12 +84,16 @@ abstract class CustomMenuFields
 				$field_id = $field['id'];
 				$field_key = self::$field_prefix . $field_id . '_' . $menu_item_db_id;
 
+				// phpcs:disable WordPress.Security.NonceVerification.Recommended
 				if ($field['type'] === 'checkbox') {
-					$check_value = (isset($_REQUEST[$field_key]) && $_REQUEST[$field_key] == 'on') ? 1 : 0;
+					// phpcs:ignore
+					$check_value = (isset($_REQUEST[$field_key]) && $_REQUEST[$field_key] === 'on') ? 1 : 0;
 					update_post_meta($menu_item_db_id, self::$field_prefix . $field_id, $check_value);
 				} elseif (isset($_REQUEST[$field_key])) {
+					// phpcs:ignore
 					update_post_meta($menu_item_db_id, self::$field_prefix . $field_id, $_REQUEST[$field_key]);
 				}
+				// phpcs:enable WordPress.Security.NonceVerification.Recommended
 			}
 		}, 10, 3);
 	}
@@ -103,11 +107,11 @@ abstract class CustomMenuFields
 	{
 		if (!isset(self::$menu_item_ids_cache[$menu_slug])) {
 			$menu_items = wp_get_nav_menu_items($menu_slug);
-	
+
 			$menu_item_ids = array_map(function ($menu_post) {
 				return $menu_post->ID;
 			}, is_array($menu_items) ? $menu_items : []);
-	
+
 			self::$menu_item_ids_cache[$menu_slug] = $menu_item_ids;
 		}
 
@@ -118,7 +122,7 @@ abstract class CustomMenuFields
 	{
 		foreach (self::$fields as $field) {
 			$show_field = true;
-			
+
 			if ($field['show_in_menu']) {
 				$show_field = false;
 
@@ -129,7 +133,7 @@ abstract class CustomMenuFields
 
 					$menu_item_ids = self::get_menu_item_ids($menu_slug);
 
-					if (in_array($menu_item->ID, $menu_item_ids)) {
+					if (in_array($menu_item->ID, $menu_item_ids, true)) {
 						$show_field = true;
 					}
 				}
@@ -149,7 +153,7 @@ abstract class CustomMenuFields
 				case 'select':
 					self::display_field_select($field, $menu_item);
 					break;
-				
+
 				case 'checkbox':
 					self::display_field_checkbox($field, $menu_item);
 					break;
@@ -166,49 +170,47 @@ abstract class CustomMenuFields
 		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
 		$input_id = 'edit-menu-item-' . $field_id . '-' . $menu_item->ID;
 
+		// phpcs:disable Squiz.ControlStructures, Squiz.WhiteSpace
 		?>
 		<p class="field-custom description description-wide">
-			<label for="<?php echo $input_id; ?>">
-				<input type="checkbox" name="<?php echo $input_name; ?>" id="<?php echo $input_id; ?>" 
-														<?php
-														if ($menu_item->$field_id) {
-															?>
-					checked
-															<?php
-														}
-														?>
+			<label for="<?php echo esc_attr($input_id); ?>">
+				<input
+					type="checkbox"
+					name="<?php echo esc_attr($input_name); ?>"
+					id="<?php echo esc_attr($input_id); ?>"
+					<?php if ($menu_item->$field_id) { ?>checked<?php } ?>
 				>
 				<?php echo esc_html($field['label']); ?>
 			</label>
 		</p>
 		<?php
+		// phpcs:enable Squiz.ControlStructures, Squiz.WhiteSpace
 	}
 
 	private static function display_field_select($field, $menu_item)
 	{
 		$field_id = $field['id'];
-		$input_name = $input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
+		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
 		$input_id = 'edit-menu-item-' . $field_id . '-' . $menu_item->ID;
 
 		?>
 		<p class="field-custom description description-wide">
-			<label for="<?php echo $input_id; ?>">
+			<label for="<?php echo esc_attr($input_id); ?>">
 				<?php echo esc_html($field['label']); ?><br />
-				<select class="widefat" name="<?php echo $input_name; ?>" id="<?php echo $input_id; ?>">
+				<select class="widefat" name="<?php echo esc_attr($input_name); ?>" id="<?php echo esc_attr($input_id); ?>">
 					<?php
 					if (isset($field['values'])) {
 						foreach ($field['values'] as $key => $value) {
+							// phpcs:disable Squiz.ControlStructures, Squiz.WhiteSpace
 							?>
-							<option value="<?php echo esc_attr($key); ?>" 
-													  <?php
-														if ($menu_item->$field_id == $key) {
-															?>
-								selected
-															<?php
-														}
-														?>
-							><?php echo esc_html($value); ?></option>
+							<option
+								value="<?php echo esc_attr($key); ?>"
+								<?php if ($menu_item->$field_id === $key) { ?>selected<?php } ?>
+							>
+								<?php echo esc_html($value); ?>
+							</option>
 							<?php
+							// phpcs:enable Squiz.ControlStructures, Squiz.WhiteSpace
 						}
 					}
 					?>
