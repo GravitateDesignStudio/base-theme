@@ -4,13 +4,12 @@
 	<?php
 	do_action('global_head_top_content');
 
-	if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS'))
-	{
+	if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS')) {
 		the_field('global_head_top_content', 'option', false);
 	}
 
 	?>
-	<title><?php bloginfo("name"); ?> <?php wp_title('&bull;'); ?></title>
+	<title><?php bloginfo('name'); ?> <?php wp_title('&bull;'); ?></title>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,8 +20,7 @@
 
 	<?php
 	// polyfills for IE users
-	if (stripos($_SERVER['HTTP_USER_AGENT'], 'trident/') !== false)
-	{
+	if (stripos($_SERVER['HTTP_USER_AGENT'], 'trident/') !== false) {
 		?>
 		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 		<?php
@@ -30,16 +28,14 @@
 
 	wp_head();
 
-	if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS'))
-	{
+	if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS')) {
 		the_field('global_head_bottom_content', 'option', false);
 	}
 	?>
 </head>
 <body id="body" <?php body_class(); ?>>
 	<?php
-	if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS'))
-	{
+	if (!defined('IGNORE_USER_SCRIPTS') || !constant('IGNORE_USER_SCRIPTS')) {
 		the_field('global_body_top_content', 'option', false);
 	}
 

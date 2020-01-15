@@ -7,14 +7,11 @@ WPUtil\Component::render('components/banners/banner-default');
 <main class="main-content">
 	<div class="tmpl-<?php echo esc_attr(get_post_type()); ?>">
 		<?php
-		if (have_posts())
-		{
-			while (have_posts())
-			{
+		if (have_posts()) {
+			while (have_posts()) {
 				the_post();
 
-				if (get_the_content())
-				{
+				if (get_the_content()) {
 					?>
 					<section class="block-container">
 						<div class="block-inner">

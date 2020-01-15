@@ -1,6 +1,5 @@
 <?php
-if (isset($link) && isset($text))
-{
+if (isset($link) && isset($text)) {
 	$style = isset($style) ? trim($style) : '';
 	$icon = isset($icon) ? trim($icon) : '';
 	$additional_classes = $additional_classes ?? [];
@@ -8,7 +7,7 @@ if (isset($link) && isset($text))
 	$classes = ['button'];
 
 	if ($style) {
-		$classes[] = 'button--'.esc_attr($style);
+		$classes[] = 'button--' . esc_attr($style);
 	}
 
 	if (isset($trigger_video_modal) && $trigger_video_modal) {
@@ -38,7 +37,6 @@ if (isset($link) && isset($text))
 	$additional_attrs = [];
 
 	if (isset($attributes) && is_array($attributes)) {
-
 		foreach ($attributes as $attr_name => $attr_value) {
 			$additional_attrs[] = sprintf('%s="%s"', esc_attr($attr_name), esc_attr($attr_value));
 		}
@@ -47,8 +45,7 @@ if (isset($link) && isset($text))
 	?>
 	<a class="<?php echo implode(' ', $classes); ?>" href="<?php echo esc_url($link); ?>" <?php echo implode(' ', $additional_attrs); ?>>
 		<?php
-		if ($icon)
-		{
+		if ($icon) {
 			?>
 			<span class="button__icon-container">
 				<?php Blueprint\SVG::the_svg($icon, $svg_opts); ?>

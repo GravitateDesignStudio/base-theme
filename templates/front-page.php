@@ -2,7 +2,7 @@
 get_header();
 
 WPUtil\Component::render('components/banners/banner-default', [
-    'title' => 'Gravitate WordPress Theme'
+	'title' => 'Gravitate WordPress Theme'
 ]);
 
 ?>

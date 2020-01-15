@@ -16,8 +16,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 <main class="main-content">
 	<div class="tmpl-404">
 		<?php
-		if ($content)
-		{
+		if ($content) {
 			?>
 			<section class="block-container">
 				<div class="block-inner">

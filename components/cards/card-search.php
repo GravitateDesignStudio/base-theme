@@ -10,8 +10,7 @@ $permalink = $permalink ?? get_the_permalink($post_id);
 <a class="card-search" href="<?php echo esc_url($permalink); ?>">
 	<h3 class="card-search__title"><?php echo esc_html($title); ?></h3>
 	<?php
-	if ($content)
-	{
+	if ($content) {
 		?>
 		<div class="card-search__content">
 			<?php echo $content; ?>

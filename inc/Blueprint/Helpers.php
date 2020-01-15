@@ -25,7 +25,7 @@ abstract class Helpers
 			return;
 		}
 
-		$quick_nav_links = array_map(function($link) {
+		$quick_nav_links = array_map(function ($link) {
 			return [
 				'title' => $link['quick_link_title'],
 				'anchor' => $link['quick_link_anchor']

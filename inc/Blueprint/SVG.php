@@ -35,7 +35,7 @@ abstract class SVG
 
 	protected static function get_svg_path()
 	{
-		$svg_path = apply_filters('blueprint/svg_path', get_template_directory().'/media/svg/');
+		$svg_path = apply_filters('blueprint/svg_path', get_template_directory() . '/media/svg/');
 		
 		return trailingslashit($svg_path);
 	}
@@ -44,7 +44,7 @@ abstract class SVG
 	{
 		$svg_path = self::get_svg_path();
 
-		return $svg_path.$svg_name.'.svg';
+		return $svg_path . $svg_name . '.svg';
 	}
 
 	public static function the_svg($svg_name, $opts = [])
@@ -79,7 +79,7 @@ abstract class SVG
 
 		if ($add_class) {
 			$class_attr = $svg_node->getAttribute('class');
-			$class_attr = $class_attr ? $class_attr.' '.$add_class : $add_class;
+			$class_attr = $class_attr ? $class_attr . ' ' . $add_class : $add_class;
 			$svg_node->setAttribute('class', $class_attr);
 		}
 
@@ -137,7 +137,7 @@ abstract class SVG
 		$add_class = $opts['class'] ?? '';
 
 		if ($add_class) {
-			$attrs['class'] = isset($attrs['class']) ? $attrs['class'].' '.$add_class : $add_class;
+			$attrs['class'] = isset($attrs['class']) ? $attrs['class'] . ' ' . $add_class : $add_class;
 		}
 
 		$attrs_str = self::create_attributes_string($attrs);
@@ -200,7 +200,7 @@ abstract class SVG
 		$svg_path = $svg_base_path;
 
 		if ($sub_dir) {
-			$svg_path = trailingslashit($svg_path.$sub_dir);
+			$svg_path = trailingslashit($svg_path . $sub_dir);
 		}
 
 		$dir_iterator = new \RecursiveDirectoryIterator($svg_path);

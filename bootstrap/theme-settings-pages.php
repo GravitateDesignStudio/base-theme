@@ -1,8 +1,8 @@
 <?php
 if (function_exists('acf_add_options_page') && function_exists('acf_add_options_sub_page')) {
 	$parent = acf_add_options_page([
-		'page_title' => 'Theme Settings', 
-		'menu_slug' => 'acf-options-theme', 
+		'page_title' => 'Theme Settings',
+		'menu_slug' => 'acf-options-theme',
 		'position' => 2
 	]);
 

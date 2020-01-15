@@ -2,14 +2,11 @@
 $post_id = $post_id ?? get_the_ID();
 $banner_type = $banner_type ?? get_field('banner_background_type', $post_id);
 
-if ($banner_type === 'video')
-{
+if ($banner_type === 'video') {
 	WPUtil\Component::render('components/banners/partials/banner-cover-video', [
 		'post_id' => $post_id
 	]);
-}
-else
-{
+} else {
 	$background_image = $background_image ?? get_field('banner_background_image', $post_id);
 
 	if (!$background_image) {

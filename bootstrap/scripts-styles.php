@@ -4,7 +4,7 @@
 // ********************
 WPUtil\Scripts::enqueue_scripts([
 	'master_js' => [
-		'url' => get_template_directory_uri().'/dist/js/master.min.js',
+		'url' => get_template_directory_uri() . '/dist/js/master.min.js',
 		'deps' => ['jquery'],
 		'defer' => true,
 		'preload_hook' => 'global_head_top_content',
@@ -24,7 +24,7 @@ WPUtil\Scripts::enqueue_scripts([
 // ********************
 WPUtil\Styles::enqueue_styles([
 	'master_css' => [
-		'url' => get_template_directory_uri().'/dist/css/master.min.css',
+		'url' => get_template_directory_uri() . '/dist/css/master.min.css',
 		'preload_hook' => 'global_head_top_content'
 	]
 ]);

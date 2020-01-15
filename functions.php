@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 
 // check for/require composer autoloader
-if (!file_exists(dirname(__FILE__).'/vendor/autoload.php')) {
+if (!file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 	die("The required composer dependencies must be installed for this theme. Please run 'composer install' from the theme root.");
 }
 

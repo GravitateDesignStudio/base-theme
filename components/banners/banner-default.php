@@ -20,8 +20,7 @@ if (isset($background_image)) {
 	<div class="banner-default__content">
 		<h1 class="banner-default__title"><?php echo esc_html($title); ?></h1>
 		<?php
-		if ($button)
-		{
+		if ($button) {
 			?>
 			<a href="<?php echo esc_url($button->link); ?>" class="button banner-default__button"><?php echo esc_html($button->text); ?></a>
 			<?php

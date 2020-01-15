@@ -34,17 +34,17 @@ class ACF_SVGIconSelector extends \acf_field
 	public function render_field_settings($field)
 	{
 		acf_render_field_setting($field, [
-			'label'			=> 'Allow None',
-			'instructions'	=> 'Enable the ability to select "none"',
-			'type'			=> 'true_false',
-			'name'			=> 'allow_none'
+			'label'         => 'Allow None',
+			'instructions'  => 'Enable the ability to select "none"',
+			'type'          => 'true_false',
+			'name'          => 'allow_none'
 		]);
 
 		acf_render_field_setting($field, [
-			'label'			=> 'Sub-directory',
-			'instructions'	=> 'Limit icon selections to the specified sub-directory',
-			'type'			=> 'text',
-			'name'			=> 'svg_sub_dir'
+			'label'         => 'Sub-directory',
+			'instructions'  => 'Limit icon selections to the specified sub-directory',
+			'type'          => 'text',
+			'name'          => 'svg_sub_dir'
 		]);
 	}
 
@@ -55,16 +55,13 @@ class ACF_SVGIconSelector extends \acf_field
 		$preview_height = $field['selected_height'] ?? 48;
 
 		?>
-		<input class="svg-icon-selector__value" type="hidden" name="<?php echo esc_attr($field['name']) ?>" value="<?php echo esc_attr($field['value']) ?>" />
+		<input class="svg-icon-selector__value" type="hidden" name="<?php echo esc_attr($field['name']); ?>" value="<?php echo esc_attr($field['value']); ?>" />
 
 		<div class="svg-icon-selector__preview" style="width: <?php echo $preview_width; ?>px; height: <?php echo $preview_height; ?>px;">
 			<?php
-			if ($field['value'])
-			{
+			if ($field['value']) {
 				\WPUtil\SVG::the_svg($field['value']);
-			}
-			else
-			{
+			} else {
 				?>
 				None
 				<?php
@@ -75,8 +72,7 @@ class ACF_SVGIconSelector extends \acf_field
 		<button class="svg-icon-selector__trigger">Select Icon</button>
 		<div class="svg-icon-selector__selectable-icons">
 			<?php
-			if ($field['allow_none'])
-			{
+			if ($field['allow_none']) {
 				?>
 				<div class="svg-icon-selector__selectable-icon" data-name="" data-label="None">
 					None
@@ -84,8 +80,7 @@ class ACF_SVGIconSelector extends \acf_field
 				<?php
 			}
 
-			foreach ($svg_list as $svg_item)
-			{
+			foreach ($svg_list as $svg_item) {
 				?>
 				<div class="svg-icon-selector__selectable-icon" data-name="<?php echo esc_attr($svg_item['name']); ?>" data-label="<?php echo esc_attr($svg_item['label']); ?>">
 					<?php \WPUtil\SVG::the_svg($svg_item['name']); ?>
@@ -99,11 +94,11 @@ class ACF_SVGIconSelector extends \acf_field
 
 	public function input_admin_enqueue_scripts()
 	{
-		$js_url = get_template_directory_uri().'/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
-		$css_url = get_template_directory_uri().'/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.css';
+		$js_url = get_template_directory_uri() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
+		$css_url = get_template_directory_uri() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.css';
 
-		$js_path = get_template_directory().'/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
-		$css_path = get_template_directory().'/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
+		$js_path = get_template_directory() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
+		$css_path = get_template_directory() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
 
 		wp_enqueue_script('svg-icon-selector', $js_url, [], filemtime($js_path), true);
 		wp_enqueue_style('svg-icon-selector', $css_url, [], filemtime($css_path));

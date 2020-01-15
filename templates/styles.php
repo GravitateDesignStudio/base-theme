@@ -7,15 +7,13 @@ get_header();
 WPUtil\Component::render('components/banners/banner-default');
 
 $backgrounds = apply_filters('grav_block_background_colors', [], '');
-$backgrounds = $backgrounds ? array_filter($backgrounds, function($key) {
+$backgrounds = $backgrounds ? array_filter($backgrounds, function ($key) {
 	return $key !== 'block-bg-image';
 }, ARRAY_FILTER_USE_KEY) : [];
 
 
-if (have_posts())
-{
-	while (have_posts())
-	{
+if (have_posts()) {
+	while (have_posts()) {
 		the_post();
 
 		?>
@@ -43,10 +41,17 @@ if (have_posts())
 			<label for="bg-color">Background Color:</label>
 			<select id="bg-color" class="style-testing__select--color">
 				<?php
-				foreach ($backgrounds as $class => $label)
-				{
+				foreach ($backgrounds as $class => $label) {
 					?>
-					<option value="<?php echo esc_attr($class); ?>" <?php if ($class === '') { ?>selected<?php } ?>><?php echo esc_html($label); ?></option>
+					<option value="<?php echo esc_attr($class); ?>" 
+											  <?php
+												if ($class === '') {
+													?>
+						selected
+													<?php
+												}
+												?>
+					><?php echo esc_html($label); ?></option>
 					<?php
 				}
 				?>

@@ -29,7 +29,7 @@ abstract class Images
 				$sizes[$size]['width'] = get_option("{$size}_size_w");
 				$sizes[$size]['height'] = get_option("{$size}_size_h");
 				$sizes[$size]['crop'] = (bool)get_option("{$size}_crop");
-			} else if (isset($_wp_additional_image_sizes[$size])) {
+			} elseif (isset($_wp_additional_image_sizes[$size])) {
 				$sizes[$size] = array(
 					'width' => $_wp_additional_image_sizes[$size]['width'],
 					'height' => $_wp_additional_image_sizes[$size]['height'],
@@ -87,8 +87,8 @@ abstract class Images
 
 				$acf_image_sizes[$size] = array(
 					'url' => $url,
-					'width' => $acf_image['sizes'][$size.'-width'],
-					'height' => $acf_image['sizes'][$size.'-height']
+					'width' => $acf_image['sizes'][$size . '-width'],
+					'height' => $acf_image['sizes'][$size . '-height']
 				);
 			}
 		}
@@ -171,17 +171,17 @@ abstract class Images
 			$ib_sources_str = self::build_ib_sources_string($image_sizes);
 
 			$attributes['src'] = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC"'; // 100x1
-			$attributes['data-ib-sources'] = '"'.$ib_sources_str.'"';
+			$attributes['data-ib-sources'] = '"' . $ib_sources_str . '"';
 			$attributes['data-ib-match-dpr'] = '"0"';
-			$attributes['class'] = '"'.$attr_class.'"';
-			$attributes['alt'] = '"'.$attr_alt.'"';
+			$attributes['class'] = '"' . $attr_class . '"';
+			$attributes['alt'] = '"' . $attr_alt . '"';
 
 			if ($attr_width) {
-				$attributes['width'] = '"'.$attr_width.'"';
+				$attributes['width'] = '"' . $attr_width . '"';
 			}
 
 			if ($attr_height) {
-				$attributes['height'] = '"'.$attr_height.'"';
+				$attributes['height'] = '"' . $attr_height . '"';
 			}
 
 			$attributes_str = trim(urldecode(http_build_query($attributes, '', ' ')));

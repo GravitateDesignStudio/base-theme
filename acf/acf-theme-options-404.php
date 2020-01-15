@@ -2,13 +2,13 @@
 $acf_group = 'theme_options_404';
 
 acf_add_local_field_group(array (
-    'key' => 'group_'.$acf_group,
-    'title' => '404 Settings',
-    'fields' => array (
-		array ( 
-			'key' => 'field_'.$acf_group.'_404_title',
+	'key' => 'group_' . $acf_group,
+	'title' => '404 Settings',
+	'fields' => array (
+		array (
+			'key' => 'field_' . $acf_group . '_404_title',
 			'label' => '404 Title',
-			'name' => $acf_group.'_title',
+			'name' => $acf_group . '_title',
 			'type' => 'text',
 			'instructions' => '',
 			'required' => 0,
@@ -28,9 +28,9 @@ acf_add_local_field_group(array (
 			'disabled' => 0,
 		),
 		array (
-			'key' => 'field_'.$acf_group.'_404_content',
+			'key' => 'field_' . $acf_group . '_404_content',
 			'label' => '404 Content',
-			'name' => $acf_group.'_content',
+			'name' => $acf_group . '_content',
 			'type' => 'wysiwyg',
 			'instructions' => '',
 			'required' => 0,
@@ -46,7 +46,7 @@ acf_add_local_field_group(array (
 			'media_upload' => 1,
 		),
 		array (
-			'key' => 'field_'.$acf_group.'_404_blocks',
+			'key' => 'field_' . $acf_group . '_404_blocks',
 			'label' => '404 Blocks',
 			'name' => '404_blocks',
 			'type' => 'clone',
@@ -66,39 +66,39 @@ acf_add_local_field_group(array (
 			'prefix_label' => 1,
 			'prefix_name' => 1,
 		),
-    ),
-    'location' => array (
-        array (
-            array (
-                'param' => 'options_page', // post_type | post | page | page_template | post_category | taxonomy | options_page
-                'operator' => '==',
-                'value' => 'acf-theme-options-404',        // if options_page then use: acf-options  | if page_template then use:  template-example.php
-                'order_no' => 0,
-                'group_no' => 1,
-            ),
-        ),
-    ),
-    'menu_order' => 0,
-    'position' => 'normal',                 // side | normal | acf_after_title
-    'style' => 'default',                    // default | seamless
-    'label_placement' => 'top',                // top | left
-    'instruction_placement' => 'label',     // label | field
-    'hide_on_screen' => array (
-      //    0 => 'permalink',
-      //    1 => 'the_content',
-      //    2 => 'excerpt',
-      //    3 => 'custom_fields',
-      //    4 => 'discussion',
-      //    5 => 'comments',
-      //    6 => 'revisions',
-      //    7 => 'slug',
-      //    8 => 'author',
-      //    9 => 'format',
-      //    10 => 'featured_image',
-      //    11 => 'categories',
-      //    12 => 'tags',
-      //    13 => 'send-trackbacks',
-    ),
-    'active' => 1,
-    'description' => '',
+	),
+	'location' => array (
+		array (
+			array (
+				'param' => 'options_page', // post_type | post | page | page_template | post_category | taxonomy | options_page
+				'operator' => '==',
+				'value' => 'acf-theme-options-404',        // if options_page then use: acf-options  | if page_template then use:  template-example.php
+				'order_no' => 0,
+				'group_no' => 1,
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',                 // side | normal | acf_after_title
+	'style' => 'default',                    // default | seamless
+	'label_placement' => 'top',                // top | left
+	'instruction_placement' => 'label',     // label | field
+	'hide_on_screen' => array (
+	  // 0 => 'permalink',
+	  // 1 => 'the_content',
+	  // 2 => 'excerpt',
+	  // 3 => 'custom_fields',
+	  // 4 => 'discussion',
+	  // 5 => 'comments',
+	  // 6 => 'revisions',
+	  // 7 => 'slug',
+	  // 8 => 'author',
+	  // 9 => 'format',
+	  // 10 => 'featured_image',
+	  // 11 => 'categories',
+	  // 12 => 'tags',
+	  // 13 => 'send-trackbacks',
+	),
+	'active' => 1,
+	'description' => '',
 ));

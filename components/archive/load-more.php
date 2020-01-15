@@ -9,8 +9,7 @@ if (!$paged) {
 
 $nextpage = intval($paged) + 1;
 
-if (!is_single() && ($nextpage <= $max_page))
-{
+if (!is_single() && ($nextpage <= $max_page)) {
 	$button_text = $button_text ?? 'Load More';
 	
 	?>

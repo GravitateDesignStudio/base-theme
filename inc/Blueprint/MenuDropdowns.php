@@ -11,7 +11,7 @@ abstract class MenuDropdowns
 	public static function init($opts = [])
 	{
 		self::$opts = array_merge([
-			'template_path' => get_template_directory().'/menu-dropdowns/',
+			'template_path' => get_template_directory() . '/menu-dropdowns/',
 			'render_action' => 'wp_footer'
 		], $opts);
 
@@ -31,11 +31,11 @@ abstract class MenuDropdowns
 
 	private static function create_save_hook()
 	{
-		add_action('acf/save_post', function($post_id) {
+		add_action('acf/save_post', function ($post_id) {
 			$template_type = get_field('template', $post_id);
 
 			$child_post_ids = apply_filters('menu_dropdown/get_child_post_ids', [], $post_id, $template_type);
-			$child_post_ids = apply_filters('menu_dropdown/get_child_post_ids/template='.$template_type, [], $post_id);
+			$child_post_ids = apply_filters('menu_dropdown/get_child_post_ids/template=' . $template_type, [], $post_id);
 
 			update_post_meta($post_id, 'child_post_ids', $child_post_ids);
 		}, 20);
@@ -43,11 +43,11 @@ abstract class MenuDropdowns
 
 	private static function create_acf_fields()
 	{
-		$template_paths = glob(self::$opts['template_path'].'*', GLOB_ONLYDIR);
+		$template_paths = glob(self::$opts['template_path'] . '*', GLOB_ONLYDIR);
 		$template_groups = [];
 
 		if ($template_paths) {
-			$template_groups = array_map(function($path) {
+			$template_groups = array_map(function ($path) {
 				return [
 					'path' => $path,
 					'name' => basename($path),
@@ -63,8 +63,8 @@ abstract class MenuDropdowns
 			$select_options[$group['name']] = $group['display_name'];
 		}
 
-		$acf_template_groups = array_map(function($template_group) use ($acf_master_group) {
-			$template_fields_file = trailingslashit($template_group['path']).'fields.php';
+		$acf_template_groups = array_map(function ($template_group) use ($acf_master_group) {
+			$template_fields_file = trailingslashit($template_group['path']) . 'fields.php';
 
 			if (!file_exists($template_fields_file)) {
 				return [];
@@ -73,16 +73,16 @@ abstract class MenuDropdowns
 			$template_fields = include $template_fields_file;
 
 			return [
-				'key' => 'field_'.$acf_master_group.'_template_group_'.$template_group['name'],
-				'label' => $template_group['display_name'].' Settings',
-				'name' => 'template_group_'.$template_group['name'],
+				'key' => 'field_' . $acf_master_group . '_template_group_' . $template_group['name'],
+				'label' => $template_group['display_name'] . ' Settings',
+				'name' => 'template_group_' . $template_group['name'],
 				'type' => 'group',
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => array(
 					array(
 						array(
-							'field' => 'field_'.$acf_master_group.'_template',
+							'field' => 'field_' . $acf_master_group . '_template',
 							'operator' => '==',
 							'value' => $template_group['name'],
 						),
@@ -99,12 +99,12 @@ abstract class MenuDropdowns
 		}, $template_groups);
 
 		acf_add_local_field_group(array (
-			'key' => 'group_'.$acf_master_group,
+			'key' => 'group_' . $acf_master_group,
 			'title' => 'Menu Dropdown Settings',
 			'fields' => array_merge(
 				array (
 					array (
-						'key' => 'field_'.$acf_master_group.'_template',
+						'key' => 'field_' . $acf_master_group . '_template',
 						'label' => 'Template',
 						'name' => 'template',
 						'type' => 'select',
@@ -134,17 +134,17 @@ abstract class MenuDropdowns
 					array (
 						'param' => 'post_type', // post_type | post | page | page_template | post_category | taxonomy | options_page
 						'operator' => '==',
-						'value' => self::$cpt_slug,		// if options_page then use: acf-options  | if page_template then use:  template-example.php
+						'value' => self::$cpt_slug,     // if options_page then use: acf-options  | if page_template then use:  template-example.php
 						'order_no' => 0,
 						'group_no' => 1,
 					),
 				),
 			),
 			'menu_order' => 0,
-			'position' => 'normal', 				// side | normal | acf_after_title
-			'style' => 'default',					// default | seamless
-			'label_placement' => 'top',				// top | left
-			'instruction_placement' => 'label', 	// label | field
+			'position' => 'normal',                 // side | normal | acf_after_title
+			'style' => 'default',                   // default | seamless
+			'label_placement' => 'top',             // top | left
+			'instruction_placement' => 'label',     // label | field
 			'hide_on_screen' => [],
 			'active' => 1,
 			'description' => '',
@@ -164,17 +164,17 @@ abstract class MenuDropdowns
 		setup_postdata($post);
 
 		$template_name = get_field('template', $dropdown_id);
-		$render_file = trailingslashit(self::$opts['template_path']).$template_name.DIRECTORY_SEPARATOR.$opts['render_file_name'].'.php';
+		$render_file = trailingslashit(self::$opts['template_path']) . $template_name . DIRECTORY_SEPARATOR . $opts['render_file_name'] . '.php';
 
 		if (file_exists($render_file)) {
 			extract([
-				'values' => get_field('template_group_'.$template_name, $dropdown_id),
+				'values' => get_field('template_group_' . $template_name, $dropdown_id),
 				'custom_values' => $opts['custom_values']
 			]);
 
 			$container_classes = [
 				'menu-dropdown',
-				'menu-dropdown-'.esc_attr($template_name)
+				'menu-dropdown-' . esc_attr($template_name)
 			];
 
 			if (isset(self::$opts['container_classes']) && is_array(self::$opts['container_classes'])) {
@@ -281,17 +281,17 @@ abstract class MenuDropdowns
 					'name' => $plural_label,
 					'singular_name' => $single_label,
 					'menu_name' => $plural_label,
-					'add_new' => 'Add '.$single_label,
-					'add_new_item' => 'Add New '.$single_label,
+					'add_new' => 'Add ' . $single_label,
+					'add_new_item' => 'Add New ' . $single_label,
 					'edit' => 'Edit',
-					'edit_item' => 'Edit '.$single_label,
-					'new_item' => 'New '.$single_label,
-					'view' => 'View '.$single_label,
-					'view_item' => 'View '.$single_label,
-					'search_items' => 'Search '.$plural_label,
-					'not_found' => 'No '.$plural_label.' Found',
-					'not_found_in_trash' => 'No '.$plural_label.' Found in Trash',
-					'parent' => 'Parent '.$single_label,
+					'edit_item' => 'Edit ' . $single_label,
+					'new_item' => 'New ' . $single_label,
+					'view' => 'View ' . $single_label,
+					'view_item' => 'View ' . $single_label,
+					'search_items' => 'Search ' . $plural_label,
+					'not_found' => 'No ' . $plural_label . ' Found',
+					'not_found_in_trash' => 'No ' . $plural_label . ' Found in Trash',
+					'parent' => 'Parent ' . $single_label,
 				)
 			)
 		);

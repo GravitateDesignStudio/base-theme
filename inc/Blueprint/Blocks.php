@@ -19,7 +19,7 @@ abstract class Blocks
 
 		self::$bg_colors = $new_colors;
 
-		add_filter('grav_block_background_colors', function($colors) use (&$new_colors) {
+		add_filter('grav_block_background_colors', function ($colors) use (&$new_colors) {
 			return $new_colors;
 		});
 	}
@@ -32,7 +32,7 @@ abstract class Blocks
 
 		$colors = [];
 
-		return array_filter(self::$bg_colors, function($name, $class) use (&$opts) {
+		return array_filter(self::$bg_colors, function ($name, $class) use (&$opts) {
 			if (isset($opts['exclude']) && is_array($opts['exclude']) && in_array($class, $opts['exclude'])) {
 				return false;
 			}
@@ -50,7 +50,7 @@ abstract class Blocks
 	public static function sort_block_names_alphabetically(): void
 	{
 		add_filter('grav_block_fields', function ($layouts) {
-			uasort($layouts, function($a, $b) {
+			uasort($layouts, function ($a, $b) {
 				return strcasecmp($a['label'], $b['label']);
 			});
 
@@ -115,15 +115,15 @@ abstract class Blocks
 			$post_id = get_the_ID();
 		}
 
-		$button_type = get_field($acf_field.'_type', $post_id);
+		$button_type = get_field($acf_field . '_type', $post_id);
 
 		if (!$button_type || $button_type === 'none') {
 			return null;
 		}
 
-		$button_values->text = get_field($acf_field.'_text', $post_id) ?? '';
-		$button_values->link = get_field($acf_field.'_'.$button_type, $post_id) ?? '';
-		$button_values->style = get_field($acf_field.'_style', $post_id) ?? '';
+		$button_values->text = get_field($acf_field . '_text', $post_id) ?? '';
+		$button_values->link = get_field($acf_field . '_' . $button_type, $post_id) ?? '';
+		$button_values->style = get_field($acf_field . '_style', $post_id) ?? '';
 
 		return $button_values;
 	}

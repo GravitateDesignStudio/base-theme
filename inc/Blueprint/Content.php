@@ -5,7 +5,7 @@ abstract class Content
 {
 	/**
 	 * Get the excerpt for a post with various options
-	 * 
+	 *
 	 * Options:
 	 *     'force_blocks' (bool) - force Gravitate Blocks content to be used (default: false)
 	 *     'force_default' (bool) - force default post content to be used (default: false)
@@ -60,7 +60,7 @@ abstract class Content
 				global $wpdb;
 
 				// prepare our sql query
-				$meta_key_match = array_map(function($match_str) {
+				$meta_key_match = array_map(function ($match_str) {
 					return "meta_key LIKE '{$match_str}'";
 				}, $meta_key_match);
 

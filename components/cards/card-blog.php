@@ -12,8 +12,7 @@ if (!$image) {
 ?>
 <a class="card-blog" href="<?php echo esc_url($permalink); ?>">
 	<?php
-	if ($image)
-	{
+	if ($image) {
 		?>
 		<div class="card-blog__image-container">
 			<?php Blueprint\Images::safe_image_output($image, ['class' => 'card-blog__image']); ?>

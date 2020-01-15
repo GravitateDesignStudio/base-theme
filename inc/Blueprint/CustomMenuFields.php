@@ -16,7 +16,7 @@ abstract class CustomMenuFields
 		}
 
 		// use a nav menu walker with the markup for the custom edit options
-		add_filter('wp_edit_nav_menu_walker', function($walker, $menu_id) {
+		add_filter('wp_edit_nav_menu_walker', function ($walker, $menu_id) {
 			return '\Blueprint\CustomMenuFieldsAdminWalker';
 		}, 10, 2);
 
@@ -27,7 +27,7 @@ abstract class CustomMenuFields
 	{
 		self::add_init_hook();
 
-		$fields = array_reduce($fields, function($acum, $field) {
+		$fields = array_reduce($fields, function ($acum, $field) {
 			if (!isset($field['id'])) {
 				error_log('CustomMenuFields::create_fields - field must have "id" value');
 				return $acum;
@@ -36,7 +36,7 @@ abstract class CustomMenuFields
 			$field['id'] = str_replace(['-', ' '], '_', $field['id']);
 
 			if (!isset($field['type'])) {
-				error_log('CustomMenuFields::create_fields - no type specified for '.$field['id'].'; defaulting to "text"');
+				error_log('CustomMenuFields::create_fields - no type specified for ' . $field['id'] . '; defaulting to "text"');
 				$field['type'] = 'text';
 			}
 
@@ -69,26 +69,26 @@ abstract class CustomMenuFields
 		self::$fields = $fields;
 
 		// load custom menu edit options
-		add_filter('wp_setup_nav_menu_item', function($menu_item) use ($fields) {
+		add_filter('wp_setup_nav_menu_item', function ($menu_item) use ($fields) {
 			foreach ($fields as $field) {
 				$field_id = $field['id'];
-				$menu_item->$field_id = get_post_meta($menu_item->ID, self::$field_prefix.$field_id, true);
+				$menu_item->$field_id = get_post_meta($menu_item->ID, self::$field_prefix . $field_id, true);
 			}
 
 			return $menu_item;
 		});
 
 		// save custom menu edit options
-		add_action('wp_update_nav_menu_item', function($menu_id, $menu_item_db_id, $args) use ($fields) {
+		add_action('wp_update_nav_menu_item', function ($menu_id, $menu_item_db_id, $args) use ($fields) {
 			foreach ($fields as $field) {
 				$field_id = $field['id'];
-				$field_key = self::$field_prefix.$field_id.'_'.$menu_item_db_id;
+				$field_key = self::$field_prefix . $field_id . '_' . $menu_item_db_id;
 
 				if ($field['type'] === 'checkbox') {
 					$check_value = (isset($_REQUEST[$field_key]) && $_REQUEST[$field_key] == 'on') ? 1 : 0;
-					update_post_meta($menu_item_db_id, self::$field_prefix.$field_id, $check_value);
+					update_post_meta($menu_item_db_id, self::$field_prefix . $field_id, $check_value);
 				} elseif (isset($_REQUEST[$field_key])) {
-					update_post_meta($menu_item_db_id, self::$field_prefix.$field_id, $_REQUEST[$field_key]);
+					update_post_meta($menu_item_db_id, self::$field_prefix . $field_id, $_REQUEST[$field_key]);
 				}
 			}
 		}, 10, 3);
@@ -96,7 +96,7 @@ abstract class CustomMenuFields
 
 	public static function get_value($menu_id, $field_id)
 	{
-		return get_post_meta($menu_id, self::$field_prefix.$field_id, true);
+		return get_post_meta($menu_id, self::$field_prefix . $field_id, true);
 	}
 
 	private static function get_menu_item_ids($menu_slug)
@@ -104,7 +104,7 @@ abstract class CustomMenuFields
 		if (!isset(self::$menu_item_ids_cache[$menu_slug])) {
 			$menu_items = wp_get_nav_menu_items($menu_slug);
 	
-			$menu_item_ids = array_map(function($menu_post) {
+			$menu_item_ids = array_map(function ($menu_post) {
 				return $menu_post->ID;
 			}, is_array($menu_items) ? $menu_items : []);
 	
@@ -163,13 +163,21 @@ abstract class CustomMenuFields
 	private static function display_field_checkbox($field, $menu_item)
 	{
 		$field_id = $field['id'];
-		$input_name = self::$field_prefix.$field_id.'_'.$menu_item->ID;
-		$input_id = 'edit-menu-item-'.$field_id.'-'.$menu_item->ID;
+		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
+		$input_id = 'edit-menu-item-' . $field_id . '-' . $menu_item->ID;
 
 		?>
 		<p class="field-custom description description-wide">
 			<label for="<?php echo $input_id; ?>">
-				<input type="checkbox" name="<?php echo $input_name; ?>" id="<?php echo $input_id; ?>" <?php if ($menu_item->$field_id) { ?>checked<?php } ?>>
+				<input type="checkbox" name="<?php echo $input_name; ?>" id="<?php echo $input_id; ?>" 
+														<?php
+														if ($menu_item->$field_id) {
+															?>
+					checked
+															<?php
+														}
+														?>
+				>
 				<?php echo esc_html($field['label']); ?>
 			</label>
 		</p>
@@ -179,8 +187,8 @@ abstract class CustomMenuFields
 	private static function display_field_select($field, $menu_item)
 	{
 		$field_id = $field['id'];
-		$input_name = $input_name = self::$field_prefix.$field_id.'_'.$menu_item->ID;
-		$input_id = 'edit-menu-item-'.$field_id.'-'.$menu_item->ID;
+		$input_name = $input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
+		$input_id = 'edit-menu-item-' . $field_id . '-' . $menu_item->ID;
 
 		?>
 		<p class="field-custom description description-wide">
@@ -191,7 +199,15 @@ abstract class CustomMenuFields
 					if (isset($field['values'])) {
 						foreach ($field['values'] as $key => $value) {
 							?>
-							<option value="<?php echo esc_attr($key); ?>" <?php if ($menu_item->$field_id == $key) { ?>selected<?php } ?>><?php echo esc_html($value); ?></option>
+							<option value="<?php echo esc_attr($key); ?>" 
+													  <?php
+														if ($menu_item->$field_id == $key) {
+															?>
+								selected
+															<?php
+														}
+														?>
+							><?php echo esc_html($value); ?></option>
 							<?php
 						}
 					}

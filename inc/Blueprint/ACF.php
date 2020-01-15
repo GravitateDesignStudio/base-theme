@@ -7,9 +7,9 @@ abstract class ACF
 	{
 		return array(
 			array (
-				'key' => 'field_'.$acf_group.'_background_type',
+				'key' => 'field_' . $acf_group . '_background_type',
 				'label' => 'Background Type',
-				'name' => $acf_group.'_background_type',
+				'name' => $acf_group . '_background_type',
 				'type' => 'radio',
 				'instructions' => '',
 				'required' => 0,
@@ -28,17 +28,17 @@ abstract class ACF
 				'default_value' => 'image',
 				'layout' => 'horizontal',
 			),
-			array ( 
-				'key' => 'field_'.$acf_group.'_background_image',
+			array (
+				'key' => 'field_' . $acf_group . '_background_image',
 				'label' => 'Image',
-				'name' => $acf_group.'_background_image',
+				'name' => $acf_group . '_background_image',
 				'instructions' => 'The featured image attached to this page/post will be used if this field is empty',
 				'type' => 'image',
 				'required' => 0,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'image',
 						),
@@ -61,16 +61,16 @@ abstract class ACF
 				'mime_types' => '',
 			),
 			array (
-				'key' => 'field_'.$acf_group.'_background_image_pos_horz',
+				'key' => 'field_' . $acf_group . '_background_image_pos_horz',
 				'label' => 'Horizontal Position',
-				'name' => $acf_group.'_background_image_pos_horz',
+				'name' => $acf_group . '_background_image_pos_horz',
 				'type' => 'number',
 				'instructions' => 'Adjust the horizontal image position from 0 (left aligned) to 100 (right aligned).',
 				'required' => 0,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'image',
 						),
@@ -92,16 +92,16 @@ abstract class ACF
 				'disabled' => 0,
 			),
 			array (
-				'key' => 'field_'.$acf_group.'_background_image_pos_vert',
+				'key' => 'field_' . $acf_group . '_background_image_pos_vert',
 				'label' => 'Vertical Position',
-				'name' => $acf_group.'_background_image_pos_vert',
+				'name' => $acf_group . '_background_image_pos_vert',
 				'type' => 'number',
 				'instructions' => 'Adjust the vertical image position from 0 (top aligned) to 100 (bottom aligned).',
 				'required' => 0,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'image',
 						),
@@ -123,16 +123,16 @@ abstract class ACF
 				'disabled' => 0,
 			),
 			array (
-				'key' => 'field_'.$acf_group.'_background_video_message',
+				'key' => 'field_' . $acf_group . '_background_video_message',
 				'label' => 'A note about background videos',
-				'name' => $acf_group.'_background_video_message',
+				'name' => $acf_group . '_background_video_message',
 				'type' => 'message',
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'video',
 						),
@@ -147,17 +147,17 @@ abstract class ACF
 				'new_lines' => 'wpautop',    // wpautop | br | ''
 				'esc_html' => 0,             // uses the WordPress esc_html function
 			),
-			array ( 
-				'key' => 'field_'.$acf_group.'_background_video_url_desktop',
+			array (
+				'key' => 'field_' . $acf_group . '_background_video_url_desktop',
 				'label' => 'Video URL (desktop)',
-				'name' => $acf_group.'_background_video_url_desktop',
+				'name' => $acf_group . '_background_video_url_desktop',
 				'type' => 'text',
 				'instructions' => '',
 				'required' => 1,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'video',
 						),
@@ -177,17 +177,17 @@ abstract class ACF
 				'readonly' => 0,
 				'disabled' => 0,
 			),
-			array ( 
-				'key' => 'field_'.$acf_group.'_background_video_url_tablet',
+			array (
+				'key' => 'field_' . $acf_group . '_background_video_url_tablet',
 				'label' => 'Video URL (tablet)',
-				'name' => $acf_group.'_background_video_url_tablet',
+				'name' => $acf_group . '_background_video_url_tablet',
 				'type' => 'text',
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'video',
 						),
@@ -207,17 +207,17 @@ abstract class ACF
 				'readonly' => 0,
 				'disabled' => 0,
 			),
-			array ( 
-				'key' => 'field_'.$acf_group.'_background_video_url_mobile',
+			array (
+				'key' => 'field_' . $acf_group . '_background_video_url_mobile',
 				'label' => 'Video URL (mobile)',
-				'name' => $acf_group.'_background_video_url_mobile',
+				'name' => $acf_group . '_background_video_url_mobile',
 				'type' => 'text',
 				'instructions' => '',
 				'required' => 0,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'video',
 						),
@@ -237,17 +237,17 @@ abstract class ACF
 				'readonly' => 0,
 				'disabled' => 0,
 			),
-			array ( 
-				'key' => 'field_'.$acf_group.'_background_video_poster',
+			array (
+				'key' => 'field_' . $acf_group . '_background_video_poster',
 				'label' => 'Poster Image',
-				'name' => $acf_group.'_background_video_poster',
+				'name' => $acf_group . '_background_video_poster',
 				'instructions' => 'This image will be displayed while the video is loading. It can be helpful to use the first frame of the video here to smooth the transition.',
 				'type' => 'image',
 				'required' => 1,
 				'conditional_logic' => array (
 					array (
 						array (
-							'field' => 'field_'.$acf_group.'_background_type',
+							'field' => 'field_' . $acf_group . '_background_type',
 							'operator' => '==',
 							'value' => 'video',
 						),

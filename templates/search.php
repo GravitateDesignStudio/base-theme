@@ -9,8 +9,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 <main class="main-content">
 	<div class="tmpl-search">
 		<?php
-		if (have_posts())
-		{
+		if (have_posts()) {
 			global $wp_query;
 			global $paged;
 
@@ -26,8 +25,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 				data-search="<?php echo get_search_query(); ?>"
 				>
 				<?php
-				while (have_posts())
-				{
+				while (have_posts()) {
 					?>
 					<div class="row align-center">
 						<div class="columns small-12 large-10">
@@ -40,14 +38,12 @@ WPUtil\Component::render('components/banners/banner-default', [
 					</div>
 					<?php
 				}
-			?>
+				?>
 			</div>
 			<?php
 
 			WPUtil\Component::render('components/archive/load-more');
-		}
-		else
-		{
+		} else {
 			?>
 			<section class="block-container">
 				<div class="block-inner">

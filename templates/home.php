@@ -12,8 +12,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 <main class="main-content">
 	<div class="tmpl-archive-blog">
 		<?php
-		if (have_posts())
-		{
+		if (have_posts()) {
 			global $wp_query;
 			global $paged;
 
@@ -28,8 +27,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 				data-posts-per-page="<?php echo $posts_per_page; ?>"
 				>
 				<?php
-				while (have_posts())
-				{
+				while (have_posts()) {
 					?>
 					<div class="columns">
 						<?php
@@ -40,7 +38,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 					</div>
 					<?php
 				}
-			?>
+				?>
 			</div>
 			<?php
 
@@ -51,9 +49,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 					'object' => $blog_page_id
 				]);
 			}
-		}
-		else
-		{
+		} else {
 			WPUtil\Component::render('components/not-found');
 		}
 		?>
