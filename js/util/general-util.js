@@ -10,12 +10,12 @@ function isExternalURL(url) {
 }
 
 /*
-* Add target="_blank" and rel="noopener" to links that are external
+* Add target="_blank" and rel="noopener noreferrer" to links that are external
 * Will also force PDF's to open in new tabs
 * Adds "external-link" class
 */
 export function processExternalLinks(opts = {}) {
-	const attributes = opts.attributes || { target: '_blank', rel: 'noopener' };
+	const attributes = opts.attributes || { target: '_blank', rel: 'noopener noreferrer' };
 	const anchors = document.querySelectorAll('a[href]');
 
 	Array.from(anchors).forEach((anchor) => {
