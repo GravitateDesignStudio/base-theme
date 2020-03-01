@@ -154,7 +154,7 @@ abstract class SVG
 			$safe_id = self::get_safe_id_value($svg_name);
 
 			?>
-			<svg style="display:none" <?php echo esc_attr($attrs_str); ?>>
+			<svg style="display:none" <?php echo $attrs_str; ?>>
 				<symbol id="<?php echo esc_attr($safe_id); ?>">
 					<?php
 					// phpcs:ignore
@@ -186,6 +186,8 @@ abstract class SVG
 		$attrs_parts = [];
 
 		foreach ($attrs as $attr_name => $attr_value) {
+			$attr_value = esc_attr($attr_value);
+
 			$attrs_parts[] = "{$attr_name}=\"{$attr_value}\"";
 		}
 
