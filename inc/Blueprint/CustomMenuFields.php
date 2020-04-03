@@ -15,10 +15,10 @@ abstract class CustomMenuFields
 			return;
 		}
 
-		// use a nav menu walker with the markup for the custom edit options
-		add_filter('wp_edit_nav_menu_walker', function ($walker, $menu_id) {
-			return '\Blueprint\CustomMenuFieldsAdminWalker';
-		}, 10, 2);
+		// Render the registered fields in the default nav menu walker (as of WP 5.4)
+		add_action('wp_nav_menu_item_custom_fields', function ($item_id, $item, $depth, $args, $id) {
+			CustomMenuFields::display_fields($item);
+		}, 10, 5);
 
 		self::$init_hook_added = true;
 	}
@@ -205,7 +205,7 @@ abstract class CustomMenuFields
 							?>
 							<option
 								value="<?php echo esc_attr($key); ?>"
-								<?php if ($menu_item->$field_id === $key) { ?>selected<?php } ?>
+								<?php if ($menu_item->$field_id == $key) { ?>selected<?php } ?>
 							>
 								<?php echo esc_html($value); ?>
 							</option>
