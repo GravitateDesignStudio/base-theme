@@ -1,8 +1,8 @@
 @each $bg_color_name, $color_values in $bg-colors {
 	.bg-#{$bg_color_name} {
-		background-color: map-get($color_values, 'background');
-		background: map-get($color_values, 'background');
-		color: map-get($color_values, 'text');
+		background-color: map-get($color_values, "background");
+		background: map-get($color_values, "background");
+		color: map-get($color_values, "text");
 
 		label,
 		p,
@@ -17,8 +17,8 @@
 			color: inherit;
 		}
 
-		@if (map-has-key($color_values, 'elements')) {
-			@each $element, $element_color in map-get($color_values, 'elements') {
+		@if (map-has-key($color_values, "elements")) {
+			@each $element, $element_color in map-get($color_values, "elements") {
 				#{$element} {
 					color: $element_color;
 				}
@@ -50,14 +50,18 @@
 
 	&.block-bg-overlay {
 		&::before {
-			z-index: 0;
-			content: '';
+			z-index: -1;
+			content: "";
 			position: absolute;
 			top: 0;
 			right: 0;
 			bottom: 0;
 			left: 0;
-			background-image: linear-gradient(180deg, rgba(0,0,0,0.70) 0%, rgba(246,249,252,0.00) 100%);
+			background-image: linear-gradient(
+				180deg,
+				rgba(0, 0, 0, 0.7) 0%,
+				rgba(246, 249, 252, 0) 100%
+			);
 		}
 
 		.block-inner {
