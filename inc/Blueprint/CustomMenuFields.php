@@ -158,10 +158,38 @@ abstract class CustomMenuFields
 					self::display_field_checkbox($field, $menu_item);
 					break;
 
+				case 'text':
+					self::display_field_text($field, $menu_item);
+					break;
+
 				default:
 					break;
 			}
 		}
+	}
+
+	private static function display_field_text($field, $menu_item)
+	{
+		$field_id = $field['id'];
+		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
+		$input_id = 'edit-menu-item-' . $field_id . '-' . $menu_item->ID;
+
+		// phpcs:disable Squiz.ControlStructures, Squiz.WhiteSpace
+		?>
+		<p class="field-custom description description-wide">
+			<label for="<?php echo esc_attr($input_id); ?>">
+				<?php echo esc_html($field['label']); ?><br />
+				<input
+					type="text"
+					class="widefat"
+					name="<?php echo esc_attr($input_name); ?>"
+					id="<?php echo esc_attr($input_id); ?>"
+					value="<?php if ($menu_item->$field_id) { echo esc_attr($menu_item->$field_id); } ?>"
+				>
+			</label>
+		</p>
+		<?php
+		// phpcs:enable Squiz.ControlStructures, Squiz.WhiteSpace
 	}
 
 	private static function display_field_checkbox($field, $menu_item)
