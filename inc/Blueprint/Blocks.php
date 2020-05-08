@@ -95,13 +95,13 @@ abstract class Blocks
 
 	/**
 	 * Get the values for a button field created with the 'GRAV_BLOCKS::get_link_fields' method.
-	 * Returns an object with 'text', 'link', and 'style' properties or null if the field values are not found.
+	 * Returns an object with 'text', 'link', and 'style' properties.
 	 *
 	 * @param string $acf_field
-	 * @param integer $post_id
-	 * @return object|null
+	 * @param int|array $object Can be a post ID or an array. Defaults to the current post ID.
+	 * @return object
 	 */
-	public static function get_button_field_values(string $acf_field, $post_id = 0)
+	public static function get_button_field_values(string $acf_field, $object = 0)
 	{
 		$button_values = (object)[
 			'text' => '',
@@ -109,19 +109,25 @@ abstract class Blocks
 			'style' => ''
 		];
 
-		if (!$post_id) {
-			$post_id = get_the_ID();
+		if (is_int($object)) {
+			$post_id = $object ? $object : get_the_ID();
+			$button_type = get_field($acf_field . '_type', $post_id) ?? 'none';
+
+			if ($button_type !== 'none') {
+				$button_values->text = get_field($acf_field . '_text', $post_id) ?? '';
+				$button_values->link = get_field($acf_field . '_' . $button_type, $post_id) ?? '';
+				$button_values->style = get_field($acf_field . '_style', $post_id) ?? '';
+			}
+
+		} else if (is_array($object)) {
+			$button_type = $object[$acf_field . '_type'] ?? 'none';
+
+			if ($button_type !== 'none') {
+				$button_values->text = $object[$acf_field . '_text'] ?? '';
+				$button_values->link = $object[$acf_field . '_' . $button_type] ?? '';
+				$button_values->style = $object[$acf_field . '_style'] ?? '';
+			}
 		}
-
-		$button_type = get_field($acf_field . '_type', $post_id);
-
-		if (!$button_type || $button_type === 'none') {
-			return null;
-		}
-
-		$button_values->text = get_field($acf_field . '_text', $post_id) ?? '';
-		$button_values->link = get_field($acf_field . '_' . $button_type, $post_id) ?? '';
-		$button_values->style = get_field($acf_field . '_style', $post_id) ?? '';
 
 		return $button_values;
 	}
