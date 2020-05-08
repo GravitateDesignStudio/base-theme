@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "dfrei/wp-util",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dougfrei/wp-util.git",
-                "reference": "59e285e169e9ff1e2e269d6a11b6aa19ac0f8b8d"
+                "reference": "72e1bf85b4c33aadf0890c5200ad9c2a1963d6e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/59e285e169e9ff1e2e269d6a11b6aa19ac0f8b8d",
-                "reference": "59e285e169e9ff1e2e269d6a11b6aa19ac0f8b8d",
+                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/72e1bf85b4c33aadf0890c5200ad9c2a1963d6e4",
+                "reference": "72e1bf85b4c33aadf0890c5200ad9c2a1963d6e4",
                 "shasum": ""
             },
             "require": {
@@ -44,7 +44,7 @@
                 "utilities",
                 "wordpress"
             ],
-            "time": "2019-11-25T17:43:16+00:00"
+            "time": "2020-05-08T21:26:33+00:00"
         }
     ],
     "packages-dev": [],
@@ -54,5 +54,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
