@@ -41,6 +41,9 @@ abstract class Content
 		$post_id = isset($opts['post_id']) ? (int)$opts['post_id'] : get_the_ID();
 		$post = get_post($post_id);
 
+		if (!$post) {
+			return '';
+		}
 
 		if ($prefer_excerpt && trim($post->post_excerpt)) {
 			if ($autop) {
