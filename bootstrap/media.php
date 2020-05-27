@@ -92,9 +92,9 @@ add_filter('grav_blocks_image_tag', function ($default_markup, $tag, $attributes
 }, 10, 4);
 
 add_filter('acf/load_value/type=wysiwyg', function ($value, $post_id, $field) {
-	return \Blueprint\Images::replace_content_with_ib_images($value);
+	return is_admin() ? $value : \Blueprint\Images::replace_content_with_ib_images($value);
 }, 10, 3);
 
 add_filter('the_content', function ($content) {
-	return \Blueprint\Images::replace_content_with_ib_images($content);
+	return is_admin() ? $content : \Blueprint\Images::replace_content_with_ib_images($content);
 });
