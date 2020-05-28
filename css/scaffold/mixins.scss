@@ -1,15 +1,15 @@
-@mixin object-fit-polyfill($object-fit, $object-position: '') {
-	@if $object-position != '' {
+@mixin object-fit-polyfill($object-fit, $object-position: "") {
+	@if $object-position != "" {
 		object-fit: #{$object-fit};
 		object-position: #{$object-position};
-		font-family: 'object-fit: #{$object-fit}; object-position: #{$object-position};';
+		font-family: "object-fit: #{$object-fit}; object-position: #{$object-position};";
 	} @else {
 		object-fit: #{$object-fit};
-		font-family: 'object-fit: #{$object-fit}';
+		font-family: "object-fit: #{$object-fit}";
 	}
 }
 
-@mixin image-constrain($object-fit, $object-position: '') {
+@mixin image-constrain($object-fit, $object-position: "") {
 	@include object-fit-polyfill($object-fit, $object-position);
 
 	position: absolute;
@@ -21,13 +21,13 @@
 	height: 100%;
 }
 
-@mixin classes-from-list($list, $prepend: '', $append: '') {
+@mixin classes-from-list($list, $prepend: "", $append: "") {
 	#{generate-selector-string($list, $prepend, $append)} {
 		@content;
 	}
 }
 
-@mixin dark-bg($prepend: '', $append: ' &') {
+@mixin dark-bg($prepend: "", $append: " &") {
 	@include classes-from-list($bg-colors-with-light-text-classes, $prepend, $append) {
 		@content;
 	}
@@ -60,10 +60,10 @@
 }
 
 @mixin media($args...) {
-	$media-type: 'only screen';
-	$media-type-key: 'media-type';
+	$media-type: "only screen";
+	$media-type-key: "media-type";
 	$args: keywords($args);
-	$expr: '';
+	$expr: "";
 
 	@if map-has-key($args, $media-type-key) {
 		$media-type: map-get($args, $media-type-key);
@@ -82,7 +82,11 @@
 }
 
 @mixin media-max($max) {
-	@include media($max-width: ($max - 1)) {
+	@include media(
+		$max-width: (
+			$max - 1
+		)
+	) {
 		@content;
 	}
 }
@@ -102,7 +106,7 @@
 	margin-right: auto;
 }
 
-@mixin image-cover-entire-container($object-fit: 'cover', $object-position: '') {
+@mixin image-cover-entire-container($object-fit: "cover", $object-position: "") {
 	@include object-fit-polyfill($object-fit, $object-position);
 
 	position: absolute;
@@ -114,7 +118,7 @@
 	height: 100%;
 	object-fit: #{$object-fit};
 
-	@if $object-position != '' {
+	@if $object-position != "" {
 		object-position: #{$object-position};
 	}
 }

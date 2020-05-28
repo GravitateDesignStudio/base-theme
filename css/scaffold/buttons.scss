@@ -1,24 +1,24 @@
 .button,
 .wysiwyg button,
-input[type=submit],
+input[type="submit"],
 .mce-button-primary,
 %button {
 	position: relative;
 	display: inline-block;
 
 	margin: 0;
-	padding: 0.8rem 1.5rem 0.8rem;
-    min-width: 160px;
+	padding: 0.8rem 1.5rem;
+	min-width: 160px;
 	min-height: $default-input-min-height;
-    border: 2px solid $blue;
+	border: 2px solid $blue;
 
 	font: normal normal $font-weight-bold #{$body-font-size} / 1.45 $font-primary;
 	text-align: center;
 	text-decoration: none;
-    text-transform: uppercase;
+	text-transform: uppercase;
 
 	color: $white;
-    background-color: $blue;
+	background-color: $blue;
 	box-shadow: $default-box-shadow;
 
 	appearance: none;
@@ -36,7 +36,7 @@ input[type=submit],
 	&:active,
 	&.active {
 		color: $white;
-        background-color: darken($blue, 10%);
+		background-color: darken($blue, 10%);
 		border-color: darken($blue, 10%);
 		text-decoration: none;
 	}
@@ -46,7 +46,7 @@ input[type=submit],
 		pointer-events: none;
 		cursor: not-allowed;
 		color: rgba($white, 0.7);
-        background-color: rgba($black, 0.4);
+		background-color: rgba($black, 0.4);
 		border-color: transparent;
 
 		.bg-black & {
@@ -57,7 +57,7 @@ input[type=submit],
 
 	&.button--secondary {
 		color: $black;
-        background-color: transparent;
+		background-color: transparent;
 		border: 2px solid $black;
 
 		@include dark-bg() {
@@ -69,14 +69,14 @@ input[type=submit],
 		&:active,
 		&.active {
 			color: $white;
-            background-color: darken($blue, 10%);
-            border-color: darken($blue, 10%);
+			background-color: darken($blue, 10%);
+			border-color: darken($blue, 10%);
 		}
 
 		&:disabled,
 		&.disabled {
 			color: rgba($black, 0.4);
-            background-color: transparent;
+			background-color: transparent;
 			border-color: rgba($black, 0.4);
 
 			@include dark-bg() {

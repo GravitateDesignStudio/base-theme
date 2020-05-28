@@ -49,7 +49,7 @@
 
 		// apply a fade over the background image or video
 		&::before {
-			content: '';
+			content: "";
 			z-index: 1;
 			position: absolute;
 			top: 0;

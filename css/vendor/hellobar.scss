@@ -11,7 +11,7 @@ body.hellobar--position-top {
 	pointer-events: none;
 	transition: all 0.5s ease-in-out;
 	background: #fff;
-	border: 1px solid red;
+	border: 1px solid #fff;
 
 	body.hellobar--position-top & {
 		top: 0;

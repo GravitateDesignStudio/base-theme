@@ -4,6 +4,7 @@
 	"description": "Blueprint Theme",
 	"scripts": {
 		"eslint": "npx eslint js/**/*.js",
+		"stylelint": "npx stylelint css/**/*.scss",
 		"build-css": "npx gulp build_scss",
 		"build-js": "npx gulp build_js",
 		"build": "npx gulp build",
@@ -58,6 +59,8 @@
 		"gulp-sourcemaps": "^2.6.5",
 		"hard-source-webpack-plugin": "^0.13.0",
 		"node-sass": "^4.14.1",
+		"stylelint": "^13.5.0",
+		"stylelint-config-sass-guidelines": "^7.0.0",
 		"webpack": "^4.43.0",
 		"webpack-cli": "^3.3.11",
 		"webpack-stream": "^5.1.1"

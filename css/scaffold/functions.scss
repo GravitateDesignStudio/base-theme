@@ -1,11 +1,11 @@
-@function generate-selector-string($list, $prepend: '', $append: '') {
+@function generate-selector-string($list, $prepend: "", $append: "") {
 	$result: null;
-	
+
 	@for $i from 1 through length($list) {
 		$e: nth($list, $i);
 		$result: if(
 			$i != length($list),
-			$result#{$prepend}#{$e}#{$append}#{','},
+			$result#{$prepend}#{$e}#{$append}#{","},
 			$result#{$prepend}#{$e}#{$append}
 		);
 	}
