@@ -74,6 +74,10 @@ abstract class SVG
 
 		$dom = self::get_svg_domdocument($filename);
 
+		if ($dom === null) {
+			return '';
+		}
+
 		$svg_node = $dom->documentElement;
 
 		$add_class = $opts['class'] ?? '';
@@ -104,6 +108,11 @@ abstract class SVG
 
 			$attrs = [];
 			$dom = self::get_svg_domdocument($filename);
+
+			if ($dom === null) {
+				return '';
+			}
+
 			$svg_node = $dom->documentElement;
 
 			if ($svg_node->hasAttributes()) {
@@ -168,8 +177,18 @@ abstract class SVG
 
 	protected static function get_svg_domdocument($filename)
 	{
+		if (!file_exists($filename)) {
+			return null;
+		}
+
+		$file_contents = file_get_contents($filename);
+
+		if ($file_contents === false) {
+			return null;
+		}
+
 		// phpcs:ignore
-		$clean_markup = self::clean_markup(file_get_contents($filename));
+		$clean_markup = self::clean_markup($file_contents);
 
 		libxml_use_internal_errors(true);
 
