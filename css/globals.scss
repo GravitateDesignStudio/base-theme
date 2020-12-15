@@ -65,8 +65,8 @@ table {
 		tr {
 			th {
 				border-bottom: 1px solid $gray;
-  				padding: 0.5rem;
-  				text-align: left;
+				padding: 0.5rem;
+				text-align: left;
 			}
 		}
 	}
@@ -75,8 +75,8 @@ table {
 		tr {
 			td {
 				border-bottom: 1px solid $gray;
-  				padding: 0.5rem;
-  				text-align: left;
+				padding: 0.5rem;
+				text-align: left;
 			}
 		}
 	}
@@ -86,17 +86,17 @@ blockquote {
 	margin: 2rem 1rem;
 
 	&::before {
-	   content: '\201C';
-    }
+		content: "\201C";
+	}
 
 	&::after {
-	   content: '\201D';
-    }
+		content: "\201D";
+	}
 
 	p {
-	    font: inherit;
-	    display: inline;
-	    color: inherit;
+		font: inherit;
+		display: inline;
+		color: inherit;
 	}
 }
 
@@ -113,4 +113,55 @@ strong {
 video,
 iframe {
 	max-width: 100%;
+}
+
+.row {
+	padding-left: map-get($row-padding, "small");
+	padding-right: map-get($row-padding, "small");
+
+	@include media-min($medium) {
+		padding-left: map-get($row-padding, "medium");
+		padding-right: map-get($row-padding, "medium");
+	}
+
+	@include media-min($large) {
+		padding-left: map-get($row-padding, "large");
+		padding-right: map-get($row-padding, "large");
+	}
+
+	@include media-min($global-width + 80px) {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.faux-row {
+	width: 100%;
+	max-width: $global-width;
+	margin-left: auto;
+	margin-right: auto;
+
+	padding-left: #{map-get($row-padding, "small") +
+		(rem-calc(map-get($grid-column-gutter, "small")) / 2)};
+	padding-right: #{map-get($row-padding, "small") +
+		(rem-calc(map-get($grid-column-gutter, "small")) / 2)};
+
+	@include media-min($medium) {
+		padding-left: #{map-get($row-padding, "medium") +
+			(rem-calc(map-get($grid-column-gutter, "medium")) / 2)};
+		padding-right: #{map-get($row-padding, "medium") +
+			(rem-calc(map-get($grid-column-gutter, "medium")) / 2)};
+	}
+
+	@include media-min($large) {
+		padding-left: #{map-get($row-padding, "large") +
+			(rem-calc(map-get($grid-column-gutter, "large")) / 2)};
+		padding-right: #{map-get($row-padding, "large") +
+			(rem-calc(map-get($grid-column-gutter, "large")) / 2)};
+	}
+
+	@include media-min($global-width + 80px) {
+		padding-left: rem-calc(map-get($grid-column-gutter, "large")) / 2;
+		padding-right: rem-calc(map-get($grid-column-gutter, "large")) / 2;
+	}
 }

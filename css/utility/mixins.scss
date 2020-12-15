@@ -97,14 +97,14 @@
 	}
 }
 
-@mixin faux-foundation-row() {
+/* @mixin faux-foundation-row() {
 	@include grid-column-gutter;
 
 	width: 100%;
 	max-width: $global-width;
 	margin-left: auto;
 	margin-right: auto;
-}
+} */
 
 @mixin image-cover-entire-container($object-fit: "cover", $object-position: "") {
 	@include object-fit-polyfill($object-fit, $object-position);
@@ -120,5 +120,40 @@
 
 	@if $object-position != "" {
 		object-position: #{$object-position};
+	}
+}
+
+@mixin anchor-link-colors($normal-color, $hover-color) {
+	color: $normal-color;
+
+	&:hover,
+	&:active {
+		color: $hover-color;
+	}
+}
+
+@mixin button-colors($color-values: ()) {
+	$color-values: map-merge(
+		(
+			"default-background-color": $color-blue,
+			"default-border-color": $color-blue,
+			"default-text-color": $color-black,
+			"hover-background-color": darken($color-blue, 10%),
+			"hover-border-color": darken($color-blue, 10%),
+			"hover-text-color": $color-white
+		),
+		$color-values
+	);
+
+	background-color: map-get($color-values, "default-background-color");
+	color: map-get($color-values, "default-text-color");
+	border-color: map-get($color-values, "default-border-color");
+
+	&:hover,
+	&:active,
+	&.active {
+		background-color: map-get($color-values, "hover-background-color");
+		color: map-get($color-values, "hover-text-color");
+		border-color: map-get($color-values, "hover-border-color");
 	}
 }

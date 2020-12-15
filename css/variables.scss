@@ -13,17 +13,25 @@ $xxlarge: 1921px;
 
 // override default foundation breakpoints
 $breakpoints: (
-    small: 0,
-    medium: $medium,
-    large: $large,
-    xlarge: $xlarge,
-    xxlarge: $xxlarge,
+	small: 0,
+	medium: $medium,
+	large: $large,
+	xlarge: $xlarge,
+	xxlarge: $xxlarge
 );
 
 // override default foundation gutter widths
 $grid-column-gutter: (
-    small: 40px,
-    medium: 60px
+	small: 3rem,
+	medium: 4rem,
+	large: 4rem
+);
+
+// row padding
+$row-padding: (
+	small: 0,
+	medium: 1rem,
+	large: 3rem
 );
 
 // header height by viewport
@@ -31,14 +39,12 @@ $header-height-sm: 60px;
 $header-height-md: 70px;
 $header-height-lg: 80px;
 
-
 /*************************************
 z-index
 **************************************/
 $z-root: 0;
 $z-header: $z-root + 10;
 $z-above-all: $z-header + 10;
-
 
 /*************************************
 default variables
@@ -48,72 +54,99 @@ $default-input-border-radius: 20px;
 $default-input-min-height: 40px;
 $default-transition-speed: 0.2s;
 $default-transition-easing: ease-in-out;
-$default-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.50);
+$default-box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
 
-$theme-url-base: '../..';
-
+$theme-url-base: "../..";
 
 /*************************************
 Colors
 **************************************/
-$black:         #000000;
-$blue:          #145CA1;
-$red:           #98143C;
-$gray:          #D4D7DA;
-$white:         #ffffff;
+$color-black: #000;
+$color-blue: #145ca1;
+$color-red: #98143c;
+$color-gray: #d4d7da;
+$color-white: #fff;
 
-$text-light: $white;
-$text-dark: $black;
+$text-light: $color-white;
+$text-dark: $color-black;
 
-$error-text: $red;
+$error-text: $color-red;
 
 $bg-colors: (
-    white: $white,
-    black: $black,
-    blue: $blue,
-    red: $red,
-    gray: $gray
+	white: $color-white,
+	black: $color-black,
+	blue: $color-blue,
+	gray: $color-gray
 );
 
 $bg-colors: (
-    white: (
-        background: $white,
-        text: $text-dark,
-        // elements: (
-        //     h2: $specific-h2-color,
-        //     h4: $specific-h4-color
-        // )
-    ),
-    black: (
-        background: $black,
-        text: $text-light
-    ),
-    blue: (
-        background: $blue,
-        text: $text-light
-    ),
-    red: (
-        background: $red,
-        text: $text-light
-    ),
-    gray: (
-        background: $gray,
-        text: $text-dark
-    )
+	white: (
+		background: $white,
+		text: $text-dark,
+		elements: (
+			h1: $text-dark,
+			h2: $text-dark,
+			h3: $text-dark,
+			h4: $text-dark,
+			h5: $text-dark,
+			h6: $text-dark
+		)
+	),
+	black: (
+		is_dark_bg: true,
+		background: $black,
+		text: $text-light,
+		anchor_normal: $text-light,
+		anchor_hover: $text-light,
+		elements: (
+			h1: $text-light,
+			h2: $text-light,
+			h3: $text-light,
+			h4: $text-light,
+			h5: $text-light,
+			h6: $text-light
+		)
+	),
+	blue: (
+		is_dark_bg: true,
+		background: $blue,
+		text: $text-light,
+		anchor_normal: $text-light,
+		anchor_hover: $text-light,
+		elements: (
+			h1: $text-light,
+			h2: $text-light,
+			h3: $text-light,
+			h4: $text-light,
+			h5: $text-light,
+			h6: $text-light
+		)
+	),
+	gray: (
+		background: $gray,
+		text: $text-dark,
+		elements: (
+			h1: $text-dark,
+			h2: $text-dark,
+			h3: $text-dark,
+			h4: $text-dark,
+			h5: $text-dark,
+			h6: $text-dark
+		)
+	)
 );
 
 $bg-colors-with-light-text-classes: (
-    '.block-bg-image',
-    '.block-bg-video',
-    '.bg-black',
-    '.bg-blue',
-    '.bg-red'
+	".block-bg-image",
+	".block-bg-video",
+	".bg-black",
+	".bg-blue",
+	".bg-red"
 );
 
-$color-twitter: #79CCF0;
-$color-facebook: #547BBD;
-$color-linkedin: #1385C8;
-
+$color-twitter: #79ccf0;
+$color-facebook: #547bbd;
+$color-linkedin: #1385c8;
 
 /*************************************
 Typography
@@ -130,9 +163,9 @@ $font-weight-bold: 700;
 
 $body-font-size: 1.6rem;
 $body-font-line-height: 1.5;
-$body-font: normal normal $font-weight-regular #{$body-font-size} / #{$body-font-line-height} $font-primary;
+$body-font: normal normal $font-weight-regular #{$body-font-size} / #{$body-font-line-height}
+	$font-primary;
 $body-font-color: $text-dark;
-
 
 /*************************************
 Spacing
@@ -145,42 +178,41 @@ $next-el-margin-top: (
 	h4: 2rem,
 	h5: 1.5rem,
 	h6: 1.5rem,
-    p: 1.5rem,
-    ol: 1.5rem,
-    ul: 1.5rem
+	p: 1.5rem,
+	ol: 1.5rem,
+	ul: 1.5rem
 );
 
 // creates the selector "* + <element>"
 $following-el-margin-top: (
-    h1: 3rem,
-    h2: 3rem,
-    h3: 3rem,
-    h4: 3rem,
-    h5: 3rem,
-    h6: 3rem
+	h1: 3rem,
+	h2: 3rem,
+	h3: 3rem,
+	h4: 3rem,
+	h5: 3rem,
+	h6: 3rem
 );
-
 
 /*************************************
 Blocks
 *************************************/
 $block-padding: (
-    small: (
-        top: 4.25rem,
-        bottom: 4.25rem,
-        left: 0,
-        right: 0,
-    ),
-    medium: (
-        top: 6.25rem,
-        bottom: 6.25rem,
-        left: 0,
-        right: 0,
-    ),
-    large: (
-        top: 6.25rem,
-        bottom: 6.25rem,
-        left: 0,
-        right: 0,
-    ),
+	small: (
+		top: 4.25rem,
+		bottom: 4.25rem,
+		left: 0,
+		right: 0
+	),
+	medium: (
+		top: 6.25rem,
+		bottom: 6.25rem,
+		left: 0,
+		right: 0
+	),
+	large: (
+		top: 6.25rem,
+		bottom: 6.25rem,
+		left: 0,
+		right: 0
+	)
 );

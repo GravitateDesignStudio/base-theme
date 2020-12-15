@@ -4,8 +4,6 @@
 	}
 
 	&__content {
-		@include faux-foundation-row();
-
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -19,8 +17,8 @@
 			padding-bottom: 12rem;
 		}
 	}
-	
+
 	&__title {
-		text-align: center;		
+		text-align: center;
 	}
 }

@@ -110,3 +110,16 @@ small,
 %small-text {
 	font-size: #{$body-font-size - 0.2rem};
 }
+
+// Useful classes that are missing without the Foundation typography styles
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.text-right {
+	text-align: right;
+}

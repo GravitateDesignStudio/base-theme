@@ -1,25 +1,25 @@
 /*************************************
 Include Functions and Mixins
 **************************************/
-@import 'scaffold/functions';
-@import 'scaffold/mixins';
+@import "utility/functions";
+@import "utility/mixins";
 
 /*************************************
 Include Variables
 **************************************/
-@import 'variables';
+@import "variables";
 
 /*************************************
 Include Libraries
 **************************************/
-@import 'scaffold/typography';
-@import 'scaffold/buttons';
-@import 'vendor/wordpress';
+@import "scaffold/typography";
+@import "scaffold/buttons";
+@import "vendor/wordpress";
 
 /*************************************
 Main Project Files
 **************************************/
-@import 'globals';
+@import "globals";
 
 body {
 	margin: 0 20px !important;

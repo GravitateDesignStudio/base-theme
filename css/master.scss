@@ -1,76 +1,70 @@
 /*************************************
 Include Functions and Mixins
 **************************************/
-@import 'scaffold/functions';
-@import 'scaffold/mixins';
-
+@import "utility/functions";
+@import "utility/mixins";
 
 /*************************************
 Include Variables
 **************************************/
-@import 'variables';
+@import "variables";
 
 // included in foundation
 // @import '../node_modules/normalize.css/normalize';
 
-
 /*************************************
 Foundation Grid
 **************************************/
-@import '../node_modules/foundation-sites/scss/foundation';
+@import "../node_modules/foundation-sites/scss/foundation";
 
 @include foundation-global-styles;
 @include foundation-flex-grid;
 @include foundation-visibility-classes;
 @include foundation-flex-classes;
 
-
 /*************************************
 Scaffolding
 **************************************/
-@import 'scaffold/typography';
-@import 'scaffold/backgrounds';
-@import 'scaffold/buttons';
-@import 'scaffold/forms';
-@import 'scaffold/blocks';
-
+@import "scaffold/typography";
+@import "scaffold/backgrounds";
+@import "scaffold/buttons";
+@import "scaffold/forms";
+@import "scaffold/blocks";
 
 /*************************************
 Vendor Styles
 **************************************/
-@import 'vendor/wordpress';
-@import 'vendor/gravity-forms';
-@import 'vendor/hellobar';
+@import "vendor/wordpress";
+@import "vendor/gravity-forms";
+@import "vendor/hellobar";
 
 // The styles in Swiper 5.0 are designed to be modular. If you need additional
 // functionality outside the base functionality, import them from the node_modules path
 // in this section.
-@import '../node_modules/swiper/swiper';
-@import '../node_modules/swiper/components/navigation/navigation';
-@import '../node_modules/swiper/components/pagination/pagination';
-
+@import "../node_modules/swiper/swiper";
+@import "../node_modules/swiper/components/navigation/navigation";
+@import "../node_modules/swiper/components/pagination/pagination";
 
 /*************************************
 Main Project Custom Files
 **************************************/
-@import 'globals';
-@import 'wysiwyg';
-@import 'utility';
+@import "globals";
+@import "wysiwyg";
 
-@import 'components/style-testing';
+@import "components/style-testing";
 
-@import 'components/header';
-@import 'components/footer';
-@import 'components/modal';
+@import "components/header";
+@import "components/footer";
+@import "components/modal";
 
-@import 'components/banners/banner';
-@import 'components/banners/banner-default';
+@import "components/banners/banner";
+@import "components/banners/banner-default";
 
-@import 'components/cards/card-blog';
-@import 'components/cards/card-search';
+@import "components/cards/card-blog";
+@import "components/cards/card-search";
 
-@import 'components/archive/load-more';
-@import 'components/archive/navigation';
+@import "components/archive/load-more";
+@import "components/archive/navigation";
 
-@import 'components/ui/share-icon';
-@import 'components/ui/spin-loader';
+@import "components/ui/share-icon";
+@import "components/ui/spin-loader";
