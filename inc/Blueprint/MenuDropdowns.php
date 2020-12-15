@@ -151,13 +151,18 @@ abstract class MenuDropdowns
 		));
 	}
 
-	protected static function render_now($dropdown_id, $custom_opts = [])
+	public static function render_now($dropdown_id, $custom_opts = [])
 	{
 		$opts = array_merge([
 			'render_file_name' => 'render',
 			'section' => '',
-			'custom_values' => []
+			'custom_values' => [],
+			'echo' => true
 		], $custom_opts);
+
+		if (!$opts['echo']) {
+			ob_start();
+		}
 
 		$post = get_post($dropdown_id);
 
@@ -194,6 +199,15 @@ abstract class MenuDropdowns
 		}
 
 		wp_reset_postdata();
+
+		$ret_val = '';
+
+		if (!$opts['echo']) {
+			$ret_val = ob_get_contents();
+			ob_end_clean();
+		}
+
+		return $ret_val;
 	}
 
 	public static function render_dropdown_menu($menu_id)
@@ -224,11 +238,6 @@ abstract class MenuDropdowns
 		foreach (self::$registered_menu_dropdown_ids as $dropdown_id) {
 			self::render_now($dropdown_id);
 		}
-	}
-
-	public static function get_requested_menu_ids()
-	{
-		return self::$requested_menu_dropdown_ids;
 	}
 
 	public static function get_menu_dropdown_select_options($query_opts = [])
