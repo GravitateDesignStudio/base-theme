@@ -12,8 +12,8 @@ html.mobile-menu-active {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background: $white;
-	box-shadow: 0 0 5px rgba($black, 0.4);
+	background: $color-white;
+	box-shadow: 0 0 5px rgba($color-black, 0.4);
 	transition: transform ($default-transition-speed * 2) ease-in-out;
 
 	height: $header-height-sm;
@@ -67,7 +67,7 @@ html.mobile-menu-active {
 
 		opacity: 0;
 		pointer-events: none;
-		background: $white;
+		background: $color-white;
 
 		html.mobile-menu-active & {
 			opacity: 1;
@@ -140,7 +140,7 @@ html.mobile-menu-active {
 		font: inherit;
 		color: inherit;
 		text-transform: none;
-		background: $black;
+		background: $color-black;
 		border: 0;
 		margin: 0;
 		padding: 0;
@@ -168,7 +168,7 @@ html.mobile-menu-active {
 		&::after {
 			width: $hamburger-layer-width;
 			height: $hamburger-layer-height;
-			background-color: $white;
+			background-color: $color-white;
 			position: absolute;
 			transition-property: transform;
 			transition-duration: 0.15s;

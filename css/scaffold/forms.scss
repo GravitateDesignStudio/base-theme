@@ -1,14 +1,14 @@
 $form-disabled-opacity: 0.4;
 
-$input-border: 2px solid $gray;
+$input-border: 2px solid $color-gray;
 $input-text-color: $body-font-color;
 
 $input-checkbox-radio-size: 16px;
-$input-checked-fill-color: $black;
+$input-checked-fill-color: $color-black;
 
 label {
 	font: $body-font;
-	color: $black;
+	color: $color-black;
 }
 
 $input-style-selectors: (
@@ -28,7 +28,7 @@ $input-style-selectors: (
 	border-radius: $default-input-border-radius;
 	border: $input-border;
 	padding: 8px 20px 8px 18px;
-	background-color: $white;
+	background-color: $color-white;
 	min-height: 36px;
 	font: $body-font;
 	color: $input-text-color;
@@ -36,7 +36,7 @@ $input-style-selectors: (
 	width: 100%;
 
 	&::placeholder {
-		color: $gray;
+		color: $color-gray;
 	}
 
 	@include media-min($medium) {
@@ -53,7 +53,7 @@ $input-style-selectors: (
 
 	&:focus {
 		border-radius: $default-input-border-radius;
-		border: 2px solid $black;
+		border: 2px solid $color-black;
 		color: $body-font-color;
 	}
 
@@ -121,7 +121,7 @@ input[type="radio"] {
 		&::before {
 			width: $input-checkbox-radio-size;
 			height: $input-checkbox-radio-size;
-			// border: 1px solid $gray;
+			// border: 1px solid $color-gray;
 			border: $input-border;
 			background: transparent;
 		}
@@ -197,8 +197,8 @@ input[type="radio"] {
 
 @include dark-bg("", "") {
 	@include classes-from-list($input-style-selectors) {
-		border-color: $white;
-		background-color: $white;
+		border-color: $color-white;
+		background-color: $color-white;
 		color: $input-text-color;
 	}
 
@@ -213,7 +213,7 @@ input[type="radio"] {
 	input[type="radio"] {
 		+ label {
 			&::after {
-				background: $white;
+				background: $color-white;
 			}
 		}
 	}

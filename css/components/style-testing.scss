@@ -42,8 +42,8 @@
 		padding-bottom: 0.5rem;
 		display: flex;
 		align-items: center;
-		background: $white;
-		box-shadow: 0 0 5px rgba($black, 0.4);
+		background: $color-white;
+		box-shadow: 0 0 5px rgba($color-black, 0.4);
 
 		body.admin-bar & {
 			bottom: 46px;

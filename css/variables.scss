@@ -81,7 +81,7 @@ $bg-colors: (
 
 $bg-colors: (
 	white: (
-		background: $white,
+		background: $color-white,
 		text: $text-dark,
 		elements: (
 			h1: $text-dark,
@@ -94,7 +94,7 @@ $bg-colors: (
 	),
 	black: (
 		is_dark_bg: true,
-		background: $black,
+		background: $color-black,
 		text: $text-light,
 		anchor_normal: $text-light,
 		anchor_hover: $text-light,
@@ -109,7 +109,7 @@ $bg-colors: (
 	),
 	blue: (
 		is_dark_bg: true,
-		background: $blue,
+		background: $color-blue,
 		text: $text-light,
 		anchor_normal: $text-light,
 		anchor_hover: $text-light,
@@ -123,7 +123,7 @@ $bg-colors: (
 		)
 	),
 	gray: (
-		background: $gray,
+		background: $color-gray,
 		text: $text-dark,
 		elements: (
 			h1: $text-dark,

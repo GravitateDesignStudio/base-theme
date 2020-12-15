@@ -58,7 +58,7 @@ blockquote {
 h1,
 %h1 {
 	font: normal normal $font-weight-bold 3.6rem / 1.21 $font-primary;
-	color: $black;
+	color: $color-black;
 	text-transform: uppercase;
 
 	@include media-min($large) {
@@ -69,32 +69,32 @@ h1,
 h2,
 %h2 {
 	font: normal normal $font-weight-bold 3.6rem / 1.22 $font-primary;
-	color: $black;
+	color: $color-black;
 	text-transform: uppercase;
 }
 
 h3,
 %h3 {
 	font: normal normal $font-weight-medium 2.6rem / 1.25 $font-primary;
-	color: $black;
+	color: $color-black;
 }
 
 h4,
 %h4 {
 	font: normal normal $font-weight-medium 1.8rem / 1.44 $font-primary;
-	color: $black;
+	color: $color-black;
 }
 
 h5,
 %h5 {
 	font: normal normal $font-weight-medium 1.6rem / 1.5 $font-primary;
-	color: $black;
+	color: $color-black;
 }
 
 h6,
 %h6 {
 	font: normal normal $font-weight-medium 1.2rem / 1.66 $font-primary;
-	color: $black;
+	color: $color-black;
 }
 
 /**

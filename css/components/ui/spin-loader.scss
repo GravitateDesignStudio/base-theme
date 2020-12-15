@@ -7,7 +7,7 @@
 	border-top: 1.1em solid rgba(transparent, 0.05);
 	border-right: 1.1em solid rgba(transparent, 0.05);
 	border-bottom: 1.1em solid rgba(transparent, 0.05);
-	border-left: 1.1em solid $blue;
+	border-left: 1.1em solid $color-blue;
 	transform: translateZ(0);
 	animation: spin-loader 1s infinite linear;
 
@@ -19,7 +19,7 @@
 	}
 
 	.bg-black & {
-		border-left: 1.1em solid $white;
+		border-left: 1.1em solid $color-white;
 	}
 }
 

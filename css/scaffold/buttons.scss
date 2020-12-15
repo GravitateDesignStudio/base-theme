@@ -10,15 +10,15 @@ input[type="submit"],
 	padding: 0.8rem 1.5rem;
 	min-width: 160px;
 	min-height: $default-input-min-height;
-	border: 2px solid $blue;
+	border: 2px solid $color-blue;
 
 	font: normal normal $font-weight-bold #{$body-font-size} / 1.45 $font-primary;
 	text-align: center;
 	text-decoration: none;
 	text-transform: uppercase;
 
-	color: $white;
-	background-color: $blue;
+	color: $color-white;
+	background-color: $color-blue;
 	box-shadow: $default-box-shadow;
 
 	appearance: none;
@@ -27,17 +27,17 @@ input[type="submit"],
 	transition: all $default-transition-speed ease-in-out;
 
 	@include dark-bg() {
-		background-color: $white;
-		border-color: $white;
-		color: $black;
+		background-color: $color-white;
+		border-color: $color-white;
+		color: $color-black;
 	}
 
 	&:hover,
 	&:active,
 	&.active {
-		color: $white;
-		background-color: darken($blue, 10%);
-		border-color: darken($blue, 10%);
+		color: $color-white;
+		background-color: darken($color-blue, 10%);
+		border-color: darken($color-blue, 10%);
 		text-decoration: none;
 	}
 
@@ -45,43 +45,43 @@ input[type="submit"],
 	&.disabled {
 		pointer-events: none;
 		cursor: not-allowed;
-		color: rgba($white, 0.7);
-		background-color: rgba($black, 0.4);
+		color: rgba($color-white, 0.7);
+		background-color: rgba($color-black, 0.4);
 		border-color: transparent;
 
 		.bg-black & {
-			background-color: rgba($white, 0.4);
-			color: rgba($black, 0.7);
+			background-color: rgba($color-white, 0.4);
+			color: rgba($color-black, 0.7);
 		}
 	}
 
 	&.button--secondary {
-		color: $black;
+		color: $color-black;
 		background-color: transparent;
-		border: 2px solid $black;
+		border: 2px solid $color-black;
 
 		@include dark-bg() {
-			color: $white;
-			border-color: $white;
+			color: $color-white;
+			border-color: $color-white;
 		}
 
 		&:hover,
 		&:active,
 		&.active {
-			color: $white;
-			background-color: darken($blue, 10%);
-			border-color: darken($blue, 10%);
+			color: $color-white;
+			background-color: darken($color-blue, 10%);
+			border-color: darken($color-blue, 10%);
 		}
 
 		&:disabled,
 		&.disabled {
-			color: rgba($black, 0.4);
+			color: rgba($color-black, 0.4);
 			background-color: transparent;
-			border-color: rgba($black, 0.4);
+			border-color: rgba($color-black, 0.4);
 
 			@include dark-bg() {
-				color: rgba($white, 0.4);
-				border-color: rgba($white, 0.4);
+				color: rgba($color-white, 0.4);
+				border-color: rgba($color-white, 0.4);
 			}
 		}
 	}
@@ -104,14 +104,14 @@ input[type="submit"],
 		left: -2px;
 		width: $default-input-min-height;
 
-		background: $black;
-		color: $white;
+		background: $color-black;
+		color: $color-white;
 	}
 
 	&__icon {
 		width: #{$default-input-min-height / 3};
 		height: #{$default-input-min-height / 3};
-		color: $white;
+		color: $color-white;
 	}
 
 	&--slim {

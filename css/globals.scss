@@ -64,7 +64,7 @@ table {
 	thead {
 		tr {
 			th {
-				border-bottom: 1px solid $gray;
+				border-bottom: 1px solid $color-gray;
 				padding: 0.5rem;
 				text-align: left;
 			}
@@ -74,7 +74,7 @@ table {
 	tbody {
 		tr {
 			td {
-				border-bottom: 1px solid $gray;
+				border-bottom: 1px solid $color-gray;
 				padding: 0.5rem;
 				text-align: left;
 			}
@@ -101,8 +101,8 @@ blockquote {
 }
 
 code {
-	background: $black;
-	color: $white;
+	background: $color-black;
+	color: $color-white;
 	padding: 0.1rem 0.25rem;
 }
 
