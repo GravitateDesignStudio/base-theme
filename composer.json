@@ -1,14 +1,14 @@
 {
-    "name": "gravitate/gravtheme",
-    "description": "Gravitate WordPress Starter Theme",
-    "type": "project",
-    "autoload": {
+	"name": "gravitate/blueprint-theme",
+	"description": "Gravitate WordPress Starter Theme",
+	"type": "wordpress-theme",
+	"autoload": {
 		"psr-4": {
-            "Blueprint\\": "inc/Blueprint/",
-            "ClientNamespace\\": "inc/ClientNamespace/"
+			"Blueprint\\": "inc/Blueprint/",
+			"ClientNamespace\\": "inc/ClientNamespace/"
 		}
 	},
-    "require": {
-        "dfrei/wp-util": "^2.0"
-    }
+	"require": {
+		"dfrei/wp-util": "^2.0"
+	}
 }
