@@ -1,4 +1,7 @@
 <?php
+add_filter('grav_blocks_output_default_js', function () { return false; });
+add_filter('grav_blocks_output_default_styles', function () { return false; });
+
 // enforce background color choices
 Blueprint\Blocks::enforce_background_colors([
 	'block-bg-none' => 'None',
@@ -37,20 +40,4 @@ add_action('rest_api_init', function () {
 			return get_field('grav_blocks');
 		}
 	]);
-});
-
-
-add_filter('hello_bar_fields_settings', function ($fields) {
-	$fields = array_filter($fields, function ($field) {
-		return $field['key'] !== 'hello_bar_icon';
-	});
-
-	return $fields;
-});
-
-add_filter('hello_bar_colors', function ($colors) {
-	return [
-		'hellobar--blue' => 'Blue',
-		'hellobar--red' => 'Red'
-	];
 });
