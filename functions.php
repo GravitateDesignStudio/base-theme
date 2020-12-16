@@ -33,3 +33,4 @@ require_once 'bootstrap/plugins.php';
 require_once 'bootstrap/blocks.php';
 require_once 'bootstrap/theme-settings-pages.php';
 require_once 'bootstrap/api.php';
+require_once 'bootstrap/hello-bar.php';
