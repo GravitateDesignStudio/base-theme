@@ -1,23 +1,24 @@
-import { getPostsHTML } from '../util/wp-rest-api';
+import { wpAPIget } from '../util/wp-rest-api';
 import LoadMore from '../components/archive-load-more';
-import SiteEvents from '../util/site-events';
+import SiteEvents, { SiteEventNames } from '../util/site-events';
 
 class ArchiveBlog {
-	constructor($el) {
-		this.$el = $el;
-		this.$cardsContainer = this.$el.find('[data-load-more-target]').first();
+	constructor(el) {
+		this.el = el;
+		this.cardsContainer = this.el.querySelector('[data-load-more-target]');
+		this.loadMoreContainer = this.el.querySelector('.archive__load-more-container');
 
-		this.loadMore = new LoadMore(this.$el.find('.archive__load-more-container').first());
+		this.loadMore = this.loadMoreContainer ? new LoadMore(this.loadMoreContainer) : null;
 
-		this.loadMore.on('load', () => {
-			this.loadMorePosts();
-		});
+		if (this.loadMore) {
+			this.loadMore.on('load', () => this.loadMorePosts());
+		}
 	}
 
-	loadMorePosts() {
-		const nextPage = parseInt(this.$cardsContainer.attr('data-current-page'), 10) + 1;
-		const totalPages = parseInt(this.$cardsContainer.attr('data-total-pages'), 10);
-		const postsPerPage = parseInt(this.$cardsContainer.attr('data-posts-per-page'), 10);
+	async loadMorePosts() {
+		const nextPage = parseInt(this.cardsContainer.getAttribute('data-current-page'), 10) + 1;
+		const totalPages = parseInt(this.cardsContainer.getAttribute('data-total-pages'), 10);
+		const postsPerPage = parseInt(this.cardsContainer.getAttribute('data-posts-per-page'), 10);
 
 		if (nextPage > totalPages) {
 			this.loadMore.setVisible(false);
@@ -26,29 +27,30 @@ class ArchiveBlog {
 
 		this.loadMore.setLoading(true);
 
-		getPostsHTML({
-			page: nextPage,
-			per_page: postsPerPage
-		}).then((postsHTML) => {
-			const addMarkup = postsHTML.map(post => `
+		try {
+			const res = await wpAPIget('wp/v2/posts', { page: nextPage, per_page: postsPerPage });
+			const postsHTML = res.map((post) => post.card_markup);
+
+			const addMarkup = postsHTML.map(
+				(post) => `
 				<div class="columns">
 					${post}
-				</div>
-			`);
+				</div>`
+			);
 
-			this.$cardsContainer.append(addMarkup.join(''));
-			this.$cardsContainer.attr('data-current-page', nextPage);
+			this.cardsContainer.insertAdjacentHTML('beforeend', addMarkup.join(''));
+			this.cardsContainer.setAttribute('data-current-page', nextPage);
 
 			if (nextPage >= totalPages) {
 				this.loadMore.setVisible(false);
 			}
 
-			SiteEvents.imageBuddyUpdate();
-		}).catch((err) => {
+			SiteEvents.publish(SiteEventNames.IMAGEBUDDY_TRIGGER_UPDATE);
+		} catch (err) {
 			console.error(err);
-		}).finally(() => {
-			this.loadMore.setLoading(false);
-		});
+		}
+
+		this.loadMore.setLoading(false);
 	}
 }
 

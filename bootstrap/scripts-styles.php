@@ -5,7 +5,7 @@
 WPUtil\Scripts::enqueue_scripts([
 	'master_js' => [
 		'url' => get_template_directory_uri() . '/dist/js/master.min.js',
-		'deps' => ['jquery'],
+		'deps' => [],
 		'defer' => true,
 		'preload_hook' => 'global_head_top_content',
 		'localize' => [

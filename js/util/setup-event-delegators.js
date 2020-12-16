@@ -1,23 +1,21 @@
 function getEventDelegateTriggerNode(targetNode, className) {
-	const $target = jQuery(targetNode);
-
-	if ($target.hasClass(className)) {
-		return targetNode;
+	if (!targetNode) {
+		return null;
 	}
 
-	const $parents = $target.parents(`.${className}`);
-
-	return $parents.length ? $parents.first().get(0) : null;
+	return targetNode.classList.contains(className)
+		? targetNode
+		: targetNode.closest(`.${className}`);
 }
 
 function setupEventDelegators(parentSelector, events = {}) {
-	const $parent = jQuery(parentSelector);
+	const parentEl = document.querySelector(parentSelector);
 
-	if (!$parent) {
+	if (!parentEl) {
 		return;
 	}
 
-	$parent.on('click', (e) => {
+	parentEl.addEventListener('click', (e) => {
 		const selectors = Object.keys(events);
 		let interceptEvent = false;
 

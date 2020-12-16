@@ -1,37 +1,43 @@
 import Emitter from '../util/emitter';
 
 class ArchiveLoadMore extends Emitter {
-	constructor($containerEl) {
+	constructor(containerEl) {
 		super();
 
-		this.$containerEl = $containerEl;
-		this.$loadMoreButton = this.$containerEl.find('.js__load-more');
+		this.containerEl = containerEl;
+		this.loadMoreButton = this.containerEl.querySelector('.js__load-more');
 
-		this.lastButtonText = this.$loadMoreButton.text();
+		this.lastButtonText = this.loadMoreButton ? this.loadMoreButton.textContent : '';
 
-		this.$loadMoreButton.on('click', (e) => {
-			e.preventDefault();
+		if (this.loadMoreButton) {
+			this.loadMoreButton.addEventListener('click', (e) => {
+				e.preventDefault();
 
-			this.emit('load');
-		});
+				this.emit('load');
+			});
+		}
 	}
 
 	setLoading(isLoading, loadingText = 'Loading...') {
+		if (!this.loadMoreButton) {
+			return;
+		}
+
 		if (isLoading) {
-			this.lastButtonText = this.$loadMoreButton.text();
-			this.$loadMoreButton.text(loadingText);
-			this.$loadMoreButton.addClass('disabled');
+			this.lastButtonText = this.loadMoreButton.textContent;
+			this.loadMoreButton.textContent = loadingText;
+			this.loadMoreButton.classList.add('disabled');
 		} else {
-			this.$loadMoreButton.text(this.lastButtonText);
-			this.$loadMoreButton.removeClass('disabled');
+			this.loadMoreButton.textContent = this.lastButtonText;
+			this.loadMoreButton.classList.remove('disabled');
 		}
 	}
 
 	setVisible(isVisible) {
 		if (isVisible) {
-			this.$containerEl.removeClass('hide');
+			this.containerEl.classList.remove('hide');
 		} else {
-			this.$containerEl.addClass('hide');
+			this.containerEl.classList.add('hide');
 		}
 	}
 }

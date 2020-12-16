@@ -1,19 +1,46 @@
 class SiteEvents {
-	static get IMAGEBUDDY_TRIGGER_UPDATE() {
-		return 'imagebuddy-trigger-update';
+	constructor() {
+		this.observers = {};
 	}
 
-	static get MODAL_VIDEO_OPEN() {
-		return 'modal-video-open';
+	subscribe(eventName, callback) {
+		if (typeof callback !== 'function') {
+			return;
+		}
+
+		if (!Array.isArray(this.observers[eventName])) {
+			this.observers[eventName] = [];
+		}
+
+		this.observers[eventName].push(callback);
 	}
 
-	static imageBuddyUpdate(opts = {}) {
-		jQuery(window).trigger(this.IMAGEBUDDY_TRIGGER_UPDATE, opts);
+	unsubscribe(eventName, callback) {
+		if (!Array.isArray(this.observers[eventName])) {
+			return;
+		}
+
+		this.observers[eventName] = this.observers[eventName].filter(
+			(observer) => observer !== callback
+		);
 	}
 
-	static modalVideoOpen(videoUrl) {
-		jQuery(window).trigger(this.MODAL_VIDEO_OPEN, videoUrl);
+	publish(eventName, values = {}) {
+		if (!Array.isArray(this.observers[eventName])) {
+			return;
+		}
+
+		this.observers[eventName].forEach((observer) => {
+			if (typeof observer === 'function') {
+				observer(values);
+			}
+		});
 	}
 }
 
-export default SiteEvents;
+export const SiteEventNames = {
+	IMAGEBUDDY_TRIGGER_UPDATE: 'imagebuddy-trigger-update',
+	MODAL_VIDEO_OPEN: 'modal-video-open'
+};
+
+export default new SiteEvents();

@@ -1,23 +1,24 @@
-import { getSearchResultCardsHTML } from '../util/wp-rest-api';
+import { wpAPIget } from '../util/wp-rest-api';
 import ArchiveLoadMore from '../components/archive-load-more';
 
 class SearchResults {
-	constructor($el) {
-		this.$el = $el;
-		this.$cardsContainer = this.$el.find('[data-load-more-target]').first();
+	constructor(el) {
+		this.el = el;
+		this.cardsContainer = this.el.querySelector('[data-load-more-target]');
+		this.loadMoreContainer = this.el.querySelector('.archive__load-more-container');
 
-		this.loadMore = new ArchiveLoadMore(this.$el.find('.archive__load-more-container').first());
+		this.loadMore = this.loadMoreContainer ? new ArchiveLoadMore(this.loadMoreContainer) : null;
 
-		this.loadMore.on('load', () => {
-			this.loadMorePosts();
-		});
+		if (this.loadMore) {
+			this.loadMore.on('load', () => this.loadMorePosts());
+		}
 	}
 
-	loadMorePosts() {
-		const nextPage = parseInt(this.$cardsContainer.attr('data-current-page'), 10) + 1;
-		const totalPages = parseInt(this.$cardsContainer.attr('data-total-pages'), 10);
-		const postsPerPage = parseInt(this.$cardsContainer.attr('data-posts-per-page'), 10);
-		const searchString = this.$cardsContainer.attr('data-search');
+	async loadMorePosts() {
+		const nextPage = parseInt(this.cardsContainer.getAttribute('data-current-page'), 10) + 1;
+		const totalPages = parseInt(this.cardsContainer.getAttribute('data-total-pages'), 10);
+		const postsPerPage = parseInt(this.cardsContainer.getAttribute('data-posts-per-page'), 10);
+		const searchString = this.cardsContainer.getAttribute('data-search');
 
 		if (nextPage > totalPages) {
 			this.loadMore.setVisible(false);
@@ -26,30 +27,32 @@ class SearchResults {
 
 		this.loadMore.setLoading(true);
 
-		getSearchResultCardsHTML({
-			page: nextPage,
-			per_page: postsPerPage,
-			search: searchString
-		}).then((postsHTML) => {
-			const addMarkup = postsHTML.map(post => `
-				<div class="row align-center">
-					<div class="columns small-12 medium-10">
-						${post}
-					</div>
-				</div>
-			`);
+		try {
+			const res = await wpAPIget('wp/v2/posts', {
+				page: nextPage,
+				per_page: postsPerPage,
+				search: searchString
+			});
+			const postsHTML = res.map((post) => post.card_markup);
 
-			this.$cardsContainer.append(addMarkup.join(''));
-			this.$cardsContainer.attr('data-current-page', nextPage);
+			const addMarkup = postsHTML.map(
+				(post) => `
+				<div class="columns">
+					${post}
+				</div>`
+			);
+
+			this.cardsContainer.insertAdjacentHTML('beforeend', addMarkup.join(''));
+			this.cardsContainer.setAttribute('data-current-page', nextPage);
 
 			if (nextPage >= totalPages) {
 				this.loadMore.setVisible(false);
 			}
-		}).catch((err) => {
+		} catch (err) {
 			console.error(err);
-		}).finally(() => {
-			this.loadMore.setLoading(false);
-		});
+		}
+
+		this.loadMore.setLoading(false);
 	}
 }
 

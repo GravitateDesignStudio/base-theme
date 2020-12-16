@@ -1,22 +1,38 @@
-const HelloBar = (function ($) {
+const HelloBar = function () {
 	function adjustElements() {
-		const hbHeight = $('.hellobar').outerHeight();
+		const hbEl = document.querySelector('.hellobar');
 
-		$('body, .site-header').css('margin-top', hbHeight);
+		if (hbEl) {
+			document.body.style.marginTop = `${hbEl.offsetHeight}px`;
+
+			const siteHeaderEl = document.querySelector('.site-header');
+
+			if (siteHeaderEl) {
+				siteHeaderEl.style.marginTop = `${hbEl.offsetHeight}px`;
+			}
+		}
 	}
 
 	function init() {
-		$(window).on('hellobar-visible', function (event, isShowing) {
+		window.addEventListener('hellobar-visible', (e) => {
+			const isShowing = e.detail ?? false;
+
 			if (isShowing) {
 				adjustElements();
 			} else {
-				$('body, .site-header').css('margin-top', 0);
+				document.body.style.marginTop = '0px';
+
+				const siteHeaderEl = document.querySelector('.site-header');
+
+				if (siteHeaderEl) {
+					siteHeaderEl.style.marginTop = '0px';
+				}
 			}
 		});
 
 		window.addEventListener('resize', () => {
 			requestAnimationFrame(() => {
-				if ($('body').hasClass('hellobar--visible')) {
+				if (document.body.classList.contains('hellobar--visible')) {
 					adjustElements();
 				}
 			});
@@ -26,6 +42,6 @@ const HelloBar = (function ($) {
 	return {
 		init
 	};
-})(jQuery);
+};
 
 export default HelloBar;

@@ -1,9 +1,9 @@
-/* global jQuery */
-
 import App from './App';
 
-jQuery(function ($) {
-	$(document).ready(function () {
+if (document.readyState === 'loading') {
+	document.addEventListener('DOMContentLoaded', () => {
 		window.app = new App();
 	});
-});
+} else {
+	window.app = new App();
+}

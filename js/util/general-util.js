@@ -1,3 +1,5 @@
+import { isIE } from './browsers';
+
 function isExternalURL(url) {
 	const firstCharValid = ['/', '#', '?'].indexOf(url.charAt(0)) === -1;
 	const isDifferentHost = new RegExp(`/${window.location.host}/`).test(url) === false;
@@ -10,10 +12,10 @@ function isExternalURL(url) {
 }
 
 /*
-* Add target="_blank" and rel="noopener noreferrer" to links that are external
-* Will also force PDF's to open in new tabs
-* Adds "external-link" class
-*/
+ * Add target="_blank" and rel="noopener noreferrer" to links that are external
+ * Will also force PDF's to open in new tabs
+ * Adds "external-link" class
+ */
 export function processExternalLinks(opts = {}) {
 	const attributes = opts.attributes || { target: '_blank', rel: 'noopener noreferrer' };
 	const anchors = document.querySelectorAll('a[href]');
@@ -30,14 +32,14 @@ export function processExternalLinks(opts = {}) {
 }
 
 /*
-* Scrolling function to animate to a
-* selector, with optional offset
-*/
+ * Scrolling function to animate to a
+ * selector, with optional offset
+ */
 export function scrollTo(selector, offset) {
-	let element;
+	let element = null;
 
 	if (typeof selector === 'string') {
-		element = jQuery(selector);
+		element = document.querySelector(selector);
 	} else {
 		element = selector;
 	}
@@ -50,9 +52,22 @@ export function scrollTo(selector, offset) {
 		offset = 0;
 	}
 
-	jQuery('html, body').animate({
-		scrollTop: (element.offset().top - offset)
-	}, 500);
+	const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+	const elPosFromTop = element.getBoundingClientRect().top + scrollTop;
+
+	if (isIE()) {
+		window.scroll(0, elPosFromTop);
+	} else {
+		window.scroll({
+			top: elPosFromTop,
+			left: 0,
+			behavior: 'smooth'
+		});
+	}
+
+	// jQuery('html, body').animate({
+	// 	scrollTop: (element.offset().top - offset)
+	// }, 500);
 }
 
 export function copyTextToClipboard(copyText) {

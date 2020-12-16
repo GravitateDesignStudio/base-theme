@@ -1,4 +1,3 @@
-/* global jQuery */
 import objectFitImages from 'object-fit-images';
 import ImageBuddy from 'imagebuddy';
 
@@ -12,132 +11,136 @@ import SearchResults from './templates/search-results';
 
 import { processExternalLinks } from './util/general-util';
 import ScrollWatcher from './util/scroll-watcher';
-import SiteEvents from './util/site-events';
+import SiteEvents, { SiteEventNames } from './util/site-events';
 import BlockAnimationWatcher from './util/block-animation-watcher';
+import HelloBar from './util/hello-bar';
 
-const App = (function ($) {
-	return class {
-		constructor() {
-			this.instances = {
-				components: {
-					themeWelcome: null,
-					siteHeader: null,
-					bannerVideo: null
-				},
-				templates: {
-					archiveBlog: null,
-					searchResults: null
-				},
-				blocks: {},
-				scrollWatcher: null,
-				imageBuddy: null,
-				blockAnimationWatcher: null
-			};
+class App {
+	constructor() {
+		this.instances = {
+			components: {
+				themeWelcome: null,
+				siteHeader: null,
+				bannerVideo: null
+			},
+			templates: {
+				archiveBlog: null,
+				searchResults: null
+			},
+			blocks: {},
+			scrollWatcher: null,
+			imageBuddy: null,
+			blockAnimationWatcher: null,
+			helloBar: null
+		};
 
-			this.init();
-			this.initComponents();
-			this.initTemplates();
-			this.initBlocks();
-			this.initSocialShare();
+		this.init();
+		this.initComponents();
+		this.initTemplates();
+		this.initBlocks();
+		this.initSocialShare();
+	}
+
+	init() {
+		processExternalLinks({
+			target: '_blank',
+			rel: 'noopener'
+		});
+
+		Modal.setDefaults({
+			closeDuration: 400,
+			closeButtonContent: `
+				<svg xmlns="http://www.w3.org/2000/svg" class="modal__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			`.trim()
+		});
+
+		this.scrollWatcher = new ScrollWatcher((params) => {
+			ScrollWatcher.defaultCallback(params, 100);
+		});
+
+		// initialize ImageBuddy and setup events
+		this.instances.imageBuddy = new ImageBuddy({
+			lazyLoad: true
+			// debug: true
+		});
+
+		ImageBuddy.on('image-loaded', (imgEl) => {
+			objectFitImages(imgEl);
+		});
+
+		SiteEvents.subscribe(SiteEventNames.IMAGEBUDDY_TRIGGER_UPDATE, (opts) => {
+			this.instances.imageBuddy.update(opts || {});
+		});
+
+		this.instances.helloBar = new HelloBar();
+		this.instances.helloBar.init();
+
+		// ObjectFitImages: only act upon images that have a valid src attribute
+		// Note: use the 'object-fit-polyfill' SCSS mixin to create the necessary 'font-family' attribute
+		objectFitImages('img:not([src^="data:"])');
+	}
+
+	async initComponents() {
+		// theme welcome
+		// TODO: remove during development
+		const themeWelcomeEl = document.querySelector('.theme-welcome');
+
+		if (themeWelcomeEl) {
+			this.instances.themeWelcome = new ThemeWelcome(themeWelcomeEl);
 		}
 
-		init() {
-			processExternalLinks({
-				target: '_blank',
-				rel: 'noopener'
-			});
+		// site header
+		const siteHeaderEl = document.querySelector('.site-header');
 
-			Modal.setDefaults({
-				closeDuration: 400,
-				closeButtonContent: `
-					<svg xmlns="http://www.w3.org/2000/svg" class="modal__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<line x1="18" y1="6" x2="6" y2="18"></line>
-						<line x1="6" y1="6" x2="18" y2="18"></line>
-					</svg>
-				`.trim()
-			});
-
-			this.scrollWatcher = new ScrollWatcher((params) => {
-				ScrollWatcher.defaultCallback(params, 100);
-			});
-
-			// initialize ImageBuddy and setup events
-			this.instances.imageBuddy = new ImageBuddy({
-				lazyLoad: true
-				// debug: true
-			});
-
-			ImageBuddy.on('image-loaded', (imgEl) => {
-				objectFitImages(imgEl);
-			});
-
-			$(window).on(SiteEvents.IMAGEBUDDY_TRIGGER_UPDATE, (e, opts) => {
-				const updateOpts = opts || {};
-
-				this.instances.imageBuddy.update(updateOpts);
-			});
-
-			// ObjectFitImages: only act upon images that have a valid src attribute
-			// Note: use the 'object-fit-polyfill' SCSS mixin to create the necessary 'font-family' attribute
-			objectFitImages('img:not([src^="data:"])');
+		if (siteHeaderEl) {
+			this.instances.components.siteHeader = new SiteHeader(siteHeaderEl);
 		}
 
-		async initComponents() {
-			// theme welcome
-			// TODO: remove during development
-			const $themeWelcomeEls = $('.theme-welcome');
+		// banner cover video
+		const bannerCoverVideoEl = document.querySelector('.banner__cover-video');
 
-			if ($themeWelcomeEls.length) {
-				this.instances.themeWelcome = new ThemeWelcome($themeWelcomeEls.first());
-			}
+		if (bannerCoverVideoEl) {
+			this.instances.components.bannerVideo = new BannerVideo(bannerCoverVideoEl);
+		}
+	}
 
-			// site header
-			const $siteHeaderEls = $('.site-header');
+	initTemplates() {
+		// blog archive
+		const archiveBlogEl = document.querySelector('.tmpl-archive-blog');
 
-			if ($siteHeaderEls.length) {
-				this.instances.components.siteHeader = new SiteHeader($siteHeaderEls.first());
-			}
-
-			// banner cover video
-			const $bannerCoverVideo = $('.banner__cover-video');
-
-			if ($bannerCoverVideo.length) {
-				this.instances.components.bannerVideo = new BannerVideo($bannerCoverVideo);
-			}
+		if (archiveBlogEl) {
+			this.instances.templates.archiveBlog = new ArchiveBlog(archiveBlogEl);
 		}
 
-		initTemplates() {
-			// blog archive
-			const $archiveBlogEl = $('.tmpl-archive-blog').first();
+		// search results
+		const searchResultsEl = document.querySelector('.tmpl-search');
 
-			if ($archiveBlogEl) {
-				this.instances.templates.archiveBlog = new ArchiveBlog($archiveBlogEl);
-			}
-
-			// search results
-			const $searchResultsEl = $('.tmpl-search').first();
-
-			if ($searchResultsEl) {
-				this.instances.templates.searchResults = new SearchResults($searchResultsEl);
-			}
+		if (searchResultsEl) {
+			this.instances.templates.searchResults = new SearchResults(searchResultsEl);
 		}
+	}
 
-		initBlocks() {
-			// initialize blocks here
+	initBlocks() {
+		// initialize blocks here
 
-			// setup block animation watcher
-			const animateBlocks = document.querySelectorAll('.block-animate');
+		// setup block animation watcher
+		const animateBlocks = document.querySelectorAll('.block-animate');
 
-			if (animateBlocks && animateBlocks.length) {
-				this.instances.blockAnimationWatcher = new BlockAnimationWatcher(animateBlocks);
-			}
+		if (animateBlocks && animateBlocks.length) {
+			this.instances.blockAnimationWatcher = new BlockAnimationWatcher(animateBlocks);
 		}
+	}
 
-		initSocialShare() {
-			$('[data-social-share]').on('click', (e) => {
-				const $el = $(e.currentTarget);
-				const site = $el.attr('data-social-share');
-				const shareUrl = $el.attr('href');
+	initSocialShare() {
+		const socialShareEls = document.querySelectorAll('[data-social-share]');
+
+		Array.from(socialShareEls).forEach((el) => {
+			el.addEventListener('click', (e) => {
+				const site = el.getAttribute('data-social-share');
+				const shareUrl = el.getAttribute('href');
 
 				e.preventDefault();
 
@@ -147,8 +150,8 @@ const App = (function ($) {
 
 				window.open(shareUrl, `${site}Share`, 'width=626,height=436');
 			});
-		}
-	};
-})(jQuery);
+		});
+	}
+}
 
 export default App;
