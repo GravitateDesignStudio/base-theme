@@ -93,6 +93,13 @@ acf_add_local_field_group(array (
 				'order_no' => 0,
 				'group_no' => 1,
 			),
+			array (
+				'param' => 'post_type', // post_type | post | page | page_template | post_category | taxonomy | options_page
+				'operator' => '!=',
+				'value' => 'hellobar',      // if options_page then use: acf-options  | if page_template then use:  template-example.php
+				'order_no' => 0,
+				'group_no' => 1,
+			),
 		),
 	),
 	'menu_order' => 0,
