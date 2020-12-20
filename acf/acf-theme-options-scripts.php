@@ -1,5 +1,7 @@
 <?php
-$acf_group = 'theme_options_scripts';
+use Blueprint\Constants;
+
+$acf_group = Constants\ACF::THEME_OPTIONS_SCRIPTS_BASE;
 
 acf_add_local_field_group(array (
 	'key' => 'group_' . $acf_group,
@@ -8,7 +10,7 @@ acf_add_local_field_group(array (
 		array (
 			'key' => 'field_' . $acf_group . '_global_head_top_content',
 			'label' => 'Top &lt;head&gt; Tag Content',
-			'name' => 'global_head_top_content',
+			'name' => $acf_group . '_global_head_top_content',
 			'type' => 'textarea',
 			'instructions' => 'This will be inserted at the top of the &lt;head&gt; tag on all pages.<br>Warning! This must be formatted correctly or could break the website.',
 			'required' => 0,
@@ -29,7 +31,7 @@ acf_add_local_field_group(array (
 		array (
 			'key' => 'field_' . $acf_group . '_global_head_bottom_content',
 			'label' => 'Bottom &lt;head&gt; Tag Content',
-			'name' => 'global_head_bottom_content',
+			'name' => $acf_group . '_global_head_bottom_content',
 			'type' => 'textarea',
 			'instructions' => 'This will be inserted at the end of the &lt;head&gt; tag on all pages.<br>Warning! This must be formatted correctly or could break the website.',
 			'required' => 0,
@@ -50,7 +52,7 @@ acf_add_local_field_group(array (
 		array (
 			'key' => 'field_' . $acf_group . '_global_body_top_content',
 			'label' => 'Top &lt;body&gt; Tag Content',
-			'name' => 'global_body_top_content',
+			'name' => $acf_group . '_global_body_top_content',
 			'type' => 'textarea',
 			'instructions' => 'This will be inserted at the top of the &lt;body&gt; tag on all pages.<br>Warning! This must be formatted correctly or could break the website.',
 			'required' => 0,
@@ -71,7 +73,7 @@ acf_add_local_field_group(array (
 		array (
 			'key' => 'field_' . $acf_group . '_global_body_bottom_content',
 			'label' => 'Bottom &lt;body&gt; Tag Content',
-			'name' => 'global_body_bottom_content',
+			'name' => $acf_group . '_global_body_bottom_content',
 			'type' => 'textarea',
 			'instructions' => 'This will be inserted at the end of the &lt;body&gt; tag on all pages.<br>Warning! This must be formatted correctly or could break the website.',
 			'required' => 0,

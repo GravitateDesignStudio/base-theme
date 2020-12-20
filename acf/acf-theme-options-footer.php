@@ -1,5 +1,7 @@
 <?php
-$acf_group = 'theme_options_footer';
+use Blueprint\Constants;
+
+$acf_group = Constants\ACF::THEME_OPTIONS_FOOTER_BASE;
 
 acf_add_local_field_group(array (
 	'key' => 'group_' . $acf_group,
@@ -8,7 +10,7 @@ acf_add_local_field_group(array (
 		array (
 			'key' => 'field_' . $acf_group . '_copyright_text',
 			'label' => 'Copyright Text',
-			'name' => 'copyright_text',
+			'name' => $acf_group . '_copyright_text',
 			'type' => 'text',
 			'instructions' => 'The Year is automatically added at the front of the text.',
 			'required' => 0,

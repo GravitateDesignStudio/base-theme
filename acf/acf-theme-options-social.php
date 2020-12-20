@@ -1,5 +1,7 @@
 <?php
-$acf_group = 'theme_options_social';
+use Blueprint\Constants;
+
+$acf_group = Constants\ACF::THEME_OPTIONS_SOCIAL_BASE;
 
 $social_icons_list = WPUtil\SVG::get_svg_list('social', ['label_includes_dir' => false]);
 $social_icon_choices = [];

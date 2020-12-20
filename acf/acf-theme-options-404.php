@@ -1,5 +1,7 @@
 <?php
-$acf_group = 'theme_options_404';
+use Blueprint\Constants;
+
+$acf_group = Constants\ACF::THEME_OPTIONS_404_BASE;
 
 acf_add_local_field_group(array (
 	'key' => 'group_' . $acf_group,

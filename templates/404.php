@@ -1,8 +1,10 @@
 <?php
+use Blueprint\Constants;
+
 get_header();
 
-$title = get_field('theme_options_404_title', 'option');
-$content = get_field('theme_options_404_content', 'option');
+$title = get_field(Constants\ACF::THEME_OPTIONS_404_BASE . '_title', 'option');
+$content = get_field(Constants\ACF::THEME_OPTIONS_404_BASE . '_content', 'option');
 
 if (!$title) {
 	$title = '404 - Not Found';

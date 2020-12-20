@@ -1,6 +1,8 @@
 <?php
+use Blueprint\Constants;
+
 $social_links = array();
-$social_icon_fields = get_field('theme_options_social_site_links', 'option');
+$social_icon_fields = get_field(Constants\ACF::THEME_OPTIONS_SOCIAL_BASE . '_site_links', 'option');
 
 if ($social_icon_fields) {
 	$social_links = array_filter($social_icon_fields, function ($icon) {
@@ -38,7 +40,7 @@ if ($social_icon_fields) {
 	</div>
 	<div class="row">
 		 <div class="columns small-12 site-footer__legal">
-			  <p class="site-footer__copyright">&copy; <?php echo esc_html(gmdate('Y')); ?> <?php the_field('copyright_text', 'option'); ?></p>
+			  <p class="site-footer__copyright">&copy; <?php echo esc_html(gmdate('Y')); ?> <?php the_field(Constants\ACF::THEME_OPTIONS_FOOTER_BASE . '_copyright_text', 'option'); ?></p>
 			  <nav class="site-footer__menu site-footer__menu--secondary">
 				  <?php WPUtil\Menus::display_for_location('footer-links', array('depth' => 1)); ?>
 			  </nav>
