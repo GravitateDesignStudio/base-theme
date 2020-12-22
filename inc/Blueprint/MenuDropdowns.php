@@ -43,6 +43,10 @@ abstract class MenuDropdowns
 
 	private static function create_acf_fields()
 	{
+		if (!function_exists('acf_add_local_field_group')) {
+			return;
+		}
+
 		$template_paths = glob(self::$opts['template_path'] . '*', GLOB_ONLYDIR);
 		$template_groups = [];
 
@@ -186,6 +190,9 @@ abstract class MenuDropdowns
 				$container_classes = array_merge($container_classes, self::$opts['container_classes']);
 			}
 
+			// phpcs:ignore
+			echo apply_filters('menu_dropdown/pre_container_html', '', $template_name, $dropdown_id, $opts['section']);
+
 			$html_open = sprintf('<div class="%s" data-menu-dropdown-id="%d">', implode(' ', $container_classes), $dropdown_id);
 			$html_close = '</div>';
 
@@ -196,6 +203,9 @@ abstract class MenuDropdowns
 
 			// phpcs:ignore
 			echo apply_filters('menu_dropdown/container_html_close', $html_close, $template_name, $dropdown_id, $opts['section']);
+
+			// phpcs:ignore
+			echo apply_filters('menu_dropdown/post_container_html', '', $template_name, $dropdown_id, $opts['section']);
 		}
 
 		wp_reset_postdata();
