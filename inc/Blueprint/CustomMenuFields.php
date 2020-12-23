@@ -68,6 +68,9 @@ abstract class CustomMenuFields
 
 		self::$fields = $fields;
 
+		// error_log('valid fields');
+		// error_log(var_export(self::$fields, true));
+
 		// load custom menu edit options
 		add_filter('wp_setup_nav_menu_item', function ($menu_item) use ($fields) {
 			foreach ($fields as $field) {
@@ -106,7 +109,23 @@ abstract class CustomMenuFields
 	private static function get_menu_item_ids($menu_slug)
 	{
 		if (!isset(self::$menu_item_ids_cache[$menu_slug])) {
-			$menu_items = wp_get_nav_menu_items($menu_slug);
+			$locations = get_nav_menu_locations();
+
+			if (!isset($locations[$menu_slug])) {
+				self::$menu_item_ids_cache[$menu_slug] = [];
+
+				return self::$menu_item_ids_cache[$menu_slug];
+			}
+
+			$object = wp_get_nav_menu_object($locations[$menu_slug]);
+
+			if ($object === false) {
+				self::$menu_item_ids_cache[$menu_slug] = [];
+
+				return self::$menu_item_ids_cache[$menu_slug];
+			}
+
+			$menu_items = wp_get_nav_menu_items($object->name);
 
 			$menu_item_ids = array_map(function ($menu_post) {
 				return $menu_post->ID;
@@ -132,6 +151,9 @@ abstract class CustomMenuFields
 					}
 
 					$menu_item_ids = self::get_menu_item_ids($menu_slug);
+
+					// error_log(__METHOD__ . ': ' . $menu_slug . ' | ' . $menu_item->ID . ' | ' . $menu_item->title);
+					// error_log(var_export($menu_item_ids, true));
 
 					if (in_array($menu_item->ID, $menu_item_ids, true)) {
 						$show_field = true;
