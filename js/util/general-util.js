@@ -44,7 +44,7 @@ export function scrollTo(selector, offset) {
 		element = selector;
 	}
 
-	if (!element.length) {
+	if (!element) {
 		return;
 	}
 
@@ -53,7 +53,7 @@ export function scrollTo(selector, offset) {
 	}
 
 	const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-	const elPosFromTop = element.getBoundingClientRect().top + scrollTop;
+	const elPosFromTop = element.getBoundingClientRect().top + scrollTop - offset;
 
 	if (isIE()) {
 		window.scroll(0, elPosFromTop);
