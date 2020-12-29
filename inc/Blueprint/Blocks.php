@@ -104,6 +104,7 @@ abstract class Blocks
 	public static function get_button_field_values(string $acf_field, $object = 0)
 	{
 		$button_values = (object)[
+			'type' => '',
 			'text' => '',
 			'link' => '',
 			'style' => ''
@@ -114,6 +115,7 @@ abstract class Blocks
 			$button_type = get_field($acf_field . '_type', $post_id) ?? 'none';
 
 			if ($button_type !== 'none') {
+				$button_values->type = $button_type;
 				$button_values->text = get_field($acf_field . '_text', $post_id) ?? '';
 				$button_values->link = get_field($acf_field . '_' . $button_type, $post_id) ?? '';
 				$button_values->style = get_field($acf_field . '_style', $post_id) ?? '';
@@ -123,6 +125,7 @@ abstract class Blocks
 			$button_type = $object[$acf_field . '_type'] ?? 'none';
 
 			if ($button_type !== 'none') {
+				$button_values->type = $button_type;
 				$button_values->text = $object[$acf_field . '_text'] ?? '';
 				$button_values->link = $object[$acf_field . '_' . $button_type] ?? '';
 				$button_values->style = $object[$acf_field . '_style'] ?? '';
