@@ -19,9 +19,11 @@ export async function wpAPIget(endpoint, params = {}, fetchOpts = {}) {
 		...fetchOpts
 	});
 
+	const jsonRes = await res.json();
+
 	if (!res.ok) {
-		throw new Error(res.json());
+		throw jsonRes;
 	}
 
-	return res.json();
+	return jsonRes;
 }
