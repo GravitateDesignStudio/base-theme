@@ -28,7 +28,7 @@ use Blueprint\Constants;
 	// phpcs:ignore
 	if (isset($_SERVER['HTTP_USER_AGENT']) && stripos($_SERVER['HTTP_USER_AGENT'], 'trident/') !== false) {
 		?>
-		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+		<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.js?features=default,es5,es6,Object.entries,Array.prototype.find,fetch"></script>
 		<?php
 	}
 	// phpcs:enable WordPress.WP.EnqueuedResources.NonEnqueuedScript
