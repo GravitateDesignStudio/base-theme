@@ -33,7 +33,7 @@ class SearchResults {
 				per_page: postsPerPage,
 				search: searchString
 			});
-			const postsHTML = res.map((post) => post.card_markup);
+			const postsHTML = res.body.map((post) => post.card_markup);
 
 			const addMarkup = postsHTML.map(
 				(post) => `

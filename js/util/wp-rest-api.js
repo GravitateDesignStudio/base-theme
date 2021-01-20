@@ -22,8 +22,40 @@ export async function wpAPIget(endpoint, params = {}, fetchOpts = {}) {
 	const jsonRes = await res.json();
 
 	if (!res.ok) {
-		throw jsonRes;
+		throw { headers: res.headers, body: jsonRes };
 	}
 
-	return jsonRes;
+	return { headers: res.headers, body: jsonRes };
+}
+
+export async function wpAPIpost(endpoint, params = {}, fetchOpts = {}) {
+	const formBody = Object.keys(params)
+		.map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+		.join('&');
+
+	const fetchHeaders = fetchOpts.headers ?? {};
+
+	delete fetchOpts.headers;
+
+	const reqOpts = {
+		method: 'POST',
+		cache: 'no-cache',
+		credentials: 'include',
+		body: formBody,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+			...fetchHeaders
+		},
+		...fetchOpts
+	};
+
+	const res = await fetch(getURL(endpoint), reqOpts);
+
+	const jsonRes = await res.json();
+
+	if (!res.ok) {
+		throw { headers: res.headers, body: jsonRes };
+	}
+
+	return { headers: res.headers, body: jsonRes };
 }

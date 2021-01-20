@@ -29,7 +29,7 @@ class ArchiveBlog {
 
 		try {
 			const res = await wpAPIget('wp/v2/posts', { page: nextPage, per_page: postsPerPage });
-			const postsHTML = res.map((post) => post.card_markup);
+			const postsHTML = res.body.map((post) => post.card_markup);
 
 			const addMarkup = postsHTML.map(
 				(post) => `
