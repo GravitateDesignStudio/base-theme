@@ -4,24 +4,24 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7abec0a76f5afc9a61be4f38413cd729",
+    "content-hash": "f939dc5067b42ebfa62d2a09ce96e799",
     "packages": [
         {
             "name": "dfrei/wp-util",
-            "version": "2.0.7",
+            "version": "2.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dougfrei/wp-util.git",
-                "reference": "72e1bf85b4c33aadf0890c5200ad9c2a1963d6e4"
+                "reference": "b6bad77e95be8f46a644f4e10591af94329bc92e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/72e1bf85b4c33aadf0890c5200ad9c2a1963d6e4",
-                "reference": "72e1bf85b4c33aadf0890c5200ad9c2a1963d6e4",
+                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/b6bad77e95be8f46a644f4e10591af94329bc92e",
+                "reference": "b6bad77e95be8f46a644f4e10591af94329bc92e",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.0"
+                "php": ">=7.2"
             },
             "type": "library",
             "autoload": {
@@ -44,7 +44,11 @@
                 "utilities",
                 "wordpress"
             ],
-            "time": "2020-05-08T21:26:33+00:00"
+            "support": {
+                "issues": "https://github.com/dougfrei/wp-util/issues",
+                "source": "https://github.com/dougfrei/wp-util/tree/2.0.9"
+            },
+            "time": "2021-02-01T17:59:02+00:00"
         }
     ],
     "packages-dev": [],
@@ -55,5 +59,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

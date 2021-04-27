@@ -7,10 +7,10 @@ abstract class Content
 	 * Get related posts by matching in the following order:
 	 *     - matches all same taxonomy terms
 	 *     - matches any same taxonomy term
-	 * 
+	 *
 	 * If not enough posts are found the remainder of the requested amount
 	 * will be filled out using the most recent posts
-	 * 
+	 *
 	 * Options:
 	 *     'post_type' - post type to request (defaults to post type of object_id)
 	 *     'num_posts' - number of posts returned (default is 4)
@@ -116,10 +116,11 @@ abstract class Content
 
 	/**
 	 * Get the excerpt for a post with various options
-	 * 
+	 *
 	 * Options:
 	 *     'content' (string) - directly specify the content to return
 	 *     'full_content' (bool) - return the full content (default: false)
+	 *     'append_content' (string) - manually append content to the post (default: '')
 	 *     'wpautop' (bool) - apply 'wpautop' to the content (default: false)
 	 *     'strip_tags' (bool) - strip HTML tags on the content (default: true)
 	 *     'strip_shortcodes' (bool) - strip shortcodes from the content (default: true)
@@ -129,7 +130,7 @@ abstract class Content
 	 *     'filter_nbsp' (bool) - filter '&nbsp;' sequences from the content (default: true)
 	 *     'post_id' (int) - manually specify the post id (default is current post)
 	 *
-	 * @param array $opts
+	 * @param array<string, mixed> $opts
 	 * @return string
 	 */
 	public static function get_excerpt($opts = []): string
@@ -137,6 +138,7 @@ abstract class Content
 		// options and variables
 		$content = $opts['content'] ?? '';
 		$full_content = $opts['full_content'] ?? false;
+		$append_content = $opts['append_content'] ?? '';
 		$autop = $opts['wpautop'] ?? false;
 		$strip_tags = $opts['strip_tags'] ?? true;
 		$strip_shortcodes = $opts['strip_shortcodes'] ?? true;
@@ -145,7 +147,6 @@ abstract class Content
 		$excerpt_more = $opts['more'] ?? apply_filters('excerpt_more', ' ' . '&hellip;');
 		$filter_nbsp = $opts['filter_nbsp'] ?? true;
 		$post_id = isset($opts['post_id']) ? (int)$opts['post_id'] : get_the_ID();
-		$post = get_post($post_id);
 
 		// use manually set content if it exists
 		if ($content) {
@@ -155,6 +156,16 @@ abstract class Content
 			}
 
 			return $content;
+		}
+
+		if (!is_int($post_id)) {
+			return '';
+		}
+
+		$post = get_post($post_id);
+
+		if (!($post instanceof \WP_Post)) {
+			return '';
 		}
 
 		// does the excerpt exist and is it preferred
@@ -167,6 +178,10 @@ abstract class Content
 		}
 
 		$content = $post->post_content;
+
+		if ($append_content) {
+			$content .= $append_content;
+		}
 
 		// option to strip tags
 		if ($strip_tags) {
@@ -190,19 +205,24 @@ abstract class Content
 		// handle as excerpt if not full content
 		if (!$full_content) {
 			$content = apply_filters('the_excerpt', $content);
+
+			if (!is_string($content)) {
+				$content = '';
+			}
+
 			$content = wp_trim_words($content, $excerpt_length, $excerpt_more);
 		}
 
 		// option to wpautop
 		if ($autop) {
-			$content = wpautop($content);
+			$content = wpautop($content ?? '');
 		}
 
 		if ($filter_nbsp) {
-			$content = str_replace('&nbsp;', '', $content);
+			$content = str_replace('&nbsp;', '', $content ?? '');
 		}
 
-		return trim($content);
+		return trim($content ?? '');
 	}
 
 	/**
@@ -217,7 +237,7 @@ abstract class Content
 	{
 		$process_func = function($content) {
 			$content = preg_replace('/<p>\s*(<a .*>)?\s*(<img .* \/>)\s*(<\/a>)?\s*<\/p>/iU', '\1\2\3', $content);
-			
+
 			return preg_replace('/<p>\s*(<iframe .*>*.<\/iframe>)\s*<\/p>/iU', '\1', $content);
 		};
 

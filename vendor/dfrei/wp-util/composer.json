@@ -1,22 +1,25 @@
 {
-    "name": "dfrei/wp-util",
-    "description": "Collection of common functions and utilities for WordPress",
-    "type": "library",
-    "license": "MIT",
-    "keywords": ["wordpress", "utilities"],
-    "authors": [
-        {
-            "name": "Doug Frei",
-            "email": "dougfrei@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^7.0"
-    },
-    "require-dev": {},
-    "autoload": {
-        "psr-4": {
-            "WPUtil\\": "src"
-        }
-    }
+	"name": "dfrei/wp-util",
+	"description": "Collection of common functions and utilities for WordPress",
+	"type": "library",
+	"license": "MIT",
+	"keywords": [
+		"wordpress",
+		"utilities"
+	],
+	"authors": [
+		{
+			"name": "Doug Frei",
+			"email": "dougfrei@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=7.2"
+	},
+	"require-dev": {},
+	"autoload": {
+		"psr-4": {
+			"WPUtil\\": "src"
+		}
+	}
 }
