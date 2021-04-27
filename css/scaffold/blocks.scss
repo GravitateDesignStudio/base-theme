@@ -2,7 +2,7 @@
 // in a series of two with the same background color
 @each $bg_color_name, $color_values in $bg-colors {
 	/* prettier-ignore */
-	.block-container.bg-#{$bg_color_name}:not(.block-image) + .block-container.bg-#{$bg_color_name} {
+	.block-container.bg-#{"" + $bg_color_name}:not(.block-image) + .block-container.bg-#{"" + $bg_color_name} {
 		.block-inner {
 			padding-top: 0;
 		}

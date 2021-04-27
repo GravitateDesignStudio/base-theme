@@ -1,5 +1,5 @@
 @each $bg_color_name, $color_values in $bg-colors {
-	.bg-#{$bg_color_name} {
+	.bg-#{"" + $bg_color_name} {
 		background-color: map-get($color_values, "background");
 		background: map-get($color_values, "background");
 		color: map-get($color_values, "text");

@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { series, parallel, src, dest } = require('gulp');
 const plugins = require('gulp-load-plugins')();
+const sass = require('gulp-dart-sass');
 const browsersync = require('browser-sync').create();
 const chokidar = require('chokidar');
 const webpack = require('webpack');
@@ -58,8 +59,8 @@ function buildSCSSwithInput(srcFile, destPath = 'dist/css') {
 			})
 		)
 		.pipe(plugins.sourcemaps.init())
-		.pipe(plugins.sass())
-		.on('error', plugins.sass.logError)
+		.pipe(sass())
+		.on('error', sass.logError)
 		.pipe(plugins.autoprefixer())
 		.pipe(
 			plugins.cleanCss({
