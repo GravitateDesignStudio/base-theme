@@ -13,10 +13,11 @@
 
 .svg-icon-selector__modal-inner {
 	position: relative;
+	overflow-y: scroll;
 	width: 90vw;
 	height: 90vh;
-	background: white;
-	color: black;
+	background: #fff;
+	color: #000;
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	grid-gap: 10px;
@@ -25,25 +26,37 @@
 
 @media (min-width: 783px) {
 	.svg-icon-selector__modal-inner {
-		grid-template-columns: repeat(6, 1fr);
+		grid-template-columns: repeat(10, 1fr);
 	}
 }
 
 .svg-icon-selector__modal-close {
 	position: absolute;
-	top: -18px;
-	right: -18px;
+	top: 0;
+	right: 0;
 	width: 36px;
 	height: 36px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background: white;
-	color: black;
+	background-color: #fff;
+	color: #000;
 	font-size: 30px;
-	border-radius: 100%;
+	line-height: 1;
+	/* border-radius: 100%; */
 	box-shadow: -2px 2px 1px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
+
+	border: 1px solid #000;
+	border-top: 0;
+	border-right: 0;
+
+	transition: all 0.2s ease-in-out;
+}
+
+.svg-icon-selector__modal-close:hover {
+	background-color: #f33;
+	color: #fff;
 }
 
 .svg-icon-selector__selectable-icons {
@@ -56,6 +69,8 @@
 	align-items: center;
 	transition: all 0.2s ease-in-out;
 	cursor: pointer;
+
+	font-size: 1.4rem;
 }
 
 .svg-icon-selector__selectable-icon svg {
@@ -67,8 +82,8 @@
 
 .svg-icon-selector__selectable-icon:hover,
 .svg-icon-selector__selectable-icon.active {
-	background: lightskyblue;
-	color: white;
+	background: #1586cc;
+	color: #fff;
 }
 
 .svg-icon-selector__preview svg {
