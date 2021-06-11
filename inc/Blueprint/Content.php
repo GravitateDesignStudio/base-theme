@@ -13,6 +13,7 @@ abstract class Content
 	 *     'wpautop' (bool) - apply 'wpautop' to the content (default: false)
 	 *     'strip_tags' (bool) - strip HTML tags on the content (default: true)
 	 *     'strip_shortcodes' (bool) - strip shortcodes from the content (default: true)
+	 *     'only_excerpt' (bool) - use only the excerpt value and never create one from the post content (default: false)
 	 *     'prefer_excerpt' (bool) - prioritize the 'excerpt' field (default: false)
 	 *     'length' (int) - control the length of the excerpt (default: 55)
 	 *     'more' (string) - customize the 'read more' text (default: '&hellip;')
@@ -33,6 +34,7 @@ abstract class Content
 		$autop = isset($opts['wpautop']) ? $opts['wpautop'] : false;
 		$strip_tags = isset($opts['strip_tags']) ? $opts['strip_tags'] : true;
 		$strip_shortcodes = isset($opts['strip_shortcodes']) ? $opts['strip_shortcodes'] : true;
+		$only_excerpt = isset($opts['only_excerpt']) ? $opts['only_excerpt'] : false;
 		$prefer_excerpt = isset($opts['prefer_excerpt']) ? $opts['prefer_excerpt'] : false;
 		$excerpt_length = isset($opts['length']) ? $opts['length'] : apply_filters('excerpt_length', 55);
 		$excerpt_more = isset($opts['more']) ? $opts['more'] : apply_filters('excerpt_more', ' [&hellip;]');
@@ -43,6 +45,14 @@ abstract class Content
 
 		if (!$post) {
 			return '';
+		}
+
+		if ($only_excerpt) {
+			if ($autop) {
+				return wpautop($post->post_excerpt);
+			}
+
+			return $post->post_excerpt;
 		}
 
 		if ($prefer_excerpt && trim($post->post_excerpt)) {
