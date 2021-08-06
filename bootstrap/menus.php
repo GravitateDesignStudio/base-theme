@@ -9,14 +9,9 @@ add_shortcode('menu', function ($atts, $content = null) {
 	]);
 });
 
-$default_menus = array(
-	'main-menu' => 'Main Menu',                 // main nav in header
-	'main-links' => 'Main Utility Links',       // main nav in header
-	'footer-menu' => 'Footer Menu',             // secondary nav in footer
-	'footer-links' => 'Footer Utility Links',   // secondary nav in footer
-	'mobile-menu' => 'Mobile Menu',             // Mobile nav in header
-	'mobile-links' => 'Mobile Utility Links',   // Mobile nav in header
-	'sitemap-menu' => 'Sitemap Menu'            // Sitemap Links
-);
-
-WPUtil\ThemeSupport::register_menus($default_menus);
+WPUtil\ThemeSupport::register_menus([
+	ClientNamespace\Constants\Menus::DESKTOP_MENU => 'Desktop Menu',
+	ClientNamespace\Constants\Menus::FOOTER_LINKS_MENU => 'Footer Links',
+	ClientNamespace\Constants\Menus::FOOTER_LEGAL_MENU => 'Footer Legal',
+	ClientNamespace\Constants\Menus::MOBILE_MENU => 'Mobile Menu'
+]);

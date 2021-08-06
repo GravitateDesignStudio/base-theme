@@ -1,7 +1,7 @@
 <?php
 namespace Blueprint;
 
-use Blueprint\Constants;
+use ClientNamespace\Constants;
 
 abstract class SocialShare
 {

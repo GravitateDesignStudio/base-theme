@@ -1,5 +1,5 @@
 <?php
-use Blueprint\Constants;
+use ClientNamespace\Constants;
 
 WPUtil\Component::render('components/footer');
 

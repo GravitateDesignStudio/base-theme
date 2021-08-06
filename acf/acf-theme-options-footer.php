@@ -1,5 +1,5 @@
 <?php
-use Blueprint\Constants;
+use ClientNamespace\Constants;
 
 $acf_group = Constants\ACF::THEME_OPTIONS_FOOTER_BASE;
 

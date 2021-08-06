@@ -1,5 +1,5 @@
 <?php
-use Blueprint\Constants;
+use ClientNamespace\Constants;
 
 ?>
 <!doctype html>

@@ -1,7 +1,7 @@
 <?php
-use Blueprint\Constants;
+use ClientNamespace\Constants;
 
-$social_links = array();
+$social_links = [];
 $social_icon_fields = get_field(Constants\ACF::THEME_OPTIONS_SOCIAL_BASE . '_site_links', 'option');
 
 if ($social_icon_fields) {
@@ -15,7 +15,7 @@ if ($social_icon_fields) {
 	<div class="row">
 		<div class="columns small-6 medium-8">
 			<nav class="site-footer__menu site-footer__menu--primary">
-				<?php WPUtil\Menus::display_for_location('footer-menu', array('depth' => 1)); ?>
+				<?php WPUtil\Menus::display_for_location(Constants\Menus::FOOTER_LINKS_MENU, ['depth' => 1]); ?>
 			</nav>
 		</div>
 		<div class="columns small-6 medium-4">
@@ -42,7 +42,7 @@ if ($social_icon_fields) {
 		 <div class="columns small-12 site-footer__legal">
 			  <p class="site-footer__copyright">&copy; <?php echo esc_html(gmdate('Y')); ?> <?php the_field(Constants\ACF::THEME_OPTIONS_FOOTER_BASE . '_copyright_text', 'option'); ?></p>
 			  <nav class="site-footer__menu site-footer__menu--secondary">
-				  <?php WPUtil\Menus::display_for_location('footer-links', array('depth' => 1)); ?>
+				  <?php WPUtil\Menus::display_for_location(Constants\Menus::FOOTER_LEGAL_MENU, ['depth' => 1]); ?>
 			  </nav>
 		 </div>
 	</div>
