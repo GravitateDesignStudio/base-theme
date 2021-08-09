@@ -84,23 +84,7 @@ acf_add_local_field_group(array (
 			'max_height' => '',
 			'max_size' => '',
 			'mime_types' => '',
-		),
-		array (
-			'key' => 'field_'.$acf_group.'_svg_icon_test',
-			'label' => 'SVG Icon Field Test',
-			'name' => $acf_group.'svg_icon_test',
-			'type' => 'svg-icon-selector',
-			'instructions' => '',
-			'required' => 0,
-			'conditional_logic' => 0,
-			'wrapper' => array (
-				'width' => '',
-				'class' => '',
-				'id' => '',
-			),
-			'allow_none' => 1,
-			'svg_sub_dir' => 'general',
-		),
+		)
 	),
 	'location' => array (
 		array (
