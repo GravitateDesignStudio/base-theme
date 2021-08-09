@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .button,
 .wysiwyg button,
 input[type="submit"],
@@ -109,8 +111,8 @@ input[type="submit"],
 	}
 
 	&__icon {
-		width: #{$default-input-min-height / 3};
-		height: #{$default-input-min-height / 3};
+		width: math.div($default-input-min-height, 3);
+		height: math.div($default-input-min-height, 3);
 		color: $color-white;
 	}
 
