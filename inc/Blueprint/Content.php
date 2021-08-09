@@ -88,7 +88,7 @@ abstract class Content
 				if ($results) {
 					// flatten our multidimensional array and
 					// concatenate it to usable content
-					$content_parts = array();
+					$content_parts = [];
 
 					foreach ($results as $result) {
 						$content_parts = array_merge($content_parts, $result);

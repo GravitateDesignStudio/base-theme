@@ -1,9 +1,15 @@
 <?php
-namespace Blueprint;
+namespace ClientNamespace;
 
-abstract class ACF
+abstract class Banners
 {
-	public static function get_banner_background_fields($acf_group = 'banner')
+	/**
+	 * Generate the ACF fields for banner background options
+	 *
+	 * @param string $acf_group
+	 * @return array<array<string, mixed>>
+	 */
+	public static function get_banner_background_fields(string $acf_group = 'banner'): array
 	{
 		return array(
 			array (

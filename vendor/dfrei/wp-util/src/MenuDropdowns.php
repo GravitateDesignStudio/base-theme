@@ -1,18 +1,51 @@
 <?php
-namespace Blueprint;
+namespace WPUtil;
+
+use WPUtil\Vendor\ACF;
+use WP_Query;
 
 abstract class MenuDropdowns
 {
+	/**
+	 * The menu dropdown CPT slug
+	 *
+	 * @var string
+	 */
 	private static $cpt_slug = 'menu-dropdown';
+
+	/**
+	 * Array of menu dropdown ids that have been enqueued for rendering
+	 *
+	 * @var array<int>
+	 */
 	private static $registered_menu_dropdown_ids = [];
+
+	/**
+	 * Flag indicating that the render hook has been registered
+	 *
+	 * @var boolean
+	 */
 	private static $render_hook_registered = false;
+
+	/**
+	 * Options passed via the "init" method
+	 *
+	 * @var array<string, mixed>
+	 */
 	private static $opts = [];
 
+	/**
+	 * Initialize menu dropdown support
+	 *
+	 * @param array $opts
+	 * @return void
+	 */
 	public static function init($opts = [])
 	{
 		self::$opts = array_merge([
 			'template_path' => get_template_directory() . '/menu-dropdowns/',
-			'render_action' => 'wp_footer'
+			'render_action' => 'wp_footer',
+			'container_classes' => []
 		], $opts);
 
 		self::$opts['template_path'] = trailingslashit(self::$opts['template_path']);
@@ -22,17 +55,40 @@ abstract class MenuDropdowns
 		self::create_save_hook();
 	}
 
-	public static function get_child_post_ids($dropdown_menu_id)
+	/**
+	 * Return an array of the calculated child post ids for the specified dropdown
+	 * menu id. The calculated child post ids are created by using either the
+	 * "menu_dropdown/get_child_post_ids" or "menu_dropdown/get_child_post_ids/template=<name>"
+	 * filters. An example use of this would be determining if a menu link or dropdown
+	 * menu needs to be active/shown depending on the post ID value of the current
+	 * post/page.
+	 *
+	 * @param integer $dropdown_menu_id
+	 * @return array<int>
+	 */
+	public static function get_child_post_ids(int $dropdown_menu_id): array
 	{
 		$child_post_ids = get_post_meta($dropdown_menu_id, 'child_post_ids', true);
 
 		return is_array($child_post_ids) ? $child_post_ids : [];
 	}
 
+	/**
+	 * Creates the save hook that updates the "child_post_ids" value when menu dropdown
+	 * CPTs are saved.
+	 *
+	 * @return void
+	 */
 	private static function create_save_hook()
 	{
-		add_action('acf/save_post', function ($post_id) {
-			$template_type = get_field('template', $post_id);
+		$cpt_slug = self::$cpt_slug;
+
+		add_action('acf/save_post', function ($post_id) use ($cpt_slug) {
+			if (get_post_type($post_id) !== $cpt_slug) {
+				return;
+			}
+
+			$template_type = ACF::get_field_string('template', $post_id);
 
 			$child_post_ids = apply_filters('menu_dropdown/get_child_post_ids', [], $post_id, $template_type);
 			$child_post_ids = apply_filters('menu_dropdown/get_child_post_ids/template=' . $template_type, [], $post_id);
@@ -41,6 +97,11 @@ abstract class MenuDropdowns
 		}, 20);
 	}
 
+	/**
+	 * Create ACF field groups for the menu dropdown CPT posts
+	 *
+	 * @return void
+	 */
 	private static function create_acf_fields()
 	{
 		if (!function_exists('acf_add_local_field_group')) {
@@ -83,31 +144,31 @@ abstract class MenuDropdowns
 				'type' => 'group',
 				'instructions' => '',
 				'required' => 0,
-				'conditional_logic' => array(
-					array(
-						array(
+				'conditional_logic' => [
+					[
+						[
 							'field' => 'field_' . $acf_master_group . '_template',
 							'operator' => '==',
-							'value' => $template_group['name'],
-						),
-					),
-				),
-				'wrapper' => array(
+							'value' => $template_group['name']
+						]
+					]
+				],
+				'wrapper' => [
 					'width' => '',
 					'class' => '',
-					'id' => '',
-				),
+					'id' => ''
+				],
 				'layout' => 'block',
 				'sub_fields' => $template_fields
 			];
 		}, $template_groups);
 
-		acf_add_local_field_group(array (
+		acf_add_local_field_group([
 			'key' => 'group_' . $acf_master_group,
 			'title' => 'Menu Dropdown Settings',
 			'fields' => array_merge(
-				array (
-					array (
+				[
+					[
 						'key' => 'field_' . $acf_master_group . '_template',
 						'label' => 'Template',
 						'name' => 'template',
@@ -115,11 +176,11 @@ abstract class MenuDropdowns
 						'instructions' => '',
 						'required' => 0,
 						'conditional_logic' => 0,
-						'wrapper' => array (
+						'wrapper' => [
 							'width' => '',
 							'class' => '',
-							'id' => '',
-						),
+							'id' => ''
+						],
 						'choices' => $select_options,
 						'default_value' => '',
 						'allow_null' => 0,
@@ -129,21 +190,21 @@ abstract class MenuDropdowns
 						'placeholder' => '',
 						'disabled' => 0,
 						'readonly' => 0,
-					),
-				),
+					]
+				],
 				$acf_template_groups
 			),
-			'location' => array (
-				array (
-					array (
+			'location' => [
+				[
+					[
 						'param' => 'post_type', // post_type | post | page | page_template | post_category | taxonomy | options_page
 						'operator' => '==',
 						'value' => self::$cpt_slug,     // if options_page then use: acf-options  | if page_template then use:  template-example.php
 						'order_no' => 0,
-						'group_no' => 1,
-					),
-				),
-			),
+						'group_no' => 1
+					]
+				]
+			],
 			'menu_order' => 0,
 			'position' => 'normal',                 // side | normal | acf_after_title
 			'style' => 'default',                   // default | seamless
@@ -152,16 +213,30 @@ abstract class MenuDropdowns
 			'hide_on_screen' => [],
 			'active' => 1,
 			'description' => '',
-		));
+		]);
 	}
 
-	public static function render_now($dropdown_id, $custom_opts = [])
+	/**
+	 * Render the specified dropdown menu immediately. Valid option keys:
+	 *
+	 * 'render_file_name' (string | default: 'render')
+	 * 'section' (string | default: '')
+	 * 'custom_values' (array | default: [])
+	 * 'echo' (boolean | default: true)
+	 * 'container_classes' (array | default: [])
+	 *
+	 * @param integer $dropdown_id
+	 * @param array $custom_opts
+	 * @return void
+	 */
+	public static function render_now(int $dropdown_id, array $custom_opts = [])
 	{
 		$opts = array_merge([
 			'render_file_name' => 'render',
 			'section' => '',
 			'custom_values' => [],
-			'echo' => true
+			'echo' => true,
+			'container_classes' => []
 		], $custom_opts);
 
 		if (!$opts['echo']) {
@@ -172,12 +247,12 @@ abstract class MenuDropdowns
 
 		setup_postdata($post);
 
-		$template_name = get_field('template', $dropdown_id);
+		$template_name = ACF::get_field_string('template', $dropdown_id);
 		$render_file = trailingslashit(self::$opts['template_path']) . $template_name . DIRECTORY_SEPARATOR . $opts['render_file_name'] . '.php';
 
 		if (file_exists($render_file)) {
 			extract([
-				'values' => get_field('template_group_' . $template_name, $dropdown_id),
+				'values' => ACF::get_field_array('template_group_' . $template_name, $dropdown_id),
 				'custom_values' => $opts['custom_values']
 			]);
 
@@ -188,6 +263,10 @@ abstract class MenuDropdowns
 
 			if (isset(self::$opts['container_classes']) && is_array(self::$opts['container_classes'])) {
 				$container_classes = array_merge($container_classes, self::$opts['container_classes']);
+			}
+
+			if (is_array($opts['container_classes'])) {
+				$container_classes = array_merge($container_classes, $opts['container_classes']);
 			}
 
 			// phpcs:ignore
@@ -220,6 +299,12 @@ abstract class MenuDropdowns
 		return $ret_val;
 	}
 
+	/**
+	 * Enqueue the specified dropdown menu id for rendering
+	 *
+	 * @param integer $menu_id
+	 * @return void
+	 */
 	public static function render_dropdown_menu($menu_id)
 	{
 		$menu_id = absint($menu_id);
@@ -237,6 +322,11 @@ abstract class MenuDropdowns
 		}
 	}
 
+	/**
+	 * Trigger the rendering of all enqueued dropdown menus
+	 *
+	 * @return void
+	 */
 	public static function render_dropdown_menus()
 	{
 		if (!self::$registered_menu_dropdown_ids) {
@@ -250,9 +340,16 @@ abstract class MenuDropdowns
 		}
 	}
 
-	public static function get_menu_dropdown_select_options($query_opts = [])
+	/**
+	 * Return a key/value array of dropdown menu ids and labels suitable for use
+	 * in a select control
+	 *
+	 * @param array $query_opts Additional options to pass to WP_Query
+	 * @return array<int, string>
+	 */
+	public static function get_menu_dropdown_select_options($query_opts = []): array
 	{
-		$res = new \WP_Query(
+		$res = new WP_Query(
 			array_merge(
 				[
 					'post_type' => self::$cpt_slug,
@@ -274,47 +371,52 @@ abstract class MenuDropdowns
 		return $dropdown_posts;
 	}
 
+	/**
+	 * Create the menu dropdown CPT
+	 *
+	 * @return void
+	 */
 	private static function create_post_type()
 	{
 		$single_label = 'Menu Dropdown';
 		$plural_label = 'Menu Dropdowns';
 
-		register_post_type(
-			self::$cpt_slug,
-			array(
-				'label' => $plural_label,
-				'description' => '',
-				'public' => true,
-				'publicly_queryable' => false,
-				'show_ui' => true,
-				'show_in_menu' => true,
-				'capability_type' => 'page',
-				'map_meta_cap' => true,
-				'hierarchical' => false,
-				'rewrite' => array('with_front' => false, 'slug' => self::$cpt_slug),
-				'query_var' => true,
-				'exclude_from_search' => true,
-				'can_export' => true,
-				'has_archive' => false,
-				'menu_icon' => 'dashicons-menu',
-				'supports' => array('title'),
-				'labels' => array(
-					'name' => $plural_label,
-					'singular_name' => $single_label,
-					'menu_name' => $plural_label,
-					'add_new' => 'Add ' . $single_label,
-					'add_new_item' => 'Add New ' . $single_label,
-					'edit' => 'Edit',
-					'edit_item' => 'Edit ' . $single_label,
-					'new_item' => 'New ' . $single_label,
-					'view' => 'View ' . $single_label,
-					'view_item' => 'View ' . $single_label,
-					'search_items' => 'Search ' . $plural_label,
-					'not_found' => 'No ' . $plural_label . ' Found',
-					'not_found_in_trash' => 'No ' . $plural_label . ' Found in Trash',
-					'parent' => 'Parent ' . $single_label,
-				)
-			)
-		);
+		// phpcs:ignore
+		$cpt_opts = apply_filters('menu_dropdown/cpt_opts', [
+			'label' => $plural_label,
+			'description' => '',
+			'public' => true,
+			'publicly_queryable' => false,
+			'show_ui' => true,
+			'show_in_menu' => true,
+			'capability_type' => 'page',
+			'map_meta_cap' => true,
+			'hierarchical' => false,
+			'rewrite' => ['with_front' => false, 'slug' => self::$cpt_slug],
+			'query_var' => true,
+			'exclude_from_search' => true,
+			'can_export' => true,
+			'has_archive' => false,
+			'menu_icon' => 'dashicons-menu',
+			'supports' => ['title'],
+			'labels' => [
+				'name' => $plural_label,
+				'singular_name' => $single_label,
+				'menu_name' => $plural_label,
+				'add_new' => 'Add ' . $single_label,
+				'add_new_item' => 'Add New ' . $single_label,
+				'edit' => 'Edit',
+				'edit_item' => 'Edit ' . $single_label,
+				'new_item' => 'New ' . $single_label,
+				'view' => 'View ' . $single_label,
+				'view_item' => 'View ' . $single_label,
+				'search_items' => 'Search ' . $plural_label,
+				'not_found' => 'No ' . $plural_label . ' Found',
+				'not_found_in_trash' => 'No ' . $plural_label . ' Found in Trash',
+				'parent' => 'Parent ' . $single_label,
+			]
+		]);
+
+		register_post_type(self::$cpt_slug, $cpt_opts);
 	}
 }

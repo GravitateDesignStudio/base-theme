@@ -66,8 +66,8 @@
 		modalEl.setAttribute('data-field', fieldRef);
 		modalEl.innerHTML = `
 			<div class="svg-icon-selector__modal-inner">
-				<a class="svg-icon-selector__modal-close" role="button">&times;</a>
-				${iconsHTML}
+				<button class="svg-icon-selector__modal-close" type="button" role="button">&times;</button>
+				<div class="svg-icon-selector__selectable-icon-grid">${iconsHTML}</div>
 			</div>
 		`;
 
@@ -100,8 +100,10 @@
 			}
 
 			// is this a click outside the modal or the close icon?
-			if (e.target.classList.contains('svg-icon-selector__modal') ||
-				e.target.classList.contains('svg-icon-selector__modal-close')) {
+			if (
+				e.target.classList.contains('svg-icon-selector__modal') ||
+				e.target.classList.contains('svg-icon-selector__modal-close')
+			) {
 				closeIconModal();
 				return;
 			}

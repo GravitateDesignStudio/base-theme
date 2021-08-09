@@ -28,7 +28,7 @@ if (isset($site)) {
 			break;
 	}
 
-	$attrs_str = Blueprint\Util::attributes_array_to_string($attrs);
+	$attrs_str = WPUtil\Util::attributes_array_to_string($attrs);
 
 	?>
 	<a class="<?php echo esc_attr(implode(' ', $button_classes)); ?>" href="<?php echo esc_url(Blueprint\SocialShare::get_social_share_link($site, $post_id)); ?>" <?php echo $attrs_str; ?>>

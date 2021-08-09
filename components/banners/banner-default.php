@@ -6,7 +6,7 @@ if (!isset($title)) {
 	$title = trim($title_override) ? trim($title_override) : get_the_title($post_id);
 }
 
-$button = Blueprint\Blocks::get_button_field_values('banner_button', $post_id);
+$button = WPUtil\Vendor\BlueprintBlocks::get_button_field_values('banner_button', $post_id);
 
 $background_image_opts = ['post_id' => $post_id];
 

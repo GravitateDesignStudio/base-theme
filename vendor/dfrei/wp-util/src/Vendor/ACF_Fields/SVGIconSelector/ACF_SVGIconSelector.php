@@ -1,11 +1,16 @@
 <?php
 
-namespace Blueprint\ACF_Fields;
+namespace WPUtil\Vendor\ACF_Fields\SVGIconSelector;
 
 class ACF_SVGIconSelector extends \acf_field
 {
 	protected static $instance = null;
 
+	/**
+	 * ACF_SVGIconSelector constructor
+	 *
+	 * @param array $settings
+	 */
 	public function __construct($settings = [])
 	{
 		$this->name = 'svg-icon-selector';
@@ -15,6 +20,11 @@ class ACF_SVGIconSelector extends \acf_field
 		parent::__construct();
 	}
 
+	/**
+	 * Init method to return a singleton instance if needed
+	 *
+	 * @return void
+	 */
 	public static function init()
 	{
 		if (!self::$instance) {
@@ -22,6 +32,11 @@ class ACF_SVGIconSelector extends \acf_field
 		}
 	}
 
+	/**
+	 * Get the single instance
+	 *
+	 * @return self
+	 */
 	public static function get_instance()
 	{
 		if (!self::$instance) {
@@ -31,6 +46,12 @@ class ACF_SVGIconSelector extends \acf_field
 		return self::$instance;
 	}
 
+	/**
+	 * Render the field settings
+	 *
+	 * @param array $field
+	 * @return void
+	 */
 	public function render_field_settings($field)
 	{
 		acf_render_field_setting($field, [
@@ -48,6 +69,12 @@ class ACF_SVGIconSelector extends \acf_field
 		]);
 	}
 
+	/**
+	 * Render the field
+	 *
+	 * @param array $field
+	 * @return void
+	 */
 	public function render_field($field)
 	{
 		$svg_list = \WPUtil\SVG::get_svg_list($field['svg_sub_dir']);
@@ -92,16 +119,33 @@ class ACF_SVGIconSelector extends \acf_field
 		<?php
 	}
 
+	/**
+	 * Enqueue the JS and CSS files needed for the SVG icon selector field.
+	 * These values can be modified with the "WPUtil/ACF_Fields/SVGIconSelector/<js_url|css_url>" filters.
+	 *
+	 * @return void
+	 */
 	public function input_admin_enqueue_scripts()
 	{
-		$js_url = get_template_directory_uri() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
-		$css_url = get_template_directory_uri() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.css';
+		$sub_path = '/vendor/dfrei/wp-util/src/Vendor/ACF_Fields/SVGIconSelector';
+		$filter_base = 'WPUtil/ACF_Fields/SVGIconSelector';
 
-		$js_path = get_template_directory() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
-		$css_path = get_template_directory() . '/inc/Blueprint/ACF_Fields/ACF_SVGIconSelector.js';
+		$js_url = apply_filters($filter_base . '/js_url', get_template_directory_uri() . $sub_path . '/ACF_SVGIconSelector.js');
+		$css_url = apply_filters($filter_base . '/css_url', get_template_directory_uri() . $sub_path . '/ACF_SVGIconSelector.css');
 
-		wp_enqueue_script('svg-icon-selector', $js_url, [], filemtime($js_path), true);
-		wp_enqueue_style('svg-icon-selector', $css_url, [], filemtime($css_path));
+		$js_path = '';
+		$css_path = '';
+
+		if (stripos($js_url, get_template_directory_uri()) !== false) {
+			$js_path = str_ireplace(get_template_directory_uri(), get_template_directory(), $js_url);
+		}
+
+		if (stripos($css_url, get_template_directory_uri()) !== false) {
+			$css_path = str_ireplace(get_template_directory_uri(), get_template_directory(), $css_url);
+		}
+
+		wp_enqueue_script('svg-icon-selector', $js_url, [], $js_path ? filemtime($js_path) : '', true);
+		wp_enqueue_style('svg-icon-selector', $css_url, [], $css_path ? filemtime($css_path) : '');
 	}
 
 	public function update_value($value, $post_id, $field)

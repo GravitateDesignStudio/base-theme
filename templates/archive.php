@@ -9,11 +9,13 @@ WPUtil\Component::render('components/banners/banner-default', [
 <main class="main-content">
 	<div class="tmpl-archive">
 		<?php
-		if (have_posts()) {
+		if (have_posts())
+		{
 			?>
 			<div class="row align-center archive__cards-container">
 				<?php
-				while (have_posts()) {
+				while (have_posts())
+				{
 					?>
 					<div class="columns small-12 large-10">
 						<?php
@@ -29,8 +31,12 @@ WPUtil\Component::render('components/banners/banner-default', [
 			<?php
 
 			WPUtil\Component::render('components/archive/navigation');
-		} else {
-			WPUtil\Component::render('components/not-found');
+		}
+		else
+		{
+			?>
+			<p>No posts were found</p>
+			<?php
 		}
 		?>
 	</div>

@@ -1,7 +1,9 @@
 <?php
-namespace Blueprint;
+namespace WPUtil\Vendor;
 
-abstract class Blocks
+use WPUtil\Models\BlueprintBlocksLink;
+
+abstract class BlueprintBlocks
 {
 	protected static $bg_colors;
 
@@ -99,16 +101,11 @@ abstract class Blocks
 	 *
 	 * @param string $acf_field
 	 * @param int|array $object Can be a post ID or an array. Defaults to the current post ID.
-	 * @return object
+	 * @return \WPUtil\Models\BlueprintBlocksLink
 	 */
-	public static function get_button_field_values(string $acf_field, $object = 0)
+	public static function get_button_field_values(string $acf_field, $object = 0): BlueprintBlocksLink
 	{
-		$button_values = (object)[
-			'type' => '',
-			'text' => '',
-			'link' => '',
-			'style' => ''
-		];
+		$button_values = new BlueprintBlocksLink();
 
 		if (is_int($object)) {
 			$post_id = $object ? $object : get_the_ID();

@@ -3,7 +3,7 @@ add_filter('grav_blocks_output_default_js', function () { return false; });
 add_filter('grav_blocks_output_default_styles', function () { return false; });
 
 // enforce background color choices
-Blueprint\Blocks::enforce_background_colors([
+WPUtil\Vendor\BlueprintBlocks::enforce_background_colors([
 	'block-bg-none' => 'None',
 	'block-bg-image' => 'Image',
 	'bg-white' => 'White',
@@ -14,7 +14,7 @@ Blueprint\Blocks::enforce_background_colors([
 ]);
 
 // make sure blocks appear in alphabetical order by label in the flexible content field
-Blueprint\Blocks::sort_block_names_alphabetically();
+WPUtil\Vendor\BlueprintBlocks::sort_block_names_alphabetically();
 
 // Ensure Grav Blocks are viewable on the pages that require them
 add_filter('grav_is_viewable', function ($is_viewable) {
@@ -34,6 +34,7 @@ add_filter('grav_get_css', function ($css, $block_name) {
 	return $css;
 }, 10, 2);
 
+// Add 'grav_blocks' field to default post and page WP REST API responses
 add_action('rest_api_init', function () {
 	register_rest_field(['post', 'page'], 'grav_blocks', [
 		'get_callback' => function ($post) {

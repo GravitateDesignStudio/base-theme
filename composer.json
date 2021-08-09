@@ -9,6 +9,6 @@
 		}
 	},
 	"require": {
-		"dfrei/wp-util": "^2.0"
+		"dfrei/wp-util": "^2.1"
 	}
 }

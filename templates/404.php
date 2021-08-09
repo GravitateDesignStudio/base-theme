@@ -35,10 +35,10 @@ WPUtil\Component::render('components/banners/banner-default', [
 			<?php
 		}
 
-		GRAV_BLOCKS::display(array(
+		WPUtil\Vendor\BlueprintBlocks::safe_display([
 			'section' => '404_blocks_grav_blocks',
 			'object' => 'option'
-		));
+		]);
 		?>
 	</div>
 </main>

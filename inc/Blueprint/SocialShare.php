@@ -2,6 +2,7 @@
 namespace Blueprint;
 
 use ClientNamespace\Constants;
+use WPUtil\Vendor\ACF;
 
 abstract class SocialShare
 {
@@ -27,7 +28,10 @@ abstract class SocialShare
 
 		// get the URL template based on the specified platform
 		$platform = strtolower($platform);
-		$url_template = get_field(Constants\ACF::THEME_OPTIONS_SOCIAL_BASE . '_' . $platform . '_share_url', 'option');
+		$url_template = ACF::get_field_string(
+			Constants\ACF::THEME_OPTIONS_SOCIAL_BASE . '_' . $platform . '_share_url',
+			'option'
+		);
 
 		// return if the template does not exist
 		if (!$url_template) {
@@ -42,7 +46,10 @@ abstract class SocialShare
 
 		// if twitter, replace "[twitter_username]" placeholder
 		if ($platform === 'twitter') {
-			$twitter_username = get_field(Constants\ACF::THEME_OPTIONS_SOCIAL_BASE . '_twitter_username', 'option');
+			$twitter_username = ACF::get_field_string(
+				Constants\ACF::THEME_OPTIONS_SOCIAL_BASE . '_twitter_username',
+				'option'
+			);
 
 			$url_template = str_replace('[twitter_username]', $twitter_username ? rawurlencode('@' . $twitter_username) : '', $url_template);
 		}

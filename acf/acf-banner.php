@@ -1,7 +1,7 @@
 <?php
 $acf_group = 'banner';
 
-$button_fields = \Blueprint\Blocks::safe_get_link_fields([
+$button_fields = WPUtil\Vendor\BlueprintBlocks::safe_get_link_fields([
 	'label' => 'Button',
 	'name' => $acf_group . '_button',
 	'includes' => [
@@ -74,7 +74,7 @@ $tab_background = array_merge(
 			'endpoint' => 0,          // end tabs to start a new group
 		)
 	),
-	Blueprint\ACF::get_banner_background_fields()
+	ClientNamespace\Banners::get_banner_background_fields()
 );
 
 acf_add_local_field_group(array (

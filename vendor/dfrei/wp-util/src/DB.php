@@ -1,5 +1,5 @@
 <?php
-namespace Blueprint;
+namespace WPUtil;
 
 abstract class DB
 {
@@ -12,7 +12,7 @@ abstract class DB
 	 * @param int $id
 	 * @return string
 	 */
-	public static function id_value_in_serialized_data_selector($id)
+	public static function id_value_in_serialized_data_selector(int $id): string
 	{
 		return sprintf('s:%d:"%s";', strlen((string)$id), $id);
 	}

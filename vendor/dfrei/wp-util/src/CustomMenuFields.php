@@ -1,14 +1,45 @@
 <?php
-namespace Blueprint;
+namespace WPUtil;
+
+use WP_Post;
 
 abstract class CustomMenuFields
 {
+	/**
+	 * Array of custom menu field entries
+	 *
+	 * @var array<array<string, mixed>>
+	 */
 	private static $fields = [];
+
+	/**
+	 * Field prefix applied to all stored field names
+	 *
+	 * @var string
+	 */
 	private static $field_prefix = '_custom_menu_item_';
+
+	/**
+	 * Array of menu slug keys containing arrays of menu item ids
+	 *
+	 * @var array<string, array<int>>
+	 */
 	private static $menu_item_ids_cache = [];
+
+	/**
+	 * Flag indicating if the init hook has been added
+	 *
+	 * @var boolean
+	 */
 	private static $init_hook_added = false;
 
 
+	/**
+	 * Internal method to add the init hook onto the "wp_nav_menu_item_custom_fields"
+	 * action if needed.
+	 *
+	 * @return void
+	 */
 	private static function add_init_hook()
 	{
 		if (self::$init_hook_added) {
@@ -23,6 +54,20 @@ abstract class CustomMenuFields
 		self::$init_hook_added = true;
 	}
 
+	/**
+	 * Create custom menu item fields. Each field entry is an array with the following
+	 * usable keys:
+	 *
+	 * 'id' (required) - The id (name) of the custom menu field
+	 * 'type' - Can be 'text', 'select', or 'checkbox'
+	 * 'label' - Text label for the field
+	 * 'values' (only used when the 'type' is 'select') - A key/value array of option values
+	 * 'show_in_menu' - A string or array of strings specifying which menu slugs should display this field. An empty value will cause the field to display for all menus.
+	 * 'display_callback' - A function that receives two arguments: (bool $show_field, WP_Post $menu_item). It is expected to return a boolean value indicating if it should be visible.
+	 *
+	 * @param array<array<string, mixed>> $fields
+	 * @return void
+	 */
 	public static function create_fields($fields = [])
 	{
 		self::add_init_hook();
@@ -68,9 +113,6 @@ abstract class CustomMenuFields
 
 		self::$fields = $fields;
 
-		// error_log('valid fields');
-		// error_log(var_export(self::$fields, true));
-
 		// load custom menu edit options
 		add_filter('wp_setup_nav_menu_item', function ($menu_item) use ($fields) {
 			foreach ($fields as $field) {
@@ -101,12 +143,25 @@ abstract class CustomMenuFields
 		}, 10, 3);
 	}
 
-	public static function get_value($menu_id, $field_id)
+	/**
+	 * Returns the value of the specified field id for the provided menu id
+	 *
+	 * @param integer $menu_id
+	 * @param string $field_id
+	 * @return mixed
+	 */
+	public static function get_value(int $menu_id, string $field_id)
 	{
 		return get_post_meta($menu_id, self::$field_prefix . $field_id, true);
 	}
 
-	private static function get_menu_item_ids($menu_slug)
+	/**
+	 * Returns an array of menu item ids for the specified menu slug
+	 *
+	 * @param string $menu_slug
+	 * @return array<int>
+	 */
+	private static function get_menu_item_ids(string $menu_slug): array
 	{
 		if (!isset(self::$menu_item_ids_cache[$menu_slug])) {
 			$locations = get_nav_menu_locations();
@@ -137,7 +192,13 @@ abstract class CustomMenuFields
 		return self::$menu_item_ids_cache[$menu_slug];
 	}
 
-	public static function display_fields($menu_item)
+	/**
+	 * Output the markup for the registered custom menu fields
+	 *
+	 * @param WP_Post $menu_item
+	 * @return void
+	 */
+	public static function display_fields(WP_Post $menu_item)
 	{
 		foreach (self::$fields as $field) {
 			$show_field = true;
@@ -151,9 +212,6 @@ abstract class CustomMenuFields
 					}
 
 					$menu_item_ids = self::get_menu_item_ids($menu_slug);
-
-					// error_log(__METHOD__ . ': ' . $menu_slug . ' | ' . $menu_item->ID . ' | ' . $menu_item->title);
-					// error_log(var_export($menu_item_ids, true));
 
 					if (in_array($menu_item->ID, $menu_item_ids, true)) {
 						$show_field = true;
@@ -190,7 +248,14 @@ abstract class CustomMenuFields
 		}
 	}
 
-	private static function display_field_text($field, $menu_item)
+	/**
+	 * Output the markup for a text field
+	 *
+	 * @param array $field
+	 * @param WP_Post $menu_item
+	 * @return void
+	 */
+	private static function display_field_text(array $field, WP_Post $menu_item)
 	{
 		$field_id = $field['id'];
 		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
@@ -214,7 +279,14 @@ abstract class CustomMenuFields
 		// phpcs:enable Squiz.ControlStructures, Squiz.WhiteSpace
 	}
 
-	private static function display_field_checkbox($field, $menu_item)
+	/**
+	 * Output the markup for a checkbox field
+	 *
+	 * @param array $field
+	 * @param WP_Post $menu_item
+	 * @return void
+	 */
+	private static function display_field_checkbox(array $field, WP_Post $menu_item)
 	{
 		$field_id = $field['id'];
 		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;
@@ -237,7 +309,14 @@ abstract class CustomMenuFields
 		// phpcs:enable Squiz.ControlStructures, Squiz.WhiteSpace
 	}
 
-	private static function display_field_select($field, $menu_item)
+	/**
+	 * Output the markup for a select field
+	 *
+	 * @param array $field
+	 * @param WP_Post $menu_item
+	 * @return void
+	 */
+	private static function display_field_select(array $field, WP_Post $menu_item)
 	{
 		$field_id = $field['id'];
 		$input_name = self::$field_prefix . $field_id . '_' . $menu_item->ID;

@@ -15,9 +15,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 			while (have_posts()) {
 				the_post();
 
-				if (class_exists('GRAV_BLOCKS')) {
-					GRAV_BLOCKS::display();
-				}
+				WPUtil\Vendor\BlueprintBlocks::safe_display();
 			}
 		}
 		?>

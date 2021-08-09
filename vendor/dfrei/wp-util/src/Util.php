@@ -31,7 +31,7 @@ abstract class Util
 	public static function include_all_files(string $path, callable $filter_func = null): void
 	{
 		$files = glob($path);
-		
+
 		foreach ($files as $file) {
 			if (is_callable($filter_func) && !$filter_func($file)) {
 				continue;
@@ -51,11 +51,28 @@ abstract class Util
 	{
 		add_action('init', function() {
 			$cache = implode('', get_post_types()).implode('', get_taxonomies());
-			
+
 			if (get_option('wputil_registered_cpts_and_tax') !== $cache) {
 				flush_rewrite_rules();
 				update_option('wputil_registered_cpts_and_tax', $cache);
 			}
 		});
+	}
+
+	/**
+	 * Convert a key/value array to a string of HTML attribute values
+	 *
+	 * @param array<string, mixed> $attr_array
+	 * @return string
+	 */
+	public static function attributes_array_to_string(array $attr_array): string
+	{
+		$parts = [];
+
+		foreach ($attr_array as $key => $value) {
+			$parts[] = sprintf('%s="%s"', $key, esc_attr($value));
+		}
+
+		return implode(' ', $parts);
 	}
 }

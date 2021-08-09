@@ -57,7 +57,7 @@ add_action('rest_api_init', function () {
 		if ($service_id) {
 			$args['meta_query'][] = [
 				'key' => 'services',
-				'value' => \Blueprint\DB::id_value_in_serialized_data_selector($service_id),
+				'value' => \WPUtil\DB::id_value_in_serialized_data_selector($service_id),
 				'compare' => 'LIKE'
 			];
 		}
@@ -65,7 +65,7 @@ add_action('rest_api_init', function () {
 		if ($industry_id) {
 			$args['meta_query'][] = [
 				'key' => 'industries',
-				'value' => \Blueprint\DB::id_value_in_serialized_data_selector($industry_id),
+				'value' => \WPUtil\DB::id_value_in_serialized_data_selector($industry_id),
 				'compare' => 'LIKE'
 			];
 		}

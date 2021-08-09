@@ -25,9 +25,7 @@ WPUtil\Component::render('components/banners/banner-default');
 					<?php
 				}
 
-				if (class_exists('GRAV_BLOCKS')) {
-					GRAV_BLOCKS::display();
-				}
+				WPUtil\Vendor\BlueprintBlocks::safe_display();
 
 				?>
 				<div class="tmpl-post-single__share-icons">
@@ -45,8 +43,8 @@ WPUtil\Component::render('components/banners/banner-default');
 				<?php
 			}
 
-			GRAV_BLOCKS::display([
-				'section' => 'blog_settings_blog_post_blocks_grav_blocks',
+			WPUtil\Vendor\BlueprintBlocks::safe_display([
+				'section' => ClientNamespace\Constants\ACF::BLOG_SETTINGS_BASE . '_blog_post_blocks_grav_blocks',
 				'object' => 'option'
 			]);
 		}

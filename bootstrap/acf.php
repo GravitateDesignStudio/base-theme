@@ -11,5 +11,5 @@ if (function_exists('acf_add_local_field_group')) {
 
 // add custom ACF fields
 if (class_exists('acf_field')) {
-	Blueprint\ACF_Fields\ACF_SVGIconSelector::init();
+	WPUtil\Vendor\ACF_Fields\SVGIconSelector\ACF_SVGIconSelector::init();
 }

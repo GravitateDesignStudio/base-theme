@@ -428,7 +428,7 @@
 </div>
 
 <?php
-$icons = Blueprint\SVG::get_svg_list();
+$icons = WPUtil\SVG::get_svg_list();
 
 if ($icons) {
 	?>
@@ -443,7 +443,7 @@ if ($icons) {
 					?>
 					<div class="style-testing__icon-row">
 						<?php
-						Blueprint\SVG::the_svg($icon['name'], [
+						WPUtil\SVG::the_svg($icon['name'], [
 							'class' => 'style-testing__icon'
 						]);
 						?>

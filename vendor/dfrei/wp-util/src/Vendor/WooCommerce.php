@@ -1,6 +1,8 @@
 <?php
 namespace WPUtil\Vendor;
 
+use Exception;
+
 abstract class WooCommerce
 {
 	/**
@@ -10,7 +12,7 @@ abstract class WooCommerce
 	 */
 	public static function add_theme_support(): void
 	{
-		add_action('after_setup_theme', function() {
+		add_action('after_setup_theme', function () {
 			add_theme_support('woocommerce');
 		});
 	}
@@ -27,11 +29,11 @@ abstract class WooCommerce
 		remove_action('woocommerce_before_main_content', 'woocommerce_output_content_wrapper', 10);
 		remove_action('woocommerce_after_main_content', 'woocommerce_output_content_wrapper_end', 10);
 
-		add_action('woocommerce_before_main_content', function() use (&$openHTML) {
+		add_action('woocommerce_before_main_content', function () use (&$openHTML) {
 			echo $openHTML;
 		}, 10);
 
-		add_action('woocommerce_after_main_content', function() use (&$closeHTML) {
+		add_action('woocommerce_after_main_content', function () use (&$closeHTML) {
 			echo $closeHTML;
 		}, 10);
 	}
@@ -51,7 +53,8 @@ abstract class WooCommerce
 				'label' => $field['label'],
 				'desc_tip' => isset($field['description']) ? true : false,
 				'description' => $field['description'] ?? '',
-				'value' => get_post_meta($post_id, $field['id'], true)
+				'value' => get_post_meta($post_id, $field['id'], true),
+				'wrapper_class' => isset($field['wrapper_class']) && is_string($field['wrapper_class']) ? $field['wrapper_class'] : 'form-row form-row-full'
 			];
 
 			switch ($field['type']) {
@@ -114,7 +117,7 @@ abstract class WooCommerce
 
 				default:
 					$data = $_POST[$field['id']][$post_id];
-					
+
 					if (!empty($data)) {
 						update_post_meta($post_id, $field['id'], esc_attr($data));
 					}
@@ -128,11 +131,35 @@ abstract class WooCommerce
 	 * Add custom product fields
 	 *
 	 * @param array $fields array of fields to add
+	 * @param array $settings array of settings including 'pre_fields_markup', 'post_fields_markup', 'display_fields_priority', and 'save_fields_priority'
 	 * @throws Exception
 	 * @return void
 	 */
-	public static function add_product_fields(array $fields = []): void
+	public static function add_product_fields(array $fields = [], array $settings = []): void
 	{
+		$settings = array_merge([
+			'pre_fields_markup' => '<div>',
+			'post_fields_markup' => '</div>',
+			'display_fields_priority' => 10,
+			'save_fields_priority' => 10
+		], $settings);
+
+		if (!is_string($settings['pre_fields_markup'])) {
+			$settings['pre_fields_markup'] = '<div>';
+		}
+
+		if (!is_string($settings['post_fields_markup'])) {
+			$settings['post_fields_markup'] = '</div>';
+		}
+
+		if (!is_int($settings['display_fields_priority'])) {
+			$settings['display_fields_priority'] = 10;
+		}
+
+		if (!is_int($settings['save_fields_priority'])) {
+			$settings['save_fields_priority'] = 10;
+		}
+
 		foreach ($fields as &$field) {
 			if (!is_array($field)) {
 				throw new Exception(__METHOD__.' - fields must be arrays');
@@ -146,25 +173,49 @@ abstract class WooCommerce
 
 		$class_ref = __CLASS__;
 
-		add_action('woocommerce_product_options_general_product_data', function() use (&$fields, &$class_ref) {
+		add_action('woocommerce_product_options_general_product_data', function () use (&$fields, &$class_ref) {
 			$class_ref::display_wc_fields(get_the_ID(), $fields);
-		});
+		}, $settings['display_fields_priority']);
 
 		// save the custom variation attributes when the product is saved/updated
-		add_action('woocommerce_process_product_meta', function($post_id) use (&$fields, &$class_ref) {
+		add_action('woocommerce_process_product_meta', function ($post_id) use (&$fields, &$class_ref) {
 			$class_ref::save_wc_fields($post_id, $fields);
-		});
+		}, $settings['save_fields_priority']);
 	}
 
 	/**
 	 * Add custom product variation fields
 	 *
 	 * @param array $fields array of fields to add
+	 * @param array $settings array of settings including 'pre_fields_markup', 'post_fields_markup', 'display_fields_priority', and 'save_fields_priority'
 	 * @throws Exception
 	 * @return void
 	 */
-	public static function add_product_variation_fields(array $fields = []): void
+	public static function add_product_variation_fields(array $fields = [], array $settings = []): void
 	{
+		$settings = array_merge([
+			'pre_fields_markup' => '<div>',
+			'post_fields_markup' => '</div>',
+			'display_fields_priority' => 10,
+			'save_fields_priority' => 10
+		], $settings);
+
+		if (!is_string($settings['pre_fields_markup'])) {
+			$settings['pre_fields_markup'] = '<div>';
+		}
+
+		if (!is_string($settings['post_fields_markup'])) {
+			$settings['post_fields_markup'] = '</div>';
+		}
+
+		if (!is_int($settings['display_fields_priority'])) {
+			$settings['display_fields_priority'] = 10;
+		}
+
+		if (!is_int($settings['save_fields_priority'])) {
+			$settings['save_fields_priority'] = 10;
+		}
+
 		foreach ($fields as &$field) {
 			if (!is_array($field)) {
 				throw new Exception(__METHOD__.' - fields must be arrays');
@@ -179,14 +230,22 @@ abstract class WooCommerce
 		$class_ref = __CLASS__;
 
 		// add the custom variation attributes to the admin UI
-		add_action('woocommerce_product_after_variable_attributes', function($loop, $variation_data, $variation) use (&$fields, &$class_ref) {
+		add_action('woocommerce_product_after_variable_attributes', function ($loop, $variation_data, $variation) use (&$fields, &$class_ref, &$settings) {
+			if (is_string($settings['pre_fields_markup'])) {
+				echo $settings['pre_fields_markup'];
+			}
+
 			$class_ref::display_wc_fields($variation->ID, $fields);
-		}, 10, 3);
+
+			if (is_string($settings['post_fields_markup'])) {
+				echo $settings['post_fields_markup'];
+			}
+		}, $settings['display_fields_priority'], 3);
 
 		// save the custom variation attributes when the product is saved/updated
-		add_action('woocommerce_save_product_variation', function($post_id) use (&$fields, &$class_ref) {
+		add_action('woocommerce_save_product_variation', function ($post_id) use (&$fields, &$class_ref) {
 			$class_ref::save_wc_fields($post_id, $fields);
-		}, 10, 2);
+		}, $settings['save_fields_priority'], 2);
 	}
 
 	/**
@@ -203,7 +262,7 @@ abstract class WooCommerce
 
 	/**
 	 * Return the permalink for a WooCommerce page
-	 * 
+	 *
 	 * @param string	$page	page name to get the permalink for
 	 * @return string	the permalink
 	 */
@@ -218,7 +277,7 @@ abstract class WooCommerce
 
 	/**
 	 * Get an attribute taxonomy name
-	 * 
+	 *
 	 * @param string	$name	taxonomy name (ex: color)
 	 * @return string	the taxonomy term name (ex: pa_color)
 	 */
@@ -232,7 +291,7 @@ abstract class WooCommerce
 
 		foreach ($wc_attribute_taxonomies as $tax) {
 			$tax_name = \wc_attribute_taxonomy_name($tax->attribute_name);
-	
+
 			if (!$tax_name) {
 				continue;
 			}

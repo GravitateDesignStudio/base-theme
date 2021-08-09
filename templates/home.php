@@ -12,7 +12,8 @@ WPUtil\Component::render('components/banners/banner-default', [
 <main class="main-content">
 	<div class="tmpl-archive-blog">
 		<?php
-		if (have_posts()) {
+		if (have_posts())
+		{
 			global $wp_query;
 			global $paged;
 
@@ -27,7 +28,8 @@ WPUtil\Component::render('components/banners/banner-default', [
 				data-posts-per-page="<?php echo esc_attr($posts_per_page); ?>"
 				>
 				<?php
-				while (have_posts()) {
+				while (have_posts())
+				{
 					?>
 					<div class="columns">
 						<?php
@@ -44,13 +46,15 @@ WPUtil\Component::render('components/banners/banner-default', [
 
 			WPUtil\Component::render('components/archive/load-more');
 
-			if (class_exists('GRAV_BLOCKS')) {
-				GRAV_BLOCKS::display([
-					'object' => $blog_page_id
-				]);
-			}
-		} else {
-			WPUtil\Component::render('components/not-found');
+			WPUtil\Vendor\BlueprintBlocks::safe_display([
+				'object' => $blog_page_id
+			]);
+		}
+		else
+		{
+			?>
+			<p>No posts were found</p>
+			<?php
 		}
 		?>
 	</div>

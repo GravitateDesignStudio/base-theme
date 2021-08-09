@@ -48,7 +48,7 @@ if (isset($link) && isset($text)) {
 		if ($icon) {
 			?>
 			<span class="button__icon-container">
-				<?php Blueprint\SVG::the_svg($icon, $svg_opts); ?>
+				<?php WPUtil\SVG::the_svg($icon, $svg_opts); ?>
 			</span>
 			<?php
 		}

@@ -29,7 +29,7 @@ if ($social_icon_fields) {
 						target="_blank"
 						title="<?php echo esc_attr($social_link['title']); ?>">
 						<span class="site-footer__social-icon">
-							<?php Blueprint\SVG::the_svg($social_link['icon']); ?>
+							<?php WPUtil\SVG::the_svg('social/' . $social_link['icon']); ?>
 						</span>
 					</a>
 					<?php

@@ -25,9 +25,7 @@ WPUtil\Component::render('components/banners/banner-default');
 					<?php
 				}
 
-				if (class_exists('GRAV_BLOCKS')) {
-					GRAV_BLOCKS::display();
-				}
+				WPUtil\Vendor\BlueprintBlocks::safe_display();
 			}
 		}
 		?>
