@@ -18,24 +18,26 @@ function setLoadedDependency(depName, loadedObject) {
 	window.appDependencies[depName] = loadedObject;
 }
 
-export function loadSwiper() {
+export function loadEmblaCarousel() {
 	return new Promise((resolve, reject) => {
-		if (typeof window.Swiper !== 'undefined') {
-			resolve(window.Swiper);
+		if (typeof window.EmblaCarousel !== 'undefined') {
+			resolve(window.EmblaCarousel);
 		}
 
-		const existingInstance = getLoadedDependency('swiper');
+		const existingInstance = getLoadedDependency('embla-carousel');
 
 		if (existingInstance) {
 			resolve(existingInstance);
 		}
 
-		import(/* webpackChunkName: "swiper" */ 'swiper').then((Swiper) => {
-			setLoadedDependency('swiper', Swiper.default);
-			resolve(Swiper.default);
-		}).catch((err) => {
-			reject(err);
-		});
+		import(/* webpackChunkName: "embla-carousel" */ 'embla-carousel')
+			.then((Embla) => {
+				setLoadedDependency('embla-carousel', Embla.default);
+				resolve(Embla.default);
+			})
+			.catch((err) => {
+				reject(err);
+			});
 	});
 }
 
@@ -45,10 +47,12 @@ export function loadIntersectionObserver() {
 			resolve(true);
 		}
 
-		import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer').then(() => {
-			resolve(true);
-		}).catch((err) => {
-			reject(err);
-		});
+		import(/* webpackChunkName: "intersection-observer" */ 'intersection-observer')
+			.then(() => {
+				resolve(true);
+			})
+			.catch((err) => {
+				reject(err);
+			});
 	});
 }

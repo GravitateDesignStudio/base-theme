@@ -1,0 +1,115 @@
+.embla-instance {
+	position: relative;
+}
+
+.embla {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+
+	&.is-draggable {
+		cursor: move;
+		cursor: grab;
+	}
+
+	&.is-dragging {
+		cursor: grabbing;
+	}
+
+	&__container {
+		display: flex;
+		user-select: none;
+		-webkit-touch-callout: none;
+		-khtml-user-select: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	&__slide {
+		position: relative;
+		min-width: 100%;
+	}
+
+	&--fade {
+		.embla__container {
+			transform: none !important;
+		}
+
+		.embla__slide {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0;
+			transition: opacity 0.5s;
+
+			&.is-selected {
+				z-index: 1;
+				opacity: 1;
+				transition: opacity 0.3s;
+			}
+		}
+	}
+
+	&__controls {
+		display: flex;
+	}
+
+	&__nav-button {
+		width: 50px;
+		height: 50px;
+		cursor: pointer;
+
+		@include media-min($large) {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+
+			&--prev {
+				left: -60px;
+			}
+
+			&--next {
+				right: -60px;
+			}
+		}
+	}
+
+	&__nav-arrow {
+		width: 100%;
+		height: 100%;
+
+		color: $color-white;
+	}
+
+	&__pagination {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		margin-top: 1rem;
+	}
+
+	&__pagination-button {
+		width: 10px;
+		height: 10px;
+		border-radius: 100%;
+		margin: 0 0.5rem;
+		cursor: pointer;
+
+		background-color: $color-white;
+
+		transition: background-color $default-transition-speed $default-transition-easing;
+
+		&.active {
+			background-color: $color-blue;
+		}
+
+		&:first-child {
+			margin-left: 0;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

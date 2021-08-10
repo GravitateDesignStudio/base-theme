@@ -21,7 +21,7 @@
 				</li>
 				<li>
 					<h5>object-fit-images polyfill</h5>
-					<p>The <a href="https://github.com/bfred-it/object-fit-images/">object-fit-images</a> polyfill has been included and will allow you to use the <code>object-fit</code> and <code>object-position</code> CSS properties in browsers that don't have support for them such as IE 11, Edge, and Safari (&lt;= 9).</p>
+					<p>The <a href="https://github.com/bfred-it/object-fit-images/">object-fit-images</a> polyfill has been included and will allow you to use the <code>object-fit</code> and <code>object-position</code> CSS properties in browsers that don't have support for them such as IE 11, Edge (pre-chromium), and Safari (&lt;= 9).</p>
 				</li>
 			</ul>
 
@@ -35,7 +35,7 @@
 				</li>
 				<li>
 					<h5>WP-Util Package</h5>
-					<p>The WP-Util package (repo: <a href="https://github.com/dougfrei/wp-util">https://github.com/dougfrei/wp-util</a> | packagist: <a href="https://packagist.org/packages/dfrei/wp-util">https://packagist.org/packages/dfrei/wp-util</a>) for Composer contains many theme-independent utility methods for WordPress and common 3rd party integrations.</p>
+					<p>The WP-Util package (repo: <a href="https://github.com/dougfrei/wp-util"  target="_blank" rel="nofollow noopener">https://github.com/dougfrei/wp-util</a> | packagist: <a href="https://packagist.org/packages/dfrei/wp-util">https://packagist.org/packages/dfrei/wp-util</a>) for Composer contains many theme-independent utility methods for WordPress and common 3rd party integrations.</p>
 				</li>
 			</ul>
 
@@ -48,15 +48,15 @@
 					<p>ESLint is a tool that will compare the JavaScript in the theme to a defined set of rules. While it is not a part of the build process, it's highly recommended to run ESLint regularly in order to maintain consistency and prevent errors. The included <code>.eslintrc.json</code> file should be usable by linting plugins in editors such as Visual Studio Code and Atom in order to lint JS as you're editing it. To run ESLint manually, use the following command at the theme root: <code>npm run eslint</code> ESLint will hurt your feelings -- but that's a good thing.</p>
 				</li>
 				<li>
-					<h5>Build System based on Gulp, node-sass, and Webpack</h5>
-					<p>Gulp is being used as the build system for this theme and the currently configured tasks can be found in <code>gulpfile.js</code>. Node-sass is being used to parse the SCSS source files and it is configured within <code>gulpfile.js</code>. WebPack in combination with Babel is being used to transpile and minify the JavaScript source files.</p>
+					<h5>Build System based on Gulp, dart-sass, and Webpack</h5>
+					<p>Gulp is being used as the build system for this theme and the currently configured tasks can be found in <code>gulpfile.js</code>. Dart-sass is being used to parse the SCSS source files and it is configured within <code>gulpfile.js</code>. WebPack in combination with Babel is being used to transpile and minify the JavaScript source files.</p>
 					<p>With the combination of Webpack and Babel, it is possible to use <a href="https://babeljs.io/learn-es2015/" target="_blank" rel="nofollow noopener">ES6+</a> features in your code without worrying about browser compatibility. Additionally, both the <a href="https://nodejs.org/docs/latest/api/modules.html" target="_blank" rel="nofollow noopener">CommonJS</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank" rel="nofollow noopener">ES6 Module</a> (<i>preferred</i>) formats can be used to modularize your code.</p>
 				</li>
 				<li>
 					<h5>Included Libraries</h5>
 
-					<strong>Swiper</strong>
-					<p>Swiper can be included as an ES6 module via <code>import Swiper from 'swiper'</code>. This import statement must be included in any module where you need to use Swiper. An example of how to use it is located below.</p>
+					<strong>Embla Carousel</strong>
+					<p><a href="https://www.embla-carousel.com/" target="_blank" rel="nofollow noopener">Embla Carousel</a> can be included via the <code>loadEmblaCarousel</code> method in <code>js/util/load-dependencies.js</code>. This method will include the library dynamically and return a promise with the Embla instance after a successful load. An example of how to use Embla Carousel is located below.</p>
 				</li>
 				<li>
 					<h5>Modal Functionality</h5>
@@ -84,21 +84,29 @@
 		<div class="block-inner">
 			<div class="row">
 				<div class="columns small-12">
-					<div class="swiper-container">
-						<div class="swiper-wrapper">
-							<div class="swiper-slide">
-								<img src="https://picsum.photos/640/480?random" alt="slide 1">
-							</div>
-							<div class="swiper-slide">
-								<img src="https://picsum.photos/640/480?random" alt="slide 2">
-							</div>
-							<div class="swiper-slide">
-								<img src="https://picsum.photos/640/480?random" alt="slide 3">
+					<div class="embla-instance">
+						<div class="embla">
+							<div class="embla__container">
+								<div class="embla__slide">
+									<img src="https://picsum.photos/640/480?random" alt="slide 1">
+								</div>
+								<div class="embla__slide">
+									<img src="https://picsum.photos/640/480?random" alt="slide 2">
+								</div>
+								<div class="embla__slide">
+									<img src="https://picsum.photos/640/480?random" alt="slide 3">
+								</div>
 							</div>
 						</div>
-						<div class="swiper-pagination"></div>
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-button-next"></div>
+						<div class="embla__controls">
+							<button class="embla__nav-button embla__nav-button--prev" type="button">
+								<?php WPUtil\SVG::the_svg('general/chevron-left', ['class' => 'embla__nav-arrow embla__nav-arrow--left']); ?>
+							</button>
+							<div class="embla__pagination"></div>
+							<button class="embla__nav-button embla__nav-button--next" type="button">
+								<?php WPUtil\SVG::the_svg('general/chevron-right', ['class' => 'embla__nav-arrow embla__nav-arrow--right']); ?>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

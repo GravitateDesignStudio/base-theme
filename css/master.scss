@@ -37,13 +37,7 @@ Vendor Styles
 @import "vendor/wordpress";
 @import "vendor/gravity-forms";
 @import "vendor/hellobar";
-
-// The styles in Swiper 5.0 are designed to be modular. If you need additional
-// functionality outside the base functionality, import them from the node_modules path
-// in this section.
-@import "../node_modules/swiper/swiper";
-@import "../node_modules/swiper/components/navigation/navigation";
-@import "../node_modules/swiper/components/pagination/pagination";
+@import "vendor/embla";
 
 /*************************************
 Main Project Custom Files

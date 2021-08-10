@@ -1,14 +1,18 @@
-import { loadSwiper } from '../../util/load-dependencies';
+import { loadEmblaCarousel } from '../../util/load-dependencies';
+import EmblaAutoplay from '../../util/embla/autoplay';
+import EmblaPagination from '../../util/embla/pagination';
+import { enableNavButtons } from '../../util/embla/util';
 import Modal from '../modal';
 import { showVideoModal } from '../../util/modal-helpers';
+import SiteEvents, { SiteEventNames } from '../../util/site-events';
 
 class ThemeWelcome {
 	constructor(el) {
 		this.el = el;
-		this.swiperInstances = [];
+		this.emblaInstances = [];
 
 		this.initializeModals();
-		this.initializeSwiper();
+		this.initializeEmbla();
 	}
 
 	initializeModals = () => {
@@ -43,20 +47,62 @@ class ThemeWelcome {
 		}
 	};
 
-	initializeSwiper = async () => {
+	initializeEmbla = async () => {
 		try {
-			const Swiper = await loadSwiper();
-			const swiperContainerEls = this.el.querySelectorAll('.swiper-container');
+			const EmblaCarousel = await loadEmblaCarousel();
+			const emblaContainerEls = this.el.querySelectorAll('.embla-instance');
 
-			Array.from(swiperContainerEls).forEach((containerEl) => {
-				this.swiperInstances.push(new Swiper(containerEl));
+			Array.from(emblaContainerEls).forEach((emblaRootEl) => {
+				const emblaEl = emblaRootEl.querySelector('.embla');
+				const btnPrevEl = emblaRootEl.querySelector('.embla__nav-button--prev');
+				const btnNextEl = emblaRootEl.querySelector('.embla__nav-button--next');
+				const paginationEl = emblaRootEl.querySelector('.embla__pagination');
+
+				const transitionSpeed = emblaRootEl
+					? parseInt(emblaRootEl.getAttribute('data-transition-speed') || 10, 10)
+					: 10;
+
+				const enableAutoplay = emblaRootEl
+					? parseInt(emblaRootEl.getAttribute('data-enable-autoplay') || 0, 10)
+					: 0;
+
+				const autoplaySpeed = emblaRootEl
+					? parseInt(emblaRootEl.getAttribute('data-autoplay-speed') || 3000, 10)
+					: 3000;
+
+				const instance = {
+					embla: EmblaCarousel(emblaEl, {
+						loop: true,
+						speed: transitionSpeed
+					}),
+					pagination: null,
+					autoplay: null
+				};
+
+				if (instance.embla) {
+					instance.embla.on('init', () => {
+						SiteEvents.publish(SiteEventNames.IMAGEBUDDY_TRIGGER_UPDATE);
+					});
+
+					if (btnPrevEl && btnNextEl) {
+						enableNavButtons(instance.embla, [btnPrevEl], [btnNextEl]);
+					}
+
+					if (paginationEl) {
+						instance.pagination = new EmblaPagination(instance.embla, paginationEl, {
+							buttonClassName: 'embla__pagination-button'
+						});
+					}
+
+					if (enableAutoplay && autoplaySpeed) {
+						instance.autoplay = new EmblaAutoplay(instance.autoplay, autoplaySpeed);
+					}
+
+					this.emblaInstances.push(instance);
+				}
 			});
-
-			// this.$el.find('.swiper-container').each((index, el) => {
-			// 	this.swiperInstances.push(new Swiper(el));
-			// });
 		} catch (err) {
-			console.error('Swiper dynamic import failed', err);
+			console.error('Embla Carousel dynamic import failed', err);
 		}
 	};
 }
