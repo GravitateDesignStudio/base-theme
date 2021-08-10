@@ -113,18 +113,3 @@
 		</div>
 	</div>
 </div>
-
-<section class="section-container">
-	<div class="section-inner">
-		<div class="row">
-			<div class="columns small-12">
-				<?php
-				WPUtil\Component::render(
-					'components/entry',
-					[ 'post_id' => 2 ]
-				);
-				?>
-			</div>
-		</div>
-	</div>
-</section>
