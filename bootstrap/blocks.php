@@ -1,6 +1,11 @@
 <?php
-add_filter('grav_blocks_output_default_js', function () { return false; });
-add_filter('grav_blocks_output_default_styles', function () { return false; });
+add_filter('grav_blocks_output_default_js', function () {
+	return false;
+});
+
+add_filter('grav_blocks_output_default_styles', function () {
+	return false;
+});
 
 // enforce background color choices
 WPUtil\Vendor\BlueprintBlocks::enforce_background_colors([
