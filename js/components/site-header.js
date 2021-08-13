@@ -17,27 +17,14 @@ class SiteHeader {
 			});
 		}
 
-		// $('.site-header__mobile-menu-button').on('click tap', function () {
-		// 	$('html').toggleClass('mobile-menu-active');
-		// });
-
 		// update header height on resize
 		window.addEventListener('resize', () => this.updateHeaderHeightVar());
 
-		// $(window).resize(() => {
-		// 	this.updateHeaderHeightVar();
-		// });
-
 		// update header height on scroll
 		window.addEventListener('scroll', () => this.updateHeaderHeightVar());
-
-		// $(window).scroll(() => {
-		// 	this.updateHeaderHeightVar();
-		// });
 	}
 
 	updateHeaderHeightVar() {
-		// this.headerHeight = this.$el.outerHeight();
 		this.headerHeight = this.el.offsetHeight;
 	}
 }
