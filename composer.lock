@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fc7e80ff1da3932a0562d0ba24b69eb",
+    "content-hash": "2c27a0ed5907d9163c91e92f6b4d53db",
     "packages": [
         {
             "name": "dfrei/wp-util",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dougfrei/wp-util.git",
-                "reference": "de790b5dfe911524db9c84ea86d050af8f33b76c"
+                "reference": "3e631c18331be9ced4053c61c55f71fdaebb62ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/de790b5dfe911524db9c84ea86d050af8f33b76c",
-                "reference": "de790b5dfe911524db9c84ea86d050af8f33b76c",
+                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/3e631c18331be9ced4053c61c55f71fdaebb62ce",
+                "reference": "3e631c18331be9ced4053c61c55f71fdaebb62ce",
                 "shasum": ""
             },
             "require": {
@@ -46,9 +46,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dougfrei/wp-util/issues",
-                "source": "https://github.com/dougfrei/wp-util/tree/2.1.0"
+                "source": "https://github.com/dougfrei/wp-util/tree/2.1.1"
             },
-            "time": "2021-08-09T22:44:43+00:00"
+            "time": "2021-08-13T21:21:53+00:00"
         }
     ],
     "packages-dev": [],

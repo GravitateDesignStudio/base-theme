@@ -12,7 +12,8 @@ import SearchResults from './templates/search-results';
 import { processExternalLinks } from './util/general-util';
 import ScrollWatcher from './util/scroll-watcher';
 import SiteEvents, { SiteEventNames } from './util/site-events';
-import BlockAnimationWatcher from './util/block-animation-watcher';
+import { loadIntersectionObserver } from './util/load-dependencies';
+import { createSingleUseObserver } from './util/intersection-observer';
 import HelloBar from './util/hello-bar';
 
 class App {
@@ -123,14 +124,24 @@ class App {
 		}
 	}
 
-	initBlocks() {
-		// initialize blocks here
+	async initBlocks() {
+		// TODO: initialize blocks here
 
-		// setup block animation watcher
+		// setup block animation watchers
 		const animateBlocks = document.querySelectorAll('.block-animate');
 
 		if (animateBlocks && animateBlocks.length) {
-			this.instances.blockAnimationWatcher = new BlockAnimationWatcher(animateBlocks);
+			try {
+				await loadIntersectionObserver();
+
+				animateBlocks.forEach((watchEl) =>
+					createSingleUseObserver(watchEl, (entry, el) => {
+						el.classList.remove('block-animate');
+					})
+				);
+			} catch (err) {
+				console.error(err);
+			}
 		}
 	}
 

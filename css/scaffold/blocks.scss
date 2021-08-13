@@ -19,6 +19,8 @@
 	z-index: 0;
 	position: relative;
 
+	transition: all 1s ease-in-out;
+
 	.block-inner {
 		padding: map-deep-get($block-padding, "small", "top")
 			map-deep-get($block-padding, "small", "right")
@@ -38,6 +40,11 @@
 				map-deep-get($block-padding, "large", "bottom")
 				map-deep-get($block-padding, "large", "left");
 		}
+	}
+
+	&.block-animate {
+		transform: translateY(25%);
+		opacity: 0;
 	}
 }
 

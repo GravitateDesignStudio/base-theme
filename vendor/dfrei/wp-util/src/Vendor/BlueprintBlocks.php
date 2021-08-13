@@ -131,4 +131,48 @@ abstract class BlueprintBlocks
 
 		return $button_values;
 	}
+
+	/**
+	 * Specify which blocks should be allowed to use the animate option
+	 *
+	 * @param array<string> $allow_block_names Array of block names
+	 * @return void
+	 */
+	public static function allow_animate_option_for_blocks(array $allow_block_names)
+	{
+		add_filter('grav_block_fields', function ($fields) use ($allow_block_names) {
+			$block_names = array_keys($fields);
+
+			foreach ($block_names as $block_name) {
+				if (in_array($block_name, $allow_block_names, true) || !isset($fields[$block_name]['sub_fields'])) {
+					continue;
+				}
+
+				$fields[$block_name]['sub_fields'] = array_filter($fields[$block_name]['sub_fields'], function ($sub_field) {
+					$name = $sub_field['name'] ?? '';
+
+					return $name !== 'block_animate';
+				});
+			}
+
+			return $fields;
+		});
+	}
+
+	/**
+	 * Hide unused default blocks from the blocks settings page
+	 *
+	 * @param array<string> $unused_blocks
+	 * @return void
+	 */
+	public static function hide_unused_blocks(array $unused_blocks)
+	{
+		add_filter('grav_blocks', function ($blocks) use ($unused_blocks) {
+			$available_blocks = array_filter($blocks, function ($values, $key) use ($unused_blocks) {
+				return $values['group'] !== 'default' || !in_array($key, $unused_blocks, true);
+			}, ARRAY_FILTER_USE_BOTH);
+
+			return $available_blocks;
+		});
+	}
 }
