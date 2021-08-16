@@ -2,23 +2,23 @@
     "packages": [
         {
             "name": "dfrei/wp-util",
-            "version": "2.1.1",
-            "version_normalized": "2.1.1.0",
+            "version": "2.1.2",
+            "version_normalized": "2.1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dougfrei/wp-util.git",
-                "reference": "3e631c18331be9ced4053c61c55f71fdaebb62ce"
+                "reference": "a635d9631f4ce0b56b97dd9c3d3ed2ddd83bb163"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/3e631c18331be9ced4053c61c55f71fdaebb62ce",
-                "reference": "3e631c18331be9ced4053c61c55f71fdaebb62ce",
+                "url": "https://api.github.com/repos/dougfrei/wp-util/zipball/a635d9631f4ce0b56b97dd9c3d3ed2ddd83bb163",
+                "reference": "a635d9631f4ce0b56b97dd9c3d3ed2ddd83bb163",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
-            "time": "2021-08-13T21:21:53+00:00",
+            "time": "2021-08-16T23:19:22+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -43,7 +43,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dougfrei/wp-util/issues",
-                "source": "https://github.com/dougfrei/wp-util/tree/2.1.1"
+                "source": "https://github.com/dougfrei/wp-util/tree/2.1.2"
             },
             "install-path": "../dfrei/wp-util"
         }
