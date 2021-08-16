@@ -1,6 +1,11 @@
 import Modal from '../components/modal';
 import { getVideoEmbedURL } from './video-url';
 
+/**
+ * Show a video modal with the specified video URL
+ *
+ * @param {string} videoUrl The video URL
+ */
 export function showVideoModal(videoUrl) {
 	if (!videoUrl) {
 		return;
@@ -16,9 +21,12 @@ export function showVideoModal(videoUrl) {
 
 	const templateMarkup = `
 		<div class="modal__video-container">
-			${isDirectURL ? `
+			${
+				isDirectURL
+					? `
 				<video class="modal__video-embed" src="${embedUrl}" controls autoplay></video>
-			` : `
+			`
+					: `
 				<iframe class="modal__video-embed"
 					src="${embedUrl}"
 					width="640"
@@ -27,7 +35,8 @@ export function showVideoModal(videoUrl) {
 					allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen>
 				</iframe>
-			`}
+			`
+			}
 		</div>
 	`;
 

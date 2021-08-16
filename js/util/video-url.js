@@ -1,3 +1,21 @@
+/**
+ * @typedef {Object} ParsedURLObject
+ * @property {string} protocol
+ * @property {string} host
+ * @property {string} hostname
+ * @property {string} port
+ * @property {string} pathname
+ * @property {string} query
+ * @property {Object} queryObject
+ * @property {string} hash
+ */
+
+/**
+ * Returns an object with parsed parts of the specified URL
+ *
+ * @param {string} url The URL to parse
+ * @returns {ParsedURLObject} The parsed URL object
+ */
 function parseURL(url) {
 	const parser = document.createElement('a');
 	const searchObject = {};
@@ -32,6 +50,12 @@ function parseURL(url) {
 	};
 }
 
+/**
+ * Reform a URL with the properties of a parsed URL object
+ *
+ * @param {ParsedURLObject} parts The parsed URL object to refrom the URL from
+ * @returns {string} The reformed URL
+ */
 function reformURL(parts) {
 	let url = parts.protocol || '';
 
@@ -61,6 +85,12 @@ function reformURL(parts) {
 	return url;
 }
 
+/**
+ * Return the embed URL for a YouTube, Vimeo, or Wistia video
+ *
+ * @param {string} url
+ * @returns {string}
+ */
 export function getVideoEmbedURL(url) {
 	const urlParts = parseURL(url);
 

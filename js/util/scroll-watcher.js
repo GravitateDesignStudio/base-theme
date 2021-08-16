@@ -1,3 +1,9 @@
+/**
+ * Return the distance in pixels between the top of the current viewport and the
+ * top of the document
+ *
+ * @returns {number} distance between the current viewport and the top of the document in pixels
+ */
 function getScrollTop() {
 	const scrollEl = document.scrollingElement || document.documentElement;
 
@@ -5,6 +11,11 @@ function getScrollTop() {
 }
 
 class ScrollWatcher {
+	/**
+	 * ScrollWatcher constructor with a scroll event callback function
+	 *
+	 * @param {function} scrollFunc The callback function to be tiggered whenever a scroll event occurs
+	 */
 	constructor(scrollFunc) {
 		this.curScrollPos = getScrollTop();
 		this.prevScrollPos = 0;
@@ -26,6 +37,9 @@ class ScrollWatcher {
 		}
 	}
 
+	/**
+	 * Handler triggered whenever a scroll event occurs
+	 */
 	scrollHandler() {
 		// is this working?
 		if (this.isTicking) {
@@ -51,6 +65,12 @@ class ScrollWatcher {
 		});
 	}
 
+	/**
+	 * The default callback function for when the scroll watcher is triggered
+	 *
+	 * @param {Object} params
+	 * @param {number} threshold
+	 */
 	static defaultCallback(params, threshold = 100) {
 		const htmlEl = document.querySelector('html');
 
@@ -67,7 +87,7 @@ class ScrollWatcher {
 		htmlEl.classList.add('scrolled');
 
 		// add/remove 'scroll-bottom' class
-		if (params.curScrollPos >= (params.documentHeight - params.windowHeight)) {
+		if (params.curScrollPos >= params.documentHeight - params.windowHeight) {
 			htmlEl.classList.add('scroll-bottom');
 		} else {
 			htmlEl.classList.remove('scroll-bottom');

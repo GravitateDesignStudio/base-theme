@@ -14,7 +14,7 @@ import ScrollWatcher from './util/scroll-watcher';
 import SiteEvents, { SiteEventNames } from './util/site-events';
 import { loadIntersectionObserver } from './util/load-dependencies';
 import { createSingleUseObserver } from './util/intersection-observer';
-import HelloBar from './util/hello-bar';
+import { initHelloBar } from './util/hello-bar';
 
 class App {
 	constructor() {
@@ -77,8 +77,15 @@ class App {
 			this.instances.imageBuddy.update(opts || {});
 		});
 
-		this.instances.helloBar = new HelloBar();
-		this.instances.helloBar.init();
+		initHelloBar((hbEl) => {
+			document.body.style.marginTop = `${hbEl.offsetHeight}px`;
+
+			const siteHeaderEl = document.querySelector('.site-header');
+
+			if (siteHeaderEl) {
+				siteHeaderEl.style.marginTop = `${hbEl.offsetHeight}px`;
+			}
+		});
 
 		// ObjectFitImages: only act upon images that have a valid src attribute
 		// Note: use the 'object-fit-polyfill' SCSS mixin to create the necessary 'font-family' attribute

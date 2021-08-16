@@ -3,6 +3,11 @@ import LoadMore from '../archive-load-more';
 import SiteEvents, { SiteEventNames } from '../../util/site-events';
 
 class PostsList {
+	/**
+	 * PostsList constructor
+	 *
+	 * @param {HTMLElement} el The posts list element
+	 */
 	constructor(el) {
 		this.el = el;
 		this.cardsContainer = this.el.querySelector('[data-load-more-target]');
@@ -27,18 +32,39 @@ class PostsList {
 		}
 	}
 
+	/**
+	 * Set the API endpoint used by this post list
+	 *
+	 * @param {string} endpoint
+	 */
 	setEndpoint(endpoint) {
 		this.endpoint = endpoint;
 	}
 
+	/**
+	 * Set the card container classes used when new cards are added dynamically
+	 *
+	 * @param {string} cardContainerClasses
+	 */
 	setCardContainerClasses(cardContainerClasses) {
 		this.cardContainerClasses = cardContainerClasses;
 	}
 
+	/**
+	 * Set the callback function used to generate markup for cards that are added
+	 * dynamically
+	 *
+	 * @param {function} postDisplayFunc
+	 */
 	setPostDisplayCallback(postDisplayFunc) {
 		this.postDisplayFunc = postDisplayFunc;
 	}
 
+	/**
+	 * Set the loading spinner visibility
+	 *
+	 * @param {boolean} showSpinner
+	 */
 	showLoadingSpinner(showSpinner) {
 		if (!this.loadingSpinner) {
 			return;
@@ -51,6 +77,9 @@ class PostsList {
 		}
 	}
 
+	/**
+	 * Clear the cards container
+	 */
 	clearCardsContainer() {
 		this.cardsContainer.innerHTML = '';
 
@@ -62,6 +91,11 @@ class PostsList {
 		this.loadMore.setVisible(false);
 	}
 
+	/**
+	 * Set the visibility of the "no results" container and message
+	 *
+	 * @param {boolean} show
+	 */
 	showNoResultsMessage(show) {
 		if (!this.noResultsContainer) {
 			return;
@@ -74,6 +108,11 @@ class PostsList {
 		}
 	}
 
+	/**
+	 * Load additional posts for the post list
+	 *
+	 * @param {Object} addParams Additional parameters to add to the API request
+	 */
 	async loadMorePosts(addParams = {}) {
 		if (!this.endpoint) {
 			throw new Error('No endpoint provided for loadMorePosts');

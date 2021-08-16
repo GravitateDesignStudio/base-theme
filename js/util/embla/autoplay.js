@@ -1,4 +1,10 @@
 class EmblaAutoplay {
+	/**
+	 * Initialize autoplay support for the provided Embla instance
+	 *
+	 * @param {Object} embla The Embla instance
+	 * @param {number} interval The autoplay interval in ms
+	 */
 	constructor(embla, interval) {
 		this.emblaInstance = embla;
 		this.interval = interval;
@@ -10,6 +16,9 @@ class EmblaAutoplay {
 		}
 	}
 
+	/**
+	 * Start the autoplay timer
+	 */
 	play = () => {
 		this.stop();
 
@@ -18,12 +27,18 @@ class EmblaAutoplay {
 		});
 	};
 
+	/**
+	 * Stop the autoplay timer
+	 */
 	stop = () => {
 		window.clearTimeout(this.timer);
 
 		this.timer = 0;
 	};
 
+	/**
+	 * Advance to the next slide
+	 */
 	next = () => {
 		if (this.emblaInstance.canScrollNext()) {
 			this.emblaInstance.scrollNext();

@@ -1,6 +1,11 @@
 import Emitter from '../util/emitter';
 
 class ArchiveLoadMore extends Emitter {
+	/**
+	 * ArchiveLoadMore constructor
+	 *
+	 * @param {HTMLElement} containerEl The "load more" container element
+	 */
 	constructor(containerEl) {
 		super();
 
@@ -18,6 +23,12 @@ class ArchiveLoadMore extends Emitter {
 		}
 	}
 
+	/**
+	 * Set the "load more" button loading status and text
+	 *
+	 * @param {boolean} isLoading
+	 * @param {string} loadingText
+	 */
 	setLoading(isLoading, loadingText = 'Loading...') {
 		if (!this.loadMoreButton) {
 			return;
@@ -33,6 +44,11 @@ class ArchiveLoadMore extends Emitter {
 		}
 	}
 
+	/**
+	 * Set the "load more" button visibility
+	 *
+	 * @param {boolean} isVisible
+	 */
 	setVisible(isVisible) {
 		if (isVisible) {
 			this.containerEl.classList.remove('hide');

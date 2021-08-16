@@ -1,4 +1,18 @@
+/**
+ * @typedef EmblaPaginationOpts
+ * @property {string} buttonClassName The pagination button classname
+ * @property {string} activeClassName An additional classname added to the active pagination button
+ */
+
 class EmblaPagination {
+	/**
+	 * Initialize pagination support for the provided Embla instance
+	 *
+	 * @param {Object} embla The Embla instance
+	 * @param {HTMLElement} paginationEl The HTML element where pagination buttons will be added
+	 * @param {EmblaPaginationOpts} opts An {@link EmblaPaginationOpts} options object
+	 * @returns
+	 */
 	constructor(embla, paginationEl, opts = {}) {
 		if (!embla || !paginationEl) {
 			return;
@@ -30,6 +44,9 @@ class EmblaPagination {
 		this.emblaInstance.on('select', this.setActivePaginationButtons);
 	}
 
+	/**
+	 * Create the pagination buttons markup
+	 */
 	createButtonsMarkup() {
 		return this.emblaInstance
 			.scrollSnapList()
@@ -40,6 +57,9 @@ class EmblaPagination {
 			);
 	}
 
+	/**
+	 * Set the currently active pagination button
+	 */
 	setActivePaginationButtons = () => {
 		if (!this.emblaInstance || !this.paginationDotEls.length) {
 			return;

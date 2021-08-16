@@ -1,5 +1,11 @@
 import { isIE } from './browsers';
 
+/**
+ * Checks if the specified URL is either an external URL or a PDF file
+ *
+ * @param {string} url
+ * @returns {boolean}
+ */
 function isExternalURL(url) {
 	const firstCharValid = ['/', '#', '?'].indexOf(url.charAt(0)) === -1;
 	const isDifferentHost = new RegExp(`/${window.location.host}/`).test(url) === false;
@@ -11,10 +17,11 @@ function isExternalURL(url) {
 	return validExternalURL || isPDF;
 }
 
-/*
- * Add target="_blank" and rel="noopener noreferrer" to links that are external
- * Will also force PDF's to open in new tabs
- * Adds "external-link" class
+/**
+ * Add target="_blank" and rel="noopener noreferrer" to links that are external.
+ * Will also force PDF's to open in new tabs and adds an "external-link" class.
+ *
+ * @param {Object} opts
  */
 export function processExternalLinks(opts = {}) {
 	const attributes = opts.attributes || { target: '_blank', rel: 'noopener noreferrer' };
@@ -31,9 +38,11 @@ export function processExternalLinks(opts = {}) {
 	});
 }
 
-/*
- * Scrolling function to animate to a
- * selector, with optional offset
+/**
+ * Scroll to the specified element with an optional offset
+ *
+ * @param {HTMLElement|string} selector
+ * @param {number} offset
  */
 export function scrollTo(selector, offset) {
 	let element = null;
@@ -64,12 +73,13 @@ export function scrollTo(selector, offset) {
 			behavior: 'smooth'
 		});
 	}
-
-	// jQuery('html, body').animate({
-	// 	scrollTop: (element.offset().top - offset)
-	// }, 500);
 }
 
+/**
+ * Copy the specified text to the clipboard
+ *
+ * @param {string} copyText
+ */
 export function copyTextToClipboard(copyText) {
 	const textArea = document.createElement('textarea');
 	let copied = '';

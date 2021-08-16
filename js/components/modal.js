@@ -1,4 +1,25 @@
+/**
+ * @typedef ModalDefaults
+ * @property {number} closeDuration
+ * @property {boolean} closeOnOutsideClick
+ * @property {boolean} closeOnEscape
+ * @property {string} activeHTMLelementClass
+ * @property {string} ariaLabelClose
+ * @property {string} closeButtonContent
+ * @property {string} modalBackdropClass
+ * @property {string} modalClass
+ * @property {string} closeButtonClass
+ * @property {string} contentContainerClass
+ * @property {string} contentClass
+ * @property {string} loadingContainerClass
+ * @property {string} isLoadingClass
+ * @property {Object} callbacks
+ */
+
 class Modal {
+	/**
+	 * Modal constructor
+	 */
 	constructor() {
 		this.htmlEl = document.querySelector('html');
 		this.backdropEl = null;
@@ -22,6 +43,11 @@ class Modal {
 		this.currentOpts = { ...this.defaults };
 	}
 
+	/**
+	 * Set the defaults used by all modals
+	 *
+	 * @param {ModalDefaults} defaults A {@link ModalDefaults} object
+	 */
 	setDefaults(defaults = {}) {
 		this.defaults = {
 			...this.defaults,
@@ -29,10 +55,20 @@ class Modal {
 		};
 	}
 
-	getSetting(className, defaultValue = '') {
-		return this.currentOpts[className] ?? this.defaults[className] ?? defaultValue;
+	/**
+	 * Retrieve a modal setting or use a default if it does not exist
+	 *
+	 * @param {string} settingName The setting name
+	 * @param {any} defaultValue The default value
+	 * @returns {any}
+	 */
+	getSetting(settingName, defaultValue = '') {
+		return this.currentOpts[settingName] ?? this.defaults[settingName] ?? defaultValue;
 	}
 
+	/**
+	 * Initialize the modal
+	 */
 	initModal() {
 		return new Promise((resolve) => {
 			this.modalEl = this.createModalEl();
@@ -54,6 +90,12 @@ class Modal {
 		});
 	}
 
+	/**
+	 * Create the modal backdrop element and append an optional child
+	 *
+	 * @param {HTMLElement|null} modalEl Optional modal element child to append to the backdrop element
+	 * @returns {HTMLDivElement} The backdrop element
+	 */
 	createBackdropEl(modalEl = null) {
 		const backdropEl = document.createElement('div');
 
@@ -66,6 +108,11 @@ class Modal {
 		return backdropEl;
 	}
 
+	/**
+	 * Create and return the modal element
+	 *
+	 * @returns {HTMLDivElement} The modal element
+	 */
 	createModalEl() {
 		const modalEl = document.createElement('div');
 
@@ -90,18 +137,37 @@ class Modal {
 		return modalEl;
 	}
 
+	/**
+	 * Handler for outside click events
+	 *
+	 * @param {Event} e
+	 */
 	clickOutsideContentListener = (e) => {
-		if (this.getSetting('closeOnOutsideClick', true) && e.target.classList.contains(this.getSetting('modalBackdropClass'))) {
+		if (
+			this.getSetting('closeOnOutsideClick', true) &&
+			e.target.classList.contains(this.getSetting('modalBackdropClass'))
+		) {
 			this.hide();
 		}
-	}
+	};
 
+	/**
+	 * Handler for an escape key press
+	 *
+	 * @param {Event} e
+	 */
 	escapeListener = (e) => {
 		if (this.getSetting('closeOnEscape', true) && e.keyCode === 27) {
 			this.hide();
 		}
-	}
+	};
 
+	/**
+	 * Display the modal
+	 *
+	 * @param {string} content The modal content markup
+	 * @param {ModalDefaults} opts An optional {@link ModalDefaults} object
+	 */
 	async show(content = '', opts = {}) {
 		this.currentOpts = {
 			...this.defaults,
@@ -126,10 +192,16 @@ class Modal {
 		window.addEventListener('keydown', this.escapeListener);
 	}
 
+	/**
+	 * Hide the modal
+	 */
 	hide() {
 		this.htmlEl.classList.remove(this.getSetting('activeHTMLelementClass'));
 
-		if (this.currentOpts.callbacks?.onHide && typeof this.currentOpts.callbacks.onHide === 'function') {
+		if (
+			this.currentOpts.callbacks?.onHide &&
+			typeof this.currentOpts.callbacks.onHide === 'function'
+		) {
 			this.currentOpts.callbacks.onHide();
 		}
 
@@ -144,6 +216,11 @@ class Modal {
 		}, this.currentOpts.closeDuration || 400);
 	}
 
+	/**
+	 * Set the modal loading status
+	 *
+	 * @param {boolean} isLoading
+	 */
 	setLoading(isLoading) {
 		if (isLoading) {
 			this.modalEl.classList.add(this.getSetting('isLoadingClass'));
@@ -152,6 +229,12 @@ class Modal {
 		}
 	}
 
+	/**
+	 * Set the modal content markup and optionally remove the loading state
+	 *
+	 * @param {string} content The modal content markup
+	 * @param {boolean} removeLoader Flag to remove the loading state
+	 */
 	setContent(content = '', removeLoader = true) {
 		const contentEl = this.modalEl.querySelector(`.${this.getSetting('contentClass')}`);
 

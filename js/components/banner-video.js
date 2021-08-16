@@ -1,27 +1,21 @@
 class BannerVideo {
 	constructor(el) {
 		this.el = el;
-		// this.$bannerParent = this.$el.parents('.banner').first();
 		this.bannerParentEl = this.el.closest('.banner');
 		this.currentSize = '';
-
-		// bind functions
-		// this.catchPlaybackError = this.catchPlaybackError.bind(this);
-		// this.chooseVideoAndPoster = this.chooseVideoAndPoster.bind(this);
 
 		// choose initial video and poster
 		this.chooseVideoAndPoster();
 
 		// catch playback errors
-		this.$el.on('error abort', this.catchPlaybackError);
+		this.el.addEventListener('error', this.catchPlaybackError);
+		this.el.addEventListener('abort', this.catchPlaybackError);
 
 		// load a new video on resize if needed
-		// $(window).resize(this.chooseVideoAndPoster);
 		window.addEventListener('resize', () => this.chooseVideoAndPoster());
 	}
 
 	setVideoAutoplaySupport(isSupported, removeEl = false) {
-		// const htmlEl = document.querySelector('html');
 		const htmlEl = document.documentElement;
 
 		if (isSupported) {
@@ -33,8 +27,6 @@ class BannerVideo {
 		}
 
 		if (removeEl) {
-			// this.$el.remove();
-
 			this.el.remove();
 		}
 	}
@@ -46,7 +38,6 @@ class BannerVideo {
 	};
 
 	chooseVideoAndPoster = () => {
-		// const bannerWidth = $(window).width();
 		const bannerWidth = window.innerWidth;
 		let newSize = '';
 
@@ -93,8 +84,6 @@ class BannerVideo {
 		// ensure we have a video URL
 		if (videoUrl) {
 			// pause the current video, set/load the new URL, and begin playback
-			// const videoEl = this.$el.get(0);
-
 			this.el.pause();
 
 			this.el.setAttribute('src', videoUrl);
