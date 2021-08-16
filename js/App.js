@@ -6,8 +6,8 @@ import SiteHeader from './components/site-header';
 import BannerVideo from './components/banner-video';
 import Modal from './components/modal';
 
-import ArchiveBlog from './templates/archive-blog';
-import SearchResults from './templates/search-results';
+import PostsListBlog from './components/posts-list/posts-list-blog';
+import PostsListSearch from './components/posts-list/posts-list-search';
 
 import { processExternalLinks } from './util/general-util';
 import ScrollWatcher from './util/scroll-watcher';
@@ -22,10 +22,11 @@ class App {
 			components: {
 				themeWelcome: null,
 				siteHeader: null,
-				bannerVideo: null
+				bannerVideo: null,
+				postsListBlog: [],
+				postsListSearch: []
 			},
 			templates: {
-				archiveBlog: null,
 				searchResults: null
 			},
 			blocks: {},
@@ -106,22 +107,24 @@ class App {
 		if (bannerCoverVideoEl) {
 			this.instances.components.bannerVideo = new BannerVideo(bannerCoverVideoEl);
 		}
+
+		// posts list - blog
+		Array.from(document.querySelectorAll('.posts-list--blog')).forEach((postsListBlogEl) => {
+			this.instances.components.postsListBlog.push(new PostsListBlog(postsListBlogEl));
+		});
+
+		// posts list - search
+		Array.from(document.querySelectorAll('.posts-list--search')).forEach(
+			(postsListSearchEl) => {
+				this.instances.components.postsListSearch.push(
+					new PostsListSearch(postsListSearchEl)
+				);
+			}
+		);
 	}
 
 	initTemplates() {
-		// blog archive
-		const archiveBlogEl = document.querySelector('.tmpl-archive-blog');
-
-		if (archiveBlogEl) {
-			this.instances.templates.archiveBlog = new ArchiveBlog(archiveBlogEl);
-		}
-
-		// search results
-		const searchResultsEl = document.querySelector('.tmpl-search');
-
-		if (searchResultsEl) {
-			this.instances.templates.searchResults = new SearchResults(searchResultsEl);
-		}
+		// TODO: initialize templates here
 	}
 
 	async initBlocks() {

@@ -36,7 +36,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 		}
 
 		WPUtil\Vendor\BlueprintBlocks::safe_display([
-			'section' => '404_blocks_grav_blocks',
+			'section' => Constants\ACF::THEME_OPTIONS_404_BASE . '_404_blocks_grav_blocks',
 			'object' => 'option'
 		]);
 		?>

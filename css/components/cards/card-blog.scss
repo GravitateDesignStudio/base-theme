@@ -1,6 +1,7 @@
 .card-blog {
 	display: block;
 	background: $color-gray;
+	text-decoration: none;
 
 	&__image-container {
 		position: relative;
@@ -8,15 +9,19 @@
 		padding-top: 62.5%; // 16x10 ratio
 	}
 
+	&__content-container {
+		padding: 2rem;
+	}
+
 	&__image {
 		@include image-cover-entire-container;
 	}
 
 	&__title {
-		padding: 0 1rem;
+		margin-top: 0;
 	}
 
 	&__content {
-		padding: 1rem;
+		color: $text-dark;
 	}
 }

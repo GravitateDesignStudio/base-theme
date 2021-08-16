@@ -9,7 +9,8 @@ if (function_exists('acf_add_options_page') && function_exists('acf_add_options_
 	$sub_pages = [
 		'acf-theme-options-social' => 'Social Media',
 		'acf-theme-options-footer' => 'Footer',
-		'acf-theme-options-404' => '404',
+		'acf-theme-options-search' => 'Search',
+		'acf-theme-options-404' => '404 Settings',
 		'acf-theme-options-scripts' => 'Scripts'
 	];
 

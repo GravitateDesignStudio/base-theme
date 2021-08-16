@@ -1,4 +1,4 @@
-function queryArgsAsMap() {
+export function queryArgsAsMap() {
 	const partsMap = new Map();
 	const parts = window.location.search.substring(1).split('&');
 
@@ -13,7 +13,7 @@ function queryArgsAsMap() {
 	return partsMap;
 }
 
-function getUrlWithQueryArgs(queryArgsMap) {
+export function getUrlWithQueryArgs(queryArgsMap) {
 	const baseUrl = window.location.origin + window.location.pathname;
 	const parts = [];
 
@@ -24,10 +24,10 @@ function getUrlWithQueryArgs(queryArgsMap) {
 	return parts.length ? `${baseUrl}?${parts.join('&')}` : baseUrl;
 }
 
-export function getUrlQueryArg(name) {
+export function getUrlQueryArg(name, defaultValue = '') {
 	const queryArgsMap = queryArgsAsMap();
 
-	return queryArgsMap.get(name);
+	return queryArgsMap.get(name) ?? defaultValue;
 }
 
 export function addUrlQueryArg(name, value) {

@@ -50,7 +50,7 @@ acf_add_local_field_group(array (
 		array (
 			'key' => 'field_' . $acf_group . '_404_blocks',
 			'label' => '404 Blocks',
-			'name' => '404_blocks',
+			'name' => $acf_group . '_404_blocks',
 			'type' => 'clone',
 			'instructions' => '',
 			'required' => 0,

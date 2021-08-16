@@ -1,6 +1,9 @@
 <?php
 namespace WPUtil;
 
+use WPUtil\Models\SelectOption;
+use WP_Term_Query;
+
 abstract class Taxonomy
 {
 	/**
@@ -59,5 +62,40 @@ abstract class Taxonomy
 				}
 			}
 		}, 999);
+	}
+
+	/**
+	 * Retrieve taxonomy values to be used as select control options
+	 *
+	 * @param string $taxonomy The taxonomy name to retrieve values for
+	 * @param array<string, mixed> $opts Additional options passed to WP_Term_Query
+	 * @return array<\Bullhorn\Models\SelectOption> A key/value array of taxonomy slug/title to be used as select control options
+	 */
+	public static function get_taxonomy_filter_options(string $taxonomy, array $opts = []): array
+	{
+		$query_opts = array_merge([
+			'taxonomy' => $taxonomy,
+			'orderby' => 'name',
+			'order' => 'ASC'
+		], $opts);
+
+		$term_query = new WP_Term_Query($query_opts);
+
+		$options = array_reduce($term_query->terms ?? [], function ($acum, $term) {
+			$slug = trim($term->slug ?? '');
+			$name = trim($term->name ?? '');
+
+			if ($slug && $name) {
+				$option = new SelectOption();
+				$option->value = $slug;
+				$option->label = $name;
+
+				$acum[] = $option;
+			}
+
+			return $acum;
+		}, []);
+
+		return $options;
 	}
 }

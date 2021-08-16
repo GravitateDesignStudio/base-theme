@@ -13,7 +13,11 @@ add_action('rest_api_init', function () {
 		'get_callback' => function ($post) {
 			return WPUtil\Component::render_to_string(
 				'components/cards/card-blog',
-				[ 'post_id' => $post['id'] ]
+				[
+					'post_id' => $post['id'],
+					'category' => ClientNamespace\CPT\Blog::getPostCategoryText($post['id']),
+					'default_image' => ClientNamespace\CPT\Blog::getDefaultCardImage()
+				]
 			);
 		}
 	));
@@ -36,6 +40,21 @@ add_action('rest_api_init', function () {
 
 		return $result;
 	}, 10, 3);
+
+	/**
+	 * Add filters to blog (post) queries from the "load more" requests
+	 */
+	add_filter('rest_' . ClientNamespace\Constants\CPT::BLOG . '_query', function ($args, $request) {
+		$args['posts_per_page'] = ClientNamespace\CPT\Blog::getPostsPerPageCount();
+
+		$args = ClientNamespace\CPT\Blog::modifyQueryWithFilters($args, [
+			'category' => $request->get_param(ClientNamespace\Constants\QueryParams::BLOG_ARCHIVE_FILTER_CATEGORY) ?? '',
+			'tag' => $request->get_param(ClientNamespace\Constants\QueryParams::BLOG_ARCHIVE_FILTER_TAG) ?? '',
+			'search' => $request->get_param(ClientNamespace\Constants\QueryParams::BLOG_ARCHIVE_FILTER_SEARCH) ?? ''
+		]);
+
+		return $args;
+	}, 10, 2);
 
 	/**
 	 * EXAMPLE:

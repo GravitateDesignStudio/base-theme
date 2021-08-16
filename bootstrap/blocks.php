@@ -45,7 +45,7 @@ WPUtil\Vendor\BlueprintBlocks::sort_block_names_alphabetically();
  * Ensure Grav Blocks are viewable on the pages that require them
  */
 add_filter('grav_is_viewable', function ($is_viewable) {
-	if (is_home() || is_singular() || is_404()) {
+	if (is_home() || is_singular() || is_404() || is_search()) {
 		$is_viewable = true;
 	}
 

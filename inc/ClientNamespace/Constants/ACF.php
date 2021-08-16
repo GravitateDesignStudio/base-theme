@@ -11,6 +11,7 @@ abstract class ACF
 	const THEME_OPTIONS_FOOTER_BASE = 'theme_options_footer';
 	const THEME_OPTIONS_SCRIPTS_BASE = 'theme_options_scripts';
 	const THEME_OPTIONS_SOCIAL_BASE = 'theme_options_social';
+	const THEME_OPTIONS_SEARCH_BASE = 'theme_options_search';
 
 	const BLOG_SETTINGS_BASE = 'blog_settings';
 }
