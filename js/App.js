@@ -26,14 +26,10 @@ class App {
 				postsListBlog: [],
 				postsListSearch: []
 			},
-			templates: {
-				searchResults: null
-			},
+			templates: {},
 			blocks: {},
 			scrollWatcher: null,
-			imageBuddy: null,
-			blockAnimationWatcher: null,
-			helloBar: null
+			imageBuddy: null
 		};
 
 		this.init();
