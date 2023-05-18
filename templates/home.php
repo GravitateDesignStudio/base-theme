@@ -15,7 +15,7 @@ get_template_part('components/banners/banner', 'default', [
 <main class="tmpl-archive tmpl-archive--blog">
 	<?php
 	get_template_part('components/posts-list/posts-list', 'blog', [
-		'wp_query_obj' => $wp_query
+		'wp_query_obj' => ($wp_query && is_a($wp_query, 'WP_Query')) ? $wp_query : false,
 	]);
 	?>
 </main>
