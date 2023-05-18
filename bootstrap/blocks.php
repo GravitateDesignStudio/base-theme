@@ -80,3 +80,23 @@ add_action('rest_api_init', function () {
 add_filter('grav_blocks_process_video_url', function ($process_video, $url) {
 	return false;
 }, 10, 2);
+
+/**
+ * Grav Blocks block titles
+ */
+function grav_block_title($title, $field, $layout, $i) {
+	if($value = get_sub_field('layout_title')) {
+		return $title . ' - ' . $value;
+	} else {
+		foreach($layout['sub_fields'] as $sub) {
+			if($sub['name'] == 'layout_title') {
+				$key = $sub['key'];
+				if(array_key_exists($i, $field['value']) && $value = $field['value'][$i][$key])
+					return $title . ' - ' . $value;
+			}
+		}
+	}
+	return $title;
+}
+
+add_filter('acf/fields/flexible_content/layout_title', 'grav_block_title', 10, 4);
