@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-get_template_part('components/banners/banner-default');
+get_template_part('components/banners/banner','default');
 
 ?>
 <main class="main-content">
