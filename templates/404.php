@@ -10,7 +10,7 @@ if (!$title) {
 	$title = '404 - Not Found';
 }
 
-WPUtil\Component::render('components/banners/banner-default', [
+get_template_part('components/banners/banner', 'default', [
 	'title' => $title
 ]);
 
