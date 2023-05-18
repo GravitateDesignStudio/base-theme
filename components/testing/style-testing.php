@@ -114,20 +114,20 @@
 		<hr>
 
 		<?php
-		WPUtil\Component::render('components/ui/button', [
+		get_template_part('components/ui/button', '', [
 			'link' => '#',
 			'text' => 'Button',
 			'icon' => 'general/play'
 		]);
 
-		WPUtil\Component::render('components/ui/button', [
+		get_template_part('components/ui/button', '', [
 			'link' => '#',
 			'text' => 'Button (active)',
 			'icon' => 'general/play',
 			'additional_classes' => ['active']
 		]);
 
-		WPUtil\Component::render('components/ui/button', [
+		get_template_part('components/ui/button', '', [
 			'link' => '#',
 			'text' => 'Button (disabled)',
 			'icon' => 'general/play',
@@ -140,14 +140,14 @@
 		<hr>
 
 		<?php
-		WPUtil\Component::render('components/ui/button', [
+		get_template_part('components/ui/button', '', [
 			'link' => '#',
 			'text' => 'Button',
 			'icon' => 'general/play',
 			'style' => 'secondary'
 		]);
 
-		WPUtil\Component::render('components/ui/button', [
+		get_template_part('components/ui/button', '', [
 			'link' => '#',
 			'text' => 'Button (active)',
 			'icon' => 'general/play',
@@ -155,7 +155,7 @@
 			'additional_classes' => ['active']
 		]);
 
-		WPUtil\Component::render('components/ui/button', [
+		get_template_part('components/ui/button', '', [
 			'link' => '#',
 			'text' => 'Button (disabled)',
 			'icon' => 'general/play',
