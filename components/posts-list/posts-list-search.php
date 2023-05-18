@@ -1,5 +1,5 @@
 <?php
-$wp_query_obj = is_a($args['wp_query_obj'], 'WP_Query') ? $args['wp_query_obj'] : null;
+$wp_query_obj = is_a($args['wp_query_obj'], 'WP_Query') ? $args['wp_query_obj'] : false;
 $block_display = $block_display ?? false;
 $current_page = isset($current_page) && is_int($current_page) ? $current_page : 1;
 
