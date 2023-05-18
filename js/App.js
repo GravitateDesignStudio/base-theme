@@ -8,7 +8,6 @@ import PostsListSearch from './components/posts-list/posts-list-search';
 import { processExternalLinks } from './util/general-util';
 import ScrollWatcher from './util/scroll-watcher';
 import SiteEvents, { SiteEventNames } from './util/site-events';
-import { loadIntersectionObserver } from './util/load-dependencies';
 import { createSingleUseObserver } from './util/intersection-observer';
 import { initHelloBar } from './util/hello-bar';
 
