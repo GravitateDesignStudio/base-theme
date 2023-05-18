@@ -1,5 +1,5 @@
 <?php
-$post_id = isset($post_id) ? $post_id : get_the_ID();
+$post_id = isset($args['post_id']) ? $args['post_id'] : get_the_ID();
 $background_image_opts = ['post_id' => $post_id];
 
 if (isset($background_image)) {
@@ -8,7 +8,7 @@ if (isset($background_image)) {
 ?>
 
 <div class="banner banner-default bg-black">
-	<?php WPUtil\Component::render('components/banners/partials/banner-background', $background_image_opts); ?>
+	<?php get_template_part('components/banners/partials/banner', 'background', $background_image_opts); ?>
 	<div class="banner-default__content faux-row">
 		<h1 class="banner-default__title"><?php echo esc_html($args['title']); ?></h1>
 		<?php if ($args['button']->link && $args['button']->text) : ?>
