@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-WPUtil\Component::render('components/banners/banner-default', [
+get_template_part('components/banners/banner', 'default', [
 	'title' => 'Styles'
 ]);
 
@@ -26,7 +26,7 @@ $backgrounds = $backgrounds ? array_filter($backgrounds, function ($key) {
 	<section class="section-container wysiwyg">
 		<div class="row section-inner">
 			<div class="columns small-12">
-				<?php WPUtil\Component::render('components/testing/style-testing'); ?>
+				<?php get_template_part('components/testing/style-testing'); ?>
 			</div>
 		</div>
 	</section>
