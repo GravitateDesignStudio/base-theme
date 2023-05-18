@@ -54,3 +54,43 @@ add_action( 'wp_enqueue_scripts', function() {
     // Remove inline global CSS on the front end.
     wp_dequeue_style( 'global-styles' );
 }, 20 );
+
+/*
+ * creates a function to simplify the use of the corresponding WPUtil
+ */
+function the_svg($filename, bool $no_use = false) {
+	$options = ['no_use' => $no_use ];
+	WPUtil\SVG::the_svg($filename, $options);
+}
+function the_button_formatter($button, $params = []) {
+	$all_params = array_map(function($a, $key) {
+		return $key.'="'.$a.'"';
+	}, $params, array_keys($params));
+	
+	echo '<a '.implode(" " ,$all_params).' href="'.esc_url($button['url']).'" target="'.$button['target'].'">'.$button['title'].'</a>';
+}
+
+// add support for page excerpts
+add_post_type_support( 'page', 'excerpt' );
+
+/**
+ * Get term options for ACF select field
+ */
+function get_term_options($taxonomy) {
+	$terms = get_terms( array(
+		'taxonomy' => $taxonomy,
+		'hide_empty' => false,
+	));
+	
+	$term_options = array_map( function( $term ) {
+		return array(
+			$term->slug => $term->name,
+		);
+	}, $terms );
+	
+	return array_merge(...$term_options);
+};
+
+add_filter( 'excerpt_length', fn() => 15, 999 );
+add_filter('excerpt_more', fn() => '&hellip;');
+
