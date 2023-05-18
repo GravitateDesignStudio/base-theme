@@ -33,12 +33,12 @@ get_template_part('components/banners/banner-default');
 				?>
 				<div class="tmpl-post-single__share-icons">
 					<?php
-					WPUtil\Component::render('components/ui/share-icon', [
+					get_template_part('components/ui/share-icon', [
 						'site' => 'twitter',
 						'twitter_username' => 'test_username'
 					]);
 
-					WPUtil\Component::render('components/ui/share-icon', [
+					get_template_part('components/ui/share-icon', [
 						'site' => 'facebook'
 					]);
 					?>
