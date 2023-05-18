@@ -36,6 +36,7 @@ require_once 'bootstrap/api.php';
 require_once 'bootstrap/hello-bar.php';
 require_once 'bootstrap/virtual-pages.php';
 require_once 'bootstrap/pre-get-posts.php';
+require_once 'bootstrap/filters.php';
 
 // Disable Gutenberg on the back end.
 add_filter( 'use_block_editor_for_post', '__return_false', 10 );
