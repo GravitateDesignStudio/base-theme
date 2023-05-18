@@ -1,14 +1,14 @@
 <?php
 global $wp_query;
 
-$blog_page_id = get_option('page_for_posts');
+$post_id = get_option('page_for_posts');
 
 get_header();
 
 get_template_part('components/banners/banner', 'default', [
-	'title' => get_the_title($blog_page_id),
-	'button' => WPUtil\Vendor\BlueprintBlocks::get_button_field_values('banner_button', $blog_page_id),
-	'post_id' => $blog_page_id
+	'title' => trim(get_field('banner_title_override', $post_id)) ?: get_the_title(),
+	'button' => WPUtil\Vendor\BlueprintBlocks::get_button_field_values('banner_button', $post_id),
+	'post_id' => $post_id
 ]);
 ?>
 
