@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-WPUtil\Component::render('components/banners/banner-default', [
+get_template_part('components/banners/banner', 'default', [
 	'title' => 'Search Results'
 ]);
 
@@ -12,7 +12,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 			<?php
 			global $wp_query;
 
-			WPUtil\Component::render('components/posts-list/posts-list-search', [
+			get_template_part('components/posts-list/posts-list', 'search', [
 				'wp_query_obj' => $wp_query
 			]);
 			?>
