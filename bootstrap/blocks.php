@@ -85,7 +85,6 @@ add_filter('grav_blocks_process_video_url', function ($process_video, $url) {
  * Grav Blocks block titles
  */
 function grav_block_title($title, $field, $layout, $i) {
-	var_dump('asdjkashd');
 	if($value = get_sub_field('layout_title')) {
 		return $title . ' - ' . $value;
 	} else {
