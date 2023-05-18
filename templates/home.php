@@ -3,7 +3,7 @@ get_header();
 
 $blog_page_id = get_option('page_for_posts');
 
-WPUtil\Component::render('components/banners/banner-default', [
+get_template_part('components/banners/', 'banner-default', [
 	'title' => get_the_title($blog_page_id),
 	'post_id' => $blog_page_id
 ]);
@@ -13,7 +13,7 @@ WPUtil\Component::render('components/banners/banner-default', [
 	<?php
 	global $wp_query;
 
-	WPUtil\Component::render('components/posts-list/posts-list-blog', [
+	get_template_part('components/posts-list/posts-list-blog', [
 		'wp_query_obj' => $wp_query
 	]);
 	?>
