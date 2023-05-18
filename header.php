@@ -46,4 +46,4 @@ use ClientNamespace\Constants;
 		the_field(Constants\ACF::THEME_OPTIONS_SCRIPTS_BASE . '_global_body_top_content', 'option', false);
 	}
 
-	WPUtil\Component::render('components/header');
+	get_template_part('components/header');
