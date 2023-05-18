@@ -275,7 +275,7 @@ acf_add_local_field_group(array (
 	'instruction_placement' => 'label',     // label | field
 	'hide_on_screen' => array (
 	  // 0 => 'permalink',
-	  // 1 => 'the_content',
+	  1 => 'the_content',
 	  // 2 => 'excerpt',
 	  // 3 => 'custom_fields',
 	  // 4 => 'discussion',

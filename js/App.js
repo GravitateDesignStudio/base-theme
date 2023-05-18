@@ -1,7 +1,3 @@
-import objectFitImages from 'object-fit-images';
-import ImageBuddy from 'imagebuddy';
-
-import ThemeWelcome from './components/testing/theme-welcome';
 import SiteHeader from './components/site-header';
 import BannerVideo from './components/banner-video';
 import Modal from './components/modal';
@@ -20,7 +16,6 @@ class App {
 	constructor() {
 		this.instances = {
 			components: {
-				themeWelcome: null,
 				siteHeader: null,
 				bannerVideo: null,
 				postsListBlog: [],
@@ -59,20 +54,6 @@ class App {
 			ScrollWatcher.defaultCallback(params, 100);
 		});
 
-		// initialize ImageBuddy and setup events
-		this.instances.imageBuddy = new ImageBuddy({
-			lazyLoad: true
-			// debug: true
-		});
-
-		ImageBuddy.on('image-loaded', (imgEl) => {
-			objectFitImages(imgEl);
-		});
-
-		SiteEvents.subscribe(SiteEventNames.IMAGEBUDDY_TRIGGER_UPDATE, (opts) => {
-			this.instances.imageBuddy.update(opts || {});
-		});
-
 		initHelloBar((hbEl) => {
 			document.body.style.marginTop = `${hbEl.offsetHeight}px`;
 
@@ -89,14 +70,6 @@ class App {
 	}
 
 	async initComponents() {
-		// theme welcome
-		// TODO: remove during development
-		const themeWelcomeEl = document.querySelector('.theme-welcome');
-
-		if (themeWelcomeEl) {
-			this.instances.themeWelcome = new ThemeWelcome(themeWelcomeEl);
-		}
-
 		// site header
 		const siteHeaderEl = document.querySelector('.site-header');
 

@@ -258,22 +258,6 @@ acf_add_local_field_group(array (
 	'style' => 'default',                    // default | seamless
 	'label_placement' => 'top',                // top | left
 	'instruction_placement' => 'label',     // label | field
-	'hide_on_screen' => array (
-	  // 0 => 'permalink',
-	  // 1 => 'the_content',
-	  // 2 => 'excerpt',
-	  // 3 => 'custom_fields',
-	  // 4 => 'discussion',
-	  // 5 => 'comments',
-	  // 6 => 'revisions',
-	  // 7 => 'slug',
-	  // 8 => 'author',
-	  // 9 => 'format',
-	  // 10 => 'featured_image',
-	  // 11 => 'categories',
-	  // 12 => 'tags',
-	  // 13 => 'send-trackbacks',
-	),
 	'active' => 1,
 	'description' => '',
 ));
