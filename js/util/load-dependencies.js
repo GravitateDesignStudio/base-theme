@@ -32,35 +32,6 @@ function setLoadedDependency(depName, loadedObject) {
 }
 
 /**
- * Load the Embla Carousel library. Returns a promise with the library object
- * when successful.
- *
- * @returns {Promise<object>}
- */
-export function loadEmblaCarousel() {
-	return new Promise((resolve, reject) => {
-		if (typeof window.EmblaCarousel !== 'undefined') {
-			resolve(window.EmblaCarousel);
-		}
-
-		const existingInstance = getLoadedDependency('embla-carousel');
-
-		if (existingInstance) {
-			resolve(existingInstance);
-		}
-
-		import(/* webpackChunkName: "embla-carousel" */ 'embla-carousel')
-			.then((Embla) => {
-				setLoadedDependency('embla-carousel', Embla.default);
-				resolve(Embla.default);
-			})
-			.catch((err) => {
-				reject(err);
-			});
-	});
-}
-
-/**
  * Load the Intersection Observer polyfill library. Returns a promise with the
  * library object when successful.
  *

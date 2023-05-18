@@ -22,7 +22,7 @@ module.exports = {
 		rules: [
 			{
 				test: /\.js$/,
-				exclude: /node_modules\/(?!(dom7|swiper|imagebuddy)\/).*/,
+				exclude: /node_modules\/(?!(dom7|imagebuddy)\/).*/,
 				use: {
 					loader: 'babel-loader',
 					options: {

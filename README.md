@@ -48,10 +48,6 @@ With the combination of Webpack and Babel, it is possible to use [ES6+](https://
 
 #### Included Libraries
 
-##### Embla Carousel
-
-[Embla Carousel](https://www.embla-carousel.com/) can be included via the `loadEmblaCarousel` method in `js/util/load-dependencies.js`. This method will include the library dynamically and return a promise with the Embla instance after a successful load.
-
 ### How To Build
 
 The following NPM script aliases have been include and can be run with `npm run <script-name>`:
