@@ -161,8 +161,6 @@ class PostsList {
 			this.cardsContainer.setAttribute('data-total-pages', newTotalPages);
 
 			this.loadMore.setVisible(newTotalPages > nextPage);
-
-			SiteEvents.publish(SiteEventNames.IMAGEBUDDY_TRIGGER_UPDATE);
 		} catch (err) {
 			this.showLoadingSpinner(false);
 

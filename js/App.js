@@ -24,7 +24,6 @@ class App {
 			templates: {},
 			blocks: {},
 			scrollWatcher: null,
-			imageBuddy: null
 		};
 
 		this.init();
