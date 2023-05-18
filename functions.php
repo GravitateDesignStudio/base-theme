@@ -36,3 +36,20 @@ require_once 'bootstrap/api.php';
 require_once 'bootstrap/hello-bar.php';
 require_once 'bootstrap/virtual-pages.php';
 require_once 'bootstrap/pre-get-posts.php';
+
+// Disable Gutenberg on the back end.
+add_filter( 'use_block_editor_for_post', '__return_false', 10 );
+
+// Disable Gutenberg for widgets.
+add_filter( 'use_widgets_block_editor', '__return_false' );
+
+add_action( 'wp_enqueue_scripts', function() {
+    // Remove CSS on the front end.
+    wp_dequeue_style( 'wp-block-library' );
+
+    // Remove Gutenberg theme.
+    wp_dequeue_style( 'wp-block-library-theme' );
+
+    // Remove inline global CSS on the front end.
+    wp_dequeue_style( 'global-styles' );
+}, 20 );
