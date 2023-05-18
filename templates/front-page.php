@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-WPUtil\Component::render('components/banners/banner-default', [
+get_template_part('components/banners/banner', 'default', [
 	'title' => 'Gravitate WordPress Theme'
 ]);
 
