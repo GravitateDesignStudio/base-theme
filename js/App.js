@@ -1,3 +1,5 @@
+import '../css/master.scss';
+
 import SiteHeader from './components/site-header';
 import BannerVideo from './components/banner-video';
 import Modal from './components/modal';
