@@ -64,3 +64,14 @@ add_action( 'wp_enqueue_scripts', function() {
     // Remove inline global CSS on the front end.
     wp_dequeue_style( 'global-styles' );
 }, 20 );
+
+function enqueue_admin_styles() {
+	wp_enqueue_style(
+	  'admin-styles', // Handle name
+	  get_template_directory_uri() . 'dist/editor-styles.css', // Path to the generated styles
+	  array(), // Dependencies
+	  '1.0', // Version number
+	  'all' // Media type
+	);
+  }
+  add_action('admin_enqueue_scripts', 'enqueue_admin_styles');

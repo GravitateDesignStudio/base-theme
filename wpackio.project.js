@@ -31,6 +31,7 @@ module.exports = {
 		     // code splitting automatically. When using ES6 modules, forget
 		     // global namespace pollutions 😉
 				main: ['./js/App.js'], // Or an array of string (string[])
+				editor: ['./js/Editor.js'],
 			},
 		// // If enabled, all WordPress provided external scripts, including React
 		// // and ReactDOM are aliased automatically. Do note that all `@wordpress`
