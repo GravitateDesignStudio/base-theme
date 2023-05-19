@@ -10,6 +10,16 @@ if (!file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 
 require_once 'vendor/autoload.php';
 
+$enqueue = new \WPackio\Enqueue( 'baseTheme', 'dist', '1.0.0', 'theme', __FILE__ );
+$assets = $enqueue->enqueue( 'app', 'main', [
+	'js' => true,
+	'css' => true,
+	'js_dep' => [],
+	'css_dep' => [],
+	'in_footer' => true,
+	'media' => 'all',
+]);
+
 // check for existence of dfrei/wp-util package
 if (!class_exists('\WPUtil\Content')) {
 	die("The 'dfrei/wp-util' composer package is required for this theme. Please run 'composer install' from the theme root.");

@@ -9,6 +9,7 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
+            'WPackio\\' => 8,
             'WPUtil\\' => 7,
         ),
         'C' => 
@@ -22,6 +23,10 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
     );
 
     public static $prefixDirsPsr4 = array (
+        'WPackio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wpackio/enqueue/inc',
+        ),
         'WPUtil\\' => 
         array (
             0 => __DIR__ . '/..' . '/dfrei/wp-util/src',
