@@ -1,5 +1,5 @@
 <?php
-$wp_query_obj = isset($wp_query_obj) && is_a($wp_query_obj, 'WP_Query') ? $wp_query_obj : null;
+// $wp_query_obj = isset($wp_query_obj) && is_a($wp_query_obj, 'WP_Query') ? $wp_query_obj : null;
 $card_component = isset($card_component) && is_string($card_component) ? $card_component : 'components/cards/card-resource';
 $block_display = $block_display ?? false;
 $featured_ids = isset($featured_ids) && is_array($featured_ids) ? $featured_ids : [];
@@ -15,7 +15,7 @@ $pre_card_column_callback = isset($pre_card_column_callback) ? $pre_card_column_
 
 $filter_render_functions = isset($filter_render_functions) && is_array($filter_render_functions) ? $filter_render_functions : [];
 
-if ($wp_query_obj && $card_component)
+if ($wp_query_object && $card_component)
 {
 	$container_classes = array_merge(['posts-list'], $add_container_classes);
 
@@ -87,7 +87,7 @@ if ($wp_query_obj && $card_component)
 			'posts-list__no-results-container'
 		];
 
-		if ($wp_query_obj->posts) {
+		if ($wp_query_object->posts) {
 			$no_results_classes[] = 'hide';
 		}
 
@@ -99,7 +99,7 @@ if ($wp_query_obj && $card_component)
 			data-posts-per-page="<?php echo esc_attr($posts_per_page); ?>"
 			>
 			<?php
-			foreach ($wp_query_obj->posts as $cur_index => $cur_post)
+			foreach ($wp_query_object->posts as $cur_index => $cur_post)
 			{
 				if (is_callable($pre_card_column_callback)) {
 					$pre_card_column_callback($cur_index, $cur_post->ID);
@@ -133,7 +133,9 @@ if ($wp_query_obj && $card_component)
 		</div>
 		<?php
 
-		WPUtil\Component::render('components/archive/load-more');
+		get_template_part('components/archive/load-more', '', [
+			'wp_query_object' => $wp_query_object,
+		]);
 		?>
 	</div>
 	<?php

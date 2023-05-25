@@ -8,6 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
     'WPUtil\\' => array($vendorDir . '/dfrei/wp-util/src'),
+    'ExtCPTs\\Tests\\' => array($vendorDir . '/johnbillion/extended-cpts/tests/integration'),
+    'ExtCPTs\\' => array($vendorDir . '/johnbillion/extended-cpts/src'),
     'ClientNamespace\\' => array($baseDir . '/inc/ClientNamespace'),
     'Blueprint\\' => array($baseDir . '/inc/Blueprint'),
+    'Args\\' => array($vendorDir . '/johnbillion/args/src'),
 );

@@ -3,32 +3,28 @@
   "app/assets/arrow-right.png": "app/assets/arrow-right-f25b163d.png",
   "app/assets/check-blue.png": "app/assets/check-blue-ae31a391.png",
   "app/assets/check-white.png": "app/assets/check-white-a3f1774a.png",
-  "main.css": "app/main.css",
-  "main.css.map": "app/main.css.map",
-  "main.js": "app/main.js",
-  "main.js.map": "app/main.js.map",
-  "runtime.js": "app/runtime.js",
-  "runtime.js.map": "app/runtime.js.map",
-  "vendors~main.js": "app/vendors~main.js",
-  "vendors~main.js.map": "app/vendors~main.js.map",
+  "main.css": "app/main-2ad0a86d.css",
+  "main.css.map": "app/main-2ad0a86d.css.map",
+  "main.js": "app/main-8bc5e295.js",
+  "main.js.map": "app/main-8bc5e295.js.map",
+  "runtime.js": "app/runtime-543eedcc.js",
+  "runtime.js.map": "app/runtime-543eedcc.js.map",
   "wpackioEp": {
     "main": {
       "assets": {
         "js": [
-          "app/runtime.js",
-          "app/vendors~main.js",
-          "app/main.js"
+          "app/runtime-543eedcc.js",
+          "app/main-8bc5e295.js"
         ],
         "js.map": [
-          "app/runtime.js.map",
-          "app/vendors~main.js.map",
-          "app/main.js.map"
+          "app/runtime-543eedcc.js.map",
+          "app/main-8bc5e295.js.map"
         ],
         "css": [
-          "app/main.css"
+          "app/main-2ad0a86d.css"
         ],
         "css.map": [
-          "app/main.css.map"
+          "app/main-2ad0a86d.css.map"
         ]
       }
     }

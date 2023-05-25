@@ -5,7 +5,7 @@ get_template_part('components/banners/banner', 'default');
 
 ?>
 <main class="main-content">
-		<?php WPUtil\Vendor\BlueprintBlocks::safe_display() ?>
+	<?php WPUtil\Vendor\BlueprintBlocks::safe_display() ?>
 </main>
 <?php
 

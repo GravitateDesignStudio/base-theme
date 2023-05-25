@@ -1,5 +1,5 @@
 <?php
-$wp_query_obj = isset($wp_query_obj) && is_a($wp_query_obj, 'WP_Query') ? $wp_query_obj : null;
+// $wp_query_obj = isset($wp_query_obj) && is_a($wp_query_obj, 'WP_Query') ? $wp_query_obj : null;
 $block_display = $block_display ?? false;
 $current_page = isset($current_page) && is_int($current_page) ? $current_page : 1;
 
@@ -14,8 +14,8 @@ $no_results_message = isset($no_results_message) && is_string($no_results_messag
 	);
 
 WPUtil\Component::render('components/posts-list/posts-list', [
-	'wp_query_obj' => $wp_query_obj,
-	'card_component' => 'components/cards/card-blog',
+	'wp_query_object' => $args['wp_query_object'],
+	'card_component' => 'components/cards/card',
 	'block_display' => $block_display,
 	'featured_ids' => ClientNamespace\CPT\Blog::getFeaturedIds(),
 	'add_container_classes' => ['posts-list--blog'],

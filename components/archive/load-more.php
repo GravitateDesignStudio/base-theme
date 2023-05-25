@@ -1,7 +1,7 @@
 <?php
-global $paged, $wp_query;
+global $paged;
 
-$max_page = $wp_query->max_num_pages;
+$max_page = $args['wp_query_object']->max_num_pages;
 
 if (!$paged) {
 	$paged = 1;

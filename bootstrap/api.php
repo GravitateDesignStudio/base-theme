@@ -14,9 +14,7 @@ add_action('rest_api_init', function () {
 			return WPUtil\Component::render_to_string(
 				'components/cards/card-blog',
 				[
-					'post_id' => $post['id'],
-					'category' => ClientNamespace\CPT\Blog::getPostCategoryText($post['id']),
-					'default_image' => ClientNamespace\CPT\Blog::getDefaultCardImage()
+					'post_id' => $post['id']
 				]
 			);
 		}

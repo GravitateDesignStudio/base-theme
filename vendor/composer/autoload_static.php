@@ -6,11 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
 {
+    public static $files = array (
+        'ac773ca18bc86f9208de2ed8068423eb' => __DIR__ . '/..' . '/johnbillion/extended-cpts/functions.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
         'W' => 
         array (
             'WPackio\\' => 8,
             'WPUtil\\' => 7,
+        ),
+        'E' => 
+        array (
+            'ExtCPTs\\Tests\\' => 14,
+            'ExtCPTs\\' => 8,
         ),
         'C' => 
         array (
@@ -19,6 +28,10 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         'B' => 
         array (
             'Blueprint\\' => 10,
+        ),
+        'A' => 
+        array (
+            'Args\\' => 5,
         ),
     );
 
@@ -31,6 +44,14 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         array (
             0 => __DIR__ . '/..' . '/dfrei/wp-util/src',
         ),
+        'ExtCPTs\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/johnbillion/extended-cpts/tests/integration',
+        ),
+        'ExtCPTs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/johnbillion/extended-cpts/src',
+        ),
         'ClientNamespace\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc/ClientNamespace',
@@ -38,6 +59,10 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         'Blueprint\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc/Blueprint',
+        ),
+        'Args\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/johnbillion/args/src',
         ),
     );
 
