@@ -99,4 +99,4 @@ function grav_block_title($title, $field, $layout, $i) {
 	return $title;
 }
 
-add_filter('acf/fields/flexible_content/layout_title', 'grav_block_title', 10, 4);
+// add_filter('acf/fields/flexible_content/layout_title', 'grav_block_title', 10, 4);
