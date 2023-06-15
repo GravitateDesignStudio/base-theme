@@ -31,7 +31,7 @@ class PostsListBlog extends PostsList {
 
 					this.updateURL();
 					this.clearCardsContainer();
-					this.loadBlogPosts();
+					this.loadBlogPosts();``
 				}
 			});
 		}
