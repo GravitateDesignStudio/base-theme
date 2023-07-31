@@ -30,7 +30,8 @@ module.exports = {
 		     // You do not need to worry about file-size, because we would do
 		     // code splitting automatically. When using ES6 modules, forget
 		     // global namespace pollutions 😉
-				main: ['./js/App.js'], // Or an array of string (string[])
+				main: ['./js/App.js'],
+				admin: ['./js/admin.js']
 			},
 		// // If enabled, all WordPress provided external scripts, including React
 		// // and ReactDOM are aliased automatically. Do note that all `@wordpress`

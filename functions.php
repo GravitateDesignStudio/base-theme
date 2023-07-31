@@ -10,8 +10,9 @@ if (!file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 
 require_once 'vendor/autoload.php';
 
-$enqueue = new \WPackio\Enqueue( 'baseTheme', 'dist', '1.0.0', 'theme', __FILE__ );
-$assets = $enqueue->enqueue( 'app', 'main', [
+$enqueue = new \WPackio\Enqueue( 'baseTheme', 'dist', '1.0.0', 'theme' );
+
+$assets = $enqueue->register( 'app', 'main', [
 	'js' => true,
 	'css' => true,
 	'js_dep' => [],
@@ -19,6 +20,26 @@ $assets = $enqueue->enqueue( 'app', 'main', [
 	'in_footer' => true,
 	'media' => 'all',
 ]);
+
+$admin_assets = $enqueue->register( 'app', 'admin', []);
+
+function enqueueScripts() {
+	global $assets;
+	foreach($assets['js'] as $js) {
+		wp_enqueue_script($js['handle']);
+	}
+
+	foreach($assets['css'] as $css) {
+		wp_enqueue_style($css['handle']);
+	}
+}
+
+// Add editor styles to TinyMCE
+foreach($admin_assets['css'] as $css) {
+	add_editor_style($css['url']);
+}
+
+add_action('wp_enqueue_scripts', 'enqueueScripts');
 
 // check for existence of dfrei/wp-util package
 if (!class_exists('\WPUtil\Content')) {
@@ -33,17 +54,12 @@ if (defined('LOCAL_IMAGE_REDIRECT') && WP_HOME !== null && stripos(WP_HOME, '.lo
 require_once 'bootstrap/theme-setup.php';
 require_once 'bootstrap/performance.php';
 require_once 'bootstrap/media.php';
-require_once 'bootstrap/scripts-styles.php';
-require_once 'bootstrap/custom-post-types.php';
-require_once 'bootstrap/taxonomies.php';
 require_once 'bootstrap/acf.php';
 require_once 'bootstrap/menus.php';
-require_once 'bootstrap/tinymce.php';
 require_once 'bootstrap/plugins.php';
 require_once 'bootstrap/blocks.php';
 require_once 'bootstrap/theme-settings-pages.php';
 require_once 'bootstrap/api.php';
-require_once 'bootstrap/hello-bar.php';
 require_once 'bootstrap/virtual-pages.php';
 require_once 'bootstrap/pre-get-posts.php';
 require_once 'bootstrap/filters.php';
@@ -73,6 +89,10 @@ function the_svg($filename, bool $no_use = false) {
 	WPUtil\SVG::the_svg($filename, $options);
 }
 function the_button_formatter($button, $params = []) {
+	if (!isset($button['url']) || !isset($button['title'])) {
+		return;
+	};
+
 	$all_params = array_map(function($a, $key) {
 		return $key.'="'.$a.'"';
 	}, $params, array_keys($params));
@@ -82,25 +102,5 @@ function the_button_formatter($button, $params = []) {
 
 // add support for page excerpts
 add_post_type_support( 'page', 'excerpt' );
-
-/**
- * Get term options for ACF select field
- */
-function get_term_options($taxonomy) {
-	$terms = get_terms( array(
-		'taxonomy' => $taxonomy,
-		'hide_empty' => false,
-	));
-	
-	$term_options = array_map( function( $term ) {
-		return array(
-			$term->slug => $term->name,
-		);
-	}, $terms );
-	
-	return array_merge(...$term_options);
-};
-
 add_filter( 'excerpt_length', fn() => 15, 999 );
 add_filter('excerpt_more', fn() => '&hellip;');
-

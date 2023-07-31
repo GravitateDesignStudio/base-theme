@@ -23,12 +23,12 @@
     "@wpackio/entrypoint": "^6.4.0",
     "foundation-sites": "^6.6.3",
     "intersection-observer": "^0.12.0",
-    "normalize.css": "^8.0.0",
-    "sass": "^1.62.1"
+    "normalize.css": "^8.0.0"
   },
   "devDependencies": {
     "@wpackio/scripts": "^6.4.0",
-    "postcss": "^8.4.23"
+    "postcss": "^8.4.27",
+    "sass": "^1.64.1"
   },
   "bundlerOptions": {
     "babel": true
