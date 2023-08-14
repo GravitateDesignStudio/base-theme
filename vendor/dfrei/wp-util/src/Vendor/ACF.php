@@ -105,7 +105,9 @@ abstract class ACF
 	{
 		$opts = array_merge([
 			'format_value' => true,
-			'default' => ''
+			'default' => '',
+			'trim' => true,
+			'allow_empty' => true
 		], $opts);
 
 		if (!is_string($opts['default'])) {
@@ -116,9 +118,17 @@ abstract class ACF
 			return $opts['default'];
 		}
 
-		$value = get_field($selector, $post_id, $opts['format_value']);
+		$value = strval(get_field($selector, $post_id, $opts['format_value']));
 
-		return strval($value) ? $value : $opts['default'];
+		if ($opts['trim']) {
+			$value = trim($value);
+		}
+
+		if (!$opts['allow_empty'] && !$value) {
+			return $opts['default'];
+		}
+
+		return $value;
 	}
 
 	/**
@@ -146,11 +156,43 @@ abstract class ACF
 
 		$value = get_field($selector, $post_id, $opts['format_value']);
 
+		if (is_null($value)) {
+			return $opts['default'];
+		}
+
 		if (is_bool($value)) {
 			return $value ? 1 : 0;
 		}
 
-		return intval($value) ? $value : $opts['default'];
+		return intval($value);
+	}
+
+	/**
+	 * Wrapper around the ACF "get_field" function that returns a boolean value
+	 *
+	 * @param string $selector
+	 * @param int|string $post_id
+	 * @param array<string, mixed> $opts
+	 * @return bool
+	 */
+	public static function get_field_bool(string $selector, $post_id = false, array $opts = []): bool
+	{
+		$opts = array_merge([
+			'format_value' => true,
+			'default' => false
+		], $opts);
+
+		if (!is_bool($opts['default'])) {
+			$opts['default'] = false;
+		}
+
+		if (!function_exists('get_field')) {
+			return $opts['default'];
+		}
+
+		$value = get_field($selector, $post_id, $opts['format_value']);
+
+		return boolval($value);
 	}
 
 	/**
@@ -191,7 +233,9 @@ abstract class ACF
 	{
 		$opts = array_merge([
 			'format_value' => true,
-			'default' => ''
+			'default' => '',
+			'trim' => true,
+			'allow_empty' => true
 		], $opts);
 
 		if (!is_string($opts['default'])) {
@@ -202,9 +246,17 @@ abstract class ACF
 			return $opts['default'];
 		}
 
-		$value = get_sub_field($selector, $opts['format_value']);
+		$value = strval(get_sub_field($selector, $opts['format_value']));
 
-		return strval($value) ? $value : $opts['default'];
+		if ($opts['trim']) {
+			$value = trim($value);
+		}
+
+		if (!$opts['allow_empty'] && !$value) {
+			return $opts['default'];
+		}
+
+		return $value;
 	}
 
 	/**
@@ -231,10 +283,41 @@ abstract class ACF
 
 		$value = get_sub_field($selector, $opts['format_value']);
 
+		if (is_null($value)) {
+			return $opts['default'];
+		}
+
 		if (is_bool($value)) {
 			return $value ? 1 : 0;
 		}
 
-		return $value !== false ? intval($value) : $opts['default'];
+		return intval($value);
+	}
+
+	/**
+	 * Wrapper around the ACF "get_sub_field" function that returns a boolean value
+	 *
+	 * @param string $selector
+	 * @param array<string, mixed> $opts
+	 * @return bool
+	 */
+	public static function get_sub_field_bool(string $selector, array $opts = []): bool
+	{
+		$opts = array_merge([
+			'format_value' => true,
+			'default' => false
+		], $opts);
+
+		if (!is_bool($opts['default'])) {
+			$opts['default'] = false;
+		}
+
+		if (!function_exists('get_sub_field')) {
+			return $opts['default'];
+		}
+
+		$value = get_sub_field($selector, $opts['format_value']);
+
+		return boolval($value);
 	}
 }

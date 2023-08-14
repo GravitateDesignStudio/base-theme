@@ -8,6 +8,9 @@ $baseDir = dirname($vendorDir);
 return array(
     'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
     'WPUtil\\' => array($vendorDir . '/dfrei/wp-util/src'),
+    'StoutLogic\\AcfBuilder\\' => array($vendorDir . '/stoutlogic/acf-builder/src'),
+    'Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector'),
     'ClientNamespace\\' => array($baseDir . '/inc/ClientNamespace'),
     'Blueprint\\' => array($baseDir . '/inc/Blueprint'),
+    'BaseUtils\\' => array($vendorDir . '/jrcreative/base-utils/src'),
 );

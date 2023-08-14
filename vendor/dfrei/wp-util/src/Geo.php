@@ -1,6 +1,8 @@
 <?php
 namespace WPUtil;
 
+use WPUtil\Exceptions\GoogleMapsAPIException;
+
 abstract class Geo
 {
 	/**
@@ -55,9 +57,11 @@ abstract class Geo
 	 *
 	 * @param string $address
 	 * @param string $gmaps_api_key
+	 * @param array<int, mixed> $add_curl_opts
 	 * @return object
+	 * @throws GoogleMapsAPIException If the Geocoding API returns an error.
 	 */
-	public static function address_to_location(string $address, string $gmaps_api_key = ''): object
+	public static function address_to_location(string $address, string $gmaps_api_key = '', array $add_curl_opts = []): object
 	{
 		$ret_obj = (object)[
 			'latitude' => 0,
@@ -66,25 +70,38 @@ abstract class Geo
 		];
 
 		$query_parts = array(
-			'address='.str_replace(' ', '+', urlencode($address)),
+			'address=' . str_replace(' ', '+', urlencode($address)),
 			'sensor=false'
 		);
 
 		if ($gmaps_api_key) {
-			$query_parts[] = 'key='.$gmaps_api_key;
+			$query_parts[] = 'key=' . $gmaps_api_key;
 		}
 
-		$details_url = 'https://maps.googleapis.com/maps/api/geocode/json?'.implode('&', $query_parts);
+		$details_url = 'https://maps.googleapis.com/maps/api/geocode/json?' . implode('&', $query_parts);
 
 		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $details_url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+		$curl_opts = [
+			CURLOPT_URL => $details_url,
+			CURLOPT_RETURNTRANSFER => 1
+		];
+
+		$curl_opts = array_reduce(array_keys($add_curl_opts), function ($acum, $key) use ($add_curl_opts) {
+			if (!isset($acum[$key])) {
+				$acum[$key] = $add_curl_opts[$key];
+			}
+
+			return $acum;
+		}, $curl_opts);
+
+		curl_setopt_array($ch, $curl_opts);
 
 		$response = json_decode(curl_exec($ch), true);
 
 		// If Status Code is ZERO_RESULTS, OVER_QUERY_LIMIT, REQUEST_DENIED or INVALID_REQUEST
 		if ($response['status'] !== 'OK') {
-			return $ret_obj;
+			throw new GoogleMapsAPIException($response['status'], $response['error_message'] ?? '', $response);
 		}
 
 		$geometry = $response['results'][0]['geometry'];
@@ -126,6 +143,9 @@ abstract class Geo
 		$from = (!empty($args['from']) ? esc_sql($args['from']) : 0);
 		$limit = (!empty($args['limit']) ? esc_sql($args['limit']) : 999999);
 		$meta_query = (!empty($args['meta_query'])) ? $args['meta_query'] : [];
+		$post_not_in = isset($args['post__not_in']) && is_array($args['post__not_in']) ? array_filter($args['post__not_in'], function ($post_id) {
+			return is_int($post_id) && $post_id > 0;
+		}) : [];
 
 		if (is_array($from_location)) {
 			if (isset($args['from_location']['latitude'])) {
@@ -161,6 +181,15 @@ abstract class Geo
 			"distance >= {$from}",
 		);
 
+		$where_and_clauses = array(
+			"post_type = '{$post_type}'",
+			"post_status = 'publish'"
+		);
+
+		if ($post_not_in) {
+			$where_and_clauses[] = "{$wpdb->posts}.ID NOT IN (" . implode(',', $post_not_in) . ')';
+		}
+
 		// add meta query clauses
 		for ($i = 0; $i < count($meta_query); $i++) {
 			if (!is_array($meta_query[$i]) || !isset($meta_query[$i]['key']) || !isset($meta_query[$i]['value'])) {
@@ -176,7 +205,7 @@ abstract class Geo
 			$where_having_clauses[] = "{$key} {$compare} {$value}";
 		}
 
-		$sql = "SELECT ".implode(', ', $select_clauses)." FROM {$wpdb->posts} ".implode(' ', $join_clauses)." WHERE post_type = '{$post_type}' AND post_status = 'publish' HAVING ".implode(' AND ', $where_having_clauses)." ORDER BY distance LIMIT {$limit}";
+		$sql = "SELECT ".implode(', ', $select_clauses)." FROM {$wpdb->posts} ".implode(' ', $join_clauses)." WHERE " . implode(' AND ', $where_and_clauses) . " HAVING ".implode(' AND ', $where_having_clauses)." ORDER BY distance LIMIT {$limit}";
 
 		return $wpdb->get_results($sql);
 	}

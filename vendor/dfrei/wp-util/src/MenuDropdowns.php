@@ -389,6 +389,7 @@ abstract class MenuDropdowns
 			'publicly_queryable' => false,
 			'show_ui' => true,
 			'show_in_menu' => true,
+			'show_in_nav_menu' => false,
 			'capability_type' => 'page',
 			'map_meta_cap' => true,
 			'hierarchical' => false,

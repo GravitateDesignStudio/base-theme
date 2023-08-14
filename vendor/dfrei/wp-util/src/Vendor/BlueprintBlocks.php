@@ -2,6 +2,7 @@
 namespace WPUtil\Vendor;
 
 use WPUtil\Models\BlueprintBlocksLink;
+use WPUtil\StaticCache;
 
 abstract class BlueprintBlocks
 {
@@ -174,5 +175,57 @@ abstract class BlueprintBlocks
 
 			return $available_blocks;
 		});
+	}
+
+	/**
+	 * Return an array of block names for blocks included within the theme directory
+	 *
+	 * @return array<string>
+	 */
+	public static function get_theme_blocks_list(): array
+	{
+		$theme_blocks = StaticCache::get('blueprint_blocks_theme_blocks');
+
+		if (!is_array($theme_blocks)) {
+			$theme_blocks_dir = get_template_directory() . '/grav-blocks/';
+
+			if (is_dir($theme_blocks_dir)) {
+				$theme_blocks = glob($theme_blocks_dir . '*', GLOB_ONLYDIR);
+				$theme_blocks = array_map(fn ($block_path) => basename($block_path), $theme_blocks);
+
+				StaticCache::set('blueprint_blocks_theme_blocks', $theme_blocks);
+			}
+		}
+
+		return $theme_blocks;
+	}
+
+	/**
+	 * Restrict the specified blocks to only allow the use of specified background
+	 * colors. This method takes an array where the keys are block names and the
+	 * values are arrays with the names of allowed background colors.
+	 *
+	 * Ex:
+	 * [
+	 *     'calltoaction' => ['block-bg-none', 'bg-blue'],
+	 *     'columns' => ['block-bg-none', 'bg-gray']
+	 * ]
+	 *
+	 * @param array<string, array<string>> $blocks
+	 * @return void
+	 */
+	public static function restrict_backgrounds_for_blocks(array $blocks)
+	{
+		add_filter('grav_block_background_colors', function ($colors, $block) use (&$blocks) {
+			if (!isset($blocks[$block])) {
+				return $colors;
+			}
+
+			$allowed_colors = $blocks[$block];
+
+			return array_filter($colors, function ($color) use (&$allowed_colors) {
+				return in_array($color, $allowed_colors, true);
+			}, ARRAY_FILTER_USE_KEY);
+		}, 11, 2);
 	}
 }

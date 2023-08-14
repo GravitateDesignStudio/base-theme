@@ -83,6 +83,8 @@
 		<h4>Buttons (secondary)</h4>
 		<hr>
 
+		<?php grav_button('#', 'Primary Button', 'button button--primary'); ?>
+
 		<a href="#" class="button button--secondary">Button</a>
 		<a href="#" class="button button--secondary active">Button (active)</a>
 		<a href="#" class="button button--secondary disabled" disabled>Button (disabled)</a>
@@ -93,6 +95,7 @@
 	<div class="columns small-12 large-6">
 		<h4>Buttons Slim (primary)</h4>
 		<hr>
+
 
 		<a href="#" class="button button--slim">Button</a>
 		<a href="#" class="button button--slim active">Button (active)</a>

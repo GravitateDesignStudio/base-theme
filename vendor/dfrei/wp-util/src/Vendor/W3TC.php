@@ -18,7 +18,7 @@
  * if (file_exists(dirname(ABSPATH).'/vendor/autoload.php')) {
  *     require_once(dirname(ABSPATH).'/vendor/autoload.php');
  *
- *     Grav\Vendor\W3TC::set_values(array(
+ *     WPUtil\Vendor\W3TC::set_values(array(
  *         'pgcache.enabled' => true,
  *         'dbcache.reject.sql' => array(
  *             'gdsr_',

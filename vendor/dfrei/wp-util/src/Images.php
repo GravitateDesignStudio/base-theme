@@ -1,7 +1,7 @@
 <?php
 namespace WPUtil;
 
-use WPUtil\StaticCache;
+use WPUtil\{ StaticCache, Util };
 use WPUtil\Models\{ ImageInfo, ImageSize };
 use DOMDocument;
 
@@ -170,10 +170,19 @@ abstract class Images
 	 * with a "wp-image-*" class or a successful ID lookup using "attachment_url_to_postid".
 	 *
 	 * @param string $content
+	 * @param array<string, mixed> $opts
 	 * @return string
 	 */
-	public static function replace_content_with_ib_images(string $content): string
+	public static function replace_content_with_ib_images(string $content, array $opts = []): string
 	{
+		$settings = array_merge(
+			[
+				'add_attributes' => [],
+				'keep_width_height_attributes' => true
+			],
+			$opts
+		);
+
 		$matches = [];
 		preg_match_all('(<img\ .+\/\>)', $content, $matches);
 
@@ -224,21 +233,27 @@ abstract class Images
 			$image_sizes = self::get_image_sizes_from_acf_object($wp_image_id);
 			$ib_sources_str = self::build_ib_sources_string($image_sizes);
 
-			$attributes['src'] = '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC"'; // 100x1
-			$attributes['data-ib-sources'] = '"' . $ib_sources_str . '"';
-			$attributes['data-ib-match-dpr'] = '"0"';
-			$attributes['class'] = '"' . $attr_class . '"';
-			$attributes['alt'] = '"' . $attr_alt . '"';
+			$attributes = [
+				'src' => '"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAABCAQAAACC0sM2AAAADElEQVR42mNkGCYAAAGSAAIVQ4IOAAAAAElFTkSuQmCC"', // 100x1 transparent PNG
+				'data-ib-sources' => $ib_sources_str,
+				'data-ib-match-dpr' => 0,
+				'class' => $attr_class,
+				'alt' => $attr_alt
+			];
 
-			if ($attr_width) {
-				$attributes['width'] = '"' . $attr_width . '"';
+			if ($attr_width && $settings['keep_width_height_attributes']) {
+				$attributes['width'] = $attr_width;
 			}
 
-			if ($attr_height) {
-				$attributes['height'] = '"' . $attr_height . '"';
+			if ($attr_height && $settings['keep_width_height_attributes']) {
+				$attributes['height'] = $attr_height;
 			}
 
-			$attributes_str = trim(urldecode(http_build_query($attributes, '', ' ')));
+			if (is_array($settings['add_attributes'])) {
+				$attributes = array_merge($attributes, $settings['add_attributes']);
+			}
+
+			$attributes_str = Util::attributes_array_to_string($attributes);
 
 			$ib_image_tag = "<img {$attributes_str} />";
 

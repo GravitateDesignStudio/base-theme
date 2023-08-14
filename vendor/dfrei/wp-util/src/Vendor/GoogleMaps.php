@@ -61,8 +61,10 @@ abstract class GoogleMaps
 	 */
 	public static function register_key_for_acf(string $key): void
 	{
-		add_filter('acf/init', function() use (&$key) {
-			acf_update_setting('google_api_key', $key);
+		add_filter('acf/fields/google_map/api', function ($api) use ($key) {
+			$api['key'] = $key;
+
+			return $api;
 		});
 	}
 

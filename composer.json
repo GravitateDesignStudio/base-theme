@@ -2,6 +2,7 @@
 	"name": "gravitate/blueprint-theme",
 	"description": "Gravitate WordPress Starter Theme",
 	"type": "wordpress-theme",
+	"minimum-stability": "dev",
 	"autoload": {
 		"psr-4": {
 			"Blueprint\\": "inc/Blueprint/",
@@ -10,6 +11,13 @@
 	},
 	"require": {
 		"dfrei/wp-util": "^2.1.2",
-		"wpackio/enqueue": "^3.5"
-	}
+		"wpackio/enqueue": "^3.5",
+		"jrcreative/base-utils": "*"
+	},
+	"repositories" : [
+		{
+			"type": "path",
+			"url": "../../../../../../base-utils"
+		}
+	]
 }

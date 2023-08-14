@@ -12,6 +12,14 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
             'WPackio\\' => 8,
             'WPUtil\\' => 7,
         ),
+        'S' => 
+        array (
+            'StoutLogic\\AcfBuilder\\' => 22,
+        ),
+        'D' => 
+        array (
+            'Doctrine\\Inflector\\' => 19,
+        ),
         'C' => 
         array (
             'ClientNamespace\\' => 16,
@@ -19,6 +27,7 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         'B' => 
         array (
             'Blueprint\\' => 10,
+            'BaseUtils\\' => 10,
         ),
     );
 
@@ -31,6 +40,14 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         array (
             0 => __DIR__ . '/..' . '/dfrei/wp-util/src',
         ),
+        'StoutLogic\\AcfBuilder\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stoutlogic/acf-builder/src',
+        ),
+        'Doctrine\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
+        ),
         'ClientNamespace\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc/ClientNamespace',
@@ -38,6 +55,10 @@ class ComposerStaticInit9b1763f4e42c9b62511a1e14e07557c4
         'Blueprint\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc/Blueprint',
+        ),
+        'BaseUtils\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jrcreative/base-utils/src',
         ),
     );
 
