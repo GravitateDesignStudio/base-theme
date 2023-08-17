@@ -1,3 +1,5 @@
+import '../css/master.scss';
+
 import SiteHeader from './components/site-header';
 import BannerVideo from './components/banner-video';
 import Modal from './components/modal';
@@ -7,8 +9,6 @@ import PostsListSearch from './components/posts-list/posts-list-search';
 
 import { processExternalLinks } from './util/general-util';
 import ScrollWatcher from './util/scroll-watcher';
-import SiteEvents, { SiteEventNames } from './util/site-events';
-import { loadIntersectionObserver } from './util/load-dependencies';
 import { createSingleUseObserver } from './util/intersection-observer';
 import { initHelloBar } from './util/hello-bar';
 
@@ -24,7 +24,6 @@ class App {
 			templates: {},
 			blocks: {},
 			scrollWatcher: null,
-			imageBuddy: null
 		};
 
 		this.init();
@@ -63,10 +62,6 @@ class App {
 				siteHeaderEl.style.marginTop = `${hbEl.offsetHeight}px`;
 			}
 		});
-
-		// ObjectFitImages: only act upon images that have a valid src attribute
-		// Note: use the 'object-fit-polyfill' SCSS mixin to create the necessary 'font-family' attribute
-		objectFitImages('img:not([src^="data:"])');
 	}
 
 	async initComponents() {
@@ -111,8 +106,6 @@ class App {
 
 		if (animateBlocks && animateBlocks.length) {
 			try {
-				await loadIntersectionObserver();
-
 				animateBlocks.forEach((watchEl) =>
 					createSingleUseObserver(watchEl, (entry, el) => {
 						el.classList.remove('block-animate');

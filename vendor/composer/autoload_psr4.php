@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WPackio\\' => array($vendorDir . '/wpackio/enqueue/inc'),
     'WPUtil\\' => array($vendorDir . '/dfrei/wp-util/src'),
     'ClientNamespace\\' => array($baseDir . '/inc/ClientNamespace'),
     'Blueprint\\' => array($baseDir . '/inc/Blueprint'),

@@ -9,7 +9,7 @@ class SiteHeader {
 
 	setupEventHandlers() {
 		// mobile menu button handler
-		const btnMobileMenu = this.el.querySelector('.site-header__mobile-menu-button');
+		const btnMobileMenu = document.getElementsByClassName('site-header__mobile-menu-button');
 
 		if (btnMobileMenu) {
 			btnMobileMenu.addEventListener('click', () => {

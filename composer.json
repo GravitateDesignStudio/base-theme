@@ -9,6 +9,7 @@
 		}
 	},
 	"require": {
-		"dfrei/wp-util": "^2.1.2"
+		"dfrei/wp-util": "^2.1.2",
+		"wpackio/enqueue": "^3.5"
 	}
 }

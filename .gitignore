@@ -3,3 +3,6 @@
 node_modules
 local_config.json
 composer-local.json
+wpackio.server.js
+dist/
+

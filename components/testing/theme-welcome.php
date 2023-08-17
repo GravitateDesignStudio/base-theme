@@ -53,12 +53,6 @@
 					<p>With the combination of Webpack and Babel, it is possible to use <a href="https://babeljs.io/learn-es2015/" target="_blank" rel="nofollow noopener">ES6+</a> features in your code without worrying about browser compatibility. Additionally, both the <a href="https://nodejs.org/docs/latest/api/modules.html" target="_blank" rel="nofollow noopener">CommonJS</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import" target="_blank" rel="nofollow noopener">ES6 Module</a> (<i>preferred</i>) formats can be used to modularize your code.</p>
 				</li>
 				<li>
-					<h5>Included Libraries</h5>
-
-					<strong>Embla Carousel</strong>
-					<p><a href="https://www.embla-carousel.com/" target="_blank" rel="nofollow noopener">Embla Carousel</a> can be included via the <code>loadEmblaCarousel</code> method in <code>js/util/load-dependencies.js</code>. This method will include the library dynamically and return a promise with the Embla instance after a successful load. An example of how to use Embla Carousel is located below.</p>
-				</li>
-				<li>
 					<h5>Modal Functionality</h5>
 
 					<button class="button js__example-modal--default" type="button">Show Example Modal</button>
@@ -84,30 +78,6 @@
 		<div class="block-inner">
 			<div class="row">
 				<div class="columns small-12">
-					<div class="embla-instance">
-						<div class="embla">
-							<div class="embla__container">
-								<div class="embla__slide">
-									<img src="https://picsum.photos/640/480?random" alt="slide 1">
-								</div>
-								<div class="embla__slide">
-									<img src="https://picsum.photos/640/480?random" alt="slide 2">
-								</div>
-								<div class="embla__slide">
-									<img src="https://picsum.photos/640/480?random" alt="slide 3">
-								</div>
-							</div>
-						</div>
-						<div class="embla__controls">
-							<button class="embla__nav-button embla__nav-button--prev" type="button">
-								<?php WPUtil\SVG::the_svg('general/chevron-left', ['class' => 'embla__nav-arrow embla__nav-arrow--left']); ?>
-							</button>
-							<div class="embla__pagination"></div>
-							<button class="embla__nav-button embla__nav-button--next" type="button">
-								<?php WPUtil\SVG::the_svg('general/chevron-right', ['class' => 'embla__nav-arrow embla__nav-arrow--right']); ?>
-							</button>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

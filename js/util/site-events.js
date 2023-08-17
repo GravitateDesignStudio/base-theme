@@ -67,7 +67,6 @@ class SiteEvents {
  * Constant values for common site event types
  */
 export const SiteEventNames = {
-	IMAGEBUDDY_TRIGGER_UPDATE: 'imagebuddy-trigger-update',
 	MODAL_VIDEO_OPEN: 'modal-video-open'
 };
 

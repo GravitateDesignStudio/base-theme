@@ -1,0 +1,54 @@
+{
+  "admin.css": "app/admin-e3db4dbd.css",
+  "admin.css.map": "app/admin-e3db4dbd.css.map",
+  "admin.js": "app/admin-1d7c4fce.js",
+  "admin.js.map": "app/admin-1d7c4fce.js.map",
+  "app/assets/arrow-down.png": "app/assets/arrow-down-f7fc97f4.png",
+  "app/assets/arrow-right.png": "app/assets/arrow-right-f25b163d.png",
+  "app/assets/check-blue.png": "app/assets/check-blue-ae31a391.png",
+  "app/assets/check-white.png": "app/assets/check-white-a3f1774a.png",
+  "main.css": "app/main-2ad0a86d.css",
+  "main.css.map": "app/main-2ad0a86d.css.map",
+  "main.js": "app/main-b467883f.js",
+  "main.js.map": "app/main-b467883f.js.map",
+  "runtime.js": "app/runtime-ca62e8c0.js",
+  "runtime.js.map": "app/runtime-ca62e8c0.js.map",
+  "wpackioEp": {
+    "main": {
+      "assets": {
+        "js": [
+          "app/runtime-ca62e8c0.js",
+          "app/main-b467883f.js"
+        ],
+        "js.map": [
+          "app/runtime-ca62e8c0.js.map",
+          "app/main-b467883f.js.map"
+        ],
+        "css": [
+          "app/main-2ad0a86d.css"
+        ],
+        "css.map": [
+          "app/main-2ad0a86d.css.map"
+        ]
+      }
+    },
+    "admin": {
+      "assets": {
+        "js": [
+          "app/runtime-ca62e8c0.js",
+          "app/admin-1d7c4fce.js"
+        ],
+        "js.map": [
+          "app/runtime-ca62e8c0.js.map",
+          "app/admin-1d7c4fce.js.map"
+        ],
+        "css": [
+          "app/admin-e3db4dbd.css"
+        ],
+        "css.map": [
+          "app/admin-e3db4dbd.css.map"
+        ]
+      }
+    }
+  }
+}

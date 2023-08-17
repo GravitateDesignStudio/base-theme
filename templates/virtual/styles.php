@@ -1,7 +1,7 @@
 <?php
 get_header();
 
-WPUtil\Component::render('components/banners/banner-default', [
+get_template_part('components/banners/banner', 'default', [
 	'title' => 'Styles'
 ]);
 
@@ -9,8 +9,8 @@ $backgrounds = apply_filters('grav_block_background_colors', [], '');
 $backgrounds = $backgrounds ? array_filter($backgrounds, function ($key) {
 	return $key !== 'block-bg-image';
 }, ARRAY_FILTER_USE_KEY) : [];
-
 ?>
+
 <script>
 	document.addEventListener('DOMContentLoaded', function (e) {
 		var colorSelect = document.querySelector('.style-testing__select--color');
@@ -22,31 +22,27 @@ $backgrounds = $backgrounds ? array_filter($backgrounds, function ($key) {
 		});
 	});
 </script>
+
 <div id="style-testing__content">
 	<section class="section-container wysiwyg">
 		<div class="row section-inner">
 			<div class="columns small-12">
-				<?php WPUtil\Component::render('components/testing/style-testing'); ?>
+				<?php get_template_part('components/testing/style-testing'); ?>
 			</div>
 		</div>
 	</section>
 </div>
+
 <div class="style-testing__color-selector faux-row">
 	<label for="bg-color">Background Color:</label>
 	<select id="bg-color" class="style-testing__select--color">
-		<?php
-		foreach ($backgrounds as $class => $label) {
-			?>
-			<option value="<?php echo esc_attr($class); ?>"
-				<?php if ($class === '') { ?>selected<?php } ?>
-			>
+		<?php foreach ($backgrounds as $class => $label) : ?>
+			<option value="<?php echo esc_attr($class); ?>" <?= ($class === '') ? 'selected' : ''; ?>>
 				<?php echo esc_html($label); ?>
 			</option>
-			<?php
-		}
-		?>
+		<?php endforeach; ?>
 	</select>
 </div>
-<?php
 
+<?php
 get_footer();
