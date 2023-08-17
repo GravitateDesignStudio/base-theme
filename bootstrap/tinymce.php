@@ -17,3 +17,9 @@ WPUtil\TinyMCE::add_formats(array(
 WPUtil\TinyMCE::set_options(array(
 	'paste_as_text' => true
 ));
+
+// Insert 'styleselect' into the $buttons array
+add_filter('mce_buttons_2', function($buttons) {
+    array_unshift($buttons, 'styleselect');
+    return $buttons;
+});
