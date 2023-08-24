@@ -34,26 +34,8 @@ The WP-Util package (repo: [https://github.com/dougfrei/wp-util](https://github.
 
 ### JavaScript
 
-#### ESLint
-
-ESLint is a tool that will compare the JavaScript in the theme to a defined set of rules. While it is not a part of the build process, it's highly recommended to run ESLint regularly in order to maintain consistency and prevent errors. The included `.eslintrc.json` file should be usable by linting plugins in editors such as Visual Studio Code and Atom in order to lint JS as you're editing it. To run ESLint manually, use the following command at the theme root: `npm run eslint`.
-
-ESLint will hurt your feelings -- and that's a good thing.
-
-#### Build System based on Gulp, dart-sass, and Webpack
-
-Gulp is being used as the build system for this theme and the currently configured tasks can be found in `gulpfile.js`. Dart-sass is being used to parse the SCSS source files and it is configured within `gulpfile.js`. Webpack in combination with Babel is being used to transpile and minify the JavaScript source files.
-
-With the combination of Webpack and Babel, it is possible to use [ES6+](https://babeljs.io/learn-es2015/) features in your code without worrying about browser compatibility. Additionally, both the [CommonJS](https://nodejs.org/docs/latest/api/modules.html) and [ES6 Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) (_preferred_) formats can be used to modularize your code.
+#### Build System based WPack.io
 
 #### Included Libraries
 
 ### How To Build
-
-The following NPM script aliases have been include and can be run with `npm run <script-name>`:
-
--   `eslint` - Run ESLint against your JavaScript to check for any issues or errors
--   `build-css` - Run the Gulp build task for your SCSS files
--   `build-js` - Run the Gulp build task for your JavaScript files
--   `build` - Run both the CSS and JS build tasks together
--   `watch` - Start a BrowserSync proxy instance and put both build tasks into a watch state where they will trigger on any changes to the source files
